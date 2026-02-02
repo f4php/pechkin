@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace F4\Pechkin\DataType;
+
+use F4\Pechkin\DataType\{
+    MenuButton,
+    WebAppInfo,
+};
+
+readonly class MenuButtonWebApp extends MenuButton
+{
+    public function __construct(
+        public readonly string $type,
+        public readonly string $text,
+        public readonly WebAppInfo $web_app,
+    ) {}
+}

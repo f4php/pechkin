@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace F4\Pechkin\DataType;
+
+use F4\Pechkin\DataType\AbstractDataType;
+
+readonly class ChatAdministratorRights extends AbstractDataType
+{
+    public function __construct(
+        public readonly bool $is_anonymous,
+        public readonly bool $can_manage_chat,
+        public readonly bool $can_delete_messages,
+        public readonly bool $can_manage_video_chats,
+        public readonly bool $can_restrict_members,
+        public readonly bool $can_promote_members,
+        public readonly bool $can_change_info,
+        public readonly bool $can_invite_users,
+        public readonly ?bool $can_post_messages = null,
+        public readonly ?bool $can_edit_messages = null,
+        public readonly ?bool $can_pin_messages = null,
+        public readonly ?bool $can_post_stories = null,
+        public readonly ?bool $can_edit_stories = null,
+        public readonly ?bool $can_delete_stories = null,
+        public readonly ?bool $can_manage_topics = null,
+    ) {}
+}
