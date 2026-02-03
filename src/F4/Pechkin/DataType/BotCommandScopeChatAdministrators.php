@@ -11,7 +11,6 @@ use F4\Pechkin\DataType\{
 readonly class BotCommandScopeChatAdministrators extends BotCommandScope
 {
     public function __construct(
-        public readonly string $type,
         public readonly null|int|string $chat_id,
     ) {}
 }

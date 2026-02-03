@@ -12,7 +12,6 @@ use F4\Pechkin\DataType\{
 readonly class ChatMemberAdministrator extends ChatMember
 {
     public function __construct(
-        public readonly string $status,
         public readonly User $user,
         public readonly bool $can_be_edited,
         public readonly bool $is_anonymous,
@@ -30,6 +29,7 @@ readonly class ChatMemberAdministrator extends ChatMember
         public readonly ?bool $can_edit_stories = null,
         public readonly ?bool $can_delete_stories = null,
         public readonly ?bool $can_manage_topics = null,
+        public readonly ?bool $can_manage_direct_messages = null,
         public readonly ?string $custom_title = null,
     ) {}
 }

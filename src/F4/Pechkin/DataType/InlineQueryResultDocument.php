@@ -9,12 +9,12 @@ use F4\Pechkin\DataType\{
     InlineQueryResult,
     InputMessageContent,
     MessageEntity,
+    Attribute\ArrayOf,
 };
 
 readonly class InlineQueryResultDocument extends InlineQueryResult
 {
     public function __construct(
-        public readonly string $type,
         public readonly string $id,
         public readonly string $title,
         public readonly string $document_url,
@@ -22,6 +22,7 @@ readonly class InlineQueryResultDocument extends InlineQueryResult
         public readonly ?string $caption = null,
         public readonly ?string $parse_mode = null,
         /** @var MessageEntity[]|null */
+        #[ArrayOf(MessageEntity::class)]
         public readonly ?array $caption_entities = null,
         public readonly ?string $description = null,
         public readonly ?InlineKeyboardMarkup $reply_markup = null,

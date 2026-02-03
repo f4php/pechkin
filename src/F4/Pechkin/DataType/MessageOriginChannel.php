@@ -12,7 +12,6 @@ use F4\Pechkin\DataType\{
 readonly class MessageOriginChannel extends MessageOrigin
 {
     public function __construct(
-        public readonly string $type,
         public readonly int $date,
         public readonly Chat $chat,
         public readonly int $message_id,

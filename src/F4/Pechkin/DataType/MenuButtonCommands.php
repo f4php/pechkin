@@ -9,6 +9,6 @@ use F4\Pechkin\DataType\MenuButton;
 readonly class MenuButtonCommands extends MenuButton
 {
     public function __construct(
-        public readonly string $type,
+        // no data in API docs
     ) {}
 }

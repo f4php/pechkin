@@ -7,13 +7,14 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     PaidMedia,
     PhotoSize,
+    Attribute\ArrayOf,
 };
 
 readonly class PaidMediaPhoto extends PaidMedia
 {
     public function __construct(
-        public readonly string $type,
         /** @var PhotoSize[] */
+        #[ArrayOf(PhotoSize::class)]
         public readonly array $photo,
     ) {}
 }

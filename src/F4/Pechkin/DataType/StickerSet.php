@@ -8,6 +8,7 @@ use F4\Pechkin\DataType\{
     AbstractDataType,
     PhotoSize,
     Sticker,
+    Attribute\ArrayOf,
 };
 
 readonly class StickerSet extends AbstractDataType
@@ -17,6 +18,7 @@ readonly class StickerSet extends AbstractDataType
         public readonly string $title,
         public readonly string $sticker_type,
         /** @var Sticker[] */
+        #[ArrayOf(Sticker::class)]
         public readonly array $stickers,
         public readonly ?PhotoSize $thumbnail = null,
     ) {}

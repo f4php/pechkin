@@ -12,7 +12,6 @@ use F4\Pechkin\DataType\{
 readonly class PaidMediaVideo extends PaidMedia
 {
     public function __construct(
-        public readonly string $type,
         public readonly Video $video,
     ) {}
 }

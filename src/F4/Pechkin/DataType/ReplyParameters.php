@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     MessageEntity,
+    Attribute\ArrayOf,
 };
 
 readonly class ReplyParameters extends AbstractDataType
@@ -18,6 +19,7 @@ readonly class ReplyParameters extends AbstractDataType
         public readonly ?string $quote = null,
         public readonly ?string $quote_parse_mode = null,
         /** @var MessageEntity[]|null */
+        #[ArrayOf(MessageEntity::class)]
         public readonly ?array $quote_entities = null,
         public readonly ?int $quote_position = null,
         public readonly ?int $checklist_task_id = null,

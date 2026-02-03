@@ -12,7 +12,6 @@ use F4\Pechkin\DataType\{
 readonly class BackgroundTypeWallpaper extends BackgroundType
 {
     public function __construct(
-        public readonly string $type,
         public readonly Document $document,
         public readonly int $dark_theme_dimming,
         public readonly ?bool $is_blurred = null,

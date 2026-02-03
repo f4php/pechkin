@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     LabeledPrice,
+    Attribute\ArrayOf,
 };
 
 readonly class ShippingOption extends AbstractDataType
@@ -15,6 +16,7 @@ readonly class ShippingOption extends AbstractDataType
         public readonly string $id,
         public readonly string $title,
         /** @var LabeledPrice[] */
+        #[ArrayOf(LabeledPrice::class)]
         public readonly array $prices,
     ) {}
 }

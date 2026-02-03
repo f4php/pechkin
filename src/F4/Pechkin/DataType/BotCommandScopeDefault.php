@@ -11,6 +11,6 @@ use F4\Pechkin\DataType\{
 readonly class BotCommandScopeDefault extends BotCommandScope
 {
     public function __construct(
-        public readonly string $type,
+        // no data in API docs
     ) {}
 }

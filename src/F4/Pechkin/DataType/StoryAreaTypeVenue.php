@@ -12,7 +12,6 @@ use F4\Pechkin\DataType\{
 readonly class StoryAreaTypeVenue extends StoryAreaType
 {
     public function __construct(
-        public readonly string $type,
         public readonly Venue $venue,
     ) {}
 }

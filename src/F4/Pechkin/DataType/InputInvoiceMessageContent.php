@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     InputMessageContent,
     LabeledPrice,
+    Attribute\ArrayOf,
 };
 
 readonly class InputInvoiceMessageContent extends InputMessageContent
@@ -17,10 +18,12 @@ readonly class InputInvoiceMessageContent extends InputMessageContent
         public readonly string $payload,
         public readonly string $currency,
         /** @var LabeledPrice[] */
+        #[ArrayOf(LabeledPrice::class)]
         public readonly array $prices,
         public readonly ?string $provider_token = null,
         public readonly ?int $max_tip_amount = null,
         /** @var int[]|null */
+        #[ArrayOf('int')]
         public readonly ?array $suggested_tip_amounts = null,
         public readonly ?string $provider_data = null,
         public readonly ?string $photo_url = null,

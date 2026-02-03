@@ -9,7 +9,6 @@ use F4\Pechkin\DataType\InputPaidMedia;
 readonly class InputPaidMediaVideo extends InputPaidMedia
 {
     public function __construct(
-        public readonly string $type,
         public readonly string $media,
         public readonly ?string $thumbnail = null,
         public readonly ?int $width = null,

@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     PassportFile,
+    Attribute\ArrayOf,
 };
 
 readonly class EncryptedPassportElement extends AbstractDataType
@@ -18,11 +19,13 @@ readonly class EncryptedPassportElement extends AbstractDataType
         public readonly ?string $phone_number = null,
         public readonly ?string $email = null,
         /** @var PassportFile[]|null */
+        #[ArrayOf(PassportFile::class)]
         public readonly ?array $files = null,
         public readonly ?PassportFile $front_side = null,
         public readonly ?PassportFile $reverse_side = null,
         public readonly ?PassportFile $selfie = null,
         /** @var PassportFile[]|null */
+        #[ArrayOf(PassportFile::class)]
         public readonly ?array $translation = null,
     ) {}
 }

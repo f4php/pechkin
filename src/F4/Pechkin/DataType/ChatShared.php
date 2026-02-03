@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     PhotoSize,
+    Attribute\ArrayOf,
 };
 
 readonly class ChatShared extends AbstractDataType
@@ -17,6 +18,7 @@ readonly class ChatShared extends AbstractDataType
         public readonly ?string $title = null,
         public readonly ?string $username = null,
         /** @var PhotoSize[]|null */
+        #[ArrayOf(PhotoSize::class)]
         public readonly ?array $photo = null,
     ) {}
 }

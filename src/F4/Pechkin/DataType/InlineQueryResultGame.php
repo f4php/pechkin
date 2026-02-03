@@ -12,7 +12,6 @@ use F4\Pechkin\DataType\{
 readonly class InlineQueryResultGame extends InlineQueryResult
 {
     public function __construct(
-        public readonly string $type,
         public readonly string $id,
         public readonly string $game_short_name,
         public readonly ?InlineKeyboardMarkup $reply_markup = null,

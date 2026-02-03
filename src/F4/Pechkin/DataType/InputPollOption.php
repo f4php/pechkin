@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     MessageEntity,
+    Attribute\ArrayOf,
 };
 
 readonly class InputPollOption extends AbstractDataType
@@ -15,6 +16,7 @@ readonly class InputPollOption extends AbstractDataType
         public readonly string $text,
         public readonly ?string $text_parse_mode = null,
         /** @var MessageEntity[]|null */
+        #[ArrayOf(MessageEntity::class)]
         public readonly ?array $text_entities = null,
     ) {}
 }

@@ -8,6 +8,7 @@ use F4\Pechkin\DataType\{
     AbstractDataType,
     Chat,
     User,
+    Attribute\ArrayOf,
 };
 
 readonly class GiveawayWinners extends AbstractDataType
@@ -18,6 +19,7 @@ readonly class GiveawayWinners extends AbstractDataType
         public readonly int $winners_selection_date,
         public readonly int $winner_count,
         /** @var User[] */
+        #[ArrayOf(User::class)]
         public readonly array $winners,
         public readonly ?int $additional_chat_count = null,
         public readonly ?int $premium_subscription_month_count = null,

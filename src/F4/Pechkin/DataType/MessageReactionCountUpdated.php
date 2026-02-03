@@ -8,6 +8,7 @@ use F4\Pechkin\DataType\{
     AbstractDataType,
     Chat,
     ReactionCount,
+    Attribute\ArrayOf,
 };
 
 readonly class MessageReactionCountUpdated extends AbstractDataType
@@ -17,6 +18,7 @@ readonly class MessageReactionCountUpdated extends AbstractDataType
         public readonly int $message_id,
         public readonly int $date,
         /** @var ReactionCount[] */
+        #[ArrayOf(ReactionCount::class)]
         public readonly array $reactions,
     ) {}
 }

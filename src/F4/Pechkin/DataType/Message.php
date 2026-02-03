@@ -71,6 +71,7 @@ use F4\Pechkin\DataType\{
     Voice,
     WebAppData,
     WriteAccessAllowed,
+    Attribute\ArrayOf,
 };
 
 readonly class Message extends MaybeInaccessibleMessage
@@ -104,6 +105,7 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?int $paid_star_count = null, 
         public readonly ?string $text = null, 
         /** @var MessageEntity[]|null */
+        #[ArrayOf(MessageEntity::class)]
         public readonly ?array $entities = null, 
         public readonly ?LinkPreviewOptions $link_preview_options = null, 
         public readonly ?SuggestedPostInfo $suggested_post_info = null, 
@@ -113,6 +115,7 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?Document $document = null, 
         public readonly ?PaidMediaInfo $paid_media = null, 
         /** @var PhotoSize[]|null */
+        #[ArrayOf(PhotoSize::class)]
         public readonly ?array $photo = null, 
         public readonly ?Sticker $sticker = null, 
         public readonly ?Story $story = null, 
@@ -121,6 +124,7 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?Voice $voice = null, 
         public readonly ?string $caption = null, 
         /** @var MessageEntity[]|null */
+        #[ArrayOf(MessageEntity::class)]
         public readonly ?array $caption_entities = null, 
         public readonly ?bool $show_caption_above_media = null, 
         public readonly ?bool $has_media_spoiler = null, 
@@ -132,10 +136,12 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?Venue $venue = null, 
         public readonly ?Location $location = null, 
         /** @var User[]|null */
+        #[ArrayOf(User::class)]
         public readonly ?array $new_chat_members = null, 
         public readonly ?User $left_chat_member = null, 
         public readonly ?string $new_chat_title = null, 
         /** @var PhotoSize[]|null */
+        #[ArrayOf(PhotoSize::class)]
         public readonly ?array $new_chat_photo = null, 
         public readonly ?bool $delete_chat_photo = null, 
         public readonly ?bool $group_chat_created = null, 

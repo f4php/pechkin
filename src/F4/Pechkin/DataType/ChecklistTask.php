@@ -9,6 +9,7 @@ use F4\Pechkin\DataType\{
     Chat,
     MessageEntity,
     User,
+    Attribute\ArrayOf,
 };
 
 readonly class ChecklistTask extends AbstractDataType
@@ -17,6 +18,7 @@ readonly class ChecklistTask extends AbstractDataType
         public readonly int $id,
         public readonly string $text,
         /** @var MessageEntity[]|null */
+        #[ArrayOf(MessageEntity::class)]
         public readonly ?array $text_entities = null,
         public readonly ?User $completed_by_user = null,
         public readonly ?Chat $completed_by_chat = null,

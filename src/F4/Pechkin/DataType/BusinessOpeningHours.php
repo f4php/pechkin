@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     BusinessOpeningHoursInterval,
+    Attribute\ArrayOf,
 };
 
 readonly class BusinessOpeningHours extends AbstractDataType
@@ -14,6 +15,7 @@ readonly class BusinessOpeningHours extends AbstractDataType
     public function __construct(
         public readonly string $time_zone_name,
         /** @var BusinessOpeningHoursInterval[] */
+        #[ArrayOf(BusinessOpeningHoursInterval::class)]
         public readonly array $opening_hours,
     ) {}
 }

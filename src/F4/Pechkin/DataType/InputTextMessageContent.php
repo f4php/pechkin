@@ -8,6 +8,7 @@ use F4\Pechkin\DataType\{
     InputMessageContent,
     MessageEntity,
     LinkPreviewOptions,
+    Attribute\ArrayOf,
 };
 
 readonly class InputTextMessageContent extends InputMessageContent
@@ -16,6 +17,7 @@ readonly class InputTextMessageContent extends InputMessageContent
         public readonly string $message_text,
         public readonly ?string $parse_mode = null,
         /** @var MessageEntity[]|null */
+        #[ArrayOf(MessageEntity::class)]
         public readonly ?array $entities = null,
         public readonly ?LinkPreviewOptions $link_preview_options = null,
     ) {}

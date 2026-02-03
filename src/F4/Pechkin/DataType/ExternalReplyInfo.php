@@ -20,6 +20,10 @@ use F4\Pechkin\DataType\{
     LinkPreviewOptions,
     Location,
     MessageOrigin,
+    MessageOriginChannel,
+    MessageOriginChat,
+    MessageOriginHiddenUser,
+    MessageOriginUser,
     PaidMediaInfo,
     PhotoSize,
     Poll,
@@ -29,11 +33,19 @@ use F4\Pechkin\DataType\{
     Video,
     VideoNote,
     Voice,
+    Attribute\ArrayOf,
+    Attribute\Polymorphic,
 };
 
 readonly class ExternalReplyInfo extends AbstractDataType
 {
     public function __construct(
+        #[Polymorphic([
+            'channel' => MessageOriginChannel::class,
+            'chat' => MessageOriginChat::class,
+            'hidden_user' => MessageOriginHiddenUser::class,
+            'user' => MessageOriginUser::class,
+        ])]
         public readonly MessageOrigin $origin,
         public readonly ?Chat $chat = null,
         public readonly ?int $message_id = null,
@@ -43,6 +55,7 @@ readonly class ExternalReplyInfo extends AbstractDataType
         public readonly ?Document $document = null,
         public readonly ?PaidMediaInfo $paid_media = null,
         /** @var PhotoSize[]|null */
+        #[ArrayOf(PhotoSize::class)]
         public readonly ?array $photo = null,
         public readonly ?Sticker $sticker = null,
         public readonly ?Story $story = null,

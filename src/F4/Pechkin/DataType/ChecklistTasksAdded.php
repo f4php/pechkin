@@ -8,12 +8,14 @@ use F4\Pechkin\DataType\{
     AbstractDataType,
     ChecklistTask,
     Message,
+    Attribute\ArrayOf,
 };
 
 readonly class ChecklistTasksAdded extends AbstractDataType
 {
     public function __construct(
         /** @var ChecklistTask[] */
+        #[ArrayOf(ChecklistTask::class)]
         public readonly array $tasks,
         public readonly ?Message $checklist_message = null,
     ) {}

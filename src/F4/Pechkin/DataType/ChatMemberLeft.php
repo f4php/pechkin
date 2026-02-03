@@ -12,7 +12,6 @@ use F4\Pechkin\DataType\{
 readonly class ChatMemberLeft extends ChatMember
 {
     public function __construct(
-        public readonly string $status,
         public readonly User $user,
     ) {}
 }

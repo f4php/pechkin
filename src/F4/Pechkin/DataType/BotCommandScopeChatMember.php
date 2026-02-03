@@ -11,7 +11,6 @@ use F4\Pechkin\DataType\{
 readonly class BotCommandScopeChatMember extends BotCommandScope
 {
     public function __construct(
-        public readonly string $type,
         public readonly null|int|string $chat_id,
         public readonly string $user_id, // may not fit in a 32-bit integer
     ) {}

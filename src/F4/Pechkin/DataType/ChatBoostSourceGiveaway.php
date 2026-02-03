@@ -12,7 +12,6 @@ use F4\Pechkin\DataType\{
 readonly class ChatBoostSourceGiveaway extends ChatBoostSource
 {
     public function __construct(
-        public readonly string $type,
         public readonly int $giveaway_message_id,
         public readonly ?User $user = null,
         public readonly ?bool $is_unclaimed = null,

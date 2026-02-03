@@ -17,8 +17,13 @@ use F4\Pechkin\DataType\{
     ChatPhoto,
     Message,
     ReactionType,
+    ReactionTypeCustomEmoji,
+    ReactionTypeEmoji,
+    ReactionTypePaid,
     UniqueGiftColors,
     UserRating,
+    Attribute\ArrayOf,
+    Attribute\Polymorphic,
 };
 
 readonly class ChatFullInfo extends AbstractDataType
@@ -26,16 +31,18 @@ readonly class ChatFullInfo extends AbstractDataType
     public function __construct(
         public readonly string $id, // may not fit in a 32-bit integer
         public readonly string $type,
+        public readonly int $accent_color_id,
+        public readonly int $max_reaction_count,
+        public readonly AcceptedGiftTypes $accepted_gift_types,
         public readonly ?string $title = null,
         public readonly ?string $username = null,
         public readonly ?string $first_name = null,
         public readonly ?string $last_name = null,
         public readonly ?bool $is_forum = null,
         public readonly ?bool $is_direct_messages = null,
-        public readonly ?int $accent_color_id = null,
-        public readonly ?int $max_reaction_count = null,
         public readonly ?ChatPhoto $photo = null,
         /** @var string[]|null */
+        #[ArrayOf('string')]
         public readonly ?array $active_usernames = null,
         public readonly ?Birthdate $birthdate = null,
         public readonly ?BusinessIntro $business_intro = null,
@@ -44,6 +51,11 @@ readonly class ChatFullInfo extends AbstractDataType
         public readonly ?Chat $personal_chat = null,
         public readonly ?Chat $parent_chat = null,
         /** @var ReactionType[]|null */
+        #[ArrayOf(new Polymorphic([
+            'custom_emoji' => ReactionTypeCustomEmoji::class,
+            'emoji' => ReactionTypeEmoji::class,
+            'paid' => ReactionTypePaid::class,
+        ]))]
         public readonly ?array $available_reactions = null,
         public readonly ?string $background_custom_emoji_id = null,
         public readonly ?int $profile_accent_color_id = null,
@@ -59,7 +71,6 @@ readonly class ChatFullInfo extends AbstractDataType
         public readonly ?string $invite_link = null,
         public readonly ?Message $pinned_message = null,
         public readonly ?ChatPermissions $permissions = null,
-        public readonly ?AcceptedGiftTypes $accepted_gift_types = null,
         public readonly ?bool $can_send_paid_media = null,
         public readonly ?int $slow_mode_delay = null,
         public readonly ?int $unrestrict_boost_count = null,

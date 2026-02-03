@@ -9,6 +9,7 @@ use F4\Pechkin\DataType\{
     Animation,
     MessageEntity,
     PhotoSize,
+    Attribute\ArrayOf,
 };
 
 readonly class Game extends AbstractDataType
@@ -17,9 +18,11 @@ readonly class Game extends AbstractDataType
         public readonly string $title,
         public readonly string $description,
         /** @var PhotoSize[] */
+        #[ArrayOf(PhotoSize::class)]
         public readonly array $photo,
         public readonly ?string $text = null,
         /** @var MessageEntity[]|null */
+        #[ArrayOf(MessageEntity::class)]
         public readonly ?array $text_entities = null,
         public readonly ?Animation $animation = null,
     ) {}

@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
-use F4\Pechkin\DataType\AbstractDataType;
+use F4\Pechkin\DataType\{
+    AbstractDataType,
+    Attribute\ArrayOf,
+};
 
 readonly class WebhookInfo extends AbstractDataType
 {
@@ -18,6 +21,7 @@ readonly class WebhookInfo extends AbstractDataType
         public readonly ?int $last_synchronization_error_date = null,
         public readonly ?int $max_connections = null,
         /** @var string[]|null */
+        #[ArrayOf('string')]
         public readonly ?array $allowed_updates = null,
     ) {}
 }

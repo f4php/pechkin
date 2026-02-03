@@ -6,13 +6,14 @@ namespace F4\Pechkin\DataType;
 
 use F4\Pechkin\DataType\{
     BackgroundFill,
+    Attribute\ArrayOf,
 };
 
 readonly class BackgroundFillFreeformGradient extends BackgroundFill
 {
     public function __construct(
-        public readonly string $type,
         /** @var int[] */
+        #[ArrayOf('int')]
         public readonly array $colors,
     ) {}
 }

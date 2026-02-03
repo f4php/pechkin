@@ -9,6 +9,6 @@ use F4\Pechkin\DataType\ReactionType;
 readonly class ReactionTypePaid extends ReactionType
 {
     public function __construct(
-        public readonly string $type,
+        // no data in API docs
     ) {}
 }

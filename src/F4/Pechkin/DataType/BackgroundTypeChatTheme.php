@@ -11,7 +11,6 @@ use F4\Pechkin\DataType\{
 readonly class BackgroundTypeChatTheme extends BackgroundType
 {
     public function __construct(
-        public readonly string $type,
         public readonly string $theme_name,
     ) {}
 }

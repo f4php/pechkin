@@ -9,7 +9,6 @@ use F4\Pechkin\DataType\ReactionType;
 readonly class ReactionTypeCustomEmoji extends ReactionType
 {
     public function __construct(
-        public readonly string $type,
         public readonly string $custom_emoji_id,
     ) {}
 }

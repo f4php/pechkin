@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
-use F4\Pechkin\DataType\PassportElementError;
+use F4\Pechkin\DataType\{
+    PassportElementError,
+    Attribute\ArrayOf,
+};
 
 readonly class PassportElementErrorFiles extends PassportElementError
 {
@@ -12,6 +15,7 @@ readonly class PassportElementErrorFiles extends PassportElementError
         public readonly string $source,
         public readonly string $type,
         /** @var string[] */
+        #[ArrayOf('string')]
         public readonly array $file_hashes,
         public readonly string $message,
     ) {}

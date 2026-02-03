@@ -8,6 +8,7 @@ use F4\Pechkin\DataType\{
     AbstractDataType,
     Chat,
     User,
+    Attribute\ArrayOf,
 };
 
 readonly class PollAnswer extends AbstractDataType
@@ -15,6 +16,7 @@ readonly class PollAnswer extends AbstractDataType
     public function __construct(
         public readonly string $poll_id,
         /** @var int[] */
+        #[ArrayOf('int')]
         public readonly array $option_ids,
         public readonly ?Chat $voter_chat = null,
         public readonly ?User $user = null,

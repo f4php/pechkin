@@ -13,7 +13,6 @@ use F4\Pechkin\DataType\{
 readonly class InlineQueryResultVenue extends InlineQueryResult
 {
     public function __construct(
-        public readonly string $type,
         public readonly string $id,
         public readonly float $latitude,
         public readonly float $longitude,

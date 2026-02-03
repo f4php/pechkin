@@ -12,7 +12,6 @@ use F4\Pechkin\DataType\{
 readonly class ChatMemberRestricted extends ChatMember
 {
     public function __construct(
-        public readonly string $status,
         public readonly User $user,
         public readonly bool $is_member,
         public readonly bool $can_send_messages,

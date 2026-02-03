@@ -13,7 +13,6 @@ use F4\Pechkin\DataType\{
 readonly class InlineQueryResultContact extends InlineQueryResult
 {
     public function __construct(
-        public readonly string $type,
         public readonly string $id,
         public readonly string $phone_number,
         public readonly string $first_name,
