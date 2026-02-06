@@ -21,5 +21,7 @@ readonly class ChatInviteLink extends AbstractDataType
         public readonly ?int $expire_date = null,
         public readonly ?int $member_limit = null,
         public readonly ?int $pending_join_request_count = null,
+        public readonly ?int $subscription_period = null,
+        public readonly ?int $subscription_price = null,
     ) {}
 }

@@ -8,9 +8,6 @@ use F4\Pechkin\DataType\{
     AbstractDataType,
     Chat,
     ReactionType,
-    ReactionTypeCustomEmoji,
-    ReactionTypeEmoji,
-    ReactionTypePaid,
     User,
     Attribute\ArrayOf,
 };
@@ -22,18 +19,10 @@ readonly class MessageReactionUpdated extends AbstractDataType
         public readonly int $message_id,
         public readonly int $date,
         /** @var ReactionType[] */
-        #[ArrayOf(new Polymorphic([
-            'custom_emoji' => ReactionTypeCustomEmoji::class,
-            'emoji' => ReactionTypeEmoji::class,
-            'paid' => ReactionTypePaid::class,
-        ]))]
+        #[ArrayOf(ReactionType::class)]
         public readonly array $old_reaction,
         /** @var ReactionType[] */
-        #[ArrayOf(new Polymorphic([
-            'custom_emoji' => ReactionTypeCustomEmoji::class,
-            'emoji' => ReactionTypeEmoji::class,
-            'paid' => ReactionTypePaid::class,
-        ]))]
+        #[ArrayOf(ReactionType::class)]
         public readonly array $new_reaction,
         public readonly ?User $user = null,
         public readonly ?Chat $actor_chat = null,

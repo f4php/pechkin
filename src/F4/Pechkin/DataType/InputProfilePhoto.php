@@ -4,9 +4,17 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
-use F4\Pechkin\DataType\AbstractDataType;
+use F4\Pechkin\DataType\{
+    AbstractDataType,
+    InputProfilePhotoStatic,
+    InputProfilePhotoAnimated,
+    Attribute\Polymorphic,
+};
 
-// Union type: InputProfilePhotoStatic | InputProfilePhotoAnimated
+#[Polymorphic([
+    'static' => InputProfilePhotoStatic::class,
+    'animated' => InputProfilePhotoAnimated::class,
+])]
 abstract readonly class InputProfilePhoto extends AbstractDataType
 {
 }

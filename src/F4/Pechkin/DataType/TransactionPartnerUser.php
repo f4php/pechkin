@@ -8,13 +8,9 @@ use F4\Pechkin\DataType\{
     AffiliateInfo,
     Gift,
     PaidMedia,
-    PaidMediaPhoto,
-    PaidMediaPreview,
-    PaidMediaVideo,
     TransactionPartner,
     User,
     Attribute\ArrayOf,
-    Attribute\Polymorphic,
 };
 
 readonly class TransactionPartnerUser extends TransactionPartner
@@ -26,11 +22,7 @@ readonly class TransactionPartnerUser extends TransactionPartner
         public readonly ?string $invoice_payload = null,
         public readonly ?int $subscription_period = null,
         /** @var PaidMedia[] */
-        #[ArrayOf(new Polymorphic([
-            'photo' => PaidMediaPhoto::class,
-            'preview' => PaidMediaPreview::class,
-            'video' => PaidMediaVideo::class,
-        ]))]
+        #[ArrayOf(PaidMedia::class)]
         public readonly ?array $paid_media = null,
         public readonly ?string $paid_media_payload = null,
         public readonly ?Gift $gift = null,

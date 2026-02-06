@@ -4,9 +4,28 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
-use F4\Pechkin\DataType\AbstractDataType;
+use F4\Pechkin\DataType\{
+    AbstractDataType,
+    ChatMemberAdministrator,
+    ChatMemberBanned,
+    ChatMemberLeft,
+    ChatMemberMember,
+    ChatMemberOwner,
+    ChatMemberRestricted,
+    Attribute\Polymorphic,
+};
 
-// Union type: ChatMemberOwner | ChatMemberAdministrator | ChatMemberMember | ChatMemberRestricted | ChatMemberLeft | ChatMemberBanned
+#[Polymorphic(
+    discriminator: 'status',
+    map: [
+        'administrator' => ChatMemberAdministrator::class,
+        'kicked' => ChatMemberBanned::class,
+        'creator' => ChatMemberOwner::class,
+        'left' => ChatMemberLeft::class,
+        'member' => ChatMemberMember::class,
+        'restricted' => ChatMemberRestricted::class,
+    ],
+)]
 abstract readonly class ChatMember extends AbstractDataType
 {
 }

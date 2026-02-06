@@ -5,9 +5,12 @@ namespace F4\Pechkin\DataType\Attribute;
 use Attribute;
 
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::TARGET_PARAMETER)]
-final readonly class ArrayOf
+final readonly class OneOf
 {
+    public array $values;
     public function __construct(
-        public readonly string $type,
-    ) {}
+        ...$values,
+    ) {
+        $this->values = $values;
+    }
 }

@@ -9,14 +9,7 @@ use F4\Pechkin\DataType\{
     Chat,
     ChatInviteLink,
     ChatMember,
-    ChatMemberAdministrator,
-    ChatMemberBanned,
-    ChatMemberOwner,
-    ChatMemberLeft,
-    ChatMemberMember,
-    ChatMemberRestricted,
     User,
-    Attribute\Polymorphic,
 };
 
 readonly class ChatMemberUpdated extends AbstractDataType
@@ -25,29 +18,7 @@ readonly class ChatMemberUpdated extends AbstractDataType
         public readonly Chat $chat,
         public readonly User $from,
         public readonly int $date,
-        #[Polymorphic(
-            map:[
-                'administrator' => ChatMemberAdministrator::class,
-                'banned' => ChatMemberBanned::class,
-                'creator' => ChatMemberOwner::class,
-                'left' => ChatMemberLeft::class,
-                'member' => ChatMemberMember::class,
-                'restricted' => ChatMemberRestricted::class,
-            ],
-            discriminator: 'status',
-        )]
         public readonly ChatMember $old_chat_member,
-        #[Polymorphic(
-            map: [
-                'administrator' => ChatMemberAdministrator::class,
-                'banned' => ChatMemberBanned::class,
-                'creator' => ChatMemberOwner::class,
-                'left' => ChatMemberLeft::class,
-                'member' => ChatMemberMember::class,
-                'restricted' => ChatMemberRestricted::class,
-            ],
-            discriminator: 'status',
-        )]
         public readonly ChatMember $new_chat_member,
         public readonly ?ChatInviteLink $invite_link = null,
         public readonly ?bool $via_join_request = null,

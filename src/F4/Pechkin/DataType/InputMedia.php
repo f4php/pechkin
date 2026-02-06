@@ -4,9 +4,23 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
-use F4\Pechkin\DataType\AbstractDataType;
+use F4\Pechkin\DataType\{
+    AbstractDataType,
+    InputMediaAnimation,
+    InputMediaAudio,
+    InputMediaDocument,
+    InputMediaPhoto,
+    InputMediaVideo,
+    Attribute\Polymorphic,
+};
 
-// Union type: InputMediaPhoto | InputMediaVideo | InputMediaAnimation | InputMediaAudio | InputMediaDocument
+#[Polymorphic([
+    'animation' => InputMediaAnimation::class,
+    'document' => InputMediaDocument::class,
+    'audio' => InputMediaAudio::class,
+    'photo' => InputMediaPhoto::class,
+    'video' => InputMediaVideo::class,
+])]
 abstract readonly class InputMedia extends AbstractDataType
 {
 }

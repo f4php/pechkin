@@ -17,13 +17,9 @@ use F4\Pechkin\DataType\{
     ChatPhoto,
     Message,
     ReactionType,
-    ReactionTypeCustomEmoji,
-    ReactionTypeEmoji,
-    ReactionTypePaid,
     UniqueGiftColors,
     UserRating,
     Attribute\ArrayOf,
-    Attribute\Polymorphic,
 };
 
 readonly class ChatFullInfo extends AbstractDataType
@@ -51,11 +47,7 @@ readonly class ChatFullInfo extends AbstractDataType
         public readonly ?Chat $personal_chat = null,
         public readonly ?Chat $parent_chat = null,
         /** @var ReactionType[]|null */
-        #[ArrayOf(new Polymorphic([
-            'custom_emoji' => ReactionTypeCustomEmoji::class,
-            'emoji' => ReactionTypeEmoji::class,
-            'paid' => ReactionTypePaid::class,
-        ]))]
+        #[ArrayOf(ReactionType::class)]
         public readonly ?array $available_reactions = null,
         public readonly ?string $background_custom_emoji_id = null,
         public readonly ?int $profile_accent_color_id = null,

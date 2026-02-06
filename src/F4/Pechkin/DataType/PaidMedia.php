@@ -4,9 +4,19 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
-use F4\Pechkin\DataType\AbstractDataType;
+use F4\Pechkin\DataType\{
+    AbstractDataType,
+    PaidMediaPhoto,
+    PaidMediaPreview,
+    PaidMediaVideo,
+    Attribute\Polymorphic,
+};
 
-// Union type: PaidMediaPreview | PaidMediaPhoto | PaidMediaVideo
+#[Polymorphic([
+    'photo' => PaidMediaPhoto::class,
+    'preview' => PaidMediaPreview::class,
+    'video' => PaidMediaVideo::class,
+])]
 abstract readonly class PaidMedia extends AbstractDataType
 {
 }

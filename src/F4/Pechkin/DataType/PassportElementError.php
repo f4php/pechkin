@@ -4,9 +4,34 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
-use F4\Pechkin\DataType\AbstractDataType;
+use F4\Pechkin\DataType\{
+    AbstractDataType,
+    PassportElementErrorDataField,
+    PassportElementErrorFile,
+    PassportElementErrorFiles,
+    PassportElementErrorFrontSide,
+    PassportElementErrorReverseSide,
+    PassportElementErrorSelfie,
+    PassportElementErrorTranslationFile,
+    PassportElementErrorTranslationFiles,
+    PassportElementErrorUnspecified,
+    Attribute\Polymorphic,
+};
 
-// Union type: All PassportElementError* variants
+#[Polymorphic(
+    discriminator: 'source',
+    map :[
+        'data' => PassportElementErrorDataField::class,
+        'front_side' => PassportElementErrorFrontSide::class,
+        'reverse_side' => PassportElementErrorReverseSide::class,
+        'selfie' => PassportElementErrorSelfie::class,
+        'file' => PassportElementErrorFile::class,
+        'files' => PassportElementErrorFiles::class,
+        'translation_file' => PassportElementErrorTranslationFile::class,
+        'translation_files' => PassportElementErrorTranslationFiles::class,
+        'unspecified' => PassportElementErrorUnspecified::class,
+    ],
+)]
 abstract readonly class PassportElementError extends AbstractDataType
 {
 }
