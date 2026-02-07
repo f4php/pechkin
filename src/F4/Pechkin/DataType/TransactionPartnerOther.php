@@ -9,6 +9,6 @@ use F4\Pechkin\DataType\TransactionPartner;
 readonly class TransactionPartnerOther extends TransactionPartner
 {
     public function __construct(
-        // no data in the API docs
+        // no data in API docs
     ) {}
 }

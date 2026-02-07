@@ -6,12 +6,14 @@ namespace F4\Pechkin\DataType;
 
 use F4\Pechkin\DataType\{
     AbstractDataType,
-    BackgroundFill,
+    UniqueGiftBackdropColors,
 };
 
 readonly class UniqueGiftBackdrop extends AbstractDataType
 {
     public function __construct(
-        public readonly BackgroundFill $fill,
+        public readonly string $name,
+        public readonly UniqueGiftBackdropColors $colors,
+        public readonly int $rarity_per_mille,
     ) {}
 }

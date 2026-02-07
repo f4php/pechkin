@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
-use F4\Pechkin\DataType\AbstractDataType;
+use F4\Pechkin\DataType\{
+    AbstractDataType,
+    Sticker,
+};
 
 readonly class UniqueGiftModel extends AbstractDataType
 {
     public function __construct(
-        // Fields to be determined from API documentation
-        // 3D model data for unique gifts
+        public readonly string $name,
+        public readonly Sticker $sticker,
+        public readonly int $rarity_per_mille,
     ) {}
 }

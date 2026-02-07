@@ -8,5 +8,7 @@ use F4\Pechkin\DataType\AbstractDataType;
 
 readonly class CallbackGame extends AbstractDataType
 {
-    public function __construct() {}
+    public function __construct() {
+        // no data in API, a placeholder type
+    }
 }

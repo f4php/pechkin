@@ -8,5 +8,7 @@ use F4\Pechkin\DataType\AbstractDataType;
 
 readonly class GeneralForumTopicUnhidden extends AbstractDataType
 {
-    public function __construct() {}
+    public function __construct() {
+        // no data in API docs
+    }
 }

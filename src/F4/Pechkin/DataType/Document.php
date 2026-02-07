@@ -17,6 +17,6 @@ readonly class Document extends AbstractDataType
         public readonly ?PhotoSize $thumbnail = null,
         public readonly ?string $file_name = null,
         public readonly ?string $mime_type = null,
-        public readonly ?string $file_size = null,
+        public readonly ?string $file_size = null, // may not fit in a 32-bit integer
     ) {}
 }

@@ -11,7 +11,7 @@ readonly class PassportFile extends AbstractDataType
     public function __construct(
         public readonly string $file_id,
         public readonly string $file_unique_id,
-        public readonly string $file_size,
+        public readonly int $file_size,
         public readonly int $file_date,
     ) {}
 }

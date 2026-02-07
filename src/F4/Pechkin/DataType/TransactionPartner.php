@@ -17,13 +17,13 @@ use F4\Pechkin\DataType\{
 };
 
 #[Polymorphic([
-    'user' => TransactionPartnerUser::class,
-    'chat' => TransactionPartnerChat::class,
     'affiliate_program' => TransactionPartnerAffiliateProgram::class,
+    'chat' => TransactionPartnerChat::class,
     'fragment' => TransactionPartnerFragment::class,
+    'other' => TransactionPartnerOther::class,
     'telegram_ads' => TransactionPartnerTelegramAds::class,
     'telegram_api' => TransactionPartnerTelegramApi::class,
-    'other' => TransactionPartnerOther::class,
+    'user' => TransactionPartnerUser::class,
 ])]
 abstract readonly class TransactionPartner extends AbstractDataType
 {

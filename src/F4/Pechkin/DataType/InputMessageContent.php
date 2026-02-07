@@ -14,15 +14,18 @@ use F4\Pechkin\DataType\{
     Attribute\Polymorphic,
 };
 
-#[Polymorphic([
-
-    // '' => InputTextMessageContent::class,
-    // '' => InputLocationMessageContent::class,
-    // '' => InputVenueMessageContent::class,
-    // '' => InputContactMessageContent::class,
-    // '' => InputInvoiceMessageContent::class,
-
-])]
+#[Polymorphic(
+    createFromArray: static function (array $data): mixed {
+        return match(true) {
+            isset($data['phone_number']) => InputContactMessageContent::fromArray($data),
+            isset($data['currency']) => InputInvoiceMessageContent::fromArray($data),
+            isset($data['longitude']) && !isset($data['address']) => InputLocationMessageContent::fromArray($data),
+            isset($data['message_text']) => InputTextMessageContent::fromArray($data),
+            isset($data['address']) => InputVenueMessageContent::fromArray($data),
+            default => null
+        };
+    }
+)]
 abstract readonly class InputMessageContent extends AbstractDataType
 {
 }

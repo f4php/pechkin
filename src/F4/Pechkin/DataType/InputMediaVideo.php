@@ -15,6 +15,8 @@ readonly class InputMediaVideo extends InputMedia
     public function __construct(
         public readonly string $media,
         public readonly ?string $thumbnail = null,
+        public readonly ?string $cover = null,
+        public readonly ?int $start_timestamp = null,
         public readonly ?string $caption = null,
         public readonly ?string $parse_mode = null,
         /** @var MessageEntity[]|null */
@@ -24,7 +26,6 @@ readonly class InputMediaVideo extends InputMedia
         public readonly ?int $height = null,
         public readonly ?int $duration = null,
         public readonly ?bool $supports_streaming = null,
-        public readonly ?bool $show_caption_above_media = null,
         public readonly ?bool $has_spoiler = null,
     ) {}
 }

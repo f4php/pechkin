@@ -18,7 +18,6 @@ readonly class InlineQueryResultCachedGif extends InlineQueryResult
         public readonly string $id,
         public readonly string $gif_file_id,
         public readonly ?string $title = null,
-        public readonly ?string $description = null,
         public readonly ?string $caption = null,
         public readonly ?string $parse_mode = null,
         /** @var MessageEntity[]|null */

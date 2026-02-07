@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
+use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     MessageEntity,
     Attribute\ArrayOf,
 };
+
+use function mb_strlen;
 
 readonly class InputPollOption extends AbstractDataType
 {
@@ -18,5 +21,9 @@ readonly class InputPollOption extends AbstractDataType
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $text_entities = null,
-    ) {}
+    ) {
+        if (mb_strlen($this->text) > 100) {
+            throw new InvalidArgumentException('Text length cannot exceed 100 characters');
+        }
+    }
 }

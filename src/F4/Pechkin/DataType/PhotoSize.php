@@ -13,6 +13,6 @@ readonly class PhotoSize extends AbstractDataType
         public readonly string $file_unique_id,
         public readonly int $width,
         public readonly int $height,
-        public readonly ?string $file_size = null, // may not fit in a 32-bit integer
+        public readonly ?int $file_size = null,
     ) {}
 }

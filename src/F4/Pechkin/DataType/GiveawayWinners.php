@@ -22,6 +22,7 @@ readonly class GiveawayWinners extends AbstractDataType
         #[ArrayOf(User::class)]
         public readonly array $winners,
         public readonly ?int $additional_chat_count = null,
+        public readonly ?int $prize_star_count = null,
         public readonly ?int $premium_subscription_month_count = null,
         public readonly ?int $unclaimed_prize_count = null,
         public readonly ?bool $only_new_members = null,

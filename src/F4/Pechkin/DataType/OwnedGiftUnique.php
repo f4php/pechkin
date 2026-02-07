@@ -7,17 +7,19 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     UniqueGift,
+    User,
 };
 
 readonly class OwnedGiftUnique extends AbstractDataType
 {
     public function __construct(
-        public readonly UniqueGift $unique_gift,
-        public readonly int $converted_star_count,
-        public readonly string $owned_gift_id,
-        public readonly ?string $sticker_color = null,
-        public readonly ?string $last_resale_currency = null,
-        public readonly ?int $last_resale_amount = null,
+        public readonly UniqueGift $gift,
+        public readonly int $send_date,
+        public readonly ?string $owned_gift_id = null,
+        public readonly ?User $sender_user = null,
+        public readonly ?bool $is_saved = null,
+        public readonly ?bool $can_be_transferred = null,
+        public readonly ?int $transfer_star_count = null,
         public readonly ?int $next_transfer_date = null,
     ) {}
 }

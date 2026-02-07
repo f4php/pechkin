@@ -15,7 +15,7 @@ readonly class UserProfilePhotos extends AbstractDataType
     public function __construct(
         public readonly int $total_count,
         /** @var PhotoSize[][] */
-        #[ArrayOf(PhotoSize::class)]
+        #[ArrayOf(new ArrayOf(PhotoSize::class))]
         public readonly array $photos,
     ) {}
 }

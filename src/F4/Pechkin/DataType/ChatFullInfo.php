@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
+use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     AcceptedGiftTypes,
@@ -21,6 +22,8 @@ use F4\Pechkin\DataType\{
     UserRating,
     Attribute\ArrayOf,
 };
+
+use function in_array;
 
 readonly class ChatFullInfo extends AbstractDataType
 {
@@ -80,5 +83,8 @@ readonly class ChatFullInfo extends AbstractDataType
         public readonly ?UniqueGiftColors $unique_gift_colors = null,
         public readonly ?int $paid_message_star_count = null,
     ) {
+        if(!in_array(needle: $this->type, haystack: ['private', 'group', 'supergroup', 'channel'], strict: true)) {
+            throw new InvalidArgumentException('Unsupported '.__CLASS__.' type');
+        }
     }
 }

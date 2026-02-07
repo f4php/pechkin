@@ -22,11 +22,11 @@ use F4\Pechkin\DataType\{
     discriminator: 'source',
     map :[
         'data' => PassportElementErrorDataField::class,
+        'file' => PassportElementErrorFile::class,
+        'files' => PassportElementErrorFiles::class,
         'front_side' => PassportElementErrorFrontSide::class,
         'reverse_side' => PassportElementErrorReverseSide::class,
         'selfie' => PassportElementErrorSelfie::class,
-        'file' => PassportElementErrorFile::class,
-        'files' => PassportElementErrorFiles::class,
         'translation_file' => PassportElementErrorTranslationFile::class,
         'translation_files' => PassportElementErrorTranslationFiles::class,
         'unspecified' => PassportElementErrorUnspecified::class,

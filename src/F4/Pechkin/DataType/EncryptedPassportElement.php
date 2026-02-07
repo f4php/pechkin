@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
+use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     PassportFile,
     Attribute\ArrayOf,
 };
+
+use function in_array;
 
 readonly class EncryptedPassportElement extends AbstractDataType
 {
@@ -27,5 +30,9 @@ readonly class EncryptedPassportElement extends AbstractDataType
         /** @var PassportFile[]|null */
         #[ArrayOf(PassportFile::class)]
         public readonly ?array $translation = null,
-    ) {}
+    ) {
+        if(!in_array(needle: $this->type, haystack: ['personal_details', 'passport', 'driver_license', 'identity_card', 'internal_passport', 'address', 'utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration', 'phone_number', 'email'], strict: true)) {
+            throw new InvalidArgumentException('Unsupported '.__CLASS__.' type');
+        }
+    }
 }

@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
+use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     InputMessageContent,
     LabeledPrice,
     Attribute\ArrayOf,
 };
+
+use function mb_strlen;
 
 readonly class InputInvoiceMessageContent extends InputMessageContent
 {
@@ -37,5 +40,12 @@ readonly class InputInvoiceMessageContent extends InputMessageContent
         public readonly ?bool $send_phone_number_to_provider = null,
         public readonly ?bool $send_email_to_provider = null,
         public readonly ?bool $is_flexible = null,
-    ) {}
+    ) {
+        if (mb_strlen($this->title) > 32) {
+            throw new InvalidArgumentException('Title length cannot exceed 32 characters');
+        }
+        if (mb_strlen($this->description) > 255) {
+            throw new InvalidArgumentException('Description length cannot exceed 255 characters');
+        }
+    }
 }

@@ -12,11 +12,14 @@ use F4\Pechkin\DataType\{
     Attribute\Polymorphic,
 };
 
-#[Polymorphic([
-    'gift_code' => ChatBoostSourceGiftCode::class,
-    'giveaway' => ChatBoostSourceGiveaway::class,
-    'premium' => ChatBoostSourcePremium::class,
-])]
+#[Polymorphic(
+    discriminator: 'source',
+    map: [
+        'gift_code' => ChatBoostSourceGiftCode::class,
+        'giveaway' => ChatBoostSourceGiveaway::class,
+        'premium' => ChatBoostSourcePremium::class,
+    ],
+)]
 abstract readonly class ChatBoostSource extends AbstractDataType
 {
 }

@@ -12,7 +12,7 @@ readonly class Contact extends AbstractDataType
         public readonly string $phone_number,
         public readonly string $first_name,
         public readonly ?string $last_name = null,
-        public readonly ?string $user_id = null,
+        public readonly ?string $user_id = null, // may not fit in a 32-bit integer
         public readonly ?string $vcard = null,
     ) {}
 }

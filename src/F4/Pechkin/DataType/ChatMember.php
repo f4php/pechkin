@@ -19,8 +19,8 @@ use F4\Pechkin\DataType\{
     discriminator: 'status',
     map: [
         'administrator' => ChatMemberAdministrator::class,
-        'kicked' => ChatMemberBanned::class,
         'creator' => ChatMemberOwner::class,
+        'kicked' => ChatMemberBanned::class,
         'left' => ChatMemberLeft::class,
         'member' => ChatMemberMember::class,
         'restricted' => ChatMemberRestricted::class,

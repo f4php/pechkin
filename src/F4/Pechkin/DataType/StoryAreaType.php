@@ -15,11 +15,11 @@ use F4\Pechkin\DataType\{
 };
 
 #[Polymorphic([
+    'link' => StoryAreaTypeLink::class,
     'location' => StoryAreaTypeLocation::class,
-    'weather' => StoryAreaTypeWeather::class,
     'suggested_reaction' => StoryAreaTypeSuggestedReaction::class,
     'unique_gift' => StoryAreaTypeUniqueGift::class,
-    'link' => StoryAreaTypeLink::class,
+    'weather' => StoryAreaTypeWeather::class,
 ])]
 abstract readonly class StoryAreaType extends AbstractDataType
 {

@@ -17,7 +17,7 @@ readonly class InlineQueryResultCachedVideo extends InlineQueryResult
     public function __construct(
         public readonly string $id,
         public readonly string $video_file_id,
-        public readonly ?string $title = null,
+        public readonly string $title,
         public readonly ?string $description = null,
         public readonly ?string $caption = null,
         public readonly ?string $parse_mode = null,

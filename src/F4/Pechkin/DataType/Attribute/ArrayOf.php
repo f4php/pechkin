@@ -8,6 +8,6 @@ use Attribute;
 final readonly class ArrayOf
 {
     public function __construct(
-        public readonly string $type,
+        public readonly string|ArrayOf $type,
     ) {}
 }

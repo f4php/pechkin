@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
+use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     File,
     MaskPosition,
     PhotoSize,
 };
+
+use function in_array;
 
 readonly class Sticker extends AbstractDataType
 {
@@ -28,6 +31,10 @@ readonly class Sticker extends AbstractDataType
         public readonly ?MaskPosition $mask_position = null,
         public readonly ?string $custom_emoji_id = null,
         public readonly ?bool $needs_repainting = null,
-        public readonly ?string $file_size = null, // may not fit in a 32-bit integer
-    ) {}
+        public readonly ?int $file_size = null,
+    ) {
+        if(!in_array(needle: $this->type, haystack: ['regular', 'mask', 'custom_emoji'], strict: true)) {
+            throw new InvalidArgumentException('Unsupported '.__CLASS__.' type');
+        }
+    }
 }

@@ -16,7 +16,7 @@ readonly class BusinessMessagesDeleted extends AbstractDataType
         public readonly string $business_connection_id,
         public readonly Chat $chat,
         /** @var int[] */
-        #[ArrayOf('string')]
+        #[ArrayOf('int')]
         public readonly array $message_ids,
     ) {}
 }

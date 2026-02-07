@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
+use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     Animation,
@@ -11,6 +12,8 @@ use F4\Pechkin\DataType\{
     PhotoSize,
     Attribute\ArrayOf,
 };
+
+use function mb_strlen;
 
 readonly class Game extends AbstractDataType
 {
@@ -25,5 +28,9 @@ readonly class Game extends AbstractDataType
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $text_entities = null,
         public readonly ?Animation $animation = null,
-    ) {}
+    ) {
+        if ($this->text !== null && mb_strlen($this->text) > 4096) {
+            throw new InvalidArgumentException('Text length cannot exceed 4096 characters');
+        }
+    }
 }

@@ -11,10 +11,15 @@ use F4\Pechkin\DataType\{
     Attribute\Polymorphic,
 };
 
-#[Polymorphic([
-    // '' => InaccessibleMessage::class,
-    // '' => Message::class,
-])]
+#[Polymorphic(
+    createFromArray: static function ($data) {
+        return match(true) {
+            isset($data['from']) => Message::fromArray($data),
+            $data['date']??null === 0 => InaccessibleMessage::fromArray($data),
+            default => null,
+        };
+    }
+)]
 abstract readonly class MaybeInaccessibleMessage extends AbstractDataType
 {
 }

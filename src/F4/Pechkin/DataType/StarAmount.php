@@ -9,8 +9,7 @@ use F4\Pechkin\DataType\AbstractDataType;
 readonly class StarAmount extends AbstractDataType
 {
     public function __construct(
-        public readonly int $total_count,
-        public readonly ?int $purchased_count = null,
-        public readonly ?int $granted_count = null,
+        public readonly int $amount,
+        public readonly ?int $nanostar_amount = null,
     ) {}
 }
