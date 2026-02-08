@@ -11,8 +11,11 @@ use F4\Pechkin\DataType\{
 
 readonly class MessageOriginUser extends MessageOrigin
 {
+    public readonly string $type;
     public function __construct(
         public readonly int $date,
         public readonly User $sender_user,
-    ) {}
+    ) {
+        $this->type = 'user';
+    }
 }

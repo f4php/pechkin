@@ -14,6 +14,7 @@ use F4\Pechkin\DataType\{
 
 readonly class InlineQueryResultMpeg4Gif extends InlineQueryResult
 {
+    public readonly string $type;
     public function __construct(
         public readonly string $id,
         public readonly string $mpeg4_url,
@@ -31,5 +32,7 @@ readonly class InlineQueryResultMpeg4Gif extends InlineQueryResult
         public readonly ?bool $show_caption_above_media = null,
         public readonly ?InlineKeyboardMarkup $reply_markup = null,
         public readonly ?InputMessageContent $input_message_content = null,
-    ) {}
+    ) {
+        $this->type = 'mpeg4_gif';
+    }
 }

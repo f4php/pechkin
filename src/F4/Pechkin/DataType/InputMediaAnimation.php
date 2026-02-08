@@ -12,6 +12,7 @@ use F4\Pechkin\DataType\{
 
 readonly class InputMediaAnimation extends InputMedia
 {
+    public readonly string $type;
     public function __construct(
         public readonly string $media,
         public readonly ?string $thumbnail = null,
@@ -25,5 +26,7 @@ readonly class InputMediaAnimation extends InputMedia
         public readonly ?int $height = null,
         public readonly ?int $duration = null,
         public readonly ?bool $has_spoiler = null,
-    ) {}
+    ) {
+        $this->type = 'animation';
+    }
 }

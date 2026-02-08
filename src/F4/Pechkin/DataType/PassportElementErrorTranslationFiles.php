@@ -14,6 +14,7 @@ use function in_array;
 
 readonly class PassportElementErrorTranslationFiles extends PassportElementError
 {
+    public readonly string $source;
     public function __construct(
         public readonly string $type,
         /** @var string[] */
@@ -21,8 +22,9 @@ readonly class PassportElementErrorTranslationFiles extends PassportElementError
         public readonly array $file_hashes,
         public readonly string $message,
     ) {
-        if(!in_array(needle: $this->type, haystack: ['passport', 'driver_license', 'identity_card', 'internal_passport', 'utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration'], strict: true)) {
-            throw new InvalidArgumentException('Unsupported '.__CLASS__.' type');
+        $this->source = 'translation_files';
+        if (!in_array(needle: $this->type, haystack: ['passport', 'driver_license', 'identity_card', 'internal_passport', 'utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration'], strict: true)) {
+            throw new InvalidArgumentException('Unsupported ' . __CLASS__ . ' type');
         }
     }
 }

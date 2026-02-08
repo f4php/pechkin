@@ -11,10 +11,13 @@ use F4\Pechkin\DataType\{
 
 readonly class BackgroundTypeWallpaper extends BackgroundType
 {
+    public readonly string $type;
     public function __construct(
         public readonly Document $document,
         public readonly int $dark_theme_dimming,
         public readonly ?bool $is_blurred = null,
         public readonly ?bool $is_moving = null,
-    ) {}
+    ) {
+        $this->type = 'wallpaper';
+    }
 }

@@ -11,9 +11,12 @@ use F4\Pechkin\DataType\{
 
 readonly class ChatMemberOwner extends ChatMember
 {
+    public readonly string $status;
     public function __construct(
         public readonly User $user,
         public readonly bool $is_anonymous,
         public readonly ?string $custom_title = null,
-    ) {}
+    ) {
+        $this->status = 'creator';
+    }
 }

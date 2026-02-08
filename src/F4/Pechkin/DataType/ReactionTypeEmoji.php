@@ -8,7 +8,10 @@ use F4\Pechkin\DataType\ReactionType;
 
 readonly class ReactionTypeEmoji extends ReactionType
 {
+    public readonly string $type;
     public function __construct(
         public readonly string $emoji,
-    ) {}
+    ) {
+        $this->type = 'emoji';
+    }
 }

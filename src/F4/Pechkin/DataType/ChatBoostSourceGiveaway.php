@@ -11,10 +11,13 @@ use F4\Pechkin\DataType\{
 
 readonly class ChatBoostSourceGiveaway extends ChatBoostSource
 {
+    public readonly string $source;
     public function __construct(
         public readonly int $giveaway_message_id,
         public readonly ?User $user = null,
         public readonly ?int $prize_star_count = null,
         public readonly ?bool $is_unclaimed = null,
-    ) {}
+    ) {
+        $this->source = 'giveaway';
+    }
 }

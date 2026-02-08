@@ -14,6 +14,7 @@ use F4\Pechkin\DataType\{
 
 readonly class InlineQueryResultCachedVoice extends InlineQueryResult
 {
+    public readonly string $type;
     public function __construct(
         public readonly string $id,
         public readonly string $voice_file_id,
@@ -25,5 +26,7 @@ readonly class InlineQueryResultCachedVoice extends InlineQueryResult
         public readonly ?array $caption_entities = null,
         public readonly ?InlineKeyboardMarkup $reply_markup = null,
         public readonly ?InputMessageContent $input_message_content = null,
-    ) {}
+    ) {
+        $this->type = 'voice';
+    }
 }

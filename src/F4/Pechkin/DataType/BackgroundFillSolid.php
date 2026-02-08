@@ -10,7 +10,10 @@ use F4\Pechkin\DataType\{
 
 readonly class BackgroundFillSolid extends BackgroundFill
 {
+    public readonly string $type;
     public function __construct(
         public readonly int $color,
-    ) {}
+    ) {
+        $this->type = 'solid';
+    }
 }

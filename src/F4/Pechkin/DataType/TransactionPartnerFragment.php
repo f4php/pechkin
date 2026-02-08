@@ -11,7 +11,10 @@ use F4\Pechkin\DataType\{
 
 readonly class TransactionPartnerFragment extends TransactionPartner
 {
+    public readonly string $type;
     public function __construct(
         public readonly ?RevenueWithdrawalState $withdrawal_state = null,
-    ) {}
+    ) {
+        $this->type = 'fragment';
+    }
 }

@@ -10,7 +10,10 @@ use F4\Pechkin\DataType\{
 
 readonly class BotCommandScopeDefault extends BotCommandScope
 {
+    public readonly string $type;
     public function __construct(
         // no data in API docs
-    ) {}
+    ) {
+        $this->type = 'default';
+    }
 }

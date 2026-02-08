@@ -11,10 +11,13 @@ use F4\Pechkin\DataType\{
 
 readonly class MessageOriginChannel extends MessageOrigin
 {
+    public readonly string $type;
     public function __construct(
         public readonly int $date,
         public readonly Chat $chat,
         public readonly int $message_id,
         public readonly ?string $author_signature = null,
-    ) {}
+    ) {
+        $this->type = 'channel';
+    }
 }

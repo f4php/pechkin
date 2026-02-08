@@ -12,6 +12,7 @@ use F4\Pechkin\DataType\{
 
 readonly class InputMediaAudio extends InputMedia
 {
+    public readonly string $type;
     public function __construct(
         public readonly string $media,
         public readonly ?string $thumbnail = null,
@@ -23,5 +24,7 @@ readonly class InputMediaAudio extends InputMedia
         public readonly ?int $duration = null,
         public readonly ?string $performer = null,
         public readonly ?string $title = null,
-    ) {}
+    ) {
+        $this->type = 'audio';
+    }
 }

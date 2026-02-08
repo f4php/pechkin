@@ -10,7 +10,10 @@ use F4\Pechkin\DataType\{
 
 readonly class BotCommandScopeAllGroupChats extends BotCommandScope
 {
+    public readonly string $type;
     public function __construct(
         // no data in API docs
-    ) {}
+    ) {
+        $this->type = 'all_group_chats';
+    }
 }

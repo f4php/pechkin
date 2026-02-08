@@ -13,6 +13,7 @@ use F4\Pechkin\DataType\{
 
 readonly class OwnedGiftRegular extends OwnedGift
 {
+    public readonly string $type;
     public function __construct(
         public readonly Gift $gift,
         public readonly int $send_date,
@@ -30,5 +31,7 @@ readonly class OwnedGiftRegular extends OwnedGift
         public readonly ?bool $was_refunded = null,
         public readonly ?int $convert_star_count = null,
         public readonly ?int $prepaid_upgrade_star_count = null,
-    ) {}
+    ) {
+        $this->type = 'regular';
+    }
 }

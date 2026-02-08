@@ -11,6 +11,7 @@ use F4\Pechkin\DataType\{
 
 readonly class ChatMemberAdministrator extends ChatMember
 {
+    public readonly string $status;
     public function __construct(
         public readonly User $user,
         public readonly bool $can_be_edited,
@@ -31,5 +32,7 @@ readonly class ChatMemberAdministrator extends ChatMember
         public readonly ?bool $can_manage_topics = null,
         public readonly ?bool $can_manage_direct_messages = null,
         public readonly ?string $custom_title = null,
-    ) {}
+    ) {
+        $this->status = 'administrator';
+    }
 }

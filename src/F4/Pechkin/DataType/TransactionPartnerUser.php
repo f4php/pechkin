@@ -15,6 +15,7 @@ use F4\Pechkin\DataType\{
 
 readonly class TransactionPartnerUser extends TransactionPartner
 {
+    public readonly string $type;
     public function __construct(
         public readonly string $transaction_type,
         public readonly User $user,
@@ -27,5 +28,7 @@ readonly class TransactionPartnerUser extends TransactionPartner
         public readonly ?string $paid_media_payload = null,
         public readonly ?Gift $gift = null,
         public readonly ?int $premium_subscription_duration = null,
-    ) {}
+    ) {
+        $this->type = 'user';
+    }
 }

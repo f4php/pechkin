@@ -11,9 +11,12 @@ use F4\Pechkin\DataType\{
 
 readonly class BackgroundFillFreeformGradient extends BackgroundFill
 {
+    public readonly string $type;
     public function __construct(
         /** @var int[] */
         #[ArrayOf('int')]
         public readonly array $colors,
-    ) {}
+    ) {
+        $this->type = 'freeform_gradient';
+    }
 }

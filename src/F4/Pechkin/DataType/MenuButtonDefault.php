@@ -8,7 +8,10 @@ use F4\Pechkin\DataType\MenuButton;
 
 readonly class MenuButtonDefault extends MenuButton
 {
+    public readonly string $type;
     public function __construct(
         // no data in API docs
-    ) {}
+    ) {
+        $this->type = 'default';
+    }
 }

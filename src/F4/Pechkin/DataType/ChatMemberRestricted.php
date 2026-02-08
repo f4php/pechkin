@@ -11,6 +11,7 @@ use F4\Pechkin\DataType\{
 
 readonly class ChatMemberRestricted extends ChatMember
 {
+    public readonly string $status;
     public function __construct(
         public readonly User $user,
         public readonly bool $is_member,
@@ -29,5 +30,7 @@ readonly class ChatMemberRestricted extends ChatMember
         public readonly bool $can_pin_messages,
         public readonly bool $can_manage_topics,
         public readonly int $until_date,
-    ) {}
+    ) {
+        $this->status = 'restricted';
+    }
 }

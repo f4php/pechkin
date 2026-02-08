@@ -8,8 +8,11 @@ use F4\Pechkin\DataType\MessageOrigin;
 
 readonly class MessageOriginHiddenUser extends MessageOrigin
 {
+    public readonly string $type;
     public function __construct(
         public readonly int $date,
         public readonly string $sender_user_name,
-    ) {}
+    ) {
+        $this->type = 'hidden_user';
+    }
 }

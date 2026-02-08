@@ -8,7 +8,10 @@ use F4\Pechkin\DataType\TransactionPartner;
 
 readonly class TransactionPartnerOther extends TransactionPartner
 {
+    public readonly string $type;
     public function __construct(
         // no data in API docs
-    ) {}
+    ) {
+        $this->type = 'other';
+    }
 }

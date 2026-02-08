@@ -12,6 +12,7 @@ use F4\Pechkin\DataType\{
 
 readonly class InlineQueryResultContact extends InlineQueryResult
 {
+    public readonly string $type;
     public function __construct(
         public readonly string $id,
         public readonly string $phone_number,
@@ -23,5 +24,7 @@ readonly class InlineQueryResultContact extends InlineQueryResult
         public readonly ?string $thumbnail_url = null,
         public readonly ?int $thumbnail_width = null,
         public readonly ?int $thumbnail_height = null,
-    ) {}
+    ) {
+        $this->type = 'contact';
+    }
 }

@@ -12,9 +12,12 @@ use F4\Pechkin\DataType\{
 
 readonly class PaidMediaPhoto extends PaidMedia
 {
+    public readonly string $type;
     public function __construct(
         /** @var PhotoSize[] */
         #[ArrayOf(PhotoSize::class)]
         public readonly array $photo,
-    ) {}
+    ) {
+        $this->type = 'photo';
+    }
 }

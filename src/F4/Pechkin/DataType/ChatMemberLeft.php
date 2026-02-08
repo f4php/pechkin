@@ -11,7 +11,10 @@ use F4\Pechkin\DataType\{
 
 readonly class ChatMemberLeft extends ChatMember
 {
+    public readonly string $status;
     public function __construct(
         public readonly User $user,
-    ) {}
+    ) {
+        $this->status = 'left';
+    }
 }

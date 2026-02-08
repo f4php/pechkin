@@ -11,8 +11,11 @@ use F4\Pechkin\DataType\{
 
 readonly class BackgroundTypeFill extends BackgroundType
 {
+    public readonly string $type;
     public function __construct(
         public readonly BackgroundFill $fill,
         public readonly int $dark_theme_dimming,
-    ) {}
+    ) {
+        $this->type = 'fill';
+    }
 }

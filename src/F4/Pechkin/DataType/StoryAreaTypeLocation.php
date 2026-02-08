@@ -11,9 +11,12 @@ use F4\Pechkin\DataType\{
 
 readonly class StoryAreaTypeLocation extends StoryAreaType
 {
+    public readonly string $type;
     public function __construct(
         public readonly float $latitude,
         public readonly float $longitude,
         public readonly ?LocationAddress $address = null,
-    ) {}
+    ) {
+        $this->type = 'location';
+    }
 }

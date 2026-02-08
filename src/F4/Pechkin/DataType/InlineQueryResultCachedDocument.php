@@ -14,7 +14,8 @@ use F4\Pechkin\DataType\{
 
 readonly class InlineQueryResultCachedDocument extends InlineQueryResult
 {
-    public function __construct(
+    public readonly string $type;
+        public function __construct(
         public readonly string $id,
         public readonly string $title,
         public readonly string $document_file_id,
@@ -26,5 +27,7 @@ readonly class InlineQueryResultCachedDocument extends InlineQueryResult
         public readonly ?array $caption_entities = null,
         public readonly ?InlineKeyboardMarkup $reply_markup = null,
         public readonly ?InputMessageContent $input_message_content = null,
-    ) {}
+    ) {
+        $this->type = 'document';
+    }
 }

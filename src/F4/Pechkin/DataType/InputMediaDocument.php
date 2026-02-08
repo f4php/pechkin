@@ -12,6 +12,7 @@ use F4\Pechkin\DataType\{
 
 readonly class InputMediaDocument extends InputMedia
 {
+    public readonly string $type;
     public function __construct(
         public readonly string $media,
         public readonly ?string $thumbnail = null,
@@ -21,5 +22,7 @@ readonly class InputMediaDocument extends InputMedia
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $caption_entities = null,
         public readonly ?bool $disable_content_type_detection = null,
-    ) {}
+    ) {
+        $this->type = 'document';
+    }
 }

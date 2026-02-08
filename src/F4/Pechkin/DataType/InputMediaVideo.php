@@ -12,6 +12,7 @@ use F4\Pechkin\DataType\{
 
 readonly class InputMediaVideo extends InputMedia
 {
+    public readonly string $type;
     public function __construct(
         public readonly string $media,
         public readonly ?string $thumbnail = null,
@@ -27,5 +28,7 @@ readonly class InputMediaVideo extends InputMedia
         public readonly ?int $duration = null,
         public readonly ?bool $supports_streaming = null,
         public readonly ?bool $has_spoiler = null,
-    ) {}
+    ) {
+        $this->type = 'video';
+    }
 }

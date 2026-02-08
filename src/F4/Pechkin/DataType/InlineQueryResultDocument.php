@@ -14,6 +14,7 @@ use F4\Pechkin\DataType\{
 
 readonly class InlineQueryResultDocument extends InlineQueryResult
 {
+    public readonly string $type;
     public function __construct(
         public readonly string $id,
         public readonly string $title,
@@ -30,5 +31,7 @@ readonly class InlineQueryResultDocument extends InlineQueryResult
         public readonly ?string $thumbnail_url = null,
         public readonly ?int $thumbnail_width = null,
         public readonly ?int $thumbnail_height = null,
-    ) {}
+    ) {
+        $this->type = 'document';
+    }
 }

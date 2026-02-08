@@ -8,7 +8,10 @@ use F4\Pechkin\DataType\StoryAreaType;
 
 readonly class StoryAreaTypeUniqueGift extends StoryAreaType
 {
+    public readonly string $type;
     public function __construct(
         public readonly string $name,
-    ) {}
+    ) {
+        $this->type = 'unique_gift';
+    }
 }

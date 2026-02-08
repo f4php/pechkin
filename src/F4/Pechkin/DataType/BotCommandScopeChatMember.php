@@ -10,8 +10,11 @@ use F4\Pechkin\DataType\{
 
 readonly class BotCommandScopeChatMember extends BotCommandScope
 {
-    public function __construct(
+    public readonly string $type;
+        public function __construct(
         public readonly int|string $chat_id,
         public readonly int $user_id,
-    ) {}
+    ) {
+        $this->type = 'chat_member';
+    }
 }

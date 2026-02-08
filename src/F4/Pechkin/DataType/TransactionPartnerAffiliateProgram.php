@@ -11,8 +11,11 @@ use F4\Pechkin\DataType\{
 
 readonly class TransactionPartnerAffiliateProgram extends TransactionPartner
 {
+    public readonly string $type;
     public function __construct(
         public readonly int $commission_per_mille,
         public readonly ?User $sponsor_user = null,
-    ) {}
+    ) {
+        $this->type = 'affiliate_program';
+    }
 }

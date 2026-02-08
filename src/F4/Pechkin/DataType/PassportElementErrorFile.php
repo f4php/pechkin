@@ -11,13 +11,15 @@ use function in_array;
 
 readonly class PassportElementErrorFile extends PassportElementError
 {
+    public readonly string $source;
     public function __construct(
         public readonly string $type,
         public readonly string $file_hash,
         public readonly string $message,
     ) {
-        if(!in_array(needle: $this->type, haystack: ['utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration'], strict: true)) {
-            throw new InvalidArgumentException('Unsupported '.__CLASS__.' type');
+        $this->source = 'file';
+        if (!in_array(needle: $this->type, haystack: ['utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration'], strict: true)) {
+            throw new InvalidArgumentException('Unsupported ' . __CLASS__ . ' type');
         }
     }
 }

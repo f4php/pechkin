@@ -11,12 +11,14 @@ use function in_array;
 
 readonly class PassportElementErrorDataField extends PassportElementError
 {
+    public readonly string $source;
     public function __construct(
         public readonly string $type,
         public readonly string $field_name,
         public readonly string $data_hash,
         public readonly string $message,
     ) {
+        $this->source = 'data';
         if(!in_array(needle: $this->type, haystack: ['personal_details', 'passport', 'driver_license', 'identity_card', 'internal_passport', 'address'], strict: true)) {
             throw new InvalidArgumentException('Unsupported '.__CLASS__.' type');
         }

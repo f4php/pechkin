@@ -11,9 +11,12 @@ use F4\Pechkin\DataType\{
 
 readonly class StoryAreaTypeSuggestedReaction extends StoryAreaType
 {
+    public readonly string $type;
     public function __construct(
         public readonly ReactionType $reaction_type,
         public readonly ?bool $is_dark = null,
         public readonly ?bool $is_flipped = null,
-    ) {}
+    ) {
+        $this->type = 'suggested_reaction';
+    }
 }
