@@ -17,7 +17,7 @@ readonly class Audio extends AbstractDataType
         public readonly int $duration,
         public readonly ?string $performer = null,
         public readonly ?string $title = null,
-        public readonly ?string $file_name = null,
+        public readonly ?string $file_name = null, // may not fit in a 32-bit integer
         public readonly ?string $mime_type = null,
         public readonly ?string $file_size = null,
         public readonly ?PhotoSize $thumbnail = null,

@@ -148,8 +148,8 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?bool $supergroup_chat_created = null,
         public readonly ?bool $channel_chat_created = null,
         public readonly ?MessageAutoDeleteTimerChanged $message_auto_delete_timer_changed = null,
-        public readonly ?string $migrate_to_chat_id = null,
-        public readonly ?string $migrate_from_chat_id = null,
+        public readonly ?string $migrate_to_chat_id = null, // may not fit in a 32-bit integer
+        public readonly ?string $migrate_from_chat_id = null, // may not fit in a 32-bit integer
         public readonly ?MaybeInaccessibleMessage $pinned_message = null,
         public readonly ?Invoice $invoice = null,
         public readonly ?SuccessfulPayment $successful_payment = null,

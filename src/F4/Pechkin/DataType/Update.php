@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
+use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     BusinessConnection,
@@ -24,6 +25,11 @@ use F4\Pechkin\DataType\{
     PreCheckoutQuery,
     ShippingQuery,
 };
+
+use function 
+    array_filter,
+    count
+;
 
 readonly class Update extends AbstractDataType
 {
@@ -52,5 +58,33 @@ readonly class Update extends AbstractDataType
         public readonly ?ChatJoinRequest $chat_join_request = null,
         public readonly ?ChatBoostUpdated $chat_boost = null,
         public readonly ?ChatBoostRemoved $removed_chat_boost = null,
-    ) {}
+    ) {
+        if (1 < count(array_filter([
+            $this->message,
+            $this->edited_message,
+            $this->channel_post,
+            $this->edited_channel_post,
+            $this->business_connection,
+            $this->business_message,
+            $this->edited_business_message,
+            $this->deleted_business_messages,
+            $this->message_reaction,
+            $this->message_reaction_count,
+            $this->inline_query,
+            $this->chosen_inline_result,
+            $this->callback_query,
+            $this->shipping_query,
+            $this->pre_checkout_query,
+            $this->purchased_paid_media,
+            $this->poll,
+            $this->poll_answer,
+            $this->my_chat_member,
+            $this->chat_member,
+            $this->chat_join_request,
+            $this->chat_boost,
+            $this->removed_chat_boost,
+        ]))) {
+            throw new InvalidArgumentException('At most one update payload field may be set.');
+        }
+    }
 }

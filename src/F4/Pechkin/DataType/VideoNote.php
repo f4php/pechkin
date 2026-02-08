@@ -17,6 +17,6 @@ readonly class VideoNote extends AbstractDataType
         public readonly int $length,
         public readonly int $duration,
         public readonly ?PhotoSize $thumbnail = null,
-        public readonly ?string $file_size = null,
+        public readonly ?string $file_size = null, // may not fit in a 32-bit integer
     ) {}
 }
