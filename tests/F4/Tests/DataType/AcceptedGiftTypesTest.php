@@ -4,47 +4,31 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\AcceptedGiftTypes;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class AcceptedGiftTypesTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'unlimited_gifts' => true,
-            'limited_gifts' => true,
-            'unique_gifts' => true,
-            'premium_subscription' => true,
-            'gifts_from_channels' => true,
-        ];
-        $types = AcceptedGiftTypes::fromArray($data);
-        $this->assertTrue($types->unlimited_gifts);
-        $this->assertTrue($types->limited_gifts);
-        $this->assertTrue($types->unique_gifts);
-        $this->assertTrue($types->premium_subscription);
-        $this->assertTrue($types->gifts_from_channels);
+        $data = $this->loadFixture('accepted_gift_types_full.json');
+        $acceptedGiftTypes = AcceptedGiftTypes::fromArray($data);
+
+        $this->assertInstanceOf(AcceptedGiftTypes::class, $acceptedGiftTypes);
+        $this->assertSame(true, $acceptedGiftTypes->unlimited_gifts);
+        $this->assertSame(true, $acceptedGiftTypes->limited_gifts);
+        $this->assertSame(true, $acceptedGiftTypes->unique_gifts);
+        $this->assertSame(true, $acceptedGiftTypes->premium_subscription);
+        $this->assertSame(true, $acceptedGiftTypes->gifts_from_channels);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data1 = [
-            'unlimited_gifts' => true,
-            'limited_gifts' => false,
-            'unique_gifts' => true,
-            'premium_subscription' => false,
-            'gifts_from_channels' => true,
-        ];
-        $data2 = [
-            'unlimited_gifts' => false,
-            'limited_gifts' => true,
-            'unique_gifts' => false,
-            'premium_subscription' => true,
-            'gifts_from_channels' => false,
-        ];
-        $types1 = AcceptedGiftTypes::fromArray($data1);
-        $types2 = AcceptedGiftTypes::fromArray($data2);
-        $this->assertSame($data2, $types2->toArray());
-        $this->assertSame($data1, $types1->toArray());
+        $data = $this->loadFixture('accepted_gift_types_minimal.json');
+        $acceptedGiftTypes = AcceptedGiftTypes::fromArray($data);
+        $this->assertEquals($data, $acceptedGiftTypes->toArray());
     }
 }

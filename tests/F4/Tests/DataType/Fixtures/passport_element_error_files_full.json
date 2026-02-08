@@ -1,0 +1,7 @@
+{
+    "type": "utility_bill",
+    "file_hashes": [
+        "item_1"
+    ],
+    "message": "Error message"
+}

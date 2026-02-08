@@ -1,0 +1,28 @@
+{
+    "id": "123456789",
+    "from": {
+        "id": "123456789",
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": null,
+        "username": null,
+        "language_code": null,
+        "is_premium": null,
+        "added_to_attachment_menu": null,
+        "can_join_groups": null,
+        "can_read_all_group_messages": null,
+        "supports_inline_queries": null,
+        "can_connect_to_business": null,
+        "has_main_web_app": null,
+        "has_topics_enabled": null
+    },
+    "invoice_payload": "test_payload",
+    "shipping_address": {
+        "country_code": "US",
+        "state": "California",
+        "city": "San Francisco",
+        "street_line1": "123 Main St",
+        "street_line2": "Apt 4",
+        "post_code": "94105"
+    }
+}

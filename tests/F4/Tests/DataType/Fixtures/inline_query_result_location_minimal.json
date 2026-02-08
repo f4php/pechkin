@@ -1,0 +1,15 @@
+{
+    "id": "123456789",
+    "latitude": 55.7558,
+    "longitude": 37.6173,
+    "title": "Test Title",
+    "horizontal_accuracy": null,
+    "live_period": null,
+    "heading": null,
+    "proximity_alert_radius": null,
+    "reply_markup": null,
+    "input_message_content": null,
+    "thumbnail_url": null,
+    "thumbnail_width": null,
+    "thumbnail_height": null
+}

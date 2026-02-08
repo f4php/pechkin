@@ -1,0 +1,16 @@
+{
+    "can_send_messages": null,
+    "can_send_audios": null,
+    "can_send_documents": null,
+    "can_send_photos": null,
+    "can_send_videos": null,
+    "can_send_video_notes": null,
+    "can_send_voice_notes": null,
+    "can_send_polls": null,
+    "can_send_other_messages": null,
+    "can_add_web_page_previews": null,
+    "can_change_info": null,
+    "can_invite_users": null,
+    "can_pin_messages": null,
+    "can_manage_topics": null
+}

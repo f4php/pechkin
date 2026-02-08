@@ -1,0 +1,11 @@
+{
+    "star_count": 100,
+    "paid_media": [
+        {
+            "type": "preview",
+            "width": 640,
+            "height": 480,
+            "duration": 120
+        }
+    ]
+}

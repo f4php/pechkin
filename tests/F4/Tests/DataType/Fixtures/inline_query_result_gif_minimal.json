@@ -1,0 +1,16 @@
+{
+    "id": "123456789",
+    "gif_url": "https://example.com/animation.gif",
+    "thumbnail_url": "https://example.com/thumb.jpg",
+    "gif_width": null,
+    "gif_height": null,
+    "gif_duration": null,
+    "thumbnail_mime_type": null,
+    "title": null,
+    "caption": null,
+    "parse_mode": null,
+    "caption_entities": null,
+    "show_caption_above_media": null,
+    "reply_markup": null,
+    "input_message_content": null
+}

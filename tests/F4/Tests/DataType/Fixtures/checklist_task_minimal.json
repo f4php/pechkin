@@ -1,0 +1,8 @@
+{
+    "id": 123456789,
+    "text": "Hello, World!",
+    "text_entities": null,
+    "completed_by_user": null,
+    "completed_by_chat": null,
+    "completion_date": null
+}

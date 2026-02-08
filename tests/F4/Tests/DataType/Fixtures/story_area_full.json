@@ -1,0 +1,14 @@
+{
+    "position": {
+        "x_percentage": 50,
+        "y_percentage": 50,
+        "width_percentage": 20,
+        "height_percentage": 15,
+        "rotation_angle": 45,
+        "corner_radius_percentage": 5
+    },
+    "type": {
+        "type": "link",
+        "url": "https://example.com"
+    }
+}

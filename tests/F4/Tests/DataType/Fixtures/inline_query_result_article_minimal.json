@@ -1,0 +1,16 @@
+{
+    "id": "123456789",
+    "title": "Test Title",
+    "input_message_content": {
+        "phone_number": "+1234567890",
+        "first_name": "John",
+        "last_name": "Doe",
+        "vcard": "BEGIN:VCARD\\nVERSION:3.0\\nFN:John Doe\\nEND:VCARD"
+    },
+    "reply_markup": null,
+    "url": null,
+    "description": null,
+    "thumbnail_url": null,
+    "thumbnail_width": null,
+    "thumbnail_height": null
+}

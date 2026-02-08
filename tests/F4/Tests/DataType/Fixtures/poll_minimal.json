@@ -1,0 +1,22 @@
+{
+    "id": "123456789",
+    "question": "What is the answer?",
+    "options": [
+        {
+            "text": "Hello, World!",
+            "voter_count": 15,
+            "text_entities": null
+        }
+    ],
+    "total_voter_count": 42,
+    "is_closed": false,
+    "is_anonymous": true,
+    "type": "regular",
+    "allows_multiple_answers": false,
+    "question_entities": null,
+    "correct_option_id": null,
+    "explanation": null,
+    "explanation_entities": null,
+    "open_period": null,
+    "close_date": null
+}

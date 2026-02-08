@@ -1,0 +1,7 @@
+{
+    "is_disabled": false,
+    "url": "https://example.com",
+    "prefer_small_media": false,
+    "prefer_large_media": false,
+    "show_above_text": false
+}

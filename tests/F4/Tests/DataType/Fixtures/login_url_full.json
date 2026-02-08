@@ -1,0 +1,6 @@
+{
+    "url": "https://example.com",
+    "forward_text": "Forward text",
+    "bot_username": "testbot",
+    "request_write_access": true
+}

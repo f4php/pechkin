@@ -1,0 +1,7 @@
+{
+    "query": "test query",
+    "allow_user_chats": true,
+    "allow_bot_chats": true,
+    "allow_group_chats": true,
+    "allow_channel_chats": true
+}

@@ -4,37 +4,28 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\ChatMemberLeft;
 use F4\Pechkin\DataType\User;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class ChatMemberLeftTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'user' => [
-                'id' => '123456789',
-                'is_bot' => false,
-                'first_name' => 'John',
-            ],
-        ];
-        $member = ChatMemberLeft::fromArray($data);
+        $data = $this->loadFixture('chat_member_left_full.json');
+        $chatMemberLeft = ChatMemberLeft::fromArray($data);
 
-        $this->assertInstanceOf(User::class, $member->user);
-        $this->assertSame('123456789', $member->user->id);
+        $this->assertInstanceOf(ChatMemberLeft::class, $chatMemberLeft);
+        $this->assertInstanceOf(User::class, $chatMemberLeft->user);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'user' => [
-                'id' => '123456789',
-                'is_bot' => false,
-                'first_name' => 'John',
-            ],
-        ];
-        $member = ChatMemberLeft::fromArray($data);
-        $this->assertSame($data, $member->toArray());
+        $data = $this->loadFixture('chat_member_left_minimal.json');
+        $chatMemberLeft = ChatMemberLeft::fromArray($data);
+        $this->assertEquals([...$data, 'status' => 'left'], $chatMemberLeft->toArray());
     }
 }

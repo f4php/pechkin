@@ -1,0 +1,29 @@
+{
+    "title": "Test Title",
+    "description": "Test description",
+    "payload": "test_string",
+    "currency": "USD",
+    "prices": [
+        {
+            "label": "test_string",
+            "amount": 1000
+        }
+    ],
+    "provider_token": "provider_token_test",
+    "max_tip_amount": 5000,
+    "suggested_tip_amounts": [
+        1
+    ],
+    "provider_data": "{}",
+    "photo_url": "https://example.com/photo.jpg",
+    "photo_size": 1024,
+    "photo_width": 640,
+    "photo_height": 480,
+    "need_name": false,
+    "need_phone_number": false,
+    "need_email": false,
+    "need_shipping_address": false,
+    "send_phone_number_to_provider": false,
+    "send_email_to_provider": false,
+    "is_flexible": false
+}

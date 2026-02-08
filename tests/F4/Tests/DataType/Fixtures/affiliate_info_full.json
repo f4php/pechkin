@@ -1,0 +1,31 @@
+{
+    "amount": 1000,
+    "commission_per_mille": 50,
+    "affiliate_user": {
+        "id": "123456789",
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Doe",
+        "username": "johndoe",
+        "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": true,
+        "can_connect_to_business": true,
+        "has_main_web_app": true,
+        "has_topics_enabled": true
+    },
+    "affiliate_chat": {
+        "id": "123456789",
+        "type": "private",
+        "title": "Test Title",
+        "username": "johndoe",
+        "first_name": "John",
+        "last_name": "Doe",
+        "is_forum": false,
+        "is_direct_messages": false
+    },
+    "nanostar_amount": 500
+}

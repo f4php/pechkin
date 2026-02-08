@@ -1,0 +1,12 @@
+{
+    "currency": "USD",
+    "total_amount": 10000,
+    "invoice_payload": "test_payload",
+    "telegram_payment_charge_id": "charge_123",
+    "provider_payment_charge_id": "provider_charge_456",
+    "subscription_expiration_date": null,
+    "is_recurring": null,
+    "is_first_recurring": null,
+    "shipping_option_id": null,
+    "order_info": null
+}

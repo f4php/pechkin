@@ -4,47 +4,30 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
-use F4\Pechkin\DataType\ChatBoostUpdated;
 use F4\Pechkin\DataType\Chat;
 use F4\Pechkin\DataType\ChatBoost;
+use F4\Pechkin\DataType\ChatBoostUpdated;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class ChatBoostUpdatedTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'chat' => ['id' => '123', 'type' => 'supergroup'],
-            'boost' => [
-                'boost_id' => 'boost_abc',
-                'add_date' => 1700000000,
-                'expiration_date' => 1702592000,
-                'source' => [
-                    'type' => 'premium',
-                    'user' => ['id' => '456', 'is_bot' => false, 'first_name' => 'User'],
-                ],
-            ],
-        ];
-        $updated = ChatBoostUpdated::fromArray($data);
-        $this->assertInstanceOf(Chat::class, $updated->chat);
-        $this->assertInstanceOf(ChatBoost::class, $updated->boost);
+        $data = $this->loadFixture('chat_boost_updated_full.json');
+        $chatBoostUpdated = ChatBoostUpdated::fromArray($data);
+
+        $this->assertInstanceOf(ChatBoostUpdated::class, $chatBoostUpdated);
+        $this->assertInstanceOf(Chat::class, $chatBoostUpdated->chat);
+        $this->assertInstanceOf(ChatBoost::class, $chatBoostUpdated->boost);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'chat' => ['id' => '222', 'type' => 'supergroup'],
-            'boost' => [
-                'boost_id' => 'boost_test',
-                'add_date' => 1700000000,
-                'expiration_date' => 1702592000,
-                'source' => [
-                    'type' => 'premium',
-                    'user' => ['id' => '333', 'is_bot' => false, 'first_name' => 'Test'],
-                ],
-            ],
-        ];
-        $updated = ChatBoostUpdated::fromArray($data);
-        $this->assertSame($data, $updated->toArray());
+        $data = $this->loadFixture('chat_boost_updated_minimal.json');
+        $chatBoostUpdated = ChatBoostUpdated::fromArray($data);
+        $this->assertEquals($data, $chatBoostUpdated->toArray());
     }
 }

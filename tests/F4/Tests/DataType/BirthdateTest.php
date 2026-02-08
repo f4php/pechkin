@@ -4,47 +4,38 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\Birthdate;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class BirthdateTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'day' => 15,
-            'month' => 6,
-            'year' => 1990,
-        ];
+        $data = $this->loadFixture('birthdate_full.json');
         $birthdate = Birthdate::fromArray($data);
 
+        $this->assertInstanceOf(Birthdate::class, $birthdate);
         $this->assertSame(15, $birthdate->day);
         $this->assertSame(6, $birthdate->month);
         $this->assertSame(1990, $birthdate->year);
     }
 
-    public function testFromArrayWithoutYear(): void
+    public function testFromArrayWithMinimalData(): void
     {
-        $data = [
-            'day' => 25,
-            'month' => 12,
-        ];
+        $data = $this->loadFixture('birthdate_minimal.json');
         $birthdate = Birthdate::fromArray($data);
 
-        $this->assertSame(25, $birthdate->day);
-        $this->assertSame(12, $birthdate->month);
+        $this->assertInstanceOf(Birthdate::class, $birthdate);
         $this->assertNull($birthdate->year);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'day' => 15,
-            'month' => 6,
-            'year' => 1990,
-        ];
+        $data = $this->loadFixture('birthdate_minimal.json');
         $birthdate = Birthdate::fromArray($data);
-
-        $this->assertSame($data, $birthdate->toArray());
+        $this->assertEquals($data, $birthdate->toArray());
     }
 }

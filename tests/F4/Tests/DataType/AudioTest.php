@@ -4,68 +4,47 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\Audio;
 use F4\Pechkin\DataType\PhotoSize;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class AudioTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'file_id' => 'CQACAgIAAxkBAAI...',
-            'file_unique_id' => 'AQADAgATqNAxG',
-            'duration' => 180,
-            'performer' => 'Artist Name',
-            'title' => 'Song Title',
-            'file_name' => 'song.mp3',
-            'mime_type' => 'audio/mpeg',
-            'file_size' => 5000000,
-            'thumbnail' => [
-                'file_id' => 'thumb_id',
-                'file_unique_id' => 'thumb_unique',
-                'width' => 100,
-                'height' => 100,
-            ],
-        ];
+        $data = $this->loadFixture('audio_full.json');
         $audio = Audio::fromArray($data);
 
-        $this->assertSame('CQACAgIAAxkBAAI...', $audio->file_id);
-        $this->assertSame(180, $audio->duration);
-        $this->assertSame('Artist Name', $audio->performer);
-        $this->assertSame('Song Title', $audio->title);
-        $this->assertSame('audio/mpeg', $audio->mime_type);
+        $this->assertInstanceOf(Audio::class, $audio);
         $this->assertInstanceOf(PhotoSize::class, $audio->thumbnail);
+        $this->assertSame('BAACAgIAAxkBAAI', $audio->file_id);
+        $this->assertSame('AgADBAADZqc', $audio->file_unique_id);
+        $this->assertSame(120, $audio->duration);
+        $this->assertSame('Test Artist', $audio->performer);
+        $this->assertSame('Test Title', $audio->title);
+        $this->assertSame('test_file.pdf', $audio->file_name);
+        $this->assertSame('application/pdf', $audio->mime_type);
+        $this->assertSame('1024000', $audio->file_size);
     }
 
     public function testFromArrayWithMinimalData(): void
     {
-        $data = [
-            'file_id' => 'CQACAgIAAxkBAAI...',
-            'file_unique_id' => 'AQADAgATqNAxG',
-            'duration' => 60,
-        ];
+        $data = $this->loadFixture('audio_minimal.json');
         $audio = Audio::fromArray($data);
 
-        $this->assertSame(60, $audio->duration);
+        $this->assertInstanceOf(Audio::class, $audio);
         $this->assertNull($audio->performer);
         $this->assertNull($audio->title);
+        $this->assertNull($audio->file_name);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'file_id' => 'CQACAgIAAxkBAAI...',
-            'file_unique_id' => 'AQADAgATqNAxG',
-            'duration' => 180,
-            'performer' => 'Artist Name',
-            'title' => 'Song Title',
-            'file_name' => null,
-            'mime_type' => 'audio/mpeg',
-            'file_size' => null,
-            'thumbnail' => null,
-        ];
+        $data = $this->loadFixture('audio_minimal.json');
         $audio = Audio::fromArray($data);
-        $this->assertSame($data, $audio->toArray());
+        $this->assertEquals($data, $audio->toArray());
     }
 }

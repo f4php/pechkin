@@ -4,22 +4,27 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\BotShortDescription;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class BotShortDescriptionTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = ['short_description' => 'A helpful bot'];
-        $desc = BotShortDescription::fromArray($data);
-        $this->assertSame('A helpful bot', $desc->short_description);
+        $data = $this->loadFixture('bot_short_description_full.json');
+        $botShortDescription = BotShortDescription::fromArray($data);
+
+        $this->assertInstanceOf(BotShortDescription::class, $botShortDescription);
+        $this->assertSame('test_string', $botShortDescription->short_description);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = ['short_description' => 'Quick helper'];
-        $desc = BotShortDescription::fromArray($data);
-        $this->assertSame($data, $desc->toArray());
+        $data = $this->loadFixture('bot_short_description_minimal.json');
+        $botShortDescription = BotShortDescription::fromArray($data);
+        $this->assertEquals($data, $botShortDescription->toArray());
     }
 }

@@ -1,0 +1,12 @@
+{
+    "request_id": 12345,
+    "users": [
+        {
+            "user_id": "987654321",
+            "first_name": null,
+            "last_name": null,
+            "username": null,
+            "photo": null
+        }
+    ]
+}

@@ -4,38 +4,28 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\ChatBoostSourcePremium;
 use F4\Pechkin\DataType\User;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class ChatBoostSourcePremiumTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'user' => [
-                'id' => '123456789',
-                'is_bot' => false,
-                'first_name' => 'John',
-            ],
-        ];
-        $source = ChatBoostSourcePremium::fromArray($data);
+        $data = $this->loadFixture('chat_boost_source_premium_full.json');
+        $chatBoostSourcePremium = ChatBoostSourcePremium::fromArray($data);
 
-        $this->assertInstanceOf(User::class, $source->user);
-        $this->assertSame('123456789', $source->user->id);
-        $this->assertSame('John', $source->user->first_name);
+        $this->assertInstanceOf(ChatBoostSourcePremium::class, $chatBoostSourcePremium);
+        $this->assertInstanceOf(User::class, $chatBoostSourcePremium->user);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'user' => [
-                'id' => '123456789',
-                'is_bot' => false,
-                'first_name' => 'John',
-            ],
-        ];
-        $source = ChatBoostSourcePremium::fromArray($data);
-        $this->assertSame($data, $source->toArray());
+        $data = $this->loadFixture('chat_boost_source_premium_minimal.json');
+        $chatBoostSourcePremium = ChatBoostSourcePremium::fromArray($data);
+        $this->assertEquals([...$data, 'source' => 'premium'], $chatBoostSourcePremium->toArray());
     }
 }

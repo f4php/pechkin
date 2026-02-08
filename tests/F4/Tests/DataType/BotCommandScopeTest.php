@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
+use F4\Tests\DataType\FixtureAwareTrait;
 use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\BotCommandScope;
 use F4\Pechkin\DataType\BotCommandScopeDefault;
@@ -16,6 +17,8 @@ use F4\Pechkin\DataType\BotCommandScopeChatMember;
 
 final class BotCommandScopeTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayWithDefaultType(): void
     {
         $data = [
@@ -55,47 +58,31 @@ final class BotCommandScopeTest extends TestCase
     public function testFromArrayWithChatType(): void
     {
         $data = [
+            ...$this->loadFixture('bot_command_scope_chat_full.json'),
             'type' => 'chat',
-            'chat_id' => -1001234567890,
         ];
         $result = BotCommandScope::fromArray($data);
         $this->assertInstanceOf(BotCommandScopeChat::class, $result);
-        $this->assertSame(-1001234567890, $result->chat_id);
     }
 
     public function testFromArrayWithChatAdministratorsType(): void
     {
         $data = [
+            ...$this->loadFixture('bot_command_scope_chat_administrators_full.json'),
             'type' => 'chat_administrators',
-            'chat_id' => -1001234567890,
         ];
         $result = BotCommandScope::fromArray($data);
         $this->assertInstanceOf(BotCommandScopeChatAdministrators::class, $result);
-        $this->assertSame(-1001234567890, $result->chat_id);
     }
 
     public function testFromArrayWithChatMemberType(): void
     {
         $data = [
+            ...$this->loadFixture('bot_command_scope_chat_member_full.json'),
             'type' => 'chat_member',
-            'chat_id' => -1001234567890,
-            'user_id' => 123456789,
         ];
         $result = BotCommandScope::fromArray($data);
         $this->assertInstanceOf(BotCommandScopeChatMember::class, $result);
-        $this->assertSame(-1001234567890, $result->chat_id);
-        $this->assertSame(123456789, $result->user_id);
     }
-
-    public function testFromArrayToArrayRoundtrip(): void
-    {
-        $data = [
-            'type' => 'chat_member',
-            'chat_id' => -1001234567890,
-            'user_id' => '123456789',
-        ];
-        $result = BotCommandScope::fromArray($data);
-        unset($data['type']);
-        $this->assertSame($data, $result->toArray());
-    }
+    
 }

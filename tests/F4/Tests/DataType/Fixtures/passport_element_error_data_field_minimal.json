@@ -1,0 +1,6 @@
+{
+    "type": "personal_details",
+    "field_name": "first_name",
+    "data_hash": "data_hash_abc",
+    "message": "Error message"
+}

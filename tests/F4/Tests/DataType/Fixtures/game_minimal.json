@@ -1,0 +1,16 @@
+{
+    "title": "Test Title",
+    "description": "Test description",
+    "photo": [
+        {
+            "file_id": "BAACAgIAAxkBAAI",
+            "file_unique_id": "AgADBAADZqc",
+            "width": 640,
+            "height": 480,
+            "file_size": null
+        }
+    ],
+    "text": null,
+    "text_entities": null,
+    "animation": null
+}

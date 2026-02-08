@@ -1,0 +1,122 @@
+{
+    "transaction_type": "test_string",
+    "user": {
+        "id": "123456789",
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Doe",
+        "username": "johndoe",
+        "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": true,
+        "can_connect_to_business": true,
+        "has_main_web_app": true,
+        "has_topics_enabled": true
+    },
+    "affiliate": {
+        "amount": 1000,
+        "commission_per_mille": 50,
+        "affiliate_user": {
+            "id": "123456789",
+            "is_bot": false,
+            "first_name": "John",
+            "last_name": "Doe",
+            "username": "johndoe",
+            "language_code": "en",
+            "is_premium": true,
+            "added_to_attachment_menu": true,
+            "can_join_groups": true,
+            "can_read_all_group_messages": true,
+            "supports_inline_queries": true,
+            "can_connect_to_business": true,
+            "has_main_web_app": true,
+            "has_topics_enabled": true
+        },
+        "affiliate_chat": {
+            "id": "123456789",
+            "type": "private",
+            "title": "Test Title",
+            "username": "johndoe",
+            "first_name": "John",
+            "last_name": "Doe",
+            "is_forum": false,
+            "is_direct_messages": false
+        },
+        "nanostar_amount": 500
+    },
+    "invoice_payload": "test_payload",
+    "subscription_period": 2592000,
+    "paid_media": [
+        {
+            "type": "preview",
+            "width": 640,
+            "height": 480,
+            "duration": 120
+        }
+    ],
+    "paid_media_payload": "test_string",
+    "gift": {
+        "id": "123456789",
+        "sticker": {
+            "file_id": "BAACAgIAAxkBAAI",
+            "file_unique_id": "AgADBAADZqc",
+            "type": "regular",
+            "width": 640,
+            "height": 480,
+            "is_animated": false,
+            "is_video": false,
+            "thumbnail": {
+                "file_id": "BAACAgIAAxkBAAI",
+                "file_unique_id": "AgADBAADZqc",
+                "width": 640,
+                "height": 480,
+                "file_size": 1024000
+            },
+            "emoji": "🎲",
+            "set_name": "test_sticker_set",
+            "premium_animation": {
+                "file_id": "BAACAgIAAxkBAAI",
+                "file_unique_id": "AgADBAADZqc",
+                "file_size": "1024000",
+                "file_path": "/path/to/file"
+            },
+            "mask_position": {
+                "point": "forehead",
+                "x_shift": 0.5,
+                "y_shift": 0.5,
+                "scale": 100
+            },
+            "custom_emoji_id": "emoji_456",
+            "needs_repainting": false,
+            "file_size": 1024000
+        },
+        "star_count": 100,
+        "upgrade_star_count": 50,
+        "is_premium": true,
+        "has_colors": true,
+        "total_count": 10,
+        "remaining_count": 42,
+        "personal_total_count": 42,
+        "personal_remaining_count": 42,
+        "background": {
+            "center_color": 16711680,
+            "edge_color": 255,
+            "text_color": 16777215
+        },
+        "unique_gift_variant_count": 42,
+        "publisher_chat": {
+            "id": "123456789",
+            "type": "private",
+            "title": "Test Title",
+            "username": "johndoe",
+            "first_name": "John",
+            "last_name": "Doe",
+            "is_forum": false,
+            "is_direct_messages": false
+        }
+    },
+    "premium_subscription_duration": 42
+}

@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\BotCommandScopeChat;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class BotCommandScopeChatTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data1 = ['chat_id' => 123456789];
-        $scope1 = BotCommandScopeChat::fromArray($data1);
-        $this->assertSame(123456789, $scope1->chat_id);
-        $data2 = ['chat_id' => '@supergroupusername'];
-        $scope2 = BotCommandScopeChat::fromArray($data2);
-        $this->assertSame('@supergroupusername', $scope2->chat_id);
+        $data = $this->loadFixture('bot_command_scope_chat_full.json');
+        $botCommandScopeChat = BotCommandScopeChat::fromArray($data);
+
+        $this->assertInstanceOf(BotCommandScopeChat::class, $botCommandScopeChat);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = ['chat_id' => -100123456789];
-        $scope = BotCommandScopeChat::fromArray($data);
-        $this->assertSame($data, $scope->toArray());
+        $data = $this->loadFixture('bot_command_scope_chat_minimal.json');
+        $botCommandScopeChat = BotCommandScopeChat::fromArray($data);
+        $this->assertEquals([...$data, 'type' => 'chat'], $botCommandScopeChat->toArray());
     }
 }

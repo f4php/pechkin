@@ -1,0 +1,8 @@
+{
+    "poll_id": "test_string",
+    "option_ids": [
+        1
+    ],
+    "voter_chat": null,
+    "user": null
+}

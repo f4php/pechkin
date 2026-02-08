@@ -4,43 +4,33 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\Chat;
 use F4\Pechkin\DataType\ChatBoostRemoved;
 use F4\Pechkin\DataType\ChatBoostSource;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class ChatBoostRemovedTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'chat' => ['id' => '123', 'type' => 'supergroup'],
-            'boost_id' => 'boost_abc123',
-            'remove_date' => 1700000000,
-            'source' => [
-                'type' => 'premium',
-                'user' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Booster'],
-            ],
-        ];
-        $removed = ChatBoostRemoved::fromArray($data);
-        $this->assertInstanceOf(Chat::class, $removed->chat);
-        $this->assertSame('boost_abc123', $removed->boost_id);
-        $this->assertSame(1700000000, $removed->remove_date);
-        $this->assertInstanceOf(ChatBoostSource::class, $removed->source);
+        $data = $this->loadFixture('chat_boost_removed_full.json');
+        $chatBoostRemoved = ChatBoostRemoved::fromArray($data);
+
+        $this->assertInstanceOf(ChatBoostRemoved::class, $chatBoostRemoved);
+        $this->assertInstanceOf(Chat::class, $chatBoostRemoved->chat);
+        $this->assertNotNull($chatBoostRemoved->source);
+        $this->assertSame('boost_123', $chatBoostRemoved->boost_id);
+        $this->assertSame(1700086400, $chatBoostRemoved->remove_date);
+        $this->assertInstanceOf(ChatBoostSource::class, $chatBoostRemoved->source);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'chat' => ['id' => '222', 'type' => 'supergroup'],
-            'boost_id' => 'boost_ghi789',
-            'remove_date' => 1700000000,
-            'source' => [
-                'type' => 'premium',
-                'user' => ['id' => '333', 'is_bot' => false, 'first_name' => 'Premium'],
-            ],
-        ];
-        $removed = ChatBoostRemoved::fromArray($data);
-        $this->assertSame($data, $removed->toArray());
+        $data = $this->loadFixture('chat_boost_removed_minimal.json');
+        $chatBoostRemoved = ChatBoostRemoved::fromArray($data);
+        $this->assertEquals($data, $chatBoostRemoved->toArray());
     }
 }

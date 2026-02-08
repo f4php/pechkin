@@ -1,0 +1,62 @@
+{
+    "gift_id": "test_string",
+    "base_name": "gift_base",
+    "name": "Test Name",
+    "number": 42,
+    "model": {
+        "name": "Test Name",
+        "sticker": {
+            "file_id": "BAACAgIAAxkBAAI",
+            "file_unique_id": "AgADBAADZqc",
+            "type": "regular",
+            "width": 640,
+            "height": 480,
+            "is_animated": false,
+            "is_video": false,
+            "thumbnail": null,
+            "emoji": null,
+            "set_name": null,
+            "premium_animation": null,
+            "mask_position": null,
+            "custom_emoji_id": null,
+            "needs_repainting": null,
+            "file_size": null
+        },
+        "rarity_per_mille": 42
+    },
+    "symbol": {
+        "name": "Test Name",
+        "sticker": {
+            "file_id": "BAACAgIAAxkBAAI",
+            "file_unique_id": "AgADBAADZqc",
+            "type": "regular",
+            "width": 640,
+            "height": 480,
+            "is_animated": false,
+            "is_video": false,
+            "thumbnail": null,
+            "emoji": null,
+            "set_name": null,
+            "premium_animation": null,
+            "mask_position": null,
+            "custom_emoji_id": null,
+            "needs_repainting": null,
+            "file_size": null
+        },
+        "rarity_per_mille": 42
+    },
+    "backdrop": {
+        "name": "Test Name",
+        "colors": {
+            "center_color": 16711680,
+            "edge_color": 255,
+            "symbol_color": 65280,
+            "text_color": 16777215
+        },
+        "rarity_per_mille": 42
+    },
+    "is_premium": null,
+    "is_from_blockchain": null,
+    "colors": null,
+    "publisher_chat": null
+}

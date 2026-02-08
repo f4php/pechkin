@@ -4,34 +4,29 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\BackgroundFillGradient;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class BackgroundFillGradientTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'top_color' => 16777215,
-            'bottom_color' => 0,
-            'rotation_angle' => 45,
-        ];
-        $fill = BackgroundFillGradient::fromArray($data);
+        $data = $this->loadFixture('background_fill_gradient_full.json');
+        $backgroundFillGradient = BackgroundFillGradient::fromArray($data);
 
-        $this->assertSame(16777215, $fill->top_color);
-        $this->assertSame(0, $fill->bottom_color);
-        $this->assertSame(45, $fill->rotation_angle);
+        $this->assertInstanceOf(BackgroundFillGradient::class, $backgroundFillGradient);
+        $this->assertSame(16711680, $backgroundFillGradient->top_color);
+        $this->assertSame(255, $backgroundFillGradient->bottom_color);
+        $this->assertSame(45, $backgroundFillGradient->rotation_angle);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'top_color' => 16777215,
-            'bottom_color' => 0,
-            'rotation_angle' => 45,
-        ];
-        $fill = BackgroundFillGradient::fromArray($data);
-
-        $this->assertSame($data, $fill->toArray());
+        $data = $this->loadFixture('background_fill_gradient_minimal.json');
+        $backgroundFillGradient = BackgroundFillGradient::fromArray($data);
+        $this->assertEquals([...$data, 'type' => 'gradient'], $backgroundFillGradient->toArray());
     }
 }

@@ -1,0 +1,9 @@
+{
+    "request_id": 12345,
+    "user_is_bot": false,
+    "user_is_premium": false,
+    "max_quantity": 10,
+    "request_name": true,
+    "request_username": true,
+    "request_photo": true
+}

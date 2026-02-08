@@ -1,0 +1,12 @@
+{
+    "model_custom_emoji_id": 42,
+    "symbol_custom_emoji_id": "test_string",
+    "light_theme_main_color": 42,
+    "light_theme_other_colors": [
+        1
+    ],
+    "dark_theme_main_color": 42,
+    "dark_theme_other_colors": [
+        1
+    ]
+}

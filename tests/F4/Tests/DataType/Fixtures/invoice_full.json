@@ -1,0 +1,7 @@
+{
+    "title": "Test Title",
+    "description": "Test description",
+    "start_parameter": "test_start",
+    "currency": "USD",
+    "total_amount": 10000
+}

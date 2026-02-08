@@ -1,0 +1,17 @@
+{
+    "id": "123456789",
+    "video_url": "https://example.com/video.mp4",
+    "mime_type": "application/pdf",
+    "thumbnail_url": "https://example.com/thumb.jpg",
+    "title": "Test Title",
+    "caption": null,
+    "parse_mode": null,
+    "caption_entities": null,
+    "show_caption_above_media": null,
+    "video_width": null,
+    "video_height": null,
+    "video_duration": null,
+    "description": null,
+    "reply_markup": null,
+    "input_message_content": null
+}

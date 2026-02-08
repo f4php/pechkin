@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "type": "personal_details",
+            "hash": "hash_value_xyz",
+            "data": null,
+            "phone_number": null,
+            "email": null,
+            "files": null,
+            "front_side": null,
+            "reverse_side": null,
+            "selfie": null,
+            "translation": null
+        }
+    ],
+    "credentials": {
+        "data": "callback_data_123",
+        "hash": "hash_value_xyz",
+        "secret": "secret_hash_abc"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "url": "https://example.com",
+    "has_custom_certificate": false,
+    "pending_update_count": 0,
+    "ip_address": null,
+    "last_error_date": null,
+    "last_error_message": null,
+    "last_synchronization_error_date": null,
+    "max_connections": null,
+    "allowed_updates": null
+}

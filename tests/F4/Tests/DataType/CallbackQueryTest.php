@@ -4,88 +4,47 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\CallbackQuery;
+use F4\Pechkin\DataType\MaybeInaccessibleMessage;
 use F4\Pechkin\DataType\User;
-use F4\Pechkin\DataType\Message;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class CallbackQueryTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'id' => 'query123',
-            'from' => [
-                'id' => '123456789',
-                'is_bot' => false,
-                'first_name' => 'John',
-            ],
-            'chat_instance' => 'instance123',
-            'message' => [
-                'message_id' => 42,
-                'date' => 1700000000,
-                'chat' => [
-                    'id' => '-1001234567890',
-                    'type' => 'supergroup',
-                    'title' => 'Test',
-                ],
-            ],
-            'data' => 'button_pressed',
-        ];
-        $query = CallbackQuery::fromArray($data);
+        $data = $this->loadFixture('callback_query_full.json');
+        $callbackQuery = CallbackQuery::fromArray($data);
 
-        $this->assertSame('query123', $query->id);
-        $this->assertInstanceOf(User::class, $query->from);
-        $this->assertSame('instance123', $query->chat_instance);
-        $this->assertInstanceOf(Message::class, $query->message);
-        $this->assertSame('button_pressed', $query->data);
+        $this->assertInstanceOf(CallbackQuery::class, $callbackQuery);
+        $this->assertInstanceOf(User::class, $callbackQuery->from);
+        $this->assertNotNull($callbackQuery->message);
+        $this->assertSame('123456789', $callbackQuery->id);
+        $this->assertSame('test_string', $callbackQuery->chat_instance);
+        $this->assertInstanceOf(MaybeInaccessibleMessage::class, $callbackQuery->message);
+        $this->assertSame('inline_msg_123', $callbackQuery->inline_message_id);
+        $this->assertSame('callback_data_123', $callbackQuery->data);
+        $this->assertSame('testgame', $callbackQuery->game_short_name);
     }
 
     public function testFromArrayWithMinimalData(): void
     {
-        $data = [
-            'id' => 'query123',
-            'from' => [
-                'id' => '123456789',
-                'is_bot' => false,
-                'first_name' => 'John',
-            ],
-            'chat_instance' => 'instance123',
-        ];
-        $query = CallbackQuery::fromArray($data);
+        $data = $this->loadFixture('callback_query_minimal.json');
+        $callbackQuery = CallbackQuery::fromArray($data);
 
-        $this->assertSame('query123', $query->id);
-        $this->assertNull($query->message);
-        $this->assertNull($query->data);
+        $this->assertInstanceOf(CallbackQuery::class, $callbackQuery);
+        $this->assertNull($callbackQuery->message);
+        $this->assertNull($callbackQuery->inline_message_id);
+        $this->assertNull($callbackQuery->data);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'id' => 'query123',
-            'from' => [
-                'id' => '123456789',
-                'is_bot' => false,
-                'first_name' => 'John',
-                'last_name' => null,
-                'username' => null,
-                'language_code' => null,
-                'is_premium' => null,
-                'added_to_attachment_menu' => null,
-                'can_join_groups' => null,
-                'can_read_all_group_messages' => null,
-                'supports_inline_queries' => null,
-                'can_connect_to_business' => null,
-                'has_main_web_app' => null,
-                'has_topics_enabled' => null,
-            ],
-            'chat_instance' => 'instance123',
-            'message' => null,
-            'inline_message_id' => null,
-            'data' => 'button_pressed',
-            'game_short_name' => null,
-        ];
-        $query = CallbackQuery::fromArray($data);
-        $this->assertSame($data, $query->toArray());
+        $data = $this->loadFixture('callback_query_minimal.json');
+        $callbackQuery = CallbackQuery::fromArray($data);
+        $this->assertEquals($data, $callbackQuery->toArray());
     }
 }

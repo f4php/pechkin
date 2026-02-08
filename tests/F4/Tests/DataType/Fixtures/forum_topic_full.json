@@ -1,0 +1,7 @@
+{
+    "message_thread_id": 42,
+    "name": "Test Name",
+    "icon_color": 16711680,
+    "icon_custom_emoji_id": "emoji_123",
+    "is_name_implicit": true
+}

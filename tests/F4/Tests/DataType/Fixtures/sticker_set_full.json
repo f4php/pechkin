@@ -1,0 +1,47 @@
+{
+    "name": "Test Name",
+    "title": "Test Title",
+    "sticker_type": "regular",
+    "stickers": [
+        {
+            "file_id": "BAACAgIAAxkBAAI",
+            "file_unique_id": "AgADBAADZqc",
+            "type": "regular",
+            "width": 640,
+            "height": 480,
+            "is_animated": false,
+            "is_video": false,
+            "thumbnail": {
+                "file_id": "BAACAgIAAxkBAAI",
+                "file_unique_id": "AgADBAADZqc",
+                "width": 640,
+                "height": 480,
+                "file_size": 1024000
+            },
+            "emoji": "🎲",
+            "set_name": "test_sticker_set",
+            "premium_animation": {
+                "file_id": "BAACAgIAAxkBAAI",
+                "file_unique_id": "AgADBAADZqc",
+                "file_size": "1024000",
+                "file_path": "/path/to/file"
+            },
+            "mask_position": {
+                "point": "forehead",
+                "x_shift": 0.5,
+                "y_shift": 0.5,
+                "scale": 100
+            },
+            "custom_emoji_id": "emoji_456",
+            "needs_repainting": false,
+            "file_size": 1024000
+        }
+    ],
+    "thumbnail": {
+        "file_id": "BAACAgIAAxkBAAI",
+        "file_unique_id": "AgADBAADZqc",
+        "width": 640,
+        "height": 480,
+        "file_size": 1024000
+    }
+}

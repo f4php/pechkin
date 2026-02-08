@@ -1,0 +1,10 @@
+{
+    "media": "attach://file",
+    "thumbnail": "test_string",
+    "cover": "test_string",
+    "start_timestamp": 42,
+    "width": 640,
+    "height": 480,
+    "duration": 120,
+    "supports_streaming": true
+}

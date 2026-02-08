@@ -1,0 +1,38 @@
+{
+    "id": "123456789",
+    "game_short_name": "testgame",
+    "reply_markup": {
+        "inline_keyboard": [
+            [
+                {
+                    "text": "Hello, World!",
+                    "url": "https://example.com",
+                    "callback_data": "test_string",
+                    "web_app": {
+                        "url": "https://example.com"
+                    },
+                    "login_url": {
+                        "url": "https://example.com",
+                        "forward_text": "Forward text",
+                        "bot_username": "testbot",
+                        "request_write_access": true
+                    },
+                    "switch_inline_query": "inline_query",
+                    "switch_inline_query_current_chat": "current_chat_query",
+                    "switch_inline_query_chosen_chat": {
+                        "query": "test query",
+                        "allow_user_chats": true,
+                        "allow_bot_chats": true,
+                        "allow_group_chats": true,
+                        "allow_channel_chats": true
+                    },
+                    "copy_text": {
+                        "text": "Hello, World!"
+                    },
+                    "callback_game": {},
+                    "pay": true
+                }
+            ]
+        ]
+    }
+}

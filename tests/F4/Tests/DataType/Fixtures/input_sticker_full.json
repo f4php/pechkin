@@ -1,0 +1,14 @@
+{
+    "sticker": "sticker_file_id",
+    "format": "static",
+    "emoji_list": "test_string",
+    "mask_position": {
+        "point": "forehead",
+        "x_shift": 0.5,
+        "y_shift": 0.5,
+        "scale": 100
+    },
+    "keywords": [
+        "item_1"
+    ]
+}

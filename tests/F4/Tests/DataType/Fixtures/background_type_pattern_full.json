@@ -1,0 +1,25 @@
+{
+    "document": {
+        "file_id": "BAACAgIAAxkBAAI",
+        "file_unique_id": "AgADBAADZqc",
+        "thumbnail": {
+            "file_id": "BAACAgIAAxkBAAI",
+            "file_unique_id": "AgADBAADZqc",
+            "width": 640,
+            "height": 480,
+            "file_size": 1024000
+        },
+        "file_name": "test_file.pdf",
+        "mime_type": "application/pdf",
+        "file_size": "1024000"
+    },
+    "fill": {
+        "type": "freeform_gradient",
+        "colors": [
+            1
+        ]
+    },
+    "intensity": 80,
+    "is_inverted": false,
+    "is_moving": false
+}

@@ -12,14 +12,15 @@ final class CallbackGameTest extends TestCase
     public function testFromArrayCreatesCorrectStructure(): void
     {
         $data = [];
-        $game = CallbackGame::fromArray($data);
-        $this->assertInstanceOf(CallbackGame::class, $game);
+        $callbackGame = CallbackGame::fromArray($data);
+
+        $this->assertInstanceOf(CallbackGame::class, $callbackGame);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
         $data = [];
-        $game = CallbackGame::fromArray($data);
-        $this->assertSame($data, $game->toArray());
+        $callbackGame = CallbackGame::fromArray($data);
+        $this->assertEquals($data, $callbackGame->toArray());
     }
 }

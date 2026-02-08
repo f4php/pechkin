@@ -1,0 +1,27 @@
+{
+    "title": "Test Title",
+    "description": "Test description",
+    "payload": "test_string",
+    "currency": "USD",
+    "prices": [
+        {
+            "label": "test_string",
+            "amount": 1000
+        }
+    ],
+    "provider_token": null,
+    "max_tip_amount": null,
+    "suggested_tip_amounts": null,
+    "provider_data": null,
+    "photo_url": null,
+    "photo_size": null,
+    "photo_width": null,
+    "photo_height": null,
+    "need_name": null,
+    "need_phone_number": null,
+    "need_email": null,
+    "need_shipping_address": null,
+    "send_phone_number_to_provider": null,
+    "send_email_to_provider": null,
+    "is_flexible": null
+}

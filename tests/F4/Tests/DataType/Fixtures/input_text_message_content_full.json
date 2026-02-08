@@ -1,0 +1,37 @@
+{
+    "message_text": "test_string",
+    "parse_mode": "HTML",
+    "entities": [
+        {
+            "type": "bold",
+            "offset": 0,
+            "length": 240,
+            "url": "https://example.com",
+            "user": {
+                "id": "123456789",
+                "is_bot": false,
+                "first_name": "John",
+                "last_name": "Doe",
+                "username": "johndoe",
+                "language_code": "en",
+                "is_premium": true,
+                "added_to_attachment_menu": true,
+                "can_join_groups": true,
+                "can_read_all_group_messages": true,
+                "supports_inline_queries": true,
+                "can_connect_to_business": true,
+                "has_main_web_app": true,
+                "has_topics_enabled": true
+            },
+            "language": "test_string",
+            "custom_emoji_id": "emoji_456"
+        }
+    ],
+    "link_preview_options": {
+        "is_disabled": false,
+        "url": "https://example.com",
+        "prefer_small_media": false,
+        "prefer_large_media": false,
+        "show_above_text": false
+    }
+}

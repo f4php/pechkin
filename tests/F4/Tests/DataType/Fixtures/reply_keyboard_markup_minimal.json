@@ -1,0 +1,20 @@
+{
+    "keyboard": [
+        [
+            {
+                "text": "Hello, World!",
+                "request_users": null,
+                "request_chat": null,
+                "request_contact": null,
+                "request_location": null,
+                "request_poll": null,
+                "web_app": null
+            }
+        ]
+    ],
+    "is_persistent": null,
+    "resize_keyboard": null,
+    "one_time_keyboard": null,
+    "input_field_placeholder": null,
+    "selective": null
+}

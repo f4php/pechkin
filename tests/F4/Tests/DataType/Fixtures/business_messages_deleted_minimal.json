@@ -1,0 +1,16 @@
+{
+    "business_connection_id": "biz_conn_123",
+    "chat": {
+        "id": "123456789",
+        "type": "private",
+        "title": null,
+        "username": null,
+        "first_name": null,
+        "last_name": null,
+        "is_forum": null,
+        "is_direct_messages": null
+    },
+    "message_ids": [
+        1
+    ]
+}

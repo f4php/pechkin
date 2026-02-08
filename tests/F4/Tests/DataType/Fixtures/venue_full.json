@@ -1,0 +1,16 @@
+{
+    "location": {
+        "latitude": 55.7558,
+        "longitude": 37.6173,
+        "horizontal_accuracy": 10.5,
+        "live_period": 3600,
+        "heading": 180,
+        "proximity_alert_radius": 100
+    },
+    "title": "Test Title",
+    "address": "123 Main St",
+    "foursquare_id": "abc123foursquare",
+    "foursquare_type": "food/restaurant",
+    "google_place_id": "ChIJN1t_tDeuEmsRUsoyG83frY4",
+    "google_place_type": "restaurant"
+}

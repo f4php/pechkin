@@ -1,0 +1,13 @@
+{
+    "chat": {
+        "id": "123456789",
+        "type": "private",
+        "title": null,
+        "username": null,
+        "first_name": null,
+        "last_name": null,
+        "is_forum": null,
+        "is_direct_messages": null
+    },
+    "id": 123456789
+}

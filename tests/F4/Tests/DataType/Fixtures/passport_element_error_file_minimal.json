@@ -1,0 +1,5 @@
+{
+    "type": "utility_bill",
+    "file_hash": "file_hash_def",
+    "message": "Error message"
+}

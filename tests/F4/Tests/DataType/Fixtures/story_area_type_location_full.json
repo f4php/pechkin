@@ -1,0 +1,10 @@
+{
+    "latitude": 55.7558,
+    "longitude": 37.6173,
+    "address": {
+        "country_code": "US",
+        "state": "California",
+        "city": "San Francisco",
+        "street": "test_string"
+    }
+}

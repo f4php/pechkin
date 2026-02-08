@@ -1,0 +1,19 @@
+{
+    "document": {
+        "file_id": "BAACAgIAAxkBAAI",
+        "file_unique_id": "AgADBAADZqc",
+        "thumbnail": null,
+        "file_name": null,
+        "mime_type": null,
+        "file_size": null
+    },
+    "fill": {
+        "type": "freeform_gradient",
+        "colors": [
+            1
+        ]
+    },
+    "intensity": 80,
+    "is_inverted": null,
+    "is_moving": null
+}

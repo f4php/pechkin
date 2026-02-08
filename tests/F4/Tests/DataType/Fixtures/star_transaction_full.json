@@ -1,0 +1,12 @@
+{
+    "id": "123456789",
+    "amount": 1000,
+    "date": 1700000000,
+    "nanostar_amount": 500,
+    "source": {
+        "type": "other"
+    },
+    "receiver": {
+        "type": "other"
+    }
+}

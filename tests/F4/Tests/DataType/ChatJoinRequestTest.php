@@ -4,71 +4,45 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\Chat;
-use F4\Pechkin\DataType\ChatJoinRequest;
 use F4\Pechkin\DataType\ChatInviteLink;
+use F4\Pechkin\DataType\ChatJoinRequest;
 use F4\Pechkin\DataType\User;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class ChatJoinRequestTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'chat' => ['id' => '123', 'type' => 'supergroup'],
-            'from' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Requester'],
-            'user_chat_id' => '789012345678',
-            'date' => 1700000000,
-            'bio' => 'test bio',
-            'invite_link' => [
-                'invite_link' => 'https://t.me/joinchat/abc123',
-                'creator' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Admin'],
-                'creates_join_request' => true,
-                'is_primary' => true,
-                'is_revoked' => false,
-            ]
-        ];
-        $request = ChatJoinRequest::fromArray($data);
-        $this->assertInstanceOf(Chat::class, $request->chat);
-        $this->assertInstanceOf(User::class, $request->from);
-        $this->assertSame('789012345678', $request->user_chat_id);
-        $this->assertSame('test bio', $request->bio);
-        $this->assertInstanceOf(ChatInviteLink::class, $request->invite_link);
+        $data = $this->loadFixture('chat_join_request_full.json');
+        $chatJoinRequest = ChatJoinRequest::fromArray($data);
+
+        $this->assertInstanceOf(ChatJoinRequest::class, $chatJoinRequest);
+        $this->assertInstanceOf(Chat::class, $chatJoinRequest->chat);
+        $this->assertInstanceOf(User::class, $chatJoinRequest->from);
+        $this->assertInstanceOf(ChatInviteLink::class, $chatJoinRequest->invite_link);
+        $this->assertSame('123456789', $chatJoinRequest->user_chat_id);
+        $this->assertSame(1700000000, $chatJoinRequest->date);
+        $this->assertSame('Test bio', $chatJoinRequest->bio);
     }
 
     public function testFromArrayWithMinimalData(): void
     {
-        $data = [
-            'chat' => ['id' => '123', 'type' => 'supergroup'],
-            'from' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Requester'],
-            'user_chat_id' => '789012345678',
-            'date' => 1700000000,
-        ];
-        $request = ChatJoinRequest::fromArray($data);
-        $this->assertInstanceOf(Chat::class, $request->chat);
-        $this->assertInstanceOf(User::class, $request->from);
-        $this->assertSame('789012345678', $request->user_chat_id);
-        $this->assertNull($request->bio);
-        $this->assertNull($request->invite_link);
+        $data = $this->loadFixture('chat_join_request_minimal.json');
+        $chatJoinRequest = ChatJoinRequest::fromArray($data);
+
+        $this->assertInstanceOf(ChatJoinRequest::class, $chatJoinRequest);
+        $this->assertNull($chatJoinRequest->bio);
+        $this->assertNull($chatJoinRequest->invite_link);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'chat' => ['id' => '123', 'type' => 'supergroup'],
-            'from' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Requester'],
-            'user_chat_id' => '789012345678',
-            'date' => 1700000000,
-            'bio' => 'test bio',
-            'invite_link' => [
-                'invite_link' => 'https://t.me/joinchat/abc123',
-                'creator' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Admin'],
-                'creates_join_request' => true,
-                'is_primary' => true,
-                'is_revoked' => false,
-            ]
-        ];
-        $request = ChatJoinRequest::fromArray($data);
-        $this->assertSame($data, $request->toArray());
+        $data = $this->loadFixture('chat_join_request_minimal.json');
+        $chatJoinRequest = ChatJoinRequest::fromArray($data);
+        $this->assertEquals($data, $chatJoinRequest->toArray());
     }
 }

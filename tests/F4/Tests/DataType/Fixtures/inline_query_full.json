@@ -1,0 +1,30 @@
+{
+    "id": "123456789",
+    "from": {
+        "id": "123456789",
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Doe",
+        "username": "johndoe",
+        "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": true,
+        "can_connect_to_business": true,
+        "has_main_web_app": true,
+        "has_topics_enabled": true
+    },
+    "query": "test query",
+    "offset": "0",
+    "chat_type": "sender",
+    "location": {
+        "latitude": 55.7558,
+        "longitude": 37.6173,
+        "horizontal_accuracy": 10.5,
+        "live_period": 3600,
+        "heading": 180,
+        "proximity_alert_radius": 100
+    }
+}

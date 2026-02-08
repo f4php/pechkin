@@ -4,44 +4,41 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\BackgroundTypeWallpaper;
 use F4\Pechkin\DataType\Document;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class BackgroundTypeWallpaperTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'document' => ['file_id' => 'abc123', 'file_unique_id' => 'xyz789'],
-            'dark_theme_dimming' => 50,
-            'is_blurred' => true,
-            'is_moving' => true,
-        ];
-        $wallpaper = BackgroundTypeWallpaper::fromArray($data);
-        $this->assertInstanceOf(Document::class, $wallpaper->document);
-        $this->assertSame(50, $wallpaper->dark_theme_dimming);
-        $this->assertSame(true, $wallpaper->is_blurred);
-        $this->assertSame(true, $wallpaper->is_moving);
+        $data = $this->loadFixture('background_type_wallpaper_full.json');
+        $backgroundTypeWallpaper = BackgroundTypeWallpaper::fromArray($data);
+
+        $this->assertInstanceOf(BackgroundTypeWallpaper::class, $backgroundTypeWallpaper);
+        $this->assertInstanceOf(Document::class, $backgroundTypeWallpaper->document);
+        $this->assertSame(50, $backgroundTypeWallpaper->dark_theme_dimming);
+        $this->assertSame(true, $backgroundTypeWallpaper->is_blurred);
+        $this->assertSame(false, $backgroundTypeWallpaper->is_moving);
     }
-    public function testFromArrayCreatesCorrectStructureMinimalData(): void
+
+    public function testFromArrayWithMinimalData(): void
     {
-        $data = [
-            'document' => ['file_id' => 'abc123', 'file_unique_id' => 'xyz789'],
-            'dark_theme_dimming' => 50,
-        ];
-        $wallpaper = BackgroundTypeWallpaper::fromArray($data);
-        $this->assertInstanceOf(Document::class, $wallpaper->document);
-        $this->assertSame(50, $wallpaper->dark_theme_dimming);
+        $data = $this->loadFixture('background_type_wallpaper_minimal.json');
+        $backgroundTypeWallpaper = BackgroundTypeWallpaper::fromArray($data);
+
+        $this->assertInstanceOf(BackgroundTypeWallpaper::class, $backgroundTypeWallpaper);
+        $this->assertNull($backgroundTypeWallpaper->is_blurred);
+        $this->assertNull($backgroundTypeWallpaper->is_moving);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'document' => ['file_id' => 'ghi789', 'file_unique_id' => 'rst456'],
-            'dark_theme_dimming' => 75,
-        ];
-        $wallpaper = BackgroundTypeWallpaper::fromArray($data);
-        $this->assertSame($data, $wallpaper->toArray());
+        $data = $this->loadFixture('background_type_wallpaper_minimal.json');
+        $backgroundTypeWallpaper = BackgroundTypeWallpaper::fromArray($data);
+        $this->assertEquals([...$data, 'type' => 'wallpaper'], $backgroundTypeWallpaper->toArray());
     }
 }

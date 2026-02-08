@@ -1,0 +1,16 @@
+{
+    "can_reply": null,
+    "can_read_messages": null,
+    "can_delete_sent_messages": null,
+    "can_delete_all_messages": null,
+    "can_edit_name": null,
+    "can_edit_bio": null,
+    "can_edit_profile_photo": null,
+    "can_edit_username": null,
+    "can_change_gift_settings": null,
+    "can_view_gifts_and_stars": null,
+    "can_convert_gifts_to_stars": null,
+    "can_transfer_and_upgrade_gifts": null,
+    "can_transfer_stars": null,
+    "can_manage_stories": null
+}

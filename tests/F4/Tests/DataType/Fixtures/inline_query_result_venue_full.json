@@ -1,0 +1,54 @@
+{
+    "id": "123456789",
+    "latitude": 55.7558,
+    "longitude": 37.6173,
+    "title": "Test Title",
+    "address": "123 Main St",
+    "foursquare_id": "abc123foursquare",
+    "foursquare_type": "food/restaurant",
+    "google_place_id": "ChIJN1t_tDeuEmsRUsoyG83frY4",
+    "google_place_type": "restaurant",
+    "reply_markup": {
+        "inline_keyboard": [
+            [
+                {
+                    "text": "Hello, World!",
+                    "url": "https://example.com",
+                    "callback_data": "test_string",
+                    "web_app": {
+                        "url": "https://example.com"
+                    },
+                    "login_url": {
+                        "url": "https://example.com",
+                        "forward_text": "Forward text",
+                        "bot_username": "testbot",
+                        "request_write_access": true
+                    },
+                    "switch_inline_query": "inline_query",
+                    "switch_inline_query_current_chat": "current_chat_query",
+                    "switch_inline_query_chosen_chat": {
+                        "query": "test query",
+                        "allow_user_chats": true,
+                        "allow_bot_chats": true,
+                        "allow_group_chats": true,
+                        "allow_channel_chats": true
+                    },
+                    "copy_text": {
+                        "text": "Hello, World!"
+                    },
+                    "callback_game": {},
+                    "pay": true
+                }
+            ]
+        ]
+    },
+    "input_message_content": {
+        "phone_number": "+1234567890",
+        "first_name": "John",
+        "last_name": "Doe",
+        "vcard": "BEGIN:VCARD\\nVERSION:3.0\\nFN:John Doe\\nEND:VCARD"
+    },
+    "thumbnail_url": "https://example.com/thumb.jpg",
+    "thumbnail_width": 160,
+    "thumbnail_height": 120
+}

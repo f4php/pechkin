@@ -1,0 +1,24 @@
+{
+    "currency": "USD",
+    "total_amount": 10000,
+    "invoice_payload": "test_payload",
+    "telegram_payment_charge_id": "charge_123",
+    "provider_payment_charge_id": "provider_charge_456",
+    "subscription_expiration_date": 42,
+    "is_recurring": true,
+    "is_first_recurring": true,
+    "shipping_option_id": "shipping_1",
+    "order_info": {
+        "name": "Test Name",
+        "phone_number": "+1234567890",
+        "email": "test@example.com",
+        "shipping_address": {
+            "country_code": "US",
+            "state": "California",
+            "city": "San Francisco",
+            "street_line1": "123 Main St",
+            "street_line2": "Apt 4",
+            "post_code": "94105"
+        }
+    }
+}

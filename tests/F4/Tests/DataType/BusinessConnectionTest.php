@@ -4,89 +4,43 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\BusinessBotRights;
 use F4\Pechkin\DataType\BusinessConnection;
 use F4\Pechkin\DataType\User;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class BusinessConnectionTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'id' => 'conn_123',
-            'user' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Business'],
-            'user_chat_id' => '789012345678',
-            'date' => 1700000000,
-            'rights' => [
-                'can_reply' => true,
-                'can_read_messages' => true,
-                'can_delete_sent_messages' => true,
-                'can_delete_all_messages' => true,
-                'can_edit_name' => true,
-                'can_edit_bio' => true,
-                'can_edit_profile_photo' => true,
-                'can_edit_username' => true,
-                'can_change_gift_settings' => true,
-                'can_view_gifts_and_stars' => true,
-                'can_convert_gifts_to_stars' => true,
-                'can_transfer_and_upgrade_gifts' => true,
-                'can_transfer_stars' => true,
-                'can_manage_stories' => true,
-            ],
-            'is_enabled' => true,
-        ];
-        $conn = BusinessConnection::fromArray($data);
-        $this->assertSame('conn_123', $conn->id);
-        $this->assertInstanceOf(User::class, $conn->user);
-        $this->assertSame('789012345678', $conn->user_chat_id);
-        $this->assertInstanceOf(BusinessBotRights::class, $conn->rights);
-        $this->assertTrue($conn->is_enabled);
+        $data = $this->loadFixture('business_connection_full.json');
+        $businessConnection = BusinessConnection::fromArray($data);
+
+        $this->assertInstanceOf(BusinessConnection::class, $businessConnection);
+        $this->assertInstanceOf(User::class, $businessConnection->user);
+        $this->assertInstanceOf(BusinessBotRights::class, $businessConnection->rights);
+        $this->assertSame('123456789', $businessConnection->id);
+        $this->assertSame('123456789', $businessConnection->user_chat_id);
+        $this->assertSame(1700000000, $businessConnection->date);
+        $this->assertSame(true, $businessConnection->is_enabled);
     }
 
-    public function testFromArrayCreatesCorrectStructureMinimalData(): void
+    public function testFromArrayWithMinimalData(): void
     {
-        $data = [
-            'id' => 'conn_123',
-            'user' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Business'],
-            'user_chat_id' => '789012345678',
-            'date' => 1700000000,
-            'is_enabled' => true,
-        ];
-        $conn = BusinessConnection::fromArray($data);
-        $this->assertSame('conn_123', $conn->id);
-        $this->assertInstanceOf(User::class, $conn->user);
-        $this->assertSame('789012345678', $conn->user_chat_id);
-        $this->assertNull($conn->rights);
-        $this->assertNull($conn->is_enabled);
+        $data = $this->loadFixture('business_connection_minimal.json');
+        $businessConnection = BusinessConnection::fromArray($data);
+
+        $this->assertInstanceOf(BusinessConnection::class, $businessConnection);
+        $this->assertNull($businessConnection->rights);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'id' => 'conn_123',
-            'user' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Business'],
-            'user_chat_id' => '789012345678',
-            'date' => 1700000000,
-            'rights' => [
-                'can_reply' => true,
-                'can_read_messages' => true,
-                'can_delete_sent_messages' => true,
-                'can_delete_all_messages' => true,
-                'can_edit_name' => true,
-                'can_edit_bio' => true,
-                'can_edit_profile_photo' => true,
-                'can_edit_username' => true,
-                'can_change_gift_settings' => true,
-                'can_view_gifts_and_stars' => true,
-                'can_convert_gifts_to_stars' => true,
-                'can_transfer_and_upgrade_gifts' => true,
-                'can_transfer_stars' => true,
-                'can_manage_stories' => true,
-            ],
-            'is_enabled' => true,
-        ];
-        $conn = BusinessConnection::fromArray($data);
-        $this->assertSame($data, $conn->toArray());
+        $data = $this->loadFixture('business_connection_minimal.json');
+        $businessConnection = BusinessConnection::fromArray($data);
+        $this->assertEquals($data, $businessConnection->toArray());
     }
 }

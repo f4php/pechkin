@@ -4,80 +4,49 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\ChatInviteLink;
 use F4\Pechkin\DataType\User;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class ChatInviteLinkTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'invite_link' => 'https://t.me/joinchat/abc123',
-            'creator' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Admin'],
-            'creates_join_request' => true,
-            'is_primary' => true,
-            'is_revoked' => false,
-            'name' => 'link_name',
-            'expire_date' => 1798761600,
-            'member_limit' => 15,
-            'pending_join_request_count' => 2,
-            'subscription_period' => 180,
-            'subscription_price' => 2,
-        ];
-        $link = ChatInviteLink::fromArray($data);
-        $this->assertSame('https://t.me/joinchat/abc123', $link->invite_link);
-        $this->assertInstanceOf(User::class, $link->creator);
-        $this->assertTrue($link->creates_join_request);
-        $this->assertTrue($link->is_primary);
-        $this->assertTrue($link->is_revoked);
-        $this->assertSame('link_name', $link->name);
-        $this->assertSame(1798761600, $link->expire_date);
-        $this->assertSame(15, $link->member_limit);
-        $this->assertSame(2, $link->pending_join_request_count);
-        $this->assertSame(180, $link->subscription_period);
-        $this->assertSame(2, $link->subscription_price);
+        $data = $this->loadFixture('chat_invite_link_full.json');
+        $chatInviteLink = ChatInviteLink::fromArray($data);
+
+        $this->assertInstanceOf(ChatInviteLink::class, $chatInviteLink);
+        $this->assertInstanceOf(User::class, $chatInviteLink->creator);
+        $this->assertSame('https://t.me/+abc123', $chatInviteLink->invite_link);
+        $this->assertSame(false, $chatInviteLink->creates_join_request);
+        $this->assertSame(true, $chatInviteLink->is_primary);
+        $this->assertSame(false, $chatInviteLink->is_revoked);
+        $this->assertSame('Test Name', $chatInviteLink->name);
+        $this->assertSame(1700172800, $chatInviteLink->expire_date);
+        $this->assertSame(100, $chatInviteLink->member_limit);
+        $this->assertSame(3, $chatInviteLink->pending_join_request_count);
+        $this->assertSame(2592000, $chatInviteLink->subscription_period);
+        $this->assertSame(500, $chatInviteLink->subscription_price);
     }
 
     public function testFromArrayWithMinimalData(): void
     {
-        $data = [
-            'invite_link' => 'https://t.me/joinchat/abc123',
-            'creator' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Admin'],
-            'creates_join_request' => true,
-            'is_primary' => true,
-            'is_revoked' => false,
-        ];
-        $link = ChatInviteLink::fromArray($data);
-        $this->assertSame('https://t.me/joinchat/abc123', $link->invite_link);
-        $this->assertInstanceOf(User::class, $link->creator);
-        $this->assertTrue($link->creates_join_request);
-        $this->assertTrue($link->is_primary);
-        $this->assertTrue($link->is_revoked);
-        $this->assertNull($link->name);
-        $this->assertNull($link->expire_date);
-        $this->assertNull($link->member_limit);
-        $this->assertNull($link->pending_join_request_count);
-        $this->assertNull($link->subscription_period);
-        $this->assertNull($link->subscription_price);
+        $data = $this->loadFixture('chat_invite_link_minimal.json');
+        $chatInviteLink = ChatInviteLink::fromArray($data);
+
+        $this->assertInstanceOf(ChatInviteLink::class, $chatInviteLink);
+        $this->assertNull($chatInviteLink->name);
+        $this->assertNull($chatInviteLink->expire_date);
+        $this->assertNull($chatInviteLink->member_limit);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'invite_link' => 'https://t.me/joinchat/abc123',
-            'creator' => ['id' => '456', 'is_bot' => false, 'first_name' => 'Admin'],
-            'creates_join_request' => true,
-            'is_primary' => true,
-            'is_revoked' => false,
-            'name' => 'link_name',
-            'expire_date' => 1798761600,
-            'member_limit' => 15,
-            'pending_join_request_count' => 2,
-            'subscription_period' => 180,
-            'subscription_price' => 2,
-        ];
-        $link = ChatInviteLink::fromArray($data);
-        $this->assertSame($data, $link->toArray());
+        $data = $this->loadFixture('chat_invite_link_minimal.json');
+        $chatInviteLink = ChatInviteLink::fromArray($data);
+        $this->assertEquals($data, $chatInviteLink->toArray());
     }
 }

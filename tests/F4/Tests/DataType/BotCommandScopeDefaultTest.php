@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\BotCommandScopeDefault;
+use PHPUnit\Framework\TestCase;
 
 final class BotCommandScopeDefaultTest extends TestCase
 {
     public function testFromArrayCreatesCorrectStructure(): void
     {
         $data = [];
-        $scope = BotCommandScopeDefault::fromArray($data);
-        $this->assertInstanceOf(BotCommandScopeDefault::class, $scope);
+        $botCommandScopeDefault = BotCommandScopeDefault::fromArray($data);
+        $this->assertInstanceOf(BotCommandScopeDefault::class, $botCommandScopeDefault);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
         $data = [];
-        $scope = BotCommandScopeDefault::fromArray($data);
-        $this->assertSame($data, $scope->toArray());
+        $botCommandScopeDefault = BotCommandScopeDefault::fromArray($data);
+        $this->assertEquals([...$data, 'type' => 'default'], $botCommandScopeDefault->toArray());
     }
 }

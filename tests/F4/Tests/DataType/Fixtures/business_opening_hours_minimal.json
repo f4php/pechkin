@@ -1,0 +1,9 @@
+{
+    "time_zone_name": "America/New_York",
+    "opening_hours": [
+        {
+            "opening_minute": 0,
+            "closing_minute": 1440
+        }
+    ]
+}

@@ -4,31 +4,28 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
-use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\BotCommand;
+use F4\Tests\DataType\FixtureAwareTrait;
+use PHPUnit\Framework\TestCase;
 
 final class BotCommandTest extends TestCase
 {
+    use FixtureAwareTrait;
+
     public function testFromArrayCreatesCorrectStructure(): void
     {
-        $data = [
-            'command' => 'start',
-            'description' => 'Start the bot',
-        ];
-        $command = BotCommand::fromArray($data);
+        $data = $this->loadFixture('bot_command_full.json');
+        $botCommand = BotCommand::fromArray($data);
 
-        $this->assertSame('start', $command->command);
-        $this->assertSame('Start the bot', $command->description);
+        $this->assertInstanceOf(BotCommand::class, $botCommand);
+        $this->assertSame('/start', $botCommand->command);
+        $this->assertSame('Test description', $botCommand->description);
     }
 
     public function testFromArrayToArrayRoundtrip(): void
     {
-        $data = [
-            'command' => 'settings',
-            'description' => 'Open settings menu',
-        ];
-        $command = BotCommand::fromArray($data);
-
-        $this->assertSame($data, $command->toArray());
+        $data = $this->loadFixture('bot_command_minimal.json');
+        $botCommand = BotCommand::fromArray($data);
+        $this->assertEquals($data, $botCommand->toArray());
     }
 }

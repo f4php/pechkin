@@ -1,0 +1,35 @@
+{
+    "gifts": [
+        {
+            "id": "123456789",
+            "sticker": {
+                "file_id": "BAACAgIAAxkBAAI",
+                "file_unique_id": "AgADBAADZqc",
+                "type": "regular",
+                "width": 640,
+                "height": 480,
+                "is_animated": false,
+                "is_video": false,
+                "thumbnail": null,
+                "emoji": null,
+                "set_name": null,
+                "premium_animation": null,
+                "mask_position": null,
+                "custom_emoji_id": null,
+                "needs_repainting": null,
+                "file_size": null
+            },
+            "star_count": 100,
+            "upgrade_star_count": null,
+            "is_premium": null,
+            "has_colors": null,
+            "total_count": null,
+            "remaining_count": null,
+            "personal_total_count": null,
+            "personal_remaining_count": null,
+            "background": null,
+            "unique_gift_variant_count": null,
+            "publisher_chat": null
+        }
+    ]
+}
