@@ -85,7 +85,7 @@ use F4\Pechkin\DataType\{
         createFromArray: static function ($data) {
             return match(true) {
                 isset($data['video_url']) => InlineQueryResultVideo::fromArray($data),
-                isset($data['video_file_id']) => InlineQueryResultCachedVideo::class,
+                isset($data['video_file_id']) => InlineQueryResultCachedVideo::fromArray($data),
                 default => null,
             };
         }

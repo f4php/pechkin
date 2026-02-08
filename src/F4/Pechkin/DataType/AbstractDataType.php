@@ -72,18 +72,7 @@ abstract readonly class AbstractDataType
                 }
             }
         }
-        try {
-            return new static(...$data);
-        }
-        catch (\Error $e) {
-            throw new \Error(static::class.': '.$e->getMessage());
-        }
-        catch (\Exception $e) {
-            throw new \Exception(static::class.': '.$e->getMessage());
-        }
-        catch (\ErrorException $e) {
-            throw new \ErrorException(static::class.': '.$e->getMessage());
-        }
+        return new static(...$data);
     }
 
     private static function normalizeTypeName(string $type): ?string
