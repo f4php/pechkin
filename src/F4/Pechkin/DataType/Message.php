@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace F4\Pechkin\DataType;
 
+use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     Animation,
@@ -191,5 +192,9 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?WebAppData $web_app_data = null,
         public readonly ?InlineKeyboardMarkup $reply_markup = null,
     )
-    {}
+    {
+        if($this->date === 0) {
+            throw new InvalidArgumentException('Date must be a positive integer');
+        }
+    }
 }

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace F4\Pechkin\DataType;
 
 use F4\Pechkin\DataType\{
-    AbstractDataType,
+    OwnedGift,
     UniqueGift,
     User,
 };
 
-readonly class OwnedGiftUnique extends AbstractDataType
+readonly class OwnedGiftUnique extends OwnedGift
 {
     public function __construct(
         public readonly UniqueGift $gift,

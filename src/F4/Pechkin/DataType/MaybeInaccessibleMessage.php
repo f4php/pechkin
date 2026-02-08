@@ -14,8 +14,8 @@ use F4\Pechkin\DataType\{
 #[Polymorphic(
     createFromArray: static function ($data) {
         return match(true) {
-            isset($data['from']) => Message::fromArray($data),
-            $data['date']??null === 0 => InaccessibleMessage::fromArray($data),
+            ($data['date']??null) !== 0 => Message::fromArray($data),
+            ($data['date']??null) === 0 => InaccessibleMessage::fromArray($data),
             default => null,
         };
     }
