@@ -23,6 +23,9 @@ readonly class User extends AbstractDataType
         public readonly ?bool $can_connect_to_business = null,
         public readonly ?bool $has_main_web_app = null,
         public readonly ?bool $has_topics_enabled = null,
+
+        // Undocumented property discoverd through API interaction
+        public readonly ?bool $allows_users_to_create_topics = null,
     )
     {}
 }

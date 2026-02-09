@@ -13,7 +13,8 @@
         "supports_inline_queries": true,
         "can_connect_to_business": true,
         "has_main_web_app": true,
-        "has_topics_enabled": true
+        "has_topics_enabled": true,
+        "allows_users_to_create_topics": true
     },
     "paid_media_payload": "test_string"
 }

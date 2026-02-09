@@ -257,5 +257,6 @@
       1
     ]
   },
-  "paid_message_star_count": 10
+  "paid_message_star_count": 10,
+  "can_send_gift": true
 }

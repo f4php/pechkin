@@ -13,7 +13,8 @@
         "supports_inline_queries": null,
         "can_connect_to_business": null,
         "has_main_web_app": null,
-        "has_topics_enabled": null
+        "has_topics_enabled": null,
+        "allows_users_to_create_topics": null
     },
     "until_date": 1700172800
 }

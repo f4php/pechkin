@@ -17,6 +17,7 @@ use F4\Pechkin\DataType\{
 };
 
 use function
+    array_filter,
     array_map,
     array_reduce,
     get_object_vars,
@@ -145,13 +146,16 @@ abstract readonly class AbstractDataType
      *
      * @return array<string, mixed>
      */
-    public function toArray(): array
+    public function toArray(bool $compact = false): array
     {
-        $result = [];
-        foreach (get_object_vars($this) as $property => $value) {
-            $result[$property] = self::convertValue($value);
-        }
-        return $result;
+        $result = (array)self::convertValue(get_object_vars($this), $compact);
+        return match($compact) {
+            true => array_filter(
+                array: $result,
+                callback: fn(mixed $item): bool => $item !== null,
+            ),
+            default => $result,
+        };
     }
 
     /**
@@ -160,14 +164,14 @@ abstract readonly class AbstractDataType
      * @param mixed $value
      * @return mixed
      */
-    private static function convertValue(mixed $value): mixed
+    private static function convertValue(mixed $value, bool $compact = false): mixed
     {
         return match (true) {
             $value === null => null,
-            $value instanceof AbstractDataType => $value->toArray(),
+            $value instanceof AbstractDataType => $value->toArray($compact),
             is_array($value) => array_map(
                 array: $value,
-                callback: self::convertValue(...),
+                callback: fn($item) => self::convertValue($item, $compact),
             ),
             default => $value,
         };

@@ -54,5 +54,6 @@
     "location": null,
     "rating": null,
     "unique_gift_colors": null,
-    "paid_message_star_count": null
+    "paid_message_star_count": null,
+    "can_send_gift": null
 }
