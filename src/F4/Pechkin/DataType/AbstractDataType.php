@@ -11,13 +11,13 @@ use InvalidArgumentException,
     ReflectionUnionType
 ;
 
-use F4\Pechkin\DataType\{
-    Attribute\ArrayOf,
-    Attribute\Polymorphic,
+use F4\Pechkin\{
+    CanExpandDataTypesTrait,
+    DataType\Attribute\ArrayOf,
+    DataType\Attribute\Polymorphic,
 };
 
 use function
-    array_filter,
     array_map,
     array_reduce,
     get_object_vars,
@@ -30,7 +30,65 @@ use function
 
 abstract readonly class AbstractDataType
 {
+    use CanExpandDataTypesTrait;
     public function __construct(...$args) {}
+
+    private static function checkIfTypeHas(ReflectionType $haystack, string $needle): bool
+    {
+        return match (true) {
+            $haystack instanceof ReflectionNamedType => match (true) {
+                    $haystack->isBuiltin() => $haystack->getName() === $needle,
+                    default => is_a($haystack->getName(), $needle, allow_string: true),
+                },
+            $haystack instanceof ReflectionUnionType => array_reduce(
+                array: $haystack->getTypes(),
+                callback: fn(bool $carry, ReflectionType $type) => $carry || self::checkIfTypeHas($type, $needle),
+                initial: false,
+            ),
+            // $haystack instanceof ReflectionIntersectionType => array_reduce(
+            //     array: $haystack->getTypes(),
+            //     callback: fn(bool $carry, ReflectionType $type) => $carry && self::checkIfTypeHas($type, $needle),
+            //     initial: false,
+            // ),
+            default => false,
+        };
+    }
+
+    private static function createArrayOfType(array $data, string|ArrayOf $type): array
+    {
+        return array_map(
+            array: $data,
+            callback: match(true) {
+                $type instanceof ArrayOf =>
+                    fn(mixed $item): array => self::createArrayOfType(data: (array)$item, type: $type->type),
+                is_a(
+                    object_or_class: $type,
+                    class: AbstractDataType::class,
+                    allow_string: true,
+                ) =>
+                    fn(mixed $item): mixed => ($type)::fromArray((array)$item),
+                default =>
+                    fn(mixed $item): mixed => $item,
+            },
+        );
+    }
+
+    private static function extractClassName(?ReflectionType $type, string $needle): ?string
+    {
+        return match (true) {
+            $type instanceof ReflectionNamedType => match (true) {
+                    !$type->isBuiltin() && is_a($type->getName(), class: $needle, allow_string: true) => $type->getName(),
+                    default => null,
+                },
+            $type instanceof ReflectionUnionType => array_reduce(
+                array: $type->getTypes(),
+                callback: fn(?string $carry, ReflectionType $t) => $carry ?? self::extractClassName($t, $needle),
+                initial: null,
+            ),
+            default => null,
+        };
+    }
+
     /**
      * Create an instance from an array of data.
      *
@@ -85,62 +143,6 @@ abstract readonly class AbstractDataType
         ][$type] ?? $type;
     }
 
-    private static function checkIfTypeHas(ReflectionType $haystack, string $needle): bool
-    {
-        return match (true) {
-            $haystack instanceof ReflectionNamedType => match (true) {
-                    $haystack->isBuiltin() => $haystack->getName() === $needle,
-                    default => is_a($haystack->getName(), $needle, allow_string: true),
-                },
-            $haystack instanceof ReflectionUnionType => array_reduce(
-                array: $haystack->getTypes(),
-                callback: fn(bool $carry, ReflectionType $type) => $carry || self::checkIfTypeHas($type, $needle),
-                initial: false,
-            ),
-            // $haystack instanceof ReflectionIntersectionType => array_reduce(
-            //     array: $haystack->getTypes(),
-            //     callback: fn(bool $carry, ReflectionType $type) => $carry && self::checkIfTypeHas($type, $needle),
-            //     initial: false,
-            // ),
-            default => false,
-        };
-    }
-
-    private static function createArrayOfType(array $data, string|ArrayOf $type): array
-    {
-        return array_map(
-            array: $data,
-            callback: match(true) {
-                $type instanceof ArrayOf =>
-                    fn(mixed $item): array => self::createArrayOfType(data: (array)$item, type: $type->type),
-                is_a(
-                    object_or_class: $type,
-                    class: AbstractDataType::class,
-                    allow_string: true,
-                ) =>
-                    fn(mixed $item): mixed => $type::fromArray((array)$item),
-                default =>
-                    fn(mixed $item): mixed => $item,
-            },
-        );
-    }
-
-    private static function extractClassName(?ReflectionType $type, string $needle): ?string
-    {
-        return match (true) {
-            $type instanceof ReflectionNamedType => match (true) {
-                    !$type->isBuiltin() && is_a($type->getName(), class: $needle, allow_string: true) => $type->getName(),
-                    default => null,
-                },
-            $type instanceof ReflectionUnionType => array_reduce(
-                array: $type->getTypes(),
-                callback: fn(?string $carry, ReflectionType $t) => $carry ?? self::extractClassName($t, $needle),
-                initial: null,
-            ),
-            default => null,
-        };
-    }
-
     /**
      * Convert the DataType object to an array representation.
      *
@@ -148,33 +150,7 @@ abstract readonly class AbstractDataType
      */
     public function toArray(bool $compact = false): array
     {
-        $result = (array)self::convertValue(get_object_vars($this), $compact);
-        return match($compact) {
-            true => array_filter(
-                array: $result,
-                callback: fn(mixed $item): bool => $item !== null,
-            ),
-            default => $result,
-        };
-    }
-
-    /**
-     * Convert a value to its array representation.
-     * 
-     * @param mixed $value
-     * @return mixed
-     */
-    private static function convertValue(mixed $value, bool $compact = false): mixed
-    {
-        return match (true) {
-            $value === null => null,
-            $value instanceof AbstractDataType => $value->toArray($compact),
-            is_array($value) => array_map(
-                array: $value,
-                callback: fn($item) => self::convertValue($item, $compact),
-            ),
-            default => $value,
-        };
+        return self::expandDataTypes(value: get_object_vars($this), compact: $compact);
     }
 
 }
