@@ -162,8 +162,7 @@ class Client implements ClientInterface, ClientInlineInterface
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
-    public function close(
-    ): bool {
+    public function close(): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__);
     }
     public function closeForumTopic(
@@ -506,8 +505,7 @@ class Client implements ClientInterface, ClientInlineInterface
             callback: MessageId::fromArray(...),
         );
     }
-    public function getAvailableGifts(
-    ): Gifts {
+    public function getAvailableGifts(): Gifts {
         return Gifts::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
     }
     public function getBusinessAccountGifts(
@@ -592,8 +590,7 @@ class Client implements ClientInterface, ClientInlineInterface
     ): File {
         return File::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
-    public function getForumTopicIconStickers(
-    ): array {
+    public function getForumTopicIconStickers(): array {
         return array_map(
             array: $this->apiClient->sendJsonRequest(__FUNCTION__),
             callback: Sticker::fromArray(...),
@@ -610,8 +607,7 @@ class Client implements ClientInterface, ClientInlineInterface
             callback: GameHighScore::fromArray(...),
         );
     }
-    public function getMe(
-    ): User {
+    public function getMe(): User {
         return User::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
     }
     public function getMyCommands(
@@ -643,8 +639,7 @@ class Client implements ClientInterface, ClientInlineInterface
     ): BotShortDescription {
         return BotShortDescription::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
-    public function getMyStarBalance(
-    ): StarAmount {
+    public function getMyStarBalance(): StarAmount {
         return StarAmount::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
     }
     public function getStarTransactions(
@@ -695,8 +690,7 @@ class Client implements ClientInterface, ClientInlineInterface
     ): UserProfilePhotos {
         return UserProfilePhotos::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
-    public function getWebhookInfo(
-    ): WebHookInfo {
+    public function getWebhookInfo(): WebHookInfo {
         return WebHookInfo::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
     }
     public function giftPremiumSubscription(
@@ -719,8 +713,7 @@ class Client implements ClientInterface, ClientInlineInterface
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
-    public function logOut(
-    ): bool {
+    public function logOut(): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__);
     }
     public function pinChatMessage(
