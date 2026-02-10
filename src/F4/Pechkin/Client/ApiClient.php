@@ -7,43 +7,27 @@ namespace F4\Pechkin\Client;
 // Documentation: https://core.telegram.org/bots/api
 
 use Throwable,
+    F4\Pechkin\CanExpandDataTypesTrait,
     F4\Pechkin\Client\ClientException,
     GuzzleHttp\Client as Guzzle,
     GuzzleHttp\Exception\RequestException
 ;
 use function
-    array_filter,
-    array_map,
-    is_array,
     json_decode,
     sprintf
 ;
 
 class ApiClient
 {
+    use CanExpandDataTypesTrait;
     protected const string BASE_URL = 'https://api.telegram.org/bot';
     protected const string API_VERSION = '9.3';
     protected const int REQUEST_TIMEOUT = 60;
 
     public function __construct(protected readonly string $token) {}
 
-    // strip null values by default
-    protected static function convertToArray(mixed $value): mixed
-    {
-        return match (true) {
-            $value instanceof AbstractDataType => $value->toArray(compact: true),
-            is_array($value) => array_filter(
-                array: array_map(
-                    array: $value,
-                    callback: self::convertToArray(...),
-                ),
-                callback: fn(mixed $item): bool => $item !== null,
-            ),
-            default => $value,
-        };
-    }
     // todo: file uploading, according to the docs (https://core.telegram.org/bots/api#making-requests) must use multipart/form-data
-    public function sendJsonRequest(string $method, array $parameters = []): mixed
+    public function sendJsonRequest(string $method, array $parameters = [], bool $compact = true): mixed
     {
         $requestMethod = 'POST';
         $requestURL = sprintf(self::BASE_URL . '%s/%s', $this->token, $method);
@@ -52,7 +36,7 @@ class ApiClient
             'headers' => [
                 'Content-Type' => 'application/json; charset=utf-8',
             ],
-            'json' => self::convertToArray($parameters),
+            'json' => self::expandDataTypes(value: $parameters, compact: $compact),
         ];
         try {
             $clientResponse = new Guzzle()->request($requestMethod, $requestURL, $requestOptions);
