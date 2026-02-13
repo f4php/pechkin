@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 namespace F4\Pechkin;
+
 // Documentation: https://core.telegram.org/bots/api
 
 use F4\Pechkin\{
     ClientInterface,
-    ClientInlineInterface,
     Client\ApiClient,
 };
 use F4\Pechkin\DataType\{
@@ -70,11 +70,11 @@ use F4\Pechkin\DataType\{
 };
 
 use function
-    array_map,
-    get_defined_vars
+array_map,
+get_defined_vars
 ;
 
-class Client implements ClientInterface, ClientInlineInterface
+class Client implements ClientInterface
 {
     protected const string API_VERSION = '9.3';
     protected const int REQUEST_TIMEOUT = 60;
@@ -129,7 +129,6 @@ class Client implements ClientInterface, ClientInlineInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function answerWebAppQuery(
-
         string $web_app_query_id,
         InlineQueryResult $result,
     ): SentWebAppMessage {
@@ -162,7 +161,8 @@ class Client implements ClientInterface, ClientInlineInterface
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
-    public function close(): bool {
+    public function close(): bool
+    {
         return $this->apiClient->sendJsonRequest(__FUNCTION__);
     }
     public function closeForumTopic(
@@ -505,7 +505,8 @@ class Client implements ClientInterface, ClientInlineInterface
             callback: MessageId::fromArray(...),
         );
     }
-    public function getAvailableGifts(): Gifts {
+    public function getAvailableGifts(): Gifts
+    {
         return Gifts::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
     }
     public function getBusinessAccountGifts(
@@ -590,7 +591,8 @@ class Client implements ClientInterface, ClientInlineInterface
     ): File {
         return File::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
-    public function getForumTopicIconStickers(): array {
+    public function getForumTopicIconStickers(): array
+    {
         return array_map(
             array: $this->apiClient->sendJsonRequest(__FUNCTION__),
             callback: Sticker::fromArray(...),
@@ -607,7 +609,8 @@ class Client implements ClientInterface, ClientInlineInterface
             callback: GameHighScore::fromArray(...),
         );
     }
-    public function getMe(): User {
+    public function getMe(): User
+    {
         return User::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
     }
     public function getMyCommands(
@@ -639,7 +642,8 @@ class Client implements ClientInterface, ClientInlineInterface
     ): BotShortDescription {
         return BotShortDescription::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
-    public function getMyStarBalance(): StarAmount {
+    public function getMyStarBalance(): StarAmount
+    {
         return StarAmount::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
     }
     public function getStarTransactions(
@@ -690,7 +694,8 @@ class Client implements ClientInterface, ClientInlineInterface
     ): UserProfilePhotos {
         return UserProfilePhotos::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
-    public function getWebhookInfo(): WebHookInfo {
+    public function getWebhookInfo(): WebHookInfo
+    {
         return WebHookInfo::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
     }
     public function giftPremiumSubscription(
@@ -713,7 +718,8 @@ class Client implements ClientInterface, ClientInlineInterface
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
-    public function logOut(): bool {
+    public function logOut(): bool
+    {
         return $this->apiClient->sendJsonRequest(__FUNCTION__);
     }
     public function pinChatMessage(
@@ -866,7 +872,7 @@ class Client implements ClientInterface, ClientInlineInterface
         ?ReplyParameters $reply_parameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message {
-        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+        return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendAudio(
         int|string $chat_id,
@@ -889,7 +895,7 @@ class Client implements ClientInterface, ClientInlineInterface
         ?ReplyParameters $reply_parameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message {
-        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+        return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendChatAction(
         int|string $chat_id,
@@ -965,7 +971,7 @@ class Client implements ClientInterface, ClientInlineInterface
         ?ReplyParameters $reply_parameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message {
-        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+        return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendGame(
         int $chat_id,
@@ -1135,7 +1141,7 @@ class Client implements ClientInterface, ClientInlineInterface
         ?ReplyParameters $reply_parameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message {
-        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+        return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendPoll(
         int|string $chat_id,
@@ -1179,7 +1185,7 @@ class Client implements ClientInterface, ClientInlineInterface
         ?ReplyParameters $reply_parameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message {
-        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+        return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendVenue(
         int|string $chat_id,
@@ -1230,7 +1236,7 @@ class Client implements ClientInterface, ClientInlineInterface
         ?ReplyParameters $reply_parameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message {
-        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+        return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendVideoNote(
         int|string $chat_id,
@@ -1249,7 +1255,7 @@ class Client implements ClientInterface, ClientInlineInterface
         ?ReplyParameters $reply_parameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message {
-        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+        return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendVoice(
         int|string $chat_id,
@@ -1269,7 +1275,7 @@ class Client implements ClientInterface, ClientInlineInterface
         ?ReplyParameters $reply_parameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message {
-        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+        return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function setBusinessAccountBio(
         string $business_connection_id,
@@ -1334,7 +1340,7 @@ class Client implements ClientInterface, ClientInlineInterface
         int|string $chat_id,
         InputFile $photo,
     ): bool {
-        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+        return $this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars());
     }
     public function setChatStickerSet(
         int|string $chat_id,
@@ -1441,7 +1447,7 @@ class Client implements ClientInterface, ClientInlineInterface
         string $format,
         InputFile|string|null $thumbnail = null,
     ): bool {
-        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+        return $this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars());
     }
     public function setStickerSetTitle(
         string $name,
@@ -1458,14 +1464,17 @@ class Client implements ClientInterface, ClientInlineInterface
     }
     public function setWebhook(
         string $url,
-        ?string $certificate = null,
+        ?InputFile $certificate = null,
         ?string $ip_address = null,
         ?int $max_connections = null,
         ?array $allowed_updates = null,
         ?bool $drop_pending_updates = null,
         ?string $secret_token = null,
     ): bool {
-        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+        return match($certificate === null) {
+            true => $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()),
+            default => $this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()),
+        };
     }
     public function stopMessageLiveLocation(
         ?string $business_connection_id = null,
@@ -1552,7 +1561,7 @@ class Client implements ClientInterface, ClientInlineInterface
         InputFile $sticker,
         string $sticker_format,
     ): File {
-        return File::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+        return File::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function verifyChat(
         int|string $chat_id,

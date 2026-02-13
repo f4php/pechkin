@@ -150,7 +150,6 @@ abstract readonly class AbstractDataType
      */
     public function toArray(bool $compact = false): array
     {
-        return self::expandDataTypes(value: get_object_vars($this), compact: $compact);
+        return self::expandAsArray(value: get_object_vars($this), compact: $compact);
     }
-
 }

@@ -13,6 +13,9 @@ use Throwable,
     GuzzleHttp\Exception\RequestException
 ;
 use function
+    array_keys,
+    array_map,
+    array_values,
     json_decode,
     sprintf
 ;
@@ -36,7 +39,38 @@ class ApiClient
             'headers' => [
                 'Content-Type' => 'application/json; charset=utf-8',
             ],
-            'json' => self::expandDataTypes(value: $parameters, compact: $compact),
+            'json' => self::expandAsArray(value: $parameters, compact: $compact),
+        ];
+        try {
+            $clientResponse = new Guzzle()->request($requestMethod, $requestURL, $requestOptions);
+            $responseBody = json_decode((string) $clientResponse->getBody(), true, JSON_THROW_ON_ERROR);
+            return match ($responseBody['ok'] ?? false) {
+                true => $responseBody['result'],
+                false => throw new ClientException(
+                    message: $responseBody['description'] ?? 'Uknown error',
+                    code: $responseBody['error_code'] ?? 500,
+                ),
+            };
+        }
+        catch (RequestException $e) {
+            if($e->hasResponse()) {
+                // extract full error message
+                throw new ClientException(message: $e->getResponse()->getBody()->getContents(), code: $e->getcode(), previous: $e);
+            }
+            throw new ClientException(message: $e->getMessage(), code: $e->getcode(), previous: $e);
+        }
+        catch (Throwable $e) {
+            throw new ClientException(message: $e->getMessage(), code: $e->getcode(), previous: $e);
+        }
+    }
+
+    public function sendMultipartRequest(string $method, array $parameters = [], bool $compact = true): mixed
+    {
+        $requestMethod = 'POST';
+        $requestURL = sprintf(self::BASE_URL . '%s/%s', $this->token, $method);
+        $requestOptions = [
+            'connect_timeout' => static::REQUEST_TIMEOUT,
+            'multipart' => self::expandAsMultipartFormData(value: $parameters, compact: $compact),
         ];
         try {
             $clientResponse = new Guzzle()->request($requestMethod, $requestURL, $requestOptions);

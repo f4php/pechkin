@@ -8,7 +8,8 @@ use F4\Pechkin\DataType\AbstractDataType;
 
 readonly class InputFile extends AbstractDataType
 {
-    public function __construct() {
-        // no data in API docs
-    }
+    public function __construct(
+        public readonly string $filename,
+        public readonly string $content,
+    ) {}
 }
