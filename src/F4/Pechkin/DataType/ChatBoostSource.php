@@ -22,4 +22,5 @@ use F4\Pechkin\DataType\{
 )]
 abstract readonly class ChatBoostSource extends AbstractDataType
 {
+    public readonly string $source;
 }

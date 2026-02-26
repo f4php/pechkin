@@ -17,4 +17,5 @@ use F4\Pechkin\DataType\{
 ])]
 abstract readonly class OwnedGift extends AbstractDataType
 {
+    public readonly string $type;
 }

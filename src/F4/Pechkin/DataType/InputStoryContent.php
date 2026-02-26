@@ -17,4 +17,5 @@ use F4\Pechkin\DataType\{
 ])]
 abstract readonly class InputStoryContent extends AbstractDataType
 {
+    public readonly string $type;
 }

@@ -34,4 +34,5 @@ use F4\Pechkin\DataType\{
 )]
 abstract readonly class PassportElementError extends AbstractDataType
 {
+    public readonly string $source;
 }

@@ -19,4 +19,5 @@ use F4\Pechkin\DataType\{
 ])]
 abstract readonly class RevenueWithdrawalState extends AbstractDataType
 {
+    public readonly string $type;
 }

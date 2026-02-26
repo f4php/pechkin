@@ -28,4 +28,5 @@ use F4\Pechkin\DataType\{
 )]
 abstract readonly class ChatMember extends AbstractDataType
 {
+    public readonly string $status;
 }

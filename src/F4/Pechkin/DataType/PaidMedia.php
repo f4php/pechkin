@@ -19,4 +19,5 @@ use F4\Pechkin\DataType\{
 ])]
 abstract readonly class PaidMedia extends AbstractDataType
 {
+    public readonly string $type;
 }

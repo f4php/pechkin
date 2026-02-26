@@ -27,4 +27,5 @@ use F4\Pechkin\DataType\{
 ])]
 abstract readonly class BotCommandScope extends AbstractDataType
 {
+    public readonly string $type;
 }

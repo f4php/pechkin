@@ -23,4 +23,5 @@ use F4\Pechkin\DataType\{
 ])]
 abstract readonly class StoryAreaType extends AbstractDataType
 {
+    public readonly string $type;
 }
