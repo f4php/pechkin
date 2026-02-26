@@ -33,5 +33,6 @@
     "can_pin_messages": null,
     "can_manage_topics": null,
     "can_manage_direct_messages": null,
-    "custom_title": null
+    "custom_title": null,
+    "can_manage_voice_chats": true
 }

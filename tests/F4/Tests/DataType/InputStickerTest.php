@@ -23,7 +23,7 @@ final class InputStickerTest extends TestCase
         $this->assertNotEmpty($inputSticker->keywords);
         $this->assertSame('sticker_file_id', $inputSticker->sticker);
         $this->assertSame('static', $inputSticker->format);
-        $this->assertSame('test_string', $inputSticker->emoji_list);
+        $this->assertSame('👍', $inputSticker->emoji_list[0]);
     }
 
     public function testFromArrayWithMinimalData(): void

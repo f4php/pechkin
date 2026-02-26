@@ -9,7 +9,9 @@
         "first_name": null,
         "last_name": null,
         "is_forum": null,
-        "is_direct_messages": null
+        "is_direct_messages": null,
+        "all_members_are_administrators": null,
+        "accepted_gift_types": null
     },
     "message_thread_id": 42,
     "direct_messages_topic": {
@@ -57,7 +59,9 @@
         "first_name": null,
         "last_name": null,
         "is_forum": null,
-        "is_direct_messages": null
+        "is_direct_messages": null,
+        "all_members_are_administrators": null,
+        "accepted_gift_types": null
     },
     "sender_boost_count": 3,
     "sender_business_bot": {
@@ -112,7 +116,9 @@
             "first_name": null,
             "last_name": null,
             "is_forum": null,
-            "is_direct_messages": null
+            "is_direct_messages": null,
+            "all_members_are_administrators": null,
+            "accepted_gift_types": null
         },
         "message_thread_id": null,
         "direct_messages_topic": null,
@@ -277,7 +283,9 @@
             "first_name": null,
             "last_name": null,
             "is_forum": null,
-            "is_direct_messages": null
+            "is_direct_messages": null,
+            "all_members_are_administrators": null,
+            "accepted_gift_types": null
         },
         "id": 123456789
     },
@@ -407,7 +415,9 @@
             "first_name": null,
             "last_name": null,
             "is_forum": null,
-            "is_direct_messages": null
+            "is_direct_messages": null,
+            "all_members_are_administrators": null,
+            "accepted_gift_types": null
         },
         "id": 123456789
     },
@@ -606,7 +616,9 @@
             "first_name": null,
             "last_name": null,
             "is_forum": null,
-            "is_direct_messages": null
+            "is_direct_messages": null,
+            "all_members_are_administrators": null,
+            "accepted_gift_types": null
         },
         "message_id": 42,
         "date": 0
@@ -932,7 +944,9 @@
                 "first_name": null,
                 "last_name": null,
                 "is_forum": null,
-                "is_direct_messages": null
+                "is_direct_messages": null,
+                "all_members_are_administrators": null,
+                "accepted_gift_types": null
             }
         ],
         "winners_selection_date": 42,
@@ -953,7 +967,9 @@
             "first_name": null,
             "last_name": null,
             "is_forum": null,
-            "is_direct_messages": null
+            "is_direct_messages": null,
+            "all_members_are_administrators": null,
+            "accepted_gift_types": null
         },
         "giveaway_message_id": 42,
         "winners_selection_date": 42,

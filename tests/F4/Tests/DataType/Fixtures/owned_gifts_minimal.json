@@ -36,7 +36,8 @@
                     },
                     "custom_emoji_id": "emoji_456",
                     "needs_repainting": false,
-                    "file_size": 1024000
+                    "file_size": 1024000,
+                    "thumb": null
                 },
                 "star_count": 100,
                 "upgrade_star_count": 50,
@@ -60,7 +61,9 @@
                     "first_name": "John",
                     "last_name": "Doe",
                     "is_forum": false,
-                    "is_direct_messages": false
+                    "is_direct_messages": false,
+                    "all_members_are_administrators": null,
+                    "accepted_gift_types": null
                 }
             },
             "send_date": 1700000000,

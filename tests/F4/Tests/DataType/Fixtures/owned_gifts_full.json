@@ -36,7 +36,8 @@
                     },
                     "custom_emoji_id": "emoji_456",
                     "needs_repainting": false,
-                    "file_size": 1024000
+                    "file_size": 1024000,
+                    "thumb": null
                 },
                 "star_count": 100,
                 "upgrade_star_count": 50,

@@ -1,7 +1,7 @@
 {
     "sticker": "sticker_file_id",
     "format": "static",
-    "emoji_list": "test_string",
+    "emoji_list": ["👍"],
     "mask_position": {
         "point": "forehead",
         "x_shift": 0.5,

@@ -15,7 +15,8 @@
         "mask_position": null,
         "custom_emoji_id": null,
         "needs_repainting": null,
-        "file_size": null
+        "file_size": null,
+        "thumb": null
     },
     "star_count": 100,
     "upgrade_star_count": null,

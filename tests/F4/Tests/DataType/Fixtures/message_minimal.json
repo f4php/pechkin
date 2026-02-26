@@ -9,7 +9,9 @@
         "first_name": null,
         "last_name": null,
         "is_forum": null,
-        "is_direct_messages": null
+        "is_direct_messages": null,
+        "all_members_are_administrators": null,
+        "accepted_gift_types": null
     },
     "message_thread_id": null,
     "direct_messages_topic": null,
@@ -110,5 +112,7 @@
     "video_chat_ended": null,
     "video_chat_participants_invited": null,
     "web_app_data": null,
-    "reply_markup": null
+    "reply_markup": null,
+    "forward_from": null,
+    "forward_date": null
 }

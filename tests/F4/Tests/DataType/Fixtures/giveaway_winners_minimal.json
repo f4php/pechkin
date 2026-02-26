@@ -7,7 +7,9 @@
         "first_name": null,
         "last_name": null,
         "is_forum": null,
-        "is_direct_messages": null
+        "is_direct_messages": null,
+        "all_members_are_administrators": null,
+        "accepted_gift_types": null
     },
     "giveaway_message_id": 42,
     "winners_selection_date": 42,

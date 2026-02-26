@@ -6,5 +6,7 @@
     "first_name": "John",
     "last_name": "Doe",
     "is_forum": false,
-    "is_direct_messages": false
+    "is_direct_messages": false,
+    "all_members_are_administrators": null,
+    "accepted_gift_types": null
 }

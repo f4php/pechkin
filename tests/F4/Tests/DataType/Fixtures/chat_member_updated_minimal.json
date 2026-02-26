@@ -7,7 +7,9 @@
         "first_name": null,
         "last_name": null,
         "is_forum": null,
-        "is_direct_messages": null
+        "is_direct_messages": null,
+        "all_members_are_administrators": null,
+        "accepted_gift_types": null
     },
     "from": {
         "id": "123456789",
@@ -63,7 +65,8 @@
         "can_pin_messages": true,
         "can_manage_topics": true,
         "can_manage_direct_messages": true,
-        "custom_title": "Admin"
+        "custom_title": "Admin",
+        "can_manage_voice_chats": true
     },
     "new_chat_member": {
         "status": "administrator",
@@ -101,7 +104,8 @@
         "can_pin_messages": true,
         "can_manage_topics": true,
         "can_manage_direct_messages": true,
-        "custom_title": "Admin"
+        "custom_title": "Admin",
+        "can_manage_voice_chats": true
     },
     "invite_link": null,
     "via_join_request": null,

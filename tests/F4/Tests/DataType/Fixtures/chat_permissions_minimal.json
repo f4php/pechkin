@@ -12,5 +12,6 @@
     "can_change_info": null,
     "can_invite_users": null,
     "can_pin_messages": null,
-    "can_manage_topics": null
+    "can_manage_topics": null,
+    "can_send_media_messages": null
 }
