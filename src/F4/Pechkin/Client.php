@@ -71,7 +71,8 @@ use F4\Pechkin\DataType\{
 
 use function
 array_map,
-get_defined_vars
+get_defined_vars,
+is_bool
 ;
 
 class Client implements ClientInterface
@@ -87,7 +88,7 @@ class Client implements ClientInterface
     }
 
     public function addStickerToSet(
-        int $user_id,
+        int|string $user_id,
         string $name,
         InputSticker $sticker,
     ): bool {
@@ -136,7 +137,7 @@ class Client implements ClientInterface
     }
     public function approveChatJoinRequest(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -149,7 +150,7 @@ class Client implements ClientInterface
     }
     public function banChatMember(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
         ?int $until_date = null,
         ?bool $revoke_messages = null,
     ): bool {
@@ -262,7 +263,7 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function createNewStickerSet(
-        int $user_id,
+        int|string $user_id,
         string $name,
         string $title,
         array $stickers,
@@ -281,7 +282,7 @@ class Client implements ClientInterface
     }
     public function declineChatJoinRequest(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -395,7 +396,10 @@ class Client implements ClientInterface
         ?bool $show_caption_above_media = null,
         ?InlineKeyboardMarkup $reply_markup = null,
     ): Message|bool {
-        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+        return match(is_bool($result = $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()))) {
+            true => $result,
+            default => Message::fromArray($result),
+        };
     }
     public function editMessageChecklist(
         string $business_connection_id,
@@ -404,7 +408,10 @@ class Client implements ClientInterface
         InputChecklist $checklist,
         ?InlineKeyboardMarkup $reply_markup = null,
     ): Message|bool {
-        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+        return match(is_bool($result = $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()))) {
+            true => $result,
+            default => Message::fromArray($result),
+        };
     }
     public function editMessageLiveLocation(
         float $latitude,
@@ -419,7 +426,10 @@ class Client implements ClientInterface
         ?int $proximity_alert_radius = null,
         ?InlineKeyboardMarkup $reply_markup = null,
     ): Message|bool {
-        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+        return match(is_bool($result = $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()))) {
+            true => $result,
+            default => Message::fromArray($result),
+        };
     }
     public function editMessageMedia(
         InputMedia $media,
@@ -429,7 +439,10 @@ class Client implements ClientInterface
         ?string $inline_message_id = null,
         ?InlineKeyboardMarkup $reply_markup = null,
     ): Message|bool {
-        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+        return match(is_bool($result = $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()))) {
+            true => $result,
+            default => Message::fromArray($result),
+        };
     }
     public function editMessageReplyMarkup(
         ?string $business_connection_id = null,
@@ -438,7 +451,10 @@ class Client implements ClientInterface
         ?string $inline_message_id = null,
         ?InlineKeyboardMarkup $reply_markup = null,
     ): Message|bool {
-        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+        return match(is_bool($result = $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()))) {
+            true => $result,
+            default => Message::fromArray($result),
+        };
     }
     public function editMessageText(
         string $text,
@@ -451,7 +467,10 @@ class Client implements ClientInterface
         ?LinkPreviewOptions $link_preview_options = null,
         ?InlineKeyboardMarkup $reply_markup = null,
     ): Message|bool {
-        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+        return match(is_bool($result = $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()))) {
+            true => $result,
+            default => Message::fromArray($result),
+        };
     }
     public function editStory(
         string $business_connection_id,
@@ -465,7 +484,7 @@ class Client implements ClientInterface
         return Story::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function editUserStarSubscription(
-        int $user_id,
+        int|string $user_id,
         string $telegram_payment_charge_id,
         bool $is_canceled,
     ): bool {
@@ -477,7 +496,6 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function forwardMessage(
-
         int|string $chat_id,
         int|string $from_chat_id,
         int $message_id,
@@ -564,7 +582,7 @@ class Client implements ClientInterface
     }
     public function getChatMember(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
     ): ChatMember {
         return ChatMember::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
@@ -599,7 +617,7 @@ class Client implements ClientInterface
         );
     }
     public function getGameHighScores(
-        int $user_id,
+        int|string $user_id,
         ?int $chat_id = null,
         ?int $message_id = null,
         ?string $inline_message_id = null,
@@ -671,12 +689,12 @@ class Client implements ClientInterface
     }
     public function getUserChatBoosts(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
     ): UserChatBoosts {
         return UserChatBoosts::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function getUserGifts(
-        int $user_id,
+        int|string $user_id,
         ?bool $exclude_unlimited = null,
         ?bool $exclude_limited_upgradable = null,
         ?bool $exclude_limited_non_upgradable = null,
@@ -688,7 +706,7 @@ class Client implements ClientInterface
         return OwnedGifts::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function getUserProfilePhotos(
-        int $user_id,
+        int|string $user_id,
         ?int $offset = null,
         ?int $limit = null,
     ): UserProfilePhotos {
@@ -699,7 +717,7 @@ class Client implements ClientInterface
         return WebHookInfo::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
     }
     public function giftPremiumSubscription(
-        int $user_id,
+        int|string $user_id,
         int $month_count,
         int $star_count,
         ?string $text = null,
@@ -745,7 +763,7 @@ class Client implements ClientInterface
     }
     public function promoteChatMember(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
         ?bool $is_anonymous = null,
         ?bool $can_manage_chat = null,
         ?bool $can_delete_messages = null,
@@ -784,12 +802,12 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function removeUserVerification(
-        int $user_id,
+        int|string $user_id,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function refundStarPayment(
-        int $user_id,
+        int|string $user_id,
         string $telegram_payment_charge_id,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
@@ -806,7 +824,7 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function replaceStickerInSet(
-        int $user_id,
+        int|string $user_id,
         string $name,
         string $old_sticker,
         InputSticker $sticker,
@@ -825,7 +843,7 @@ class Client implements ClientInterface
     }
     public function restrictChatMember(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
         ChatPermissions $permissions,
         ?bool $use_independent_chat_permissions = null,
         ?int $until_date = null,
@@ -839,8 +857,7 @@ class Client implements ClientInterface
         return ChatInviteLink::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function savePreparedInlineMessage(
-
-        int $user_id,
+        int|string $user_id,
         InlineQueryResult $result,
         ?bool $allow_user_chats = null,
         ?bool $allow_bot_chats = null,
@@ -989,7 +1006,7 @@ class Client implements ClientInterface
     }
     public function sendGift(
         string $gift_id,
-        ?int $user_id = null,
+        null|int|string $user_id = null,
         int|string|null $chat_id = null,
         ?bool $pay_for_upgrade = null,
         ?string $text = null,
@@ -1312,7 +1329,7 @@ class Client implements ClientInterface
     }
     public function setChatAdministratorCustomTitle(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
         string $custom_title,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
@@ -1361,7 +1378,7 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function setGameScore(
-        int $user_id,
+        int|string $user_id,
         int $score,
         ?bool $force = null,
         ?bool $disable_edit_message = null,
@@ -1369,7 +1386,10 @@ class Client implements ClientInterface
         ?int $message_id = null,
         ?string $inline_message_id = null,
     ): Message|bool {
-        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+        return match(is_bool($result = $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()))) {
+            true => $result,
+            default => Message::fromArray($result),
+        };
     }
     public function setMessageReaction(
 
@@ -1412,7 +1432,7 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function setPassportDataErrors(
-        int $user_id,
+        int|string $user_id,
         array $errors,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
@@ -1443,7 +1463,7 @@ class Client implements ClientInterface
     }
     public function setStickerSetThumbnail(
         string $name,
-        int $user_id,
+        int|string $user_id,
         string $format,
         InputFile|string|null $thumbnail = null,
     ): bool {
@@ -1456,7 +1476,7 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function setUserEmojiStatus(
-        int $user_id,
+        int|string $user_id,
         ?string $emoji_status_custom_emoji_id = null,
         ?int $emoji_status_expiration_date = null,
     ): bool {
@@ -1483,7 +1503,10 @@ class Client implements ClientInterface
         ?string $inline_message_id = null,
         ?InlineKeyboardMarkup $reply_markup = null,
     ): Message|bool {
-        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+        return match(is_bool($result = $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()))) {
+            true => $result,
+            default => Message::fromArray($result),
+        };
     }
     public function stopPoll(
         int|string $chat_id,
@@ -1509,7 +1532,7 @@ class Client implements ClientInterface
     }
     public function unbanChatMember(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
         ?bool $only_if_banned = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
@@ -1557,7 +1580,7 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function uploadStickerFile(
-        int $user_id,
+        int|string $user_id,
         InputFile $sticker,
         string $sticker_format,
     ): File {
@@ -1570,7 +1593,7 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function verifyUser(
-        int $user_id,
+        int|string $user_id,
         ?string $custom_description = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
