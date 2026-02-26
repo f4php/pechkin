@@ -20,13 +20,11 @@
         }
     ],
     "config": {
-        "optimize-autoloader": true,
-        "allow-plugins": {
-            "cweagans/composer-patches": true
-        }
+        "optimize-autoloader": true
     },
     "scripts": {
-        "test": "phpunit --bootstrap tests/F4/Config.php --display-warnings --display-phpunit-deprecations --fail-on-deprecation tests",
+        "test": "phpunit --bootstrap tests/F4/Config.php --display-warnings --display-phpunit-deprecations --fail-on-deprecation tests --exclude-group integration",
+        "test:integration": "phpunit --bootstrap tests/F4/Config.php --display-warnings tests/F4/Tests/Integration",
         "phpstan": "phpstan --level=1 analyse src tests"
     },
     "require": {
