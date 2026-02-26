@@ -13,9 +13,6 @@ use Throwable,
     GuzzleHttp\Exception\RequestException
 ;
 use function
-    array_keys,
-    array_map,
-    array_values,
     json_decode,
     sprintf
 ;
@@ -29,7 +26,6 @@ class ApiClient
 
     public function __construct(protected readonly string $token) {}
 
-    // todo: file uploading, according to the docs (https://core.telegram.org/bots/api#making-requests) must use multipart/form-data
     public function sendJsonRequest(string $method, array $parameters = [], bool $compact = true): mixed
     {
         $requestMethod = 'POST';
