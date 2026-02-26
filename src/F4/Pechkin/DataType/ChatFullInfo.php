@@ -84,6 +84,7 @@ readonly class ChatFullInfo extends AbstractDataType
         public readonly ?int $paid_message_star_count = null,
 
         // Undocumented property discoverd through API interaction
+        public readonly ?bool $all_members_are_administrators = null,
         public readonly ?bool $can_send_gift = null,
     ) {
         if(!in_array(needle: $this->type, haystack: ['private', 'group', 'supergroup', 'channel'], strict: true)) {

@@ -22,6 +22,10 @@ readonly class Chat extends AbstractDataType
         public readonly ?string $last_name = null,
         public readonly ?bool $is_forum = null,
         public readonly ?bool $is_direct_messages = null,
+
+        // Undocumented property discoverd through API interaction
+        public readonly ?bool $all_members_are_administrators = null,
+        public readonly ?AcceptedGiftTypes $accepted_gift_types = null,
     )
     {
         if(!in_array(needle: $this->type, haystack: ['private', 'group', 'supergroup', 'channel'], strict: true)) {

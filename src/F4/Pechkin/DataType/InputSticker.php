@@ -20,7 +20,7 @@ readonly class InputSticker extends AbstractDataType
         public readonly string $format,
         /** @var string[] */
         #[ArrayOf('string')]
-        public readonly string $emoji_list,
+        public readonly array $emoji_list,
         public readonly ?MaskPosition $mask_position = null,
         /** @var string[]|null */
         #[ArrayOf('string')]

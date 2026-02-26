@@ -23,5 +23,8 @@ readonly class ChatPermissions extends AbstractDataType
         public readonly ?bool $can_invite_users = null,
         public readonly ?bool $can_pin_messages = null,
         public readonly ?bool $can_manage_topics = null,
+
+        // Undocumented property discoverd through API interaction
+        public readonly ?bool $can_send_media_messages = null,
     ) {}
 }

@@ -32,6 +32,10 @@ readonly class Sticker extends AbstractDataType
         public readonly ?string $custom_emoji_id = null,
         public readonly ?bool $needs_repainting = null,
         public readonly ?int $file_size = null,
+
+        // A bug, this property is sometimes returned by the API and is identical to "thumbnail"
+        // Reported here: https://bugs.telegram.org/c/59761
+        public readonly ?PhotoSize $thumb = null,
     ) {
         if(!in_array(needle: $this->type, haystack: ['regular', 'mask', 'custom_emoji'], strict: true)) {
             throw new InvalidArgumentException('Unsupported '.__CLASS__.' type');

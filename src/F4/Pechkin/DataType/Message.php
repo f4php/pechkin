@@ -191,6 +191,10 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?VideoChatParticipantsInvited $video_chat_participants_invited = null,
         public readonly ?WebAppData $web_app_data = null,
         public readonly ?InlineKeyboardMarkup $reply_markup = null,
+
+        // Undocumented property discoverd through API interaction
+        public readonly ?User $forward_from = null,
+        public readonly ?int $forward_date = null,
     )
     {
         if($this->date === 0) {
