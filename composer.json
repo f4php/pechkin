@@ -20,7 +20,10 @@
         }
     ],
     "config": {
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "cweagans/composer-patches": true
+        }
     },
     "scripts": {
         "test": "phpunit --bootstrap tests/F4/Config.php --display-warnings --display-phpunit-deprecations --fail-on-deprecation tests --exclude-group integration",

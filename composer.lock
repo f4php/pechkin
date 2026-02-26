@@ -268,16 +268,16 @@
         },
         {
             "name": "f4php/db",
-            "version": "v0.3.4",
+            "version": "v0.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/f4php/db.git",
-                "reference": "4cb46e1bb95f7a4dff08e0b89625932ebefbeaf7"
+                "reference": "cc7cfd34b1a1a38b1c6a559ed8f8ac64638f41e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/f4php/db/zipball/4cb46e1bb95f7a4dff08e0b89625932ebefbeaf7",
-                "reference": "4cb46e1bb95f7a4dff08e0b89625932ebefbeaf7",
+                "url": "https://api.github.com/repos/f4php/db/zipball/cc7cfd34b1a1a38b1c6a559ed8f8ac64638f41e3",
+                "reference": "cc7cfd34b1a1a38b1c6a559ed8f8ac64638f41e3",
                 "shasum": ""
             },
             "require": {
@@ -316,9 +316,9 @@
             ],
             "support": {
                 "issues": "https://github.com/f4php/db/issues",
-                "source": "https://github.com/f4php/db/tree/v0.3.4"
+                "source": "https://github.com/f4php/db/tree/v0.3.5"
             },
-            "time": "2026-01-31T12:38:57+00:00"
+            "time": "2026-02-26T21:43:40+00:00"
         },
         {
             "name": "f4php/framework",
