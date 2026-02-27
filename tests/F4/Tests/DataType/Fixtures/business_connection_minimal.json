@@ -20,5 +20,6 @@
     "user_chat_id": "123456789",
     "date": 1700000000,
     "is_enabled": true,
-    "rights": null
+    "rights": null,
+    "can_reply": null
 }

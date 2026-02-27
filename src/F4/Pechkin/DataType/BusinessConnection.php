@@ -19,5 +19,8 @@ readonly class BusinessConnection extends AbstractDataType
         public readonly int $date,
         public readonly bool $is_enabled,
         public readonly ?BusinessBotRights $rights = null,
+
+        // Undocumented property discoverd through API interaction
+        public readonly ?bool $can_reply = null,
     ) {}
 }
