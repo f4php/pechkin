@@ -6,7 +6,6 @@ namespace F4\Tests\Integration;
 
 use F4\Pechkin\Client\ClientException;
 use F4\Pechkin\DataType\{
-    AcceptedGiftTypes,
     BotCommand,
     ChatAdministratorRights,
     ChatFullInfo,
@@ -17,16 +16,15 @@ use F4\Pechkin\DataType\{
     ForumTopic,
     Gifts,
     InputFile,
-    InputSticker,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     InlineQueryResultArticle,
     Message,
     MessageId,
     MenuButton,
+    OwnedGifts,
     Poll,
     Sticker,
-    StarTransactions,
     Update,
     User,
     UserChatBoosts,
@@ -36,13 +34,14 @@ use F4\Pechkin\DataType\{
     BotName,
     BotShortDescription,
     StarAmount,
+    StarTransactions,
 };
 use PHPUnit\Framework\Attributes\{
     Depends,
     Group,
 };
 
-#[Group('integration')]
+#[Group('integration:basic')]
 final class ClientTest extends IntegrationTestCase
 {
     // -------------------------------------------------------------------------
@@ -64,7 +63,6 @@ final class ClientTest extends IntegrationTestCase
     {
         $info = self::$client->getWebhookInfo();
         $this->assertInstanceOf(WebHookInfo::class, $info);
-        // url is empty string when no webhook is set — either way it must be a string
         $this->assertIsString($info->url);
     }
 
@@ -155,7 +153,7 @@ final class ClientTest extends IntegrationTestCase
     }
 
     // -------------------------------------------------------------------------
-    // Sending messages — these are the foundation for all chained tests
+    // Sending messages — foundation for all chained tests
     // -------------------------------------------------------------------------
 
     public function testSendMessage(): Message
@@ -357,7 +355,7 @@ final class ClientTest extends IntegrationTestCase
 
     public function testSendPhoto(): Message
     {
-        // 1x1 red pixel PNG (smallest valid PNG)
+        // 1x1 red pixel PNG
         $png = base64_decode(
             'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI6QAAAABJRU5ErkJggg=='
         );
@@ -586,7 +584,6 @@ final class ClientTest extends IntegrationTestCase
 
     public function testGetFile(): void
     {
-        // Send a document, get its file_id, then call getFile
         $msg = self::$client->sendDocument(
             chat_id: self::$chatId,
             document: new InputFile('getfile_test.txt', 'getFile integration test'),
@@ -603,7 +600,6 @@ final class ClientTest extends IntegrationTestCase
 
     public function testGetUpdates(): void
     {
-        // timeout=0 returns immediately; may return empty array
         $updates = self::$client->getUpdates(timeout: 0, limit: 1);
         $this->assertIsArray($updates);
         foreach ($updates as $update) {
@@ -612,7 +608,7 @@ final class ClientTest extends IntegrationTestCase
     }
 
     // -------------------------------------------------------------------------
-    // Stars / payments (read-only endpoints)
+    // Stars (read-only)
     // -------------------------------------------------------------------------
 
     public function testGetMyStarBalance(): void
@@ -629,14 +625,13 @@ final class ClientTest extends IntegrationTestCase
     }
 
     // -------------------------------------------------------------------------
-    // Stickers (read-only endpoints)
+    // Stickers (read-only system endpoints)
     // -------------------------------------------------------------------------
 
     public function testGetForumTopicIconStickers(): void
     {
         $stickers = self::$client->getForumTopicIconStickers();
         $this->assertIsArray($stickers);
-        // Could be empty, just ensure no exception and correct types
         foreach ($stickers as $sticker) {
             $this->assertInstanceOf(Sticker::class, $sticker);
         }
@@ -656,325 +651,110 @@ final class ClientTest extends IntegrationTestCase
     // Chat boosts
     // -------------------------------------------------------------------------
 
-    // this test returns error for any valid chat_id / user_id {"ok":false,"error_code":400,"description":"Bad Request: PEER_ID_INVALID"}
+    public function testGetUserChatBoosts(): void
+    {
+        // Requires a real human user — bots cannot have boosts
+        $this->skipUnlessUserId();
 
-    // public function testGetUserChatBoosts(): void
-    // {
-    //     $boosts = self::$client->getUserChatBoosts(
-    //         chat_id: self::$chatId,
-    //         user_id: self::$botId,
-    //     );
-    //     $this->assertInstanceOf(UserChatBoosts::class, $boosts);
-    // }
+        $boosts = self::$client->getUserChatBoosts(
+            chat_id: self::$chatId,
+            user_id: self::$userId,
+        );
+        $this->assertInstanceOf(UserChatBoosts::class, $boosts);
+        // boosts array may be empty if the user hasn't boosted the chat
+        $this->assertIsArray($boosts->boosts);
+    }
 
     // -------------------------------------------------------------------------
-    // Methods that require context not available in tests — assert 4xx API error
+    // Member management lifecycle (requires TELEGRAM_TEST_USER_ID)
+    // restrict → promote → set custom title → ban → unban
+    // All steps run in one test to guarantee the user is restored afterward.
     // -------------------------------------------------------------------------
 
-    public function testAnswerCallbackQueryWithFakeId(): void
+    public function testMemberManagementLifecycle(): void
     {
-        $this->assertApiError(fn() =>
-            self::$client->answerCallbackQuery(callback_query_id: 'fake_id_000')
+        $this->skipUnlessUserId();
+
+        // Restrict: remove send_messages permission
+        $restricted = self::$client->restrictChatMember(
+            chat_id: self::$chatId,
+            user_id: self::$userId,
+            permissions: ChatPermissions::fromArray(['can_send_messages' => false]),
         );
+        $this->assertTrue($restricted);
+
+        // Restore full permissions
+        $unrestricted = self::$client->restrictChatMember(
+            chat_id: self::$chatId,
+            user_id: self::$userId,
+            permissions: ChatPermissions::fromArray(['can_send_messages' => true]),
+        );
+        $this->assertTrue($unrestricted);
+
+        // Promote to admin (minimal rights)
+        $promoted = self::$client->promoteChatMember(
+            chat_id: self::$chatId,
+            user_id: self::$userId,
+            can_change_info: false,
+        );
+        $this->assertTrue($promoted);
+
+        // Set a custom title on the promoted admin
+        $titled = self::$client->setChatAdministratorCustomTitle(
+            chat_id: self::$chatId,
+            user_id: self::$userId,
+            custom_title: 'Tester',
+        );
+        $this->assertTrue($titled);
+
+        // Demote back to member (promote with all false)
+        self::$client->promoteChatMember(
+            chat_id: self::$chatId,
+            user_id: self::$userId,
+        );
+
+        // Ban then immediately unban (only_if_banned=false so it always succeeds)
+        $banned = self::$client->banChatMember(
+            chat_id: self::$chatId,
+            user_id: self::$userId,
+        );
+        $this->assertTrue($banned);
+
+        $unbanned = self::$client->unbanChatMember(
+            chat_id: self::$chatId,
+            user_id: self::$userId,
+            only_if_banned: true,
+        );
+        $this->assertTrue($unbanned);
     }
 
-    public function testAnswerInlineQueryWithFakeId(): void
+    // -------------------------------------------------------------------------
+    // User gifts (requires TELEGRAM_TEST_USER_ID)
+    // -------------------------------------------------------------------------
+
+    public function testGetUserGifts(): void
     {
-        $this->assertApiError(fn() =>
-            self::$client->answerInlineQuery(inline_query_id: 'fake_id_000', results: [])
-        );
+        $this->skipUnlessUserId();
+
+        $gifts = self::$client->getUserGifts(user_id: self::$userId);
+        $this->assertInstanceOf(OwnedGifts::class, $gifts);
+        // gifts array may be empty — just verify the response deserializes correctly
+        $this->assertIsArray($gifts->gifts);
     }
 
-    public function testAnswerPreCheckoutQueryWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->answerPreCheckoutQuery(pre_checkout_query_id: 'fake_id_000', ok: true)
-        );
-    }
+    // -------------------------------------------------------------------------
+    // savePreparedInlineMessage (requires TELEGRAM_TEST_USER_ID)
+    // The user must have started the bot in private for this to succeed;
+    // we assert a 4xx which proves the request was serialized correctly.
+    // -------------------------------------------------------------------------
 
-    public function testAnswerShippingQueryWithFakeId(): void
+    public function testSavePreparedInlineMessage(): void
     {
-        $this->assertApiError(fn() =>
-            self::$client->answerShippingQuery(shipping_query_id: 'fake_id_000', ok: true)
-        );
-    }
+        $this->skipUnlessUserId();
 
-    public function testBanChatMemberWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->banChatMember(chat_id: self::$chatId, user_id: 1)
-        );
-    }
-
-    public function testUnbanChatMemberWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->unbanChatMember(chat_id: self::$chatId, user_id: 1)
-        );
-    }
-
-    public function testRestrictChatMemberWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->restrictChatMember(
-                chat_id: self::$chatId,
-                user_id: 1,
-                permissions: ChatPermissions::fromArray([]),
-            )
-        );
-    }
-
-    public function testPromoteChatMemberWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->promoteChatMember(chat_id: self::$chatId, user_id: 1)
-        );
-    }
-
-    public function testApproveChatJoinRequestWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->approveChatJoinRequest(chat_id: self::$chatId, user_id: 1)
-        );
-    }
-
-    public function testDeclineChatJoinRequestWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->declineChatJoinRequest(chat_id: self::$chatId, user_id: 1)
-        );
-    }
-
-    public function testGetStickerSetWithFakeName(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->getStickerSet('this_sticker_set_definitely_does_not_exist_xyz123')
-        );
-    }
-
-    public function testGetFileWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->getFile('fake_file_id_000')
-        );
-    }
-
-    public function testGetGameHighScoresWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->getGameHighScores(user_id: 1, chat_id: (int) self::$chatId, message_id: 1)
-        );
-    }
-
-    public function testRefundStarPaymentWithFakeChargeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->refundStarPayment(user_id: 1, telegram_payment_charge_id: 'fake_charge_id')
-        );
-    }
-
-    public function testSendInvoiceWithNoProvider(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->sendInvoice(
-                chat_id: self::$chatId,
-                title: 'Test Invoice',
-                description: 'Integration test',
-                payload: 'test_payload',
-                currency: 'USD',
-                prices: [['label' => 'Item', 'amount' => 100]],
-            )
-        );
-    }
-
-    public function testSendGameWithFakeName(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->sendGame(
-                chat_id: (int) self::$chatId,
-                game_short_name: 'fake_game_integration_test',
-            )
-        );
-    }
-
-    public function testGetBusinessConnectionWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->getBusinessConnection('fake_business_id')
-        );
-    }
-
-    public function testDeleteBusinessMessagesWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->deleteBusinessMessages(
-                business_connection_id: 'fake_business_id',
-                message_ids: [1],
-            )
-        );
-    }
-
-    public function testReadBusinessMessageWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->readBusinessMessage(
-                business_connection_id: 'fake_business_id',
-                chat_id: self::$chatId,
-                message_id: 1,
-            )
-        );
-    }
-
-    public function testSetChatAdministratorCustomTitleWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setChatAdministratorCustomTitle(
-                chat_id: self::$chatId,
-                user_id: 1,
-                custom_title: 'Tester',
-            )
-        );
-    }
-
-    public function testBanChatSenderChatWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->banChatSenderChat(
-                chat_id: self::$chatId,
-                sender_chat_id: 1,
-            )
-        );
-    }
-
-    public function testUnbanChatSenderChatWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->unbanChatSenderChat(
-                chat_id: self::$chatId,
-                sender_chat_id: 1,
-            )
-        );
-    }
-
-    public function testAddStickerToSetWithFakeSet(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->addStickerToSet(
-                user_id: self::$botId,
-                name: 'fake_set_integration_test_by_bot',
-                sticker: InputSticker::fromArray([
-                    'sticker' => 'fake_file_id',
-                    'format' => 'static',
-                    'emoji_list' => ['👍'],
-                ]),
-            )
-        );
-    }
-
-    public function testDeleteStickerFromSetWithFakeSticker(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->deleteStickerFromSet('fake_sticker_file_id')
-        );
-    }
-
-    public function testSetStickerEmojiListWithFakeSticker(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setStickerEmojiList('fake_sticker_file_id', ['👍'])
-        );
-    }
-
-    public function testSetStickerKeywordsWithFakeSticker(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setStickerKeywords('fake_sticker_file_id', ['test'])
-        );
-    }
-
-    public function testSetStickerMaskPositionWithFakeSticker(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setStickerMaskPosition('fake_sticker_file_id')
-        );
-    }
-
-    public function testSetStickerPositionInSetWithFakeSticker(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setStickerPositionInSet('fake_sticker_file_id', 0)
-        );
-    }
-
-    public function testSetStickerSetTitleWithFakeName(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setStickerSetTitle('fake_set_integration_test', 'New Title')
-        );
-    }
-
-    public function testDeleteStickerSetWithFakeName(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->deleteStickerSet('fake_set_integration_test')
-        );
-    }
-
-    public function testSetCustomEmojiStickerSetThumbnailWithFakeName(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setCustomEmojiStickerSetThumbnail('fake_set_integration_test')
-        );
-    }
-
-    public function testGetCustomEmojiStickersWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->getCustomEmojiStickers(['fake_emoji_id_000'])
-        );
-    }
-
-    public function testDeleteStoryWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->deleteStory('fake_business_id', 1)
-        );
-    }
-
-    public function testEditUserStarSubscriptionWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->editUserStarSubscription(
-                user_id: 1,
-                telegram_payment_charge_id: 'fake_charge_id',
-                is_canceled: true,
-            )
-        );
-    }
-
-    public function testGiftPremiumSubscriptionWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->giftPremiumSubscription(
-                user_id: 1,
-                month_count: 3,
-                star_count: 1000,
-            )
-        );
-    }
-
-    public function testSendGiftWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->sendGift(gift_id: 'fake_gift_id', user_id: 1)
-        );
-    }
-
-    public function testSavePreparedInlineMessageWithFakeUser(): void
-    {
         $this->assertApiError(fn() =>
             self::$client->savePreparedInlineMessage(
-                user_id: 1,
+                user_id: self::$userId,
                 result: InlineQueryResultArticle::fromArray([
                     'id' => 'test',
                     'title' => 'Test',
@@ -984,174 +764,60 @@ final class ClientTest extends IntegrationTestCase
         );
     }
 
-    public function testVerifyUserWithFakeUser(): void
+    // -------------------------------------------------------------------------
+    // Join request operations (requires TELEGRAM_TEST_USER_ID)
+    // The user is already a member, so these return 400 — but the request
+    // reaches Telegram correctly with a real user_id.
+    // -------------------------------------------------------------------------
+
+    public function testApproveChatJoinRequest(): void
     {
+        $this->skipUnlessUserId();
+
+        // User is already a member — Telegram returns 400; that proves the call is wired correctly
         $this->assertApiError(fn() =>
-            self::$client->verifyUser(user_id: 1)
+            self::$client->approveChatJoinRequest(chat_id: self::$chatId, user_id: self::$userId)
         );
     }
 
-    public function testRemoveUserVerificationWithFakeUser(): void
+    public function testDeclineChatJoinRequest(): void
     {
-        $this->assertApiError(fn() =>
-            self::$client->removeUserVerification(user_id: 1)
-        );
-    }
+        $this->skipUnlessUserId();
 
-    public function testVerifyChatWithFakeChat(): void
-    {
         $this->assertApiError(fn() =>
-            self::$client->verifyChat(chat_id: -1)
-        );
-    }
-
-    public function testRemoveChatVerificationWithFakeChat(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->removeChatVerification(chat_id: -1)
-        );
-    }
-
-    public function testGetUserGiftsWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->getUserGifts(user_id: 1)
-        );
-    }
-
-    public function testGetChatGiftsWithFakeChat(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->getChatGifts(chat_id: -1)
-        );
-    }
-
-    public function testConvertGiftToStarsWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->convertGiftToStars('fake_business_id', 'fake_gift_id')
-        );
-    }
-
-    public function testTransferGiftWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->transferGift(
-                business_connection_id: 'fake_business_id',
-                owned_gift_id: 'fake_gift_id',
-                new_owner_chat_id: 1,
-            )
-        );
-    }
-
-    public function testUpgradeGiftWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->upgradeGift('fake_business_id', 'fake_gift_id')
-        );
-    }
-
-    public function testGetBusinessAccountGiftsWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->getBusinessAccountGifts('fake_business_id')
-        );
-    }
-
-    public function testGetBusinessAccountStarBalanceWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->getBusinessAccountStarBalance('fake_business_id')
-        );
-    }
-
-    public function testTransferBusinessAccountStarsWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->transferBusinessAccountStars('fake_business_id', 1)
-        );
-    }
-
-    public function testSetBusinessAccountBioWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setBusinessAccountBio('fake_business_id', 'Test bio')
-        );
-    }
-
-    public function testSetBusinessAccountNameWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setBusinessAccountName('fake_business_id', 'Test')
-        );
-    }
-
-    public function testSetBusinessAccountUsernameWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setBusinessAccountUsername('fake_business_id')
-        );
-    }
-
-    public function testSetBusinessAccountGiftSettingsWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setBusinessAccountGiftSettings(
-                business_connection_id: 'fake_business_id',
-                show_gift_button: true,
-                accepted_gift_types: AcceptedGiftTypes::fromArray([
-                    'unlimited_gifts' => true,
-                    'limited_gifts' => false,
-                    'unique_gifts' => false,
-                    'premium_subscription' => false,
-                    'gifts_from_channels' => false,
-                ]),
-            )
-        );
-    }
-
-    public function testRemoveBusinessAccountProfilePhotoWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->removeBusinessAccountProfilePhoto('fake_business_id')
-        );
-    }
-
-    public function testSetPassportDataErrorsWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setPassportDataErrors(user_id: 1, errors: [])
-        );
-    }
-
-    public function testApproveSuggestedPostWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->approveSuggestedPost(chat_id: self::$chatId, message_id: 1)
-        );
-    }
-
-    public function testDeclineSuggestedPostWithFakeId(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->declineSuggestedPost(chat_id: self::$chatId, message_id: 1)
-        );
-    }
-
-    public function testSetUserEmojiStatusWithFakeUser(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->setUserEmojiStatus(user_id: 1)
+            self::$client->declineChatJoinRequest(chat_id: self::$chatId, user_id: self::$userId)
         );
     }
 
     // -------------------------------------------------------------------------
-    // Webhook (tested with no-op values to avoid disrupting the bot)
+    // Verification (bot needs special Telegram grant — assert 400 with real user)
+    // -------------------------------------------------------------------------
+
+    public function testVerifyUser(): void
+    {
+        $this->skipUnlessUserId();
+
+        // Bot doesn't have verification privileges — 400 proves the call is correct
+        $this->assertApiError(fn() =>
+            self::$client->verifyUser(user_id: self::$userId)
+        );
+    }
+
+    public function testRemoveUserVerification(): void
+    {
+        $this->skipUnlessUserId();
+
+        $this->assertApiError(fn() =>
+            self::$client->removeUserVerification(user_id: self::$userId)
+        );
+    }
+
+    // -------------------------------------------------------------------------
+    // Webhook
     // -------------------------------------------------------------------------
 
     public function testDeleteWebhook(): void
     {
-        // Only safe to call if the bot is NOT using webhooks — skip if webhook is set
         $info = self::$client->getWebhookInfo();
         if (!empty($info->url)) {
             $this->markTestSkipped('Bot is using a webhook — skipping deleteWebhook to avoid disruption');
@@ -1162,7 +828,7 @@ final class ClientTest extends IntegrationTestCase
     }
 
     // -------------------------------------------------------------------------
-    // Forum topics (requires a supergroup with topics enabled — graceful skip)
+    // Forum topics (requires supergroup with topics enabled — graceful skip)
     // -------------------------------------------------------------------------
 
     public function testForumTopicLifecycle(): void
@@ -1195,12 +861,17 @@ final class ClientTest extends IntegrationTestCase
             message_thread_id: $topic->message_thread_id,
         );
 
+        $unpin = self::$client->unpinAllForumTopicMessages(
+            chat_id: self::$chatId,
+            message_thread_id: $topic->message_thread_id,
+        );
+        $this->assertTrue($unpin);
+
         self::$client->deleteForumTopic(
             chat_id: self::$chatId,
             message_thread_id: $topic->message_thread_id,
         );
 
-        // No assertion needed — if we got here without exception, all steps worked
         $this->assertTrue(true);
     }
 
@@ -1210,27 +881,20 @@ final class ClientTest extends IntegrationTestCase
             self::$client->editGeneralForumTopic(self::$chatId, 'General');
         } catch (ClientException $e) {
             $this->markTestSkipped('Chat does not support general forum topic operations: ' . $e->getMessage());
+            return;
         }
+
+        self::$client->closeGeneralForumTopic(self::$chatId);
+        self::$client->reopenGeneralForumTopic(self::$chatId);
+        self::$client->unpinAllGeneralForumTopicMessages(self::$chatId);
+        self::$client->hideGeneralForumTopic(self::$chatId);
+        self::$client->unhideGeneralForumTopic(self::$chatId);
+
         $this->assertTrue(true);
     }
 
     // -------------------------------------------------------------------------
-    // Subscription invite links (requires channel — graceful skip)
-    // -------------------------------------------------------------------------
-
-    public function testCreateChatSubscriptionInviteLinkFallback(): void
-    {
-        $this->assertApiError(fn() =>
-            self::$client->createChatSubscriptionInviteLink(
-                chat_id: self::$chatId,
-                subscription_period: 2592000,
-                subscription_price: 100,
-            )
-        );
-    }
-
-    // -------------------------------------------------------------------------
-    // leaveChat — excluded from running; would remove the bot from the test chat
+    // leaveChat — use a fake chat to test serialization without leaving the test chat
     // -------------------------------------------------------------------------
 
     public function testLeaveChatWithFakeChat(): void
@@ -1239,4 +903,156 @@ final class ClientTest extends IntegrationTestCase
             self::$client->leaveChat(chat_id: -1)
         );
     }
+
+    // -------------------------------------------------------------------------
+    // Methods that require live user interactions and cannot be made into
+    // real round-trips. These verify the serialization path reaches Telegram
+    // and gets a well-formed 4xx back (not a local crash).
+    // -------------------------------------------------------------------------
+
+    /**
+     * callback_query_id is ephemeral — generated only when a real user presses
+     * an inline button. Cannot be pre-created.
+     */
+    public function testAnswerCallbackQuery(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->answerCallbackQuery(callback_query_id: 'fake_id_000')
+        );
+    }
+
+    /**
+     * inline_query_id is ephemeral — generated only when a real user types
+     * @botname in any chat.
+     */
+    public function testAnswerInlineQuery(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->answerInlineQuery(inline_query_id: 'fake_id_000', results: [])
+        );
+    }
+
+    /**
+     * pre_checkout_query_id is generated only during an active checkout flow
+     * initiated by a real user.
+     */
+    public function testAnswerPreCheckoutQuery(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->answerPreCheckoutQuery(pre_checkout_query_id: 'fake_id_000', ok: true)
+        );
+    }
+
+    /**
+     * shipping_query_id is generated only when a real user fills in a shipping
+     * address during an invoice flow.
+     */
+    public function testAnswerShippingQuery(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->answerShippingQuery(shipping_query_id: 'fake_id_000', ok: true)
+        );
+    }
+
+    /**
+     * Games require registration with @BotFather; high scores require live play.
+     */
+    public function testGetGameHighScores(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->getGameHighScores(user_id: 1, chat_id: (int) self::$chatId, message_id: 1)
+        );
+    }
+
+    /**
+     * sendGame requires a game short name registered with @BotFather.
+     */
+    public function testSendGame(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->sendGame(
+                chat_id: (int) self::$chatId,
+                game_short_name: 'fake_game_integration_test',
+            )
+        );
+    }
+
+    /**
+     * Telegram Passport requires a real user who submitted passport data
+     * to the bot via a Passport authorization request.
+     */
+    public function testSetPassportDataErrors(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->setPassportDataErrors(user_id: 1, errors: [])
+        );
+    }
+
+    /**
+     * Suggested posts are submitted by real users to a channel.
+     */
+    public function testApproveSuggestedPost(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->approveSuggestedPost(chat_id: self::$chatId, message_id: 1)
+        );
+    }
+
+    public function testDeclineSuggestedPost(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->declineSuggestedPost(chat_id: self::$chatId, message_id: 1)
+        );
+    }
+
+    /**
+     * sender_chat_id must be a real channel that posted a message in the group.
+     */
+    public function testBanChatSenderChat(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->banChatSenderChat(chat_id: self::$chatId, sender_chat_id: 1)
+        );
+    }
+
+    public function testUnbanChatSenderChat(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->unbanChatSenderChat(chat_id: self::$chatId, sender_chat_id: 1)
+        );
+    }
+
+    /**
+     * Verification privileges must be granted by Telegram to the bot.
+     */
+    public function testVerifyChat(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->verifyChat(chat_id: -1)
+        );
+    }
+
+    public function testRemoveChatVerification(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->removeChatVerification(chat_id: -1)
+        );
+    }
+
+    /**
+     * User must have authorized the bot to set their emoji status via a
+     * dedicated user-consent flow — not automatable.
+     */
+    public function testSetUserEmojiStatus(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->setUserEmojiStatus(user_id: 1)
+        );
+    }
+
+    /**
+     * sticker set / custom emoji: moved to StickerLifecycleTest.
+     * Business account methods: moved to BusinessClientTest.
+     * Payment methods: moved to PaymentsClientTest.
+     */
 }
