@@ -22,34 +22,28 @@ abstract class AbstractRoutable
     protected const int PRIORITY_NORMAL = 0;
     protected const int PRIORITY_LOW = -10;
     protected const int PRIORITY_LOWEST = -20;
-    protected readonly Closure $middleware;
-    protected function __construct(
+    protected ?Closure $middleware = null;
+    final protected function __construct(
         protected readonly Closure $matcher,
         protected readonly Closure $handler,
         public readonly int $priority = self::PRIORITY_NORMAL,
     ) {}
     public function before(Closure $middleware, bool $replace = false): static
     {
-        if (isset($this->middleware) && !$replace) {
+        if ($this->middleware && !$replace) {
             throw new InvalidArgumentException(message: 'Middleware already set');
         }
         $this->middleware = $middleware;
         return $this;
     }
-    protected function checkMatch(Context $context): bool
+    public function checkMatch(Context $context): bool
     {
-        if(!isset($this->matcher)) {
-            throw new RuntimeException(message: 'Matcher not set');
-        }
         return ($this->matcher)($context);
     }
-    protected function invoke(Context $context): mixed
+    public function invoke(Context $context): mixed
     {
         try {
-            if (!isset($this->handler)) {
-                throw new RuntimeException(message: 'Handler not set');
-            }
-            if (isset($this->middleware)) {
+            if ($this->middleware) {
                 $context = $this->invokeMiddleware($context);
             }
             return ($this->handler->bindTo($this))($context);
@@ -59,7 +53,7 @@ abstract class AbstractRoutable
     }
     protected function invokeMiddleware(Context $context): Context
     {
-        if (!isset($this->middleware)) {
+        if (!$this->middleware) {
             throw new RuntimeException(message: 'Middleware not set');
         }
         return match( ($result = ($this->middleware)($context)) instanceof Context) {

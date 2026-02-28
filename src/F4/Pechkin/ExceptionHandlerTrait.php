@@ -6,8 +6,7 @@ namespace F4\Pechkin;
 
 use Closure,
     InvalidArgumentException,
-    Throwable,
-    ReflectionFunction
+    Throwable
 ;
 
 use F4\Pechkin\{
@@ -45,9 +44,7 @@ trait ExceptionHandlerTrait
     {
         foreach ($this->exceptionHandlers as $className => $handler) {
             if ($exception instanceof $className) {
-                $handlerReflection = new ReflectionFunction($handler);
-                $handlerThis = $handlerReflection->getClosureThis();
-                return $handler->call($handlerThis, $exception, $context);
+                return ($handler)($exception, $context);
             }
         }
         throw $exception;

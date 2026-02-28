@@ -60,7 +60,7 @@ use F4\Pechkin\DataType\{
     User,
     UserChatBoosts,
     UserProfilePhotos,
-    WebHookInfo,
+    WebhookInfo,
 };
 
 // Documentation: https://core.telegram.org/bots/api
@@ -2729,9 +2729,9 @@ interface ClientInterface
 
     /**
      * Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.
-     * @return WebHookInfo On success, returns a WebhookInfo object
+     * @return WebhookInfo On success, returns a WebhookInfo object
      */
-    public function getWebhookInfo(): WebHookInfo;
+    public function getWebhookInfo(): WebhookInfo;
 
     /**
      * Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized Update. In case of an unsuccessful request (a request with response HTTP status code different from 2XY), we will repeat the request and give up after a reasonable amount of attempts. Returns True on success.

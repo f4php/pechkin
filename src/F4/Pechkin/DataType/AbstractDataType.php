@@ -32,7 +32,6 @@ abstract readonly class AbstractDataType
 {
     use CanExpandDataTypesTrait;
     public function __construct(...$args) {}
-
     private static function checkIfTypeHas(ReflectionType $haystack, string $needle): bool
     {
         return match (true) {
@@ -53,7 +52,6 @@ abstract readonly class AbstractDataType
             default => false,
         };
     }
-
     private static function createArrayOfType(array $data, string|ArrayOf $type): array
     {
         return array_map(
@@ -72,7 +70,6 @@ abstract readonly class AbstractDataType
             },
         );
     }
-
     private static function extractClassName(?ReflectionType $type, string $needle): ?string
     {
         return match (true) {
@@ -88,7 +85,6 @@ abstract readonly class AbstractDataType
             default => null,
         };
     }
-
     /**
      * Create an instance from an array of data.
      *
@@ -133,7 +129,6 @@ abstract readonly class AbstractDataType
         }
         return new static(...$data);
     }
-
     private static function normalizeTypeName(string $type): ?string
     {
         return [
@@ -142,7 +137,6 @@ abstract readonly class AbstractDataType
             'double' => 'float',
         ][$type] ?? $type;
     }
-
     /**
      * Convert the DataType object to an array representation.
      *

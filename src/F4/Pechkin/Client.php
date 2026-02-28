@@ -66,7 +66,7 @@ use F4\Pechkin\DataType\{
     User,
     UserChatBoosts,
     UserProfilePhotos,
-    WebHookInfo,
+    WebhookInfo,
 };
 
 use function
@@ -712,9 +712,9 @@ class Client implements ClientInterface
     ): UserProfilePhotos {
         return UserProfilePhotos::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
-    public function getWebhookInfo(): WebHookInfo
+    public function getWebhookInfo(): WebhookInfo
     {
-        return WebHookInfo::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
+        return WebhookInfo::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
     }
     public function giftPremiumSubscription(
         int|string $user_id,
