@@ -1,6 +1,6 @@
 {
     "name": "f4php/pechkin",
-    "description": "Pechkin is a Telegram API wrapper for F4, a (really) lightweight web application framework",
+    "description": "Pechkin is a Telegram API wrapper and Bot for F4, a (really) lightweight web application framework",
     "keywords": ["f4","telegram","bot"],
     "license": "MIT",
     "autoload": {

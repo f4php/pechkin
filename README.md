@@ -10,9 +10,7 @@
     Route::post('/bot.json', function (): void {})
         // This will interrupt normal request processing 
         // and return an empty 204 response to Telegram webhook initiator
-        ->before(fn(Request $request, Response $response): ResponseInterface =>
-            $bot->interceptWebhook($request) 
-        ),
+        ->before($bot->interceptWebhook(...)),
   );
 ```
 **Simple configuration** 
@@ -20,8 +18,8 @@
 ```php
 new Bot()
     ->register(
-        On::command('start', function(Context $ctx): void {
-            // $ctx->client->reply("Hey there!");
+        On::command('/start', function(Context $ctx): void {
+            // ...
         }),
     );
 ```
@@ -32,9 +30,8 @@ new Bot()
 new Bot()
     ->register(
         // Register handlers that do not require any grouping or special conditions
-        On::command('start', function(Context $ctx): void {
-            $ctx->session->set('flow', 'my-flow');
-            // $ctx->client->reply("Hey there!");
+        On::command('/start', function(Context $ctx): void {
+            $_SESSION['flow'] ='my-flow';
         })
           // Handler-level middleware
           ->before(fn(Context $ctx): Context => $ctx->withSession(/*...*/))
@@ -42,13 +39,13 @@ new Bot()
               // ...
           }),
         On::command(When::equals('cancel'), function(Context $ctx): void {
-            $ctx->session->set('flow', '');
+            $_SESSION['flow'] ='';
             // $ctx->client->reply("Hey there!");
         }),
 
         // Flows are groups of handlers with common pre-condition
         Flow::when(fn(Context $context): bool =>
-            $context->session->get('flow') === 'my-flow'
+            $_SESSION['flow'] === 'my-flow'
         )
           // Flow-level middleware
           ->before(fn(Context $ctx): Context => $ctx->withUpdate(/*...*/))
@@ -75,3 +72,10 @@ new Bot()
           // ...
       });
 ```
+
+**Sessions**
+
+Sessions are enabled by default. Each webhook call automatically gets a session keyed by context:
+private chats are keyed by user ID, groups/supergroups/channels by chat ID.
+
+Session data is available in the usual $_SESSION global. It does not rely on cookies.
