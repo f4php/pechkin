@@ -41,7 +41,7 @@ new Bot($token)
             $_SESSION['flow'] = 'my-flow';
         })
           // Handler-level middleware
-          ->before(fn(Context $ctx): Context => $ctx->withSession(/*...*/))
+          ->before(fn(Context $ctx): Context => $ctx->withUpdate(/*...*/))
           ->onException(Throwable::class, function(Throwable $e, Context $ctx) {
               // ...
           }),
