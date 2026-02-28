@@ -31,7 +31,7 @@
         "test:integration:business": "phpunit --display-warnings --display-skipped --group integration:business tests/F4/Tests/Integration/BusinessClientTest.php",
         "test:integration:payments": "phpunit --display-warnings --display-skipped --group integration:payments tests/F4/Tests/Integration/PaymentsClientTest.php",
         "test:integration:all": "phpunit --display-warnings --display-skipped tests/F4/Tests/Integration",
-        "phpstan": "phpstan --level=1 analyse src tests"
+        "stan": "phpstan --level=1 analyse src tests"
     },
     "require": {
         "f4php/framework": "^0.1.53",
