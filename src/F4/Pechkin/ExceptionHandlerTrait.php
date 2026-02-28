@@ -13,14 +13,14 @@ use F4\Pechkin\{
     Context,
 };
 
-use function is_subclass_of;
+use function is_a;
 
 trait ExceptionHandlerTrait
 {
     protected array $exceptionHandlers = [];
     public function addExceptionHandler(string $exceptionClassName, Closure $exceptionHandler): static
     {
-        if (!is_subclass_of(object_or_class: $exceptionClassName, class: Throwable::class, allow_string: true)) {
+        if (!is_a(object_or_class: $exceptionClassName, class: Throwable::class, allow_string: true)) {
             throw new InvalidArgumentException(message: "{$exceptionClassName} is not throwable");
         }
         if (isset($this->exceptionHandlers[$exceptionClassName])) {

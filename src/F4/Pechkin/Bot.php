@@ -6,7 +6,8 @@ namespace F4\Pechkin;
 
 use Closure,
     RuntimeException,
-    SessionHandlerInterface;
+    SessionHandlerInterface,
+    Throwable;
 use F4\Core\{
     RequestInterface,
     Response,
@@ -22,7 +23,6 @@ use F4\Pechkin\{
     DataType\Update,
 };
 use function
-    base64_encode,
     session_id,
     session_set_save_handler,
     session_start,
@@ -85,13 +85,20 @@ class Bot implements BotInterface
         $update = Update::fromArray($request->getParameters());
         $key    = ($this->sessionKeyResolver)($update);
         $previousSessionId = $this->startSession($key);
-        $this->dispatch(new Context(
+        $context = new Context(
             client:  $this->client,
             update:  $update,
-        ));
-        $this->endSession($previousSessionId);
-        return new Response()
-            ->withStatus(204);
+        );
+        try {
+            $this->dispatch($context);
+        } catch (Throwable $e) {
+            $this->processException($e, $context);
+        }
+        finally {
+            $this->endSession($previousSessionId);
+            return new Response()
+                ->withStatus(204);
+        }
     }
     public function registerWebhook(
         string $url,
