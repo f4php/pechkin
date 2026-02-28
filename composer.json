@@ -34,7 +34,7 @@
         "stan": "phpstan --level=1 analyse src tests"
     },
     "require": {
-        "f4php/framework": "^0.1.53",
+        "f4php/framework": "^0.2",
         "guzzlehttp/guzzle": "^7.10"
     },
     "require-dev": {
