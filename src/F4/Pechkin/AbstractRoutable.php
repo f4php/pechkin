@@ -57,8 +57,8 @@ abstract class AbstractRoutable
             throw new RuntimeException(message: 'Middleware not set');
         }
         return match( ($result = ($this->middleware)($context)) instanceof Context) {
-            false => throw new RuntimeException(message: 'Middleware must return Context'),
-            default => $result,
+            true => $result,
+            default => $context,
         };
     }
 }
