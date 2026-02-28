@@ -1089,7 +1089,6 @@ class Client implements ClientInterface
         );
     }
     public function sendMessage(
-
         int|string $chat_id,
         string $text,
         ?string $business_connection_id = null,

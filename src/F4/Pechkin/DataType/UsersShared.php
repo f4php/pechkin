@@ -17,5 +17,6 @@ readonly class UsersShared extends AbstractDataType
         /** @var SharedUser[] */
         #[ArrayOf(SharedUser::class)]
         public readonly array $users,
+        public readonly ?array $user_ids = null,
     ) {}
 }

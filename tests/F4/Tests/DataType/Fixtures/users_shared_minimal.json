@@ -8,5 +8,8 @@
             "username": null,
             "photo": null
         }
+    ],
+    "user_ids": [
+      "987654321"
     ]
 }

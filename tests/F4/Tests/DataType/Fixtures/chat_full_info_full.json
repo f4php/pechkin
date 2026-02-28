@@ -207,7 +207,8 @@
     "web_app_data": null,
     "reply_markup": null,
     "forward_from": null,
-    "forward_date": null
+    "forward_date": null,
+    "user_shared": null
   },
   "permissions": {
     "can_send_messages": null,

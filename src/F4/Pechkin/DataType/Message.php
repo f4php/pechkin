@@ -195,6 +195,7 @@ readonly class Message extends MaybeInaccessibleMessage
         // Undocumented property discoverd through API interaction
         public readonly ?User $forward_from = null,
         public readonly ?int $forward_date = null,
+        public readonly ?UserShared $user_shared = null,
     )
     {
         if($this->date === 0) {
