@@ -222,7 +222,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function contact(Closure $handler): static
     {
         return new static(
@@ -230,7 +229,13 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
+    public static function usersShared(Closure $handler): static
+    {
+        return new static(
+            matcher: fn(Context $context): bool => $context->update?->message?->users_shared !== null,
+            handler: $handler,
+        );
+    }
     public static function dice(Closure $handler): static
     {
         return new static(
@@ -238,7 +243,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function venue(Closure $handler): static
     {
         return new static(
@@ -246,7 +250,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function pollMessage(Closure $handler): static
     {
         return new static(
@@ -254,7 +257,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function invoice(Closure $handler): static
     {
         return new static(
@@ -262,9 +264,7 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     // ── Service message events ───────────────────────────────────────────
-
     public static function newChatTitle(When $when, Closure $handler): static
     {
         return new static(
@@ -275,7 +275,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGH,
         );
     }
-
     public static function newChatMembers(Closure $handler): static
     {
         return new static(
@@ -283,7 +282,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function leftChatMember(Closure $handler): static
     {
         return new static(
@@ -291,7 +289,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function pinnedMessage(Closure $handler): static
     {
         return new static(
@@ -299,9 +296,7 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     // ── Callback queries ─────────────────────────────────────────────────
-
     public static function callbackQuery(When $when, Closure $handler): static
     {
         return new static(
@@ -312,9 +307,7 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGH,
         );
     }
-
     // ── Inline mode ──────────────────────────────────────────────────────
-
     public static function inlineQuery(When $when, Closure $handler): static
     {
         return new static(
@@ -325,7 +318,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGH,
         );
     }
-
     public static function chosenInlineResult(When $when, Closure $handler): static
     {
         return new static(
@@ -336,9 +328,7 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGH,
         );
     }
-
     // ── Payments ─────────────────────────────────────────────────────────
-
     public static function preCheckoutQuery(When $when, Closure $handler): static
     {
         return new static(
@@ -349,7 +339,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGH,
         );
     }
-
     public static function shippingQuery(When $when, Closure $handler): static
     {
         return new static(
@@ -360,7 +349,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGH,
         );
     }
-
     public static function successfulPayment(When $when, Closure $handler): static
     {
         return new static(
