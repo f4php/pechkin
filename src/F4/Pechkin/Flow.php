@@ -14,7 +14,7 @@ use F4\Pechkin\{
 final class Flow extends AbstractRoutable implements RouterInterface
 {
     use RouterTrait;
-
+    protected readonly Closure $handler;
     protected function __construct(
         protected readonly Closure $matcher,
         public readonly int $priority = self::PRIORITY_NORMAL,
