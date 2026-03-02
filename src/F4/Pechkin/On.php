@@ -19,12 +19,10 @@ use function
 final class On extends AbstractRoutable
 {
     // ── Escape hatches ───────────────────────────────────────────────────
-
     public static function default(Closure $handler): static
     {
         return self::rawUpdate($handler);
     }
-
     public static function rawUpdate(Closure $handler): static
     {
         return new static(
@@ -33,7 +31,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_LOWEST,
         );
     }
-
     public static function update(string $type, Closure $handler): static
     {
         return new static(
@@ -42,9 +39,7 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_LOW,
         );
     }
-
     // ── Message update types ─────────────────────────────────────────────
-
     public static function message(When $when, Closure $handler): static
     {
         return new static(
@@ -55,7 +50,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGH,
         );
     }
-
     public static function editedMessage(When $when, Closure $handler): static
     {
         return new static(
@@ -66,7 +60,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGH,
         );
     }
-
     public static function channelPost(When $when, Closure $handler): static
     {
         return new static(
@@ -77,7 +70,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGH,
         );
     }
-
     public static function editedChannelPost(When $when, Closure $handler): static
     {
         return new static(
@@ -88,9 +80,7 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGH,
         );
     }
-
     // ── Message entity shortcuts ─────────────────────────────────────────
-
     public static function command(string|When $when, Closure $handler): static
     {
         if (is_string($when)) {
@@ -102,7 +92,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGHER,
         );
     }
-
     public static function mention(When $when, Closure $handler): static
     {
         return new static(
@@ -111,7 +100,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGHER,
         );
     }
-
     public static function hashtag(When $when, Closure $handler): static
     {
         return new static(
@@ -120,7 +108,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGHER,
         );
     }
-
     public static function cashtag(When $when, Closure $handler): static
     {
         return new static(
@@ -129,7 +116,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGHER,
         );
     }
-
     public static function url(When $when, Closure $handler): static
     {
         return new static(
@@ -138,7 +124,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGHER,
         );
     }
-
     public static function email(When $when, Closure $handler): static
     {
         return new static(
@@ -147,7 +132,6 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGHER,
         );
     }
-
     public static function phoneNumber(When $when, Closure $handler): static
     {
         return new static(
@@ -156,9 +140,7 @@ final class On extends AbstractRoutable
             priority: self::PRIORITY_HIGHER,
         );
     }
-
     // ── Message content types ────────────────────────────────────────────
-
     public static function photo(Closure $handler): static
     {
         return new static(
@@ -166,7 +148,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function video(Closure $handler): static
     {
         return new static(
@@ -174,7 +155,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function voice(Closure $handler): static
     {
         return new static(
@@ -182,7 +162,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function document(Closure $handler): static
     {
         return new static(
@@ -190,7 +169,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function audio(Closure $handler): static
     {
         return new static(
@@ -198,7 +176,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function animation(Closure $handler): static
     {
         return new static(
@@ -206,7 +183,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function sticker(Closure $handler): static
     {
         return new static(
@@ -214,7 +190,6 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
-
     public static function location(Closure $handler): static
     {
         return new static(

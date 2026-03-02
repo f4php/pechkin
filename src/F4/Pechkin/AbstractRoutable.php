@@ -23,7 +23,7 @@ abstract class AbstractRoutable
     protected const int PRIORITY_LOW = -10;
     protected const int PRIORITY_LOWEST = -20;
     protected ?Closure $middleware = null;
-    final protected function __construct(
+    protected function __construct(
         protected readonly Closure $matcher,
         protected readonly Closure $handler,
         public readonly int $priority = self::PRIORITY_NORMAL,
@@ -46,7 +46,7 @@ abstract class AbstractRoutable
             if ($this->middleware) {
                 $context = $this->invokeMiddleware($context);
             }
-            return ($this->handler->bindTo($this))($context);
+            return ($this->handler)($context);
         } catch (Throwable $e) {
             return $this->processException($e, $context);
         }
