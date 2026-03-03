@@ -31,6 +31,7 @@ readonly class ChatMemberAdministrator extends ChatMember
         public readonly ?bool $can_pin_messages = null,
         public readonly ?bool $can_manage_topics = null,
         public readonly ?bool $can_manage_direct_messages = null,
+        public readonly ?bool $can_manage_tags = null,
         public readonly ?string $custom_title = null,
 
         // Undocumented property discoverd through API interaction

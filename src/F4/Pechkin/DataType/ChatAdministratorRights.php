@@ -25,5 +25,6 @@ readonly class ChatAdministratorRights extends AbstractDataType
         public readonly ?bool $can_pin_messages = null,
         public readonly ?bool $can_manage_topics = null,
         public readonly ?bool $can_manage_direct_messages = null,
+        public readonly ?bool $can_manage_tags = null,
     ) {}
 }

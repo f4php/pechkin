@@ -14,6 +14,7 @@ readonly class ChatMemberMember extends ChatMember
     public readonly string $status;
     public function __construct(
         public readonly User $user,
+        public readonly ?string $tag = null,
         public readonly ?int $until_date = null,
     ) {
         $this->status = 'member';

@@ -1231,7 +1231,7 @@ interface ClientInterface
      */
     public function promoteChatMember(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
         ?bool $is_anonymous = null,
         ?bool $can_manage_chat = null,
         ?bool $can_delete_messages = null,
@@ -1248,6 +1248,7 @@ interface ClientInterface
         ?bool $can_delete_stories = null,
         ?bool $can_manage_topics = null,
         ?bool $can_manage_direct_messages = null,
+        ?bool $can_manage_tags = null,
     ): bool;
 
     /**
@@ -2294,6 +2295,19 @@ interface ClientInterface
     public function setChatDescription(
         int|string $chat_id,
         ?string $description = null,
+    ): bool;
+
+    /**
+     * Use this method to change the tag of a chat member.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup
+     * @param int|string $user_id Unique identifier of the target user
+     * @param string|null $tag New tag for the member; 0-16 characters, emoji are not allowed
+     * @return bool Returns True on success
+     */
+    public function setChatMemberTag(
+        int|string $chat_id,
+        int|string $user_id,
+        ?string $tag = null,
     ): bool;
 
     /**
