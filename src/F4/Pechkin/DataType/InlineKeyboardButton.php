@@ -17,6 +17,8 @@ readonly class InlineKeyboardButton extends AbstractDataType
 {
     public function __construct(
         public readonly string $text,
+        public readonly ?string $icon_custom_emoji_id = null,
+        public readonly ?string $style = null, // Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used.
         public readonly ?string $url = null,
         public readonly ?string $callback_data = null,
         public readonly ?WebAppInfo $web_app = null,

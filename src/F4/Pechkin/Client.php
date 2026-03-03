@@ -65,6 +65,7 @@ use F4\Pechkin\DataType\{
     Update,
     User,
     UserChatBoosts,
+    UserProfileAudios,
     UserProfilePhotos,
     WebhookInfo,
 };
@@ -77,7 +78,7 @@ is_bool
 
 class Client implements ClientInterface
 {
-    protected const string API_VERSION = '9.3';
+    protected const string API_VERSION = '9.4';
     protected const int REQUEST_TIMEOUT = 60;
 
     protected ApiClient $apiClient;
@@ -704,6 +705,13 @@ class Client implements ClientInterface
         ?int $limit = null,
     ): OwnedGifts {
         return OwnedGifts::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+    }
+    public function getUserProfileAudios(
+        int|string $user_id,
+        ?int $offset = null,
+        ?int $limit = null,
+    ): UserProfileAudios {
+        return UserProfileAudios::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function getUserProfilePhotos(
         int|string $user_id,
@@ -1422,6 +1430,14 @@ class Client implements ClientInterface
         ?string $name = null,
         ?string $language_code = null,
     ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function setMyProfilePhoto(
+        InputProfilePhoto $photo,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function removeMyProfilePhoto(): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function setMyShortDescription(

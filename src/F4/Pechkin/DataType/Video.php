@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     PhotoSize,
+    VideoQuality,
     Attribute\ArrayOf,
 };
 
@@ -23,6 +24,8 @@ readonly class Video extends AbstractDataType
         #[ArrayOf(PhotoSize::class)]
         public readonly ?array $cover = null,
         public readonly ?int $start_timestamp = null,
+        #[ArrayOf(VideoQuality::class)]
+        public readonly ?array $qualities = null,
         public readonly ?string $file_name = null,
         public readonly ?string $mime_type = null,
         public readonly ?string $file_size = null, // may not fit in a 32-bit integer

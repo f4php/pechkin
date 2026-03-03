@@ -12,6 +12,8 @@ use F4\Pechkin\DataType\{
     Chat,
     ChatBackground,
     ChatBoostAdded,
+    ChatOwnerChanged,
+    ChatOwnerLeft,
     ChatShared,
     Checklist,
     ChecklistTasksAdded,
@@ -140,6 +142,10 @@ readonly class Message extends MaybeInaccessibleMessage
         #[ArrayOf(User::class)]
         public readonly ?array $new_chat_members = null,
         public readonly ?User $left_chat_member = null,
+        // added in API 9.4
+        public readonly ?ChatOwnerLeft $chat_owner_left = null,
+        public readonly ?ChatOwnerChanged $chat_owner_changed = null,
+        //
         public readonly ?string $new_chat_title = null,
         /** @var PhotoSize[]|null */
         #[ArrayOf(PhotoSize::class)]

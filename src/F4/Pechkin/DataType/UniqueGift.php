@@ -24,6 +24,7 @@ readonly class UniqueGift extends AbstractDataType
         public readonly UniqueGiftSymbol $symbol,
         public readonly UniqueGiftBackdrop $backdrop,
         public readonly ?bool $is_premium = null,
+        public readonly ?bool $is_burned = null,
         public readonly ?bool $is_from_blockchain = null,
         public readonly ?UniqueGiftColors $colors = null,
         public readonly ?Chat $publisher_chat = null,

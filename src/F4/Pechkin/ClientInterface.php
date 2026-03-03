@@ -59,6 +59,7 @@ use F4\Pechkin\DataType\{
     Update,
     User,
     UserChatBoosts,
+    UserProfileAudios,
     UserProfilePhotos,
     WebhookInfo,
 };
@@ -1096,6 +1097,19 @@ interface ClientInterface
         ?string $offset = null,
         ?int $limit = null,
     ): OwnedGifts;
+
+    /**
+     * Returns the list of audios added to the profile of a user.
+     * @param int|string $user_id Unique identifier of the target user
+     * @param int|null $offset Sequential number of the first audio to be returned
+     * @param int|null $limit Limits the number of audios to be retrieved. Values between 1-100 are accepted
+     * @return UserProfileAudios Returns a UserProfileAudios object
+     */
+    public function getUserProfileAudios(
+        int|string $user_id,
+        ?int $offset = null,
+        ?int $limit = null,
+    ): UserProfileAudios;
 
     /**
      * Use this method to get a list of profile pictures for a user.
@@ -2420,6 +2434,21 @@ interface ClientInterface
         ?string $description = null,
         ?string $language_code = null,
     ): bool;
+
+    /**
+     * Changes the profile photo of the bot.
+     * @param InputProfilePhoto $photo The new profile photo
+     * @return bool Returns True on success
+     */
+    public function setMyProfilePhoto(
+        InputProfilePhoto $photo,
+    ): bool;
+
+    /**
+     * Removes the current profile photo of the bot.
+     * @return bool Returns True on success
+     */
+    public function removeMyProfilePhoto(): bool;
 
     /**
      * Use this method to change the bot's name.

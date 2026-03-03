@@ -15,5 +15,6 @@ readonly class UniqueGiftModel extends AbstractDataType
         public readonly string $name,
         public readonly Sticker $sticker,
         public readonly int $rarity_per_mille,
+        public readonly ?string $rarity = null, // Currently, can be “uncommon”, “rare”, “epic”, or “legendary”.
     ) {}
 }

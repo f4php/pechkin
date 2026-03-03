@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     AcceptedGiftTypes,
+    Audio,
     Birthdate,
     BusinessIntro,
     BusinessLocation,
@@ -80,6 +81,7 @@ readonly class ChatFullInfo extends AbstractDataType
         public readonly ?string $linked_chat_id = null, // may not fit in 32-bit int
         public readonly ?ChatLocation $location = null,
         public readonly ?UserRating $rating = null,
+        public readonly ?Audio $first_profile_audio = null,
         public readonly ?UniqueGiftColors $unique_gift_colors = null,
         public readonly ?int $paid_message_star_count = null,
 
