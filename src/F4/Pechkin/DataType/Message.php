@@ -89,6 +89,7 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?Chat $sender_chat = null,
         public readonly ?int $sender_boost_count = null,
         public readonly ?User $sender_business_bot = null,
+        public readonly ?string $sender_tag = null,
         public readonly ?string $business_connection_id = null,
         public readonly ?MessageOrigin $forward_origin = null,
         public readonly ?bool $is_topic_message = null,

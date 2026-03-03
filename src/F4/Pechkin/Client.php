@@ -78,7 +78,7 @@ is_bool
 
 class Client implements ClientInterface
 {
-    protected const string API_VERSION = '9.4';
+    protected const string API_VERSION = '9.5';
     protected const int REQUEST_TIMEOUT = 60;
 
     protected ApiClient $apiClient;
@@ -788,6 +788,7 @@ class Client implements ClientInterface
         ?bool $can_delete_stories = null,
         ?bool $can_manage_topics = null,
         ?bool $can_manage_direct_messages = null,
+        ?bool $can_manage_tags = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -1347,8 +1348,15 @@ class Client implements ClientInterface
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
+    public function setChatMemberTag(
+        int|string $chat_id,
+        int|string $user_id,
+        ?string $tag = null, // 0-16 characters, emoji are not allowed
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
     public function setChatMenuButton(
-        ?int $chat_id = null,
+        null|int|string $chat_id = null,
         ?MenuButton $menu_button = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());

@@ -22,8 +22,10 @@ readonly class MessageEntity extends AbstractDataType
         public readonly ?User $user = null, // for "text_mention"
         public readonly ?string $language = null, // for "pre"
         public readonly ?string $custom_emoji_id = null, // for "custom_emoji"
+        public readonly ?int $unix_time = null,
+        public readonly ?string $date_time_format = null,
     ) {
-        if(!in_array(needle: $this->type, haystack: ['mention', 'hashtag', 'cashtag', 'bot_command', 'url', 'email', 'phone_number', 'bold', 'italic', 'underline', 'strikethrough', 'spolier', 'blockquote', 'expandable_blockquote', 'code', 'pre', 'text_link', 'text_mention', 'custom_emoji'], strict: true)) {
+        if(!in_array(needle: $this->type, haystack: ['mention', 'hashtag', 'cashtag', 'bot_command', 'url', 'email', 'phone_number', 'bold', 'italic', 'underline', 'strikethrough', 'spolier', 'blockquote', 'expandable_blockquote', 'code', 'pre', 'text_link', 'text_mention', 'custom_emoji', 'date_time'], strict: true)) {
             throw new InvalidArgumentException('Unsupported '.__CLASS__.' type');
         }
     }
