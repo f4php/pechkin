@@ -23,7 +23,7 @@ final class Flow extends AbstractRoutable implements RouterInterface
         public readonly int $priority = self::PRIORITY_NORMAL,
     ) {
         $this->handler = function(Context $context): mixed {
-            $result = $this->dispatch(...);
+            $result = $this->dispatch($context);
             return array_reduce(
                 callback: fn(mixed $result, Closure $handler) => $handler($context, $result),
                 array: $this->thenHandlers,
