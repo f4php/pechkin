@@ -31,7 +31,7 @@ final class Flow extends AbstractRoutable implements RouterInterface
             );
         };
     }
-    public static function getState(): null
+    public static function getState(): ?string
     {
         return $_SESSION[self::STATE_SESSION_KEY] ?? null;
     }
