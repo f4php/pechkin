@@ -83,7 +83,9 @@ class Bot implements BotInterface
             }
         }
         $update = Update::fromArray($request->getParameters());
-        $key    = ($this->sessionKeyResolver)($update);
+        if(!$key = ($this->sessionKeyResolver)($update)) {
+            throw new HttpException('Failed to initialize session', 500);
+        }
         $previousSessionId = $this->startSession($key);
         $context = new Context(
             client:  $this->client,
@@ -126,7 +128,7 @@ class Bot implements BotInterface
             secret_token: $this->secretToken,
         );
     }
-    protected function resolveSessionKey(Update $update): string
+    protected function resolveSessionKey(Update $update): ?string
     {
         // Resolve the chat, if any
         $chat = $update->message?->chat

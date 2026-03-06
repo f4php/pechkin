@@ -47,7 +47,6 @@ final class On extends AbstractRoutable
                 $context->update?->message !== null
                 && $when->test($context->update?->message?->text ?? $context->update?->message?->caption ?? ''),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
         );
     }
     public static function editedMessage(When $when, Closure $handler): static
@@ -57,7 +56,6 @@ final class On extends AbstractRoutable
                 $context->update?->edited_message !== null
                 && $when->test($context->update?->edited_message?->text ?? $context->update?->edited_message?->caption ?? ''),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
         );
     }
     public static function channelPost(When $when, Closure $handler): static
@@ -67,7 +65,6 @@ final class On extends AbstractRoutable
                 $context->update?->channel_post !== null
                 && $when->test($context->update?->channel_post?->text ?? $context->update?->channel_post?->caption ?? ''),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
         );
     }
     public static function editedChannelPost(When $when, Closure $handler): static
@@ -77,7 +74,6 @@ final class On extends AbstractRoutable
                 $context->update?->edited_channel_post !== null
                 && $when->test($context->update?->edited_channel_post?->text ?? $context->update?->edited_channel_post?->caption ?? ''),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
         );
     }
     // ── Message entity shortcuts ─────────────────────────────────────────
@@ -89,7 +85,7 @@ final class On extends AbstractRoutable
         return new static(
             matcher: fn(Context $context): bool => self::matchEntity($context, 'bot_command', $when),
             handler: $handler,
-            priority: self::PRIORITY_HIGHER,
+            
         );
     }
     public static function mention(When $when, Closure $handler): static
@@ -97,7 +93,7 @@ final class On extends AbstractRoutable
         return new static(
             matcher: fn(Context $context): bool => self::matchEntity($context, 'mention', $when),
             handler: $handler,
-            priority: self::PRIORITY_HIGHER,
+            
         );
     }
     public static function hashtag(When $when, Closure $handler): static
@@ -105,7 +101,7 @@ final class On extends AbstractRoutable
         return new static(
             matcher: fn(Context $context): bool => self::matchEntity($context, 'hashtag', $when),
             handler: $handler,
-            priority: self::PRIORITY_HIGHER,
+            
         );
     }
     public static function cashtag(When $when, Closure $handler): static
@@ -113,7 +109,7 @@ final class On extends AbstractRoutable
         return new static(
             matcher: fn(Context $context): bool => self::matchEntity($context, 'cashtag', $when),
             handler: $handler,
-            priority: self::PRIORITY_HIGHER,
+            
         );
     }
     public static function url(When $when, Closure $handler): static
@@ -121,7 +117,7 @@ final class On extends AbstractRoutable
         return new static(
             matcher: fn(Context $context): bool => self::matchEntity($context, 'url', $when),
             handler: $handler,
-            priority: self::PRIORITY_HIGHER,
+            
         );
     }
     public static function email(When $when, Closure $handler): static
@@ -129,7 +125,7 @@ final class On extends AbstractRoutable
         return new static(
             matcher: fn(Context $context): bool => self::matchEntity($context, 'email', $when),
             handler: $handler,
-            priority: self::PRIORITY_HIGHER,
+            
         );
     }
     public static function phoneNumber(When $when, Closure $handler): static
@@ -137,7 +133,7 @@ final class On extends AbstractRoutable
         return new static(
             matcher: fn(Context $context): bool => self::matchEntity($context, 'phone_number', $when),
             handler: $handler,
-            priority: self::PRIORITY_HIGHER,
+            
         );
     }
     // ── Message content types ────────────────────────────────────────────
@@ -247,7 +243,7 @@ final class On extends AbstractRoutable
                 $context->update?->message?->new_chat_title !== null
                 && $when->test($context->update?->message?->new_chat_title),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
+            
         );
     }
     public static function newChatMembers(Closure $handler): static
@@ -279,7 +275,6 @@ final class On extends AbstractRoutable
                 $context->update?->callback_query !== null
                 && $when->test($context->update?->callback_query?->data ?? ''),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
         );
     }
     // ── Inline mode ──────────────────────────────────────────────────────
@@ -290,7 +285,6 @@ final class On extends AbstractRoutable
                 $context->update?->inline_query !== null
                 && $when->test($context->update?->inline_query?->query),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
         );
     }
     public static function chosenInlineResult(When $when, Closure $handler): static
@@ -300,7 +294,6 @@ final class On extends AbstractRoutable
                 $context->update?->chosen_inline_result !== null
                 && $when->test($context->update?->chosen_inline_result?->result_id),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
         );
     }
     // ── Payments ─────────────────────────────────────────────────────────
@@ -311,7 +304,6 @@ final class On extends AbstractRoutable
                 $context->update?->pre_checkout_query !== null
                 && $when->test($context->update?->pre_checkout_query?->invoice_payload),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
         );
     }
     public static function shippingQuery(When $when, Closure $handler): static
@@ -321,7 +313,7 @@ final class On extends AbstractRoutable
                 $context->update?->shipping_query !== null
                 && $when->test($context->update?->shipping_query?->invoice_payload),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
+            
         );
     }
     public static function successfulPayment(When $when, Closure $handler): static
@@ -331,7 +323,7 @@ final class On extends AbstractRoutable
                 $context->update?->message?->successful_payment !== null
                 && $when->test($context->update?->message?->successful_payment?->invoice_payload),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
+            
         );
     }
 
@@ -344,7 +336,7 @@ final class On extends AbstractRoutable
                 $context->update?->my_chat_member !== null
                 && $when->test($context->update?->my_chat_member?->new_chat_member?->status),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
+            
         );
     }
 
@@ -355,7 +347,7 @@ final class On extends AbstractRoutable
                 $context->update?->chat_member !== null
                 && $when->test($context->update?->chat_member?->new_chat_member?->status),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
+            
         );
     }
 
@@ -376,7 +368,7 @@ final class On extends AbstractRoutable
                 $context->update?->poll_answer !== null
                 && $when->test($context->update?->poll_answer?->poll_id),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
+            
         );
     }
 
@@ -397,7 +389,7 @@ final class On extends AbstractRoutable
                 return false;
             },
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
+            
         );
     }
 
@@ -436,7 +428,7 @@ final class On extends AbstractRoutable
                 $context->update?->business_message !== null
                 && $when->test($context->update?->business_message?->text ?? $context->update?->business_message?->caption ?? ''),
             handler: $handler,
-            priority: self::PRIORITY_HIGH,
+            
         );
     }
 

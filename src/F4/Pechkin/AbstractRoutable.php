@@ -11,11 +11,13 @@ use Throwable;
 use F4\Pechkin\{
     Context,
     ExceptionHandlerTrait,
+    ThenAwareTrait,
 };
 
 abstract class AbstractRoutable
 {
     use ExceptionHandlerTrait;
+    use ThenAwareTrait;
     protected const int PRIORITY_HIGHEST = 30;
     protected const int PRIORITY_HIGHER = 20;
     protected const int PRIORITY_HIGH = 10;
@@ -46,7 +48,12 @@ abstract class AbstractRoutable
             if ($this->middleware) {
                 $context = $this->invokeMiddleware($context);
             }
-            return ($this->handler)($context);
+            $result = ($this->handler)($context);
+            return array_reduce(
+                callback: fn(mixed $result, Closure $handler) => $handler($context, $result),
+                array: $this->thenHandlers,
+                initial: $result
+            );
         } catch (Throwable $e) {
             return $this->processException($e, $context);
         }

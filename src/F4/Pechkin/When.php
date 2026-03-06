@@ -66,6 +66,13 @@ final class When
             value: $prefix,
         );
     }
+    public static function inState(string $state): static
+    {
+        return new static(
+            handler: fn (): bool => Flow::getState() === $this->value,
+            value: $state,
+        );
+    }
     public function test(string $subject): bool
     {
         return (bool)($this->handler)($subject);
