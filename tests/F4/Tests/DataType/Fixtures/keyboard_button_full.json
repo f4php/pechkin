@@ -63,5 +63,7 @@
     },
     "web_app": {
         "url": "https://example.com"
-    }
+    },
+    "icon_custom_emoji_id": null,
+    "style": null
 }

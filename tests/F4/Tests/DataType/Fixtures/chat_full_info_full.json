@@ -208,7 +208,10 @@
     "reply_markup": null,
     "forward_from": null,
     "forward_date": null,
-    "user_shared": null
+    "user_shared": null,
+    "sender_tag": null,
+    "chat_owner_left": null,
+    "chat_owner_changed": null
   },
   "permissions": {
     "can_send_messages": null,
@@ -225,7 +228,8 @@
     "can_invite_users": null,
     "can_pin_messages": null,
     "can_manage_topics": null,
-    "can_send_media_messages": null
+    "can_send_media_messages": null,
+    "can_edit_tag": null
   },
   "can_send_paid_media": true,
   "slow_mode_delay": 30,
@@ -270,5 +274,6 @@
   },
   "paid_message_star_count": 10,
   "can_send_gift": true,
-  "all_members_are_administrators": null
+  "all_members_are_administrators": null,
+  "first_profile_audio": null
 }

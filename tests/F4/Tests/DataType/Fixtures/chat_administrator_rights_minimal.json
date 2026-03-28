@@ -14,5 +14,6 @@
     "can_edit_messages": null,
     "can_pin_messages": null,
     "can_manage_topics": null,
-    "can_manage_direct_messages": null
+    "can_manage_direct_messages": null,
+    "can_manage_tags": true
 }

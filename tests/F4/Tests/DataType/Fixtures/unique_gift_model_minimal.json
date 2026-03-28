@@ -18,5 +18,6 @@
         "file_size": null,
         "thumb": null
     },
-    "rarity_per_mille": 42
+    "rarity_per_mille": 42,
+    "rarity": null
 }

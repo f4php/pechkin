@@ -24,7 +24,8 @@
                 "file_size": null,
                 "thumb": null
             },
-            "rarity_per_mille": 42
+            "rarity_per_mille": 42,
+            "rarity": null
         },
         "symbol": {
             "name": "Test Name",
@@ -61,7 +62,8 @@
         "is_premium": null,
         "is_from_blockchain": null,
         "colors": null,
-        "publisher_chat": null
+        "publisher_chat": null,
+        "is_burned": null
     },
     "send_date": 1700000000,
     "owned_gift_id": null,

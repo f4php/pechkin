@@ -63,7 +63,9 @@
         "can_pin_messages": true,
         "can_manage_topics": true,
         "can_manage_direct_messages": true,
-        "custom_title": "Admin"
+        "custom_title": "Admin",
+        "can_manage_voice_chats": true,
+        "can_manage_tags": true
     },
     "new_chat_member": {
         "status": "administrator",
@@ -101,7 +103,9 @@
         "can_pin_messages": true,
         "can_manage_topics": true,
         "can_manage_direct_messages": true,
-        "custom_title": "Admin"
+        "custom_title": "Admin",
+        "can_manage_voice_chats": true,
+        "can_manage_tags": true
     },
     "invite_link": {
         "invite_link": "https://t.me/+abc123",

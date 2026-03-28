@@ -16,5 +16,6 @@
         "has_topics_enabled": null,
         "allows_users_to_create_topics": null
     },
-    "until_date": null
+    "until_date": null,
+    "tag": null
 }

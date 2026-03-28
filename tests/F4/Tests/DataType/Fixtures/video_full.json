@@ -23,5 +23,6 @@
     "start_timestamp": 42,
     "file_name": "test_file.pdf",
     "mime_type": "application/pdf",
-    "file_size": "1024000"
+    "file_size": "1024000",
+    "qualities": null
 }

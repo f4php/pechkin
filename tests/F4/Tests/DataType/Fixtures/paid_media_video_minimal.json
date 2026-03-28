@@ -10,6 +10,7 @@
         "start_timestamp": null,
         "file_name": null,
         "mime_type": null,
-        "file_size": null
+        "file_size": null,
+        "qualities": null
     }
 }

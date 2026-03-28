@@ -27,9 +27,11 @@
     "can_send_polls": true,
     "can_send_other_messages": true,
     "can_add_web_page_previews": true,
+    "can_edit_tag": true,
     "can_change_info": true,
     "can_invite_users": true,
     "can_pin_messages": true,
     "can_manage_topics": true,
-    "until_date": 1700172800
+    "until_date": 1700172800,
+    "tag": null
 }

@@ -9,5 +9,7 @@
     "switch_inline_query_chosen_chat": null,
     "copy_text": null,
     "callback_game": null,
-    "pay": null
+    "pay": null,
+    "icon_custom_emoji_id": null,
+    "style": null
 }

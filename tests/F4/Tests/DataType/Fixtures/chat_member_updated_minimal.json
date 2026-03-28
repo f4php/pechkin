@@ -66,7 +66,8 @@
         "can_manage_topics": true,
         "can_manage_direct_messages": true,
         "custom_title": "Admin",
-        "can_manage_voice_chats": true
+        "can_manage_voice_chats": true,
+        "can_manage_tags": null
     },
     "new_chat_member": {
         "status": "administrator",
@@ -105,7 +106,8 @@
         "can_manage_topics": true,
         "can_manage_direct_messages": true,
         "custom_title": "Admin",
-        "can_manage_voice_chats": true
+        "can_manage_voice_chats": true,
+        "can_manage_tags": null
     },
     "invite_link": null,
     "via_join_request": null,

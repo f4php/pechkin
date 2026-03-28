@@ -219,7 +219,13 @@
         "video_chat_ended": null,
         "video_chat_participants_invited": null,
         "web_app_data": null,
-        "reply_markup": null
+        "reply_markup": null,
+        "forward_from": null,
+        "forward_date": null,
+        "user_shared": null,
+        "sender_tag": null,
+        "chat_owner_left": null,
+        "chat_owner_changed": null
     },
     "external_reply": {
         "origin": {
@@ -1086,5 +1092,11 @@
                 }
             ]
         ]
-    }
+    },
+    "forward_from": null,
+    "forward_date": null,
+    "user_shared": null,
+    "sender_tag": null,
+    "chat_owner_left": null,
+    "chat_owner_changed": null
 }

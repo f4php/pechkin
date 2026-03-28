@@ -39,7 +39,8 @@
                 "needs_repainting": false,
                 "file_size": 1024000
             },
-            "rarity_per_mille": 42
+            "rarity_per_mille": 42,
+            "rarity": null
         },
         "symbol": {
             "name": "Test Name",
@@ -111,7 +112,8 @@
             "last_name": "Doe",
             "is_forum": false,
             "is_direct_messages": false
-        }
+        },
+        "is_burned": null
     },
     "origin": "upgrade",
     "last_resale_currency": "test_string",

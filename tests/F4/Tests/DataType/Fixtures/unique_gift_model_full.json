@@ -33,5 +33,6 @@
         "needs_repainting": false,
         "file_size": 1024000
     },
-    "rarity_per_mille": 42
+    "rarity_per_mille": 42,
+    "rarity": null
 }

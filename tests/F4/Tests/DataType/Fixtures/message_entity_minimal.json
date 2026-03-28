@@ -5,5 +5,7 @@
     "url": null,
     "user": null,
     "language": null,
-    "custom_emoji_id": null
+    "custom_emoji_id": null,
+    "unix_time": null,
+    "date_time_format": null
 }

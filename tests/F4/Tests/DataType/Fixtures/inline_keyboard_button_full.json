@@ -24,5 +24,7 @@
         "text": "Hello, World!"
     },
     "callback_game": {},
-    "pay": true
+    "pay": true,
+    "icon_custom_emoji_id": null,
+    "style": null
 }

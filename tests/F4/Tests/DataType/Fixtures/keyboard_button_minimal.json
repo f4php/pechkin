@@ -5,5 +5,7 @@
     "request_contact": null,
     "request_location": null,
     "request_poll": null,
-    "web_app": null
+    "web_app": null,
+    "icon_custom_emoji_id": null,
+    "style": null
 }
