@@ -144,129 +144,6 @@
             "time": "2024-11-12T16:29:46+00:00"
         },
         {
-            "name": "cweagans/composer-configurable-plugin",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cweagans/composer-configurable-plugin.git",
-                "reference": "15433906511a108a1806710e988629fd24b89974"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cweagans/composer-configurable-plugin/zipball/15433906511a108a1806710e988629fd24b89974",
-                "reference": "15433906511a108a1806710e988629fd24b89974",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0.0"
-            },
-            "require-dev": {
-                "codeception/codeception": "~4.0",
-                "codeception/module-asserts": "^2.0",
-                "composer/composer": "~2.0",
-                "php-coveralls/php-coveralls": "~2.0",
-                "php-parallel-lint/php-parallel-lint": "^1.0.0",
-                "phpro/grumphp": "^1.8.0",
-                "sebastian/phpcpd": "^6.0",
-                "squizlabs/php_codesniffer": "^3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "cweagans\\Composer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Cameron Eagans",
-                    "email": "me@cweagans.net"
-                }
-            ],
-            "description": "Provides a lightweight configuration system for Composer plugins.",
-            "support": {
-                "issues": "https://github.com/cweagans/composer-configurable-plugin/issues",
-                "source": "https://github.com/cweagans/composer-configurable-plugin/tree/2.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/cweagans",
-                    "type": "github"
-                }
-            ],
-            "time": "2023-02-12T04:58:58+00:00"
-        },
-        {
-            "name": "cweagans/composer-patches",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cweagans/composer-patches.git",
-                "reference": "bfa6018a5f864653d9ed899b902ea72f858a2cf7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/bfa6018a5f864653d9ed899b902ea72f858a2cf7",
-                "reference": "bfa6018a5f864653d9ed899b902ea72f858a2cf7",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^2.0",
-                "cweagans/composer-configurable-plugin": "^2.0",
-                "ext-json": "*",
-                "php": ">=8.0.0"
-            },
-            "require-dev": {
-                "codeception/codeception": "~4.0",
-                "codeception/module-asserts": "^2.0",
-                "codeception/module-cli": "^2.0",
-                "codeception/module-filesystem": "^2.0",
-                "composer/composer": "~2.0",
-                "php-coveralls/php-coveralls": "~2.0",
-                "php-parallel-lint/php-parallel-lint": "^1.0.0",
-                "phpro/grumphp": "^1.8.0",
-                "sebastian/phpcpd": "^6.0",
-                "squizlabs/php_codesniffer": "^4.0"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "_": "The following two lines ensure that composer-patches is loaded as early as possible.",
-                "class": "cweagans\\Composer\\Plugin\\Patches",
-                "plugin-modifies-downloads": true,
-                "plugin-modifies-install-path": true
-            },
-            "autoload": {
-                "psr-4": {
-                    "cweagans\\Composer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Cameron Eagans",
-                    "email": "me@cweagans.net"
-                }
-            ],
-            "description": "Provides a way to patch Composer packages.",
-            "support": {
-                "issues": "https://github.com/cweagans/composer-patches/issues",
-                "source": "https://github.com/cweagans/composer-patches/tree/2.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/cweagans",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-10-30T23:44:22+00:00"
-        },
-        {
             "name": "f4php/db",
             "version": "v0.3.5",
             "source": {
@@ -322,22 +199,21 @@
         },
         {
             "name": "f4php/framework",
-            "version": "v0.2.1",
+            "version": "v0.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/f4php/framework.git",
-                "reference": "50c283a0f43fd029cbdb2f728babdd938738532b"
+                "reference": "53766b3fae2e271bf33bc5af066dd7c43cdff074"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/f4php/framework/zipball/50c283a0f43fd029cbdb2f728babdd938738532b",
-                "reference": "50c283a0f43fd029cbdb2f728babdd938738532b",
+                "url": "https://api.github.com/repos/f4php/framework/zipball/53766b3fae2e271bf33bc5af066dd7c43cdff074",
+                "reference": "53766b3fae2e271bf33bc5af066dd7c43cdff074",
                 "shasum": ""
             },
             "require": {
                 "cekurte/environment": "^0.3.0",
                 "composer/pcre": "^3.3",
-                "cweagans/composer-patches": "^2.0",
                 "ext-filter": "*",
                 "ext-mbstring": "*",
                 "ext-pgsql": "*",
@@ -349,8 +225,8 @@
                 "nyholm/psr7": "^1.8",
                 "nyholm/psr7-server": "^1.1",
                 "php": "^8.4.1",
-                "phug/component": "1.1.4",
-                "phug/phug": "1.13.0",
+                "phug/component": "1.2.1",
+                "phug/phug": "2.0.1",
                 "ralouphie/getallheaders": "^3.0",
                 "spatie/backtrace": "^1.7"
             },
@@ -361,14 +237,7 @@
             },
             "type": "library",
             "extra": {
-                "patches": {
-                    "phug/phug": {
-                        "PHP 8.5 compatibility fixes": "https://raw.githubusercontent.com/f4php/framework/refs/heads/main/patches/phug-phug-php85-compat.patch"
-                    },
-                    "phug/component": {
-                        "PHP 8.5 compatibility fixes": "https://raw.githubusercontent.com/f4php/framework/refs/heads/main/patches/phug-component-php85-compat.patch"
-                    }
-                }
+                "patches": []
             },
             "autoload": {
                 "psr-4": {
@@ -392,9 +261,9 @@
             ],
             "support": {
                 "issues": "https://github.com/f4php/framework/issues",
-                "source": "https://github.com/f4php/framework/tree/v0.2.1"
+                "source": "https://github.com/f4php/framework/tree/v0.2.5"
             },
-            "time": "2026-02-28T15:41:46+00:00"
+            "time": "2026-03-19T20:59:26+00:00"
         },
         {
             "name": "f4php/hookmanager",
@@ -657,16 +526,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.8.0",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "21dc724a0583619cd1652f673303492272778051"
+                "reference": "7d0ed42f28e42d61352a7a79de682e5e67fec884"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/21dc724a0583619cd1652f673303492272778051",
-                "reference": "21dc724a0583619cd1652f673303492272778051",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/7d0ed42f28e42d61352a7a79de682e5e67fec884",
+                "reference": "7d0ed42f28e42d61352a7a79de682e5e67fec884",
                 "shasum": ""
             },
             "require": {
@@ -682,6 +551,7 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
                 "http-interop/http-factory-tests": "0.9.0",
+                "jshttp/mime-db": "1.54.0.1",
                 "phpunit/phpunit": "^8.5.44 || ^9.6.25"
             },
             "suggest": {
@@ -753,7 +623,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.8.0"
+                "source": "https://github.com/guzzle/psr7/tree/2.9.0"
             },
             "funding": [
                 {
@@ -769,7 +639,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-23T21:21:41+00:00"
+            "time": "2026-03-10T16:41:02+00:00"
         },
         {
             "name": "jrmajor/fluent",
@@ -1244,26 +1114,27 @@
         },
         {
             "name": "phug/component",
-            "version": "1.1.4",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phug-php/component.git",
-                "reference": "31c7dd4646a37f587658f6de8e48e6f070c65f64"
+                "reference": "dc1babf6bd7a5e80769d0774f60395b795bd1b61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phug-php/component/zipball/31c7dd4646a37f587658f6de8e48e6f070c65f64",
-                "reference": "31c7dd4646a37f587658f6de8e48e6f070c65f64",
+                "url": "https://api.github.com/repos/phug-php/component/zipball/dc1babf6bd7a5e80769d0774f60395b795bd1b61",
+                "reference": "dc1babf6bd7a5e80769d0774f60395b795bd1b61",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2",
-                "phug/phug": "^1.7.2"
+                "phug/phug": "^1.7.2 || ^2.0.1"
             },
             "require-dev": {
+                "js-phpize/js-phpize-phug": "^2.3.0",
                 "machy8/xhtml-formatter": "^1.0",
-                "phpunit/phpunit": "^8.5",
-                "pug-php/pug": "^3.3"
+                "phpunit/phpunit": "^8.5.52",
+                "pug-php/pug": "^3.6.0"
             },
             "type": "library",
             "autoload": {
@@ -1310,25 +1181,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-04-25T21:32:11+00:00"
+            "time": "2026-03-19T19:38:08+00:00"
         },
         {
             "name": "phug/phug",
-            "version": "1.13.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phug-php/phug.git",
-                "reference": "6c7b618adabd1b4c14a0733920fac561449ecd8c"
+                "reference": "0260cba390265e2d087a7a4a083072dbaa9de0eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phug-php/phug/zipball/6c7b618adabd1b4c14a0733920fac561449ecd8c",
-                "reference": "6c7b618adabd1b4c14a0733920fac561449ecd8c",
+                "url": "https://api.github.com/repos/phug-php/phug/zipball/0260cba390265e2d087a7a4a083072dbaa9de0eb",
+                "reference": "0260cba390265e2d087a7a4a083072dbaa9de0eb",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0",
-                "symfony/var-dumper": "^3.4 || ^4.0 || ^5.0 || ^6.0 || ^7.0"
+                "php": "^7.1 || ^8.0",
+                "symfony/var-dumper": "^3.4 || ^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0"
             },
             "replace": {
                 "phug/ast": "self.version",
@@ -1346,17 +1217,17 @@
             },
             "require-dev": {
                 "cebe/markdown": "^1.1",
-                "js-phpize/js-phpize-phug": "^1.2 || ^2.2.1",
+                "js-phpize/js-phpize-phug": "^2.2.1",
                 "nodejs-php-fallback/coffeescript": "^1.0.1",
                 "nodejs-php-fallback/less": "^1.0.5",
                 "nodejs-php-fallback/stylus": "^1.0.4",
                 "nodejs-php-fallback/uglify": "^1.0.4",
-                "phpunit/php-code-coverage": "^2.2.4 || ^4.0.8 || ^5.3.2 || ^6.1.4 || ^7.0.15 || ^9.2.28",
+                "phpunit/php-code-coverage": "^6.1.4 || ^7.0.17 || ^9.2.32",
                 "phpunit/php-invoker": "^1.1.4 || ^3.1.1",
-                "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^6.5.14 || ^8.5.34 || ^9.6.13",
-                "pug-php/pug": "^2.7.3 || ^3.4.1",
+                "phpunit/phpunit": "^7.5.20 || ^8.5.52 || ^9.6.34",
+                "pug-php/pug": "^3.4.1",
                 "pug-php/pug-filter-coffee-script": "^1.3.1",
-                "squizlabs/php_codesniffer": "^3.7.2"
+                "squizlabs/php_codesniffer": "^3.13.5"
             },
             "bin": [
                 "phug"
@@ -1365,7 +1236,7 @@
             "extra": {
                 "branch-alias": {
                     "dev-facade": "0.4.x-dev",
-                    "dev-master": "1.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -1438,7 +1309,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-19T14:40:12+00:00"
+            "time": "2026-03-15T18:02:06+00:00"
         },
         {
             "name": "psr/http-client",
@@ -1646,16 +1517,16 @@
         },
         {
             "name": "spatie/backtrace",
-            "version": "1.8.1",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/backtrace.git",
-                "reference": "8c0f16a59ae35ec8c62d85c3c17585158f430110"
+                "reference": "8ffe78be5ed355b5009e3dd989d183433e9a5adc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/backtrace/zipball/8c0f16a59ae35ec8c62d85c3c17585158f430110",
-                "reference": "8c0f16a59ae35ec8c62d85c3c17585158f430110",
+                "url": "https://api.github.com/repos/spatie/backtrace/zipball/8ffe78be5ed355b5009e3dd989d183433e9a5adc",
+                "reference": "8ffe78be5ed355b5009e3dd989d183433e9a5adc",
                 "shasum": ""
             },
             "require": {
@@ -1666,7 +1537,7 @@
                 "laravel/serializable-closure": "^1.3 || ^2.0",
                 "phpunit/phpunit": "^9.3 || ^11.4.3",
                 "spatie/phpunit-snapshot-assertions": "^4.2 || ^5.1.6",
-                "symfony/var-dumper": "^5.1 || ^6.0 || ^7.0"
+                "symfony/var-dumper": "^5.1|^6.0|^7.0|^8.0"
             },
             "type": "library",
             "autoload": {
@@ -1694,7 +1565,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/backtrace/issues",
-                "source": "https://github.com/spatie/backtrace/tree/1.8.1"
+                "source": "https://github.com/spatie/backtrace/tree/1.8.2"
             },
             "funding": [
                 {
@@ -1706,7 +1577,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-08-26T08:22:30+00:00"
+            "time": "2026-03-11T13:48:28+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1862,31 +1733,31 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v7.4.6",
+            "version": "v8.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "045321c440ac18347b136c63d2e9bf28a2dc0291"
+                "reference": "2e14f7e0bf5ff02c6e63bd31cb8e4855a13d6209"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/045321c440ac18347b136c63d2e9bf28a2dc0291",
-                "reference": "045321c440ac18347b136c63d2e9bf28a2dc0291",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/2e14f7e0bf5ff02c6e63bd31cb8e4855a13d6209",
+                "reference": "2e14f7e0bf5ff02c6e63bd31cb8e4855a13d6209",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/polyfill-mbstring": "~1.0"
+                "php": ">=8.4",
+                "symfony/polyfill-mbstring": "^1.0"
             },
             "conflict": {
-                "symfony/console": "<6.4"
+                "symfony/console": "<7.4",
+                "symfony/error-handler": "<7.4"
             },
             "require-dev": {
-                "symfony/console": "^6.4|^7.0|^8.0",
-                "symfony/http-kernel": "^6.4|^7.0|^8.0",
-                "symfony/process": "^6.4|^7.0|^8.0",
-                "symfony/uid": "^6.4|^7.0|^8.0",
+                "symfony/console": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/process": "^7.4|^8.0",
+                "symfony/uid": "^7.4|^8.0",
                 "twig/twig": "^3.12"
             },
             "bin": [
@@ -1925,7 +1796,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v7.4.6"
+                "source": "https://github.com/symfony/var-dumper/tree/v8.0.6"
             },
             "funding": [
                 {
@@ -1945,7 +1816,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-15T10:53:20+00:00"
+            "time": "2026-02-15T10:53:29+00:00"
         }
     ],
     "packages-dev": [
@@ -2187,11 +2058,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.40",
+            "version": "2.1.44",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
-                "reference": "9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/4a88c083c668b2c364a425c9b3171b2d9ea5d218",
+                "reference": "4a88c083c668b2c364a425c9b3171b2d9ea5d218",
                 "shasum": ""
             },
             "require": {
@@ -2236,7 +2107,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-23T15:04:35+00:00"
+            "time": "2026-03-25T17:34:21+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -3094,16 +2965,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "9.0.0",
+            "version": "9.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "bb64d08145b021b67d5f253308a498b73ab0461e"
+                "reference": "c4a2dc54b1a24e13ef1839cbb5947b967cbae853"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/bb64d08145b021b67d5f253308a498b73ab0461e",
-                "reference": "bb64d08145b021b67d5f253308a498b73ab0461e",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/c4a2dc54b1a24e13ef1839cbb5947b967cbae853",
+                "reference": "c4a2dc54b1a24e13ef1839cbb5947b967cbae853",
                 "shasum": ""
             },
             "require": {
@@ -3118,7 +2989,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.0-dev"
+                    "dev-main": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3146,7 +3017,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/environment/issues",
                 "security": "https://github.com/sebastianbergmann/environment/security/policy",
-                "source": "https://github.com/sebastianbergmann/environment/tree/9.0.0"
+                "source": "https://github.com/sebastianbergmann/environment/tree/9.1.0"
             },
             "funding": [
                 {
@@ -3166,7 +3037,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-06T04:43:29+00:00"
+            "time": "2026-03-22T06:31:50+00:00"
         },
         {
             "name": "sebastian/exporter",
