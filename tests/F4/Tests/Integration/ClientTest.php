@@ -7,6 +7,9 @@ namespace F4\Tests\Integration;
 use F4\Pechkin\Client\ClientException;
 use F4\Pechkin\DataType\{
     BotCommand,
+    BotDescription,
+    BotName,
+    BotShortDescription,
     ChatAdministratorRights,
     ChatFullInfo,
     ChatInviteLink,
@@ -15,26 +18,23 @@ use F4\Pechkin\DataType\{
     File,
     ForumTopic,
     Gifts,
-    InputFile,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     InlineQueryResultArticle,
+    InputFile,
+    MenuButton,
     Message,
     MessageId,
-    MenuButton,
     OwnedGifts,
     Poll,
+    StarAmount,
+    StarTransactions,
     Sticker,
     Update,
     User,
     UserChatBoosts,
     UserProfilePhotos,
-    WebHookInfo,
-    BotDescription,
-    BotName,
-    BotShortDescription,
-    StarAmount,
-    StarTransactions,
+    WebhookInfo,
 };
 use PHPUnit\Framework\Attributes\{
     Depends,
@@ -62,7 +62,7 @@ final class ClientTest extends IntegrationTestCase
     public function testGetWebhookInfo(): void
     {
         $info = self::$client->getWebhookInfo();
-        $this->assertInstanceOf(WebHookInfo::class, $info);
+        $this->assertInstanceOf(WebhookInfo::class, $info);
         $this->assertIsString($info->url);
     }
 

@@ -1,0 +1,24 @@
+parameters:
+    ignoreErrors:
+        -
+            message: '#has an uninitialized readonly property \$type#'
+            identifier: property.uninitializedReadonly
+        -
+            message: '#has an uninitialized readonly property \$source#'
+            identifier: property.uninitializedReadonly
+        -
+            message: '#has an uninitialized readonly property \$status#'
+            identifier: property.uninitializedReadonly
+        -
+            message: '#^Unsafe usage of new static\(\)\.$#'
+            identifier: new.static
+        -
+            message: '#^Undefined variable: \$this$#'
+            identifier:  variable.undefined
+            paths:
+              - src/F4/Pechkin/When.php
+        -
+            message: '#has an unused parameter \$args#'
+            identifier:  constructor.unusedParameter
+            paths:
+              - src/F4/Pechkin/DataType/AbstractDataType.php
