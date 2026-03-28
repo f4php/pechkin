@@ -90,6 +90,7 @@ final class MessageTest extends TestCase
         $this->assertSame(1700000000, $message->date);
         $this->assertSame(42, $message->message_thread_id);
         $this->assertSame(3, $message->sender_boost_count);
+        $this->assertSame('VIP', $message->sender_tag);
         $this->assertSame('biz_conn_123', $message->business_connection_id);
         $this->assertInstanceOf(MessageOrigin::class, $message->forward_origin);
         $this->assertSame(true, $message->is_topic_message);

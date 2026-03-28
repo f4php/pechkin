@@ -40,7 +40,7 @@
                 "file_size": 1024000
             },
             "rarity_per_mille": 42,
-            "rarity": null
+            "rarity": "rare"
         },
         "symbol": {
             "name": "Test Name",
@@ -113,7 +113,7 @@
             "is_forum": false,
             "is_direct_messages": false
         },
-        "is_burned": null
+        "is_burned": true
     },
     "origin": "upgrade",
     "last_resale_currency": "test_string",

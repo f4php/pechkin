@@ -20,6 +20,7 @@ final class ChatMemberMemberTest extends TestCase
 
         $this->assertInstanceOf(ChatMemberMember::class, $chatMemberMember);
         $this->assertInstanceOf(User::class, $chatMemberMember->user);
+        $this->assertSame('VIP', $chatMemberMember->tag);
         $this->assertSame(1700172800, $chatMemberMember->until_date);
     }
 

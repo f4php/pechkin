@@ -22,6 +22,6 @@
     },
     "language": "test_string",
     "custom_emoji_id": "emoji_456",
-    "unix_time": null,
-    "date_time_format": null
+    "unix_time": 1700172800,
+    "date_time_format": "Y-m-d H:i"
 }

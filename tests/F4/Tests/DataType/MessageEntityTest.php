@@ -26,6 +26,8 @@ final class MessageEntityTest extends TestCase
         $this->assertSame('https://example.com', $messageEntity->url);
         $this->assertSame('test_string', $messageEntity->language);
         $this->assertSame('emoji_456', $messageEntity->custom_emoji_id);
+        $this->assertSame(1700172800, $messageEntity->unix_time);
+        $this->assertSame('Y-m-d H:i', $messageEntity->date_time_format);
     }
 
     public function testFromArrayWithMinimalData(): void

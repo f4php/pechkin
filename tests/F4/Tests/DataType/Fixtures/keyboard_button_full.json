@@ -31,7 +31,8 @@
             "can_edit_messages": true,
             "can_pin_messages": true,
             "can_manage_topics": true,
-            "can_manage_direct_messages": true
+            "can_manage_direct_messages": true,
+            "can_manage_tags": true
         },
         "bot_administrator_rights": {
             "is_anonymous": true,
@@ -49,7 +50,8 @@
             "can_edit_messages": true,
             "can_pin_messages": true,
             "can_manage_topics": true,
-            "can_manage_direct_messages": true
+            "can_manage_direct_messages": true,
+            "can_manage_tags": true
         },
         "bot_is_member": true,
         "request_title": true,
@@ -64,6 +66,6 @@
     "web_app": {
         "url": "https://example.com"
     },
-    "icon_custom_emoji_id": null,
-    "style": null
+    "icon_custom_emoji_id": "emoji_456",
+    "style": "primary"
 }

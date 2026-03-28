@@ -37,6 +37,7 @@ final class ChatMemberAdministratorTest extends TestCase
         $this->assertSame(true, $chatMemberAdministrator->can_pin_messages);
         $this->assertSame(true, $chatMemberAdministrator->can_manage_topics);
         $this->assertSame(true, $chatMemberAdministrator->can_manage_direct_messages);
+        $this->assertSame(true, $chatMemberAdministrator->can_manage_tags);
         $this->assertSame('Admin', $chatMemberAdministrator->custom_title);
     }
 

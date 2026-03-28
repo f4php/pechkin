@@ -28,6 +28,7 @@ final class ChatPermissionsTest extends TestCase
         $this->assertSame(true, $chatPermissions->can_send_polls);
         $this->assertSame(true, $chatPermissions->can_send_other_messages);
         $this->assertSame(true, $chatPermissions->can_add_web_page_previews);
+        $this->assertSame(true, $chatPermissions->can_edit_tag);
         $this->assertSame(true, $chatPermissions->can_change_info);
         $this->assertSame(true, $chatPermissions->can_invite_users);
         $this->assertSame(true, $chatPermissions->can_pin_messages);

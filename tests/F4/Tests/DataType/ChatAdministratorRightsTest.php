@@ -34,6 +34,7 @@ final class ChatAdministratorRightsTest extends TestCase
         $this->assertSame(true, $chatAdministratorRights->can_pin_messages);
         $this->assertSame(true, $chatAdministratorRights->can_manage_topics);
         $this->assertSame(true, $chatAdministratorRights->can_manage_direct_messages);
+        $this->assertSame(true, $chatAdministratorRights->can_manage_tags);
     }
 
     public function testFromArrayWithMinimalData(): void

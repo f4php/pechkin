@@ -27,6 +27,8 @@ final class KeyboardButtonTest extends TestCase
         $this->assertInstanceOf(KeyboardButtonPollType::class, $keyboardButton->request_poll);
         $this->assertInstanceOf(WebAppInfo::class, $keyboardButton->web_app);
         $this->assertSame('Hello, World!', $keyboardButton->text);
+        $this->assertSame('emoji_456', $keyboardButton->icon_custom_emoji_id);
+        $this->assertSame('primary', $keyboardButton->style);
         $this->assertSame(true, $keyboardButton->request_contact);
         $this->assertSame(true, $keyboardButton->request_location);
     }

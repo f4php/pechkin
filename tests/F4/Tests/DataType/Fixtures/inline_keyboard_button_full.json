@@ -25,6 +25,6 @@
     },
     "callback_game": {},
     "pay": true,
-    "icon_custom_emoji_id": null,
-    "style": null
+    "icon_custom_emoji_id": "emoji_456",
+    "style": "primary"
 }

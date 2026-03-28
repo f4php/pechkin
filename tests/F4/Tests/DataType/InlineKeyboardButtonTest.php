@@ -29,6 +29,8 @@ final class InlineKeyboardButtonTest extends TestCase
         $this->assertInstanceOf(CopyTextButton::class, $inlineKeyboardButton->copy_text);
         $this->assertInstanceOf(CallbackGame::class, $inlineKeyboardButton->callback_game);
         $this->assertSame('Hello, World!', $inlineKeyboardButton->text);
+        $this->assertSame('emoji_456', $inlineKeyboardButton->icon_custom_emoji_id);
+        $this->assertSame('primary', $inlineKeyboardButton->style);
         $this->assertSame('https://example.com', $inlineKeyboardButton->url);
         $this->assertSame('test_string', $inlineKeyboardButton->callback_data);
         $this->assertSame('inline_query', $inlineKeyboardButton->switch_inline_query);

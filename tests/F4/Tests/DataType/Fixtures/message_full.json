@@ -1096,7 +1096,7 @@
     "forward_from": null,
     "forward_date": null,
     "user_shared": null,
-    "sender_tag": null,
+    "sender_tag": "VIP",
     "chat_owner_left": null,
     "chat_owner_changed": null
 }

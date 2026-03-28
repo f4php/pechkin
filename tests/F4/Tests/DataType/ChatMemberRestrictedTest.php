@@ -30,11 +30,13 @@ final class ChatMemberRestrictedTest extends TestCase
         $this->assertSame(true, $chatMemberRestricted->can_send_polls);
         $this->assertSame(true, $chatMemberRestricted->can_send_other_messages);
         $this->assertSame(true, $chatMemberRestricted->can_add_web_page_previews);
+        $this->assertSame(true, $chatMemberRestricted->can_edit_tag);
         $this->assertSame(true, $chatMemberRestricted->can_change_info);
         $this->assertSame(true, $chatMemberRestricted->can_invite_users);
         $this->assertSame(true, $chatMemberRestricted->can_pin_messages);
         $this->assertSame(true, $chatMemberRestricted->can_manage_topics);
         $this->assertSame(1700172800, $chatMemberRestricted->until_date);
+        $this->assertSame('VIP', $chatMemberRestricted->tag);
     }
 
     public function testFromArrayToArrayRoundtrip(): void

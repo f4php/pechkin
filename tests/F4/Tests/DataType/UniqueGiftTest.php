@@ -33,7 +33,9 @@ final class UniqueGiftTest extends TestCase
         $this->assertSame('Test Name', $uniqueGift->name);
         $this->assertSame(42, $uniqueGift->number);
         $this->assertSame(true, $uniqueGift->is_premium);
+        $this->assertSame(true, $uniqueGift->is_burned);
         $this->assertSame(true, $uniqueGift->is_from_blockchain);
+        $this->assertSame('rare', $uniqueGift->model->rarity);
     }
 
     public function testFromArrayWithMinimalData(): void
