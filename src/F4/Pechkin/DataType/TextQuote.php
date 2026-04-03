@@ -17,7 +17,7 @@ readonly class TextQuote extends AbstractDataType
         public readonly int $position,
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
-        public readonly ?array $entities = null,
+        public readonly ?array $entities = null, // Special entities that appear in the quote. Currently, only bold, italic, underline, strikethrough, spoiler, custom_emoji, and date_time entities are kept in quotes.
         public readonly ?bool $is_manual = null,
     ) {}
 }

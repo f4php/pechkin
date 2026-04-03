@@ -27,16 +27,22 @@ readonly class Poll extends AbstractDataType
         public readonly bool $is_anonymous,
         public readonly string $type,
         public readonly bool $allows_multiple_answers,
+        public readonly bool $allows_revoting,
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $question_entities = null,
-        public readonly ?int $correct_option_id = null,
+        // public readonly ?int $correct_option_id = null, // support dropped in ver 9.6
+        public readonly ?array $correct_option_ids = null,
         public readonly ?string $explanation = null,
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $explanation_entities = null,
         public readonly ?int $open_period = null,
         public readonly ?int $close_date = null,
+        public readonly ?string $description = null,
+        /** @var MessageEntity[]|null */
+        #[ArrayOf(MessageEntity::class)]
+        public readonly ?array $description_entities = null,
     ) {
         if(!in_array(needle: $this->type, haystack: ['regular', 'quiz'], strict: true)) {
             throw new InvalidArgumentException('Unsupported '.__CLASS__.' type');

@@ -1,5 +1,9 @@
 {
+    "persistent_id": "option_persistent_id_test",
     "text": "Hello, World!",
     "voter_count": 15,
-    "text_entities": null
+    "text_entities": null,
+    "added_by_user": null,
+    "added_by_chat": null,
+    "addition_date": null
 }

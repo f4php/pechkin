@@ -30,6 +30,7 @@ use F4\Pechkin\DataType\{
     InputMedia,
     InputPaidMedia,
     InputProfilePhoto,
+    KeyboardButton,
     InputSticker,
     InputStoryContent,
     LabeledPrice,
@@ -43,6 +44,7 @@ use F4\Pechkin\DataType\{
     PassportElementError,
     Poll,
     PreparedInlineMessage,
+    PreparedKeyboardButton,
     ReactionType,
     ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
@@ -70,13 +72,13 @@ interface ClientInterface
 {
     /**
      * Adds a new sticker to a set created by the bot.
-     * @param int $user_id User identifier of the sticker set owner
+     * @param int|string $user_id User identifier of the sticker set owner
      * @param string $name Sticker set name
      * @param InputSticker $sticker A JSON-serialized object with information about the added sticker
      * @return bool Returns True on success
      */
     public function addStickerToSet(
-        int $user_id,
+        int|string $user_id,
         string $name,
         InputSticker $sticker,
     ): bool;
@@ -129,12 +131,12 @@ interface ClientInterface
     /**
      * Use this method to approve a chat join request.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @return bool Returns True on success
      */
     public function approveChatJoinRequest(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
     ): bool;
 
     /**
@@ -153,14 +155,14 @@ interface ClientInterface
     /**
      * Use this method to ban a user in a group, a supergroup or a channel.
      * @param int|string $chat_id Unique identifier for the target group or username of the target supergroup or channel
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @param int|null $until_date Date when the user will be unbanned; Unix time
      * @param bool|null $revoke_messages Pass True to delete all messages from the chat for the user that is being removed
      * @return bool Returns True on success
      */
     public function banChatMember(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
         ?int $until_date = null,
         ?bool $revoke_messages = null,
     ): bool;
@@ -362,7 +364,7 @@ interface ClientInterface
 
     /**
      * Use this method to create a new sticker set owned by a user.
-     * @param int $user_id User identifier of created sticker set owner
+     * @param int|string $user_id User identifier of created sticker set owner
      * @param string $name Short name of sticker set
      * @param string $title Sticker set title, 1-64 characters
      * @param InputSticker[] $stickers A list of 1-50 initial stickers to be added to the sticker set
@@ -371,7 +373,7 @@ interface ClientInterface
      * @return bool Returns True on success
      */
     public function createNewStickerSet(
-        int $user_id,
+        int|string $user_id,
         string $name,
         string $title,
         array $stickers,
@@ -397,12 +399,12 @@ interface ClientInterface
     /**
      * Use this method to decline a chat join request.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @return bool Returns True on success
      */
     public function declineChatJoinRequest(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
     ): bool;
 
     /**
@@ -733,13 +735,13 @@ interface ClientInterface
 
     /**
      * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars.
-     * @param int $user_id Identifier of the user whose subscription will be edited
+     * @param int|string $user_id Identifier of the user whose subscription will be edited
      * @param string $telegram_payment_charge_id Telegram payment identifier for the subscription
      * @param bool $is_canceled Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable it.
      * @return bool Returns True on success
      */
     public function editUserStarSubscription(
-        int $user_id,
+        int|string $user_id,
         string $telegram_payment_charge_id,
         bool $is_canceled,
     ): bool;
@@ -855,6 +857,24 @@ interface ClientInterface
     ): BusinessConnection;
 
     /**
+     * Returns the bot token of a managed business bot.
+     * @param string $user_id Unique identifier of the business account owner
+     * @return BusinessConnection
+     */
+    public function getManagedBotToken(
+        string $user_id,
+    ): BusinessConnection;
+
+    /**
+     * Replaces the current token of a managed business bot.
+     * @param string $user_id Unique identifier of the business account owner
+     * @return BusinessConnection
+     */
+    public function replaceManagedBotToken(
+        string $user_id,
+    ): BusinessConnection;
+
+    /**
      * Use this method to get up-to-date information about the chat.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup or channel
      * @return ChatFullInfo Returns a ChatFullInfo object on success
@@ -904,12 +924,12 @@ interface ClientInterface
     /**
      * Use this method to get information about a member of a chat.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup or channel
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @return ChatMember Returns a ChatMember object on success
      */
     public function getChatMember(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
     ): ChatMember;
 
     /**
@@ -956,14 +976,14 @@ interface ClientInterface
 
     /**
      * Use this method to get data for high score tables.
-     * @param int $user_id Target user id
+     * @param int|string $user_id Target user id
      * @param int|null $chat_id Required if inline_message_id is not specified. Unique identifier for the target chat
      * @param int|null $message_id Required if inline_message_id is not specified. Identifier of the sent message
      * @param string|null $inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
      * @return GameHighScore[] Returns an Array of GameHighScore objects
      */
     public function getGameHighScores(
-        int $user_id,
+        int|string $user_id,
         ?int $chat_id = null,
         ?int $message_id = null,
         ?string $inline_message_id = null,
@@ -1067,17 +1087,17 @@ interface ClientInterface
     /**
      * Use this method to get the list of boosts added to a chat by a user.
      * @param int|string $chat_id Unique identifier for the chat or username of the channel
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @return UserChatBoosts Returns a UserChatBoosts object
      */
     public function getUserChatBoosts(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
     ): UserChatBoosts;
 
     /**
      * Returns the gifts received and owned by a user.
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @param bool|null $exclude_unlimited Pass True to exclude gifts that can be purchased an unlimited number of times
      * @param bool|null $exclude_limited_upgradable Pass True to exclude limited gifts that can be upgraded
      * @param bool|null $exclude_limited_non_upgradable Pass True to exclude limited gifts that cannot be upgraded
@@ -1088,7 +1108,7 @@ interface ClientInterface
      * @return OwnedGifts Returns an OwnedGifts object
      */
     public function getUserGifts(
-        int $user_id,
+        int|string $user_id,
         ?bool $exclude_unlimited = null,
         ?bool $exclude_limited_upgradable = null,
         ?bool $exclude_limited_non_upgradable = null,
@@ -1113,20 +1133,20 @@ interface ClientInterface
 
     /**
      * Use this method to get a list of profile pictures for a user.
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @param int|null $offset Sequential number of the first photo to be returned
      * @param int|null $limit Limits the number of photos to be retrieved. Values between 1-100 are accepted
      * @return UserProfilePhotos Returns a UserProfilePhotos object
      */
     public function getUserProfilePhotos(
-        int $user_id,
+        int|string $user_id,
         ?int $offset = null,
         ?int $limit = null,
     ): UserProfilePhotos;
 
     /**
      * Gifts a Telegram Premium subscription to the given user.
-     * @param int $user_id Unique identifier of the target user that will receive the gift
+     * @param int|string $user_id Unique identifier of the target user that will receive the gift
      * @param int $month_count Number of months the Telegram Premium subscription will be active for the user; must be one of 3, 6, or 12
      * @param int $star_count Number of Telegram Stars to pay for the gift
      * @param string|null $text Text that will be shown along with the service message about the subscription
@@ -1135,7 +1155,7 @@ interface ClientInterface
      * @return bool Returns True on success
      */
     public function giftPremiumSubscription(
-        int $user_id,
+        int|string $user_id,
         int $month_count,
         int $star_count,
         ?string $text = null,
@@ -1210,7 +1230,7 @@ interface ClientInterface
     /**
      * Use this method to promote or demote a user in a supergroup or a channel.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @param bool|null $is_anonymous Pass True if the administrator's presence in the chat is hidden
      * @param bool|null $can_manage_chat Pass True if the administrator can access the chat event log, boost list in channels, etc.
      * @param bool|null $can_delete_messages Pass True if the administrator can delete messages of other users
@@ -1286,21 +1306,21 @@ interface ClientInterface
 
     /**
      * Removes verification from a user who is currently verified on behalf of the organization represented by the bot.
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @return bool Returns True on success
      */
     public function removeUserVerification(
-        int $user_id,
+        int|string $user_id,
     ): bool;
 
     /**
      * Refunds a successful payment in Telegram Stars.
-     * @param int $user_id Identifier of the user whose payment will be refunded
+     * @param int|string $user_id Identifier of the user whose payment will be refunded
      * @param string $telegram_payment_charge_id Telegram payment identifier for the payment
      * @return bool Returns True on success
      */
     public function refundStarPayment(
-        int $user_id,
+        int|string $user_id,
         string $telegram_payment_charge_id,
     ): bool;
 
@@ -1326,14 +1346,14 @@ interface ClientInterface
 
     /**
      * Use this method to replace an existing sticker in a sticker set with a new one.
-     * @param int $user_id User identifier of the sticker set owner
+     * @param int|string $user_id User identifier of the sticker set owner
      * @param string $name Sticker set name
      * @param string $old_sticker File identifier of the replaced sticker
      * @param InputSticker $sticker A JSON-serialized object with information about the added sticker
      * @return bool Returns True on success
      */
     public function replaceStickerInSet(
-        int $user_id,
+        int|string $user_id,
         string $name,
         string $old_sticker,
         InputSticker $sticker,
@@ -1361,7 +1381,7 @@ interface ClientInterface
     /**
      * Use this method to restrict a user in a supergroup.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @param ChatPermissions $permissions A JSON-serialized object for new user permissions
      * @param bool|null $use_independent_chat_permissions Pass True if chat permissions are set independently
      * @param int|null $until_date Date when restrictions will be lifted for the user; Unix time
@@ -1369,7 +1389,7 @@ interface ClientInterface
      */
     public function restrictChatMember(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
         ChatPermissions $permissions,
         ?bool $use_independent_chat_permissions = null,
         ?int $until_date = null,
@@ -1657,7 +1677,7 @@ interface ClientInterface
     /**
      * Sends a gift to the given user or channel chat.
      * @param string $gift_id Identifier of the gift to send
-     * @param int|null $user_id Unique identifier of the target user that will receive the gift
+     * @param int|string|null $user_id Unique identifier of the target user that will receive the gift
      * @param int|string|null $chat_id Unique identifier for the target chat or username of the target channel
      * @param bool|null $pay_for_upgrade Pass True to pay for the gift upgrade from the bot's balance
      * @param string|null $text Text that will be shown along with the gift
@@ -1667,7 +1687,7 @@ interface ClientInterface
      */
     public function sendGift(
         string $gift_id,
-        ?int $user_id = null,
+        null|int|string $user_id = null,
         int|string|null $chat_id = null,
         ?bool $pay_for_upgrade = null,
         ?string $text = null,
@@ -1962,13 +1982,20 @@ interface ClientInterface
      * @param bool|null $is_anonymous True, if the poll needs to be anonymous
      * @param string|null $type Poll type, "quiz" or "regular"
      * @param bool|null $allows_multiple_answers True, if the poll allows multiple answers
-     * @param int|null $correct_option_id 0-based identifier of the correct answer option
+     * @param bool|null $allows_revoting True, if the poll allows retraction of user's choices
+     * @param bool|null $shuffle_options True, if the poll options should be shuffled randomly
+     * @param bool|null $allow_adding_options True, if the poll allows users to add new options
+     * @param bool|null $hide_results_until_closes True, if the quiz results should be hidden while the poll is running
+     * @param int[]|null $correct_option_ids 0-based identifiers of the correct answer options
      * @param string|null $explanation Text that is shown when a user chooses an incorrect answer
      * @param string|null $explanation_parse_mode Mode for parsing entities in the explanation
      * @param MessageEntity[]|null $explanation_entities List of special entities that appear in the poll explanation
      * @param int|null $open_period Amount of time in seconds the poll will be active after creation
      * @param int|null $close_date Point in time (Unix timestamp) when the poll will be automatically closed
      * @param bool|null $is_closed Pass True if the poll needs to be immediately closed
+     * @param string|null $description Description for the poll shown in the preview
+     * @param string|null $description_parse_mode Mode for parsing entities in the description
+     * @param MessageEntity[]|null $description_parse_entities List of special entities that appear in the description
      * @param bool|null $disable_notification Sends the message silently
      * @param bool|null $protect_content Protects the contents of the sent message from forwarding and saving
      * @param bool|null $allow_paid_broadcast Pass True to allow up to 1000 messages per second
@@ -1988,13 +2015,20 @@ interface ClientInterface
         ?bool $is_anonymous = null,
         ?string $type = null,
         ?bool $allows_multiple_answers = null,
-        ?int $correct_option_id = null,
+        ?bool $allows_revoting = null,
+        ?bool $shuffle_options = null,
+        ?bool $allow_adding_options = null,
+        ?bool $hide_results_until_closes = null,
+        ?array $correct_option_ids = null,
         ?string $explanation = null,
         ?string $explanation_parse_mode = null,
         ?array $explanation_entities = null,
         ?int $open_period = null,
         ?int $close_date = null,
         ?bool $is_closed = null,
+        ?string $description = null,
+        ?string $description_parse_mode = null,
+        ?array $description_parse_entities = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
         ?bool $allow_paid_broadcast = null,
@@ -2276,13 +2310,13 @@ interface ClientInterface
     /**
      * Use this method to set a custom title for an administrator in a supergroup promoted by the bot.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @param string $custom_title New custom title for the administrator; 0-16 characters, emoji are not allowed
      * @return bool Returns True on success
      */
     public function setChatAdministratorCustomTitle(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
         string $custom_title,
     ): bool;
 
@@ -2317,7 +2351,7 @@ interface ClientInterface
      * @return bool Returns True on success
      */
     public function setChatMenuButton(
-        ?int $chat_id = null,
+        null|int|string $chat_id = null,
         ?MenuButton $menu_button = null,
     ): bool;
 
@@ -2380,7 +2414,7 @@ interface ClientInterface
 
     /**
      * Use this method to set the score of the specified user in a game message.
-     * @param int $user_id User identifier
+     * @param int|string $user_id User identifier
      * @param int $score New score, must be non-negative
      * @param bool|null $force Pass True if the high score is allowed to decrease
      * @param bool|null $disable_edit_message Pass True if the game message should not be automatically edited to include the current scoreboard
@@ -2390,7 +2424,7 @@ interface ClientInterface
      * @return Message|bool Returns the edited Message if the message is not an inline message, otherwise returns True
      */
     public function setGameScore(
-        int $user_id,
+        int|string $user_id,
         int $score,
         ?bool $force = null,
         ?bool $disable_edit_message = null,
@@ -2488,12 +2522,12 @@ interface ClientInterface
 
     /**
      * Informs a user that some of the Telegram Passport elements they provided contains errors.
-     * @param int $user_id User identifier
+     * @param int|string $user_id User identifier
      * @param PassportElementError[] $errors A list describing the errors
      * @return bool Returns True on success
      */
     public function setPassportDataErrors(
-        int $user_id,
+        int|string $user_id,
         array $errors,
     ): bool;
 
@@ -2544,14 +2578,14 @@ interface ClientInterface
     /**
      * Use this method to set the thumbnail of a regular or mask sticker set.
      * @param string $name Sticker set name
-     * @param int $user_id User identifier of the sticker set owner
+     * @param int|string $user_id User identifier of the sticker set owner
      * @param string $format Format of the thumbnail
      * @param InputFile|string|null $thumbnail A .WEBP or .PNG image with the thumbnail
      * @return bool Returns True on success
      */
     public function setStickerSetThumbnail(
         string $name,
-        int $user_id,
+        int|string $user_id,
         string $format,
         InputFile|string|null $thumbnail = null,
     ): bool;
@@ -2569,13 +2603,13 @@ interface ClientInterface
 
     /**
      * Changes the emoji status for a given user.
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @param string|null $emoji_status_custom_emoji_id Custom emoji identifier of the emoji status to set
      * @param int|null $emoji_status_expiration_date Expiration date of the emoji status, if any
      * @return bool Returns True on success
      */
     public function setUserEmojiStatus(
-        int $user_id,
+        int|string $user_id,
         ?string $emoji_status_custom_emoji_id = null,
         ?int $emoji_status_expiration_date = null,
     ): bool;
@@ -2641,13 +2675,13 @@ interface ClientInterface
     /**
      * Use this method to unban a previously banned user in a supergroup or channel.
      * @param int|string $chat_id Unique identifier for the target group or username of the target supergroup or channel
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @param bool|null $only_if_banned Do nothing if the user is not banned
      * @return bool Returns True on success
      */
     public function unbanChatMember(
         int|string $chat_id,
-        int $user_id,
+        int|string $user_id,
         ?bool $only_if_banned = null,
     ): bool;
 
@@ -2730,13 +2764,13 @@ interface ClientInterface
 
     /**
      * Use this method to upload a file with a sticker for later use in createNewStickerSet and addStickerToSet.
-     * @param int $user_id User identifier of sticker file owner
+     * @param int|string $user_id User identifier of sticker file owner
      * @param InputFile $sticker A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format
      * @param string $sticker_format Format of the sticker
      * @return File Returns the uploaded File on success
      */
     public function uploadStickerFile(
-        int $user_id,
+        int|string $user_id,
         InputFile $sticker,
         string $sticker_format,
     ): File;
@@ -2754,12 +2788,12 @@ interface ClientInterface
 
     /**
      * Verifies a user on behalf of the organization represented by the bot.
-     * @param int $user_id Unique identifier of the target user
+     * @param int|string $user_id Unique identifier of the target user
      * @param string|null $custom_description Custom description for the verification
      * @return bool Returns True on success
      */
     public function verifyUser(
-        int $user_id,
+        int|string $user_id,
         ?string $custom_description = null,
     ): bool;
 
@@ -2832,7 +2866,7 @@ interface ClientInterface
 
     /**
      * Stores a message that can be sent by a user of a Mini App.
-     * @param int $user_id Unique identifier of the target user that can use the prepared message
+     * @param int|string $user_id Unique identifier of the target user that can use the prepared message
      * @param InlineQueryResult $result A JSON-serialized object describing the message to be sent
      * @param bool|null $allow_user_chats Pass True if the message can be sent to private chats with users
      * @param bool|null $allow_bot_chats Pass True if the message can be sent to private chats with bots
@@ -2841,12 +2875,23 @@ interface ClientInterface
      * @return PreparedInlineMessage Returns a PreparedInlineMessage object on success
      */
     public function savePreparedInlineMessage(
-        int $user_id,
+        int|string $user_id,
         InlineQueryResult $result,
         ?bool $allow_user_chats = null,
         ?bool $allow_bot_chats = null,
         ?bool $allow_group_chats = null,
         ?bool $allow_channel_chats = null,
     ): PreparedInlineMessage;
+
+    /**
+     * Stores a keyboard button that can be used by a user of a Mini App.
+     * @param int|string $user_id Unique identifier of the target user that can use the prepared button
+     * @param KeyboardButton $button A JSON-serialized object describing the button to be stored
+     * @return PreparedKeyboardButton Returns a PreparedKeyboardButton object on success
+     */
+    public function savePreparedKeyboardButton(
+        int|string $user_id,
+        KeyboardButton $button,
+    ): PreparedKeyboardButton;
 
 }

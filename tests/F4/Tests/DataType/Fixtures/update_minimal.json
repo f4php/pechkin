@@ -22,5 +22,6 @@
     "chat_member": null,
     "chat_join_request": null,
     "chat_boost": null,
-    "removed_chat_boost": null
+    "removed_chat_boost": null,
+    "managed_bot": null
 }

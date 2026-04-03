@@ -9,6 +9,7 @@ use F4\Pechkin\DataType\{
     KeyboardButtonPollType,
     KeyboardButtonRequestChat,
     KeyboardButtonRequestUsers,
+    KeyboardButtonRequestManagedBot,
     WebAppInfo,
 };
 
@@ -20,6 +21,7 @@ readonly class KeyboardButton extends AbstractDataType
         public readonly ?string $style = null, // Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used.
         public readonly ?KeyboardButtonRequestUsers $request_users = null,
         public readonly ?KeyboardButtonRequestChat $request_chat = null,
+        public readonly ?KeyboardButtonRequestManagedBot $request_managed_bot = null,
         public readonly ?bool $request_contact = null,
         public readonly ?bool $request_location = null,
         public readonly ?KeyboardButtonPollType $request_poll = null,

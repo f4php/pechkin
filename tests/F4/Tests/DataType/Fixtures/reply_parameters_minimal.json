@@ -6,5 +6,6 @@
     "quote_parse_mode": null,
     "quote_entities": null,
     "quote_position": null,
-    "checklist_task_id": null
+    "checklist_task_id": null,
+    "poll_option_id": null
 }

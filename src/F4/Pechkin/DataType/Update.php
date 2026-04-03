@@ -16,6 +16,7 @@ use F4\Pechkin\DataType\{
     ChatMemberUpdated,
     ChosenInlineResult,
     InlineQuery,
+    ManagedBotUpdated,
     Message,
     MessageReactionCountUpdated,
     MessageReactionUpdated,
@@ -58,6 +59,7 @@ readonly class Update extends AbstractDataType
         public readonly ?ChatJoinRequest $chat_join_request = null,
         public readonly ?ChatBoostUpdated $chat_boost = null,
         public readonly ?ChatBoostRemoved $removed_chat_boost = null,
+        public readonly ?ManagedBotUpdated $managed_bot = null,
     ) {
         if (1 < count(array_filter([
             $this->message,

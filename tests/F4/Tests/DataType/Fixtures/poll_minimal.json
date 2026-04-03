@@ -3,9 +3,13 @@
     "question": "What is the answer?",
     "options": [
         {
+            "persistent_id": "option_persistent_id_test",
             "text": "Hello, World!",
             "voter_count": 15,
-            "text_entities": null
+            "text_entities": null,
+            "added_by_user": null,
+            "added_by_chat": null,
+            "addition_date": null
         }
     ],
     "total_voter_count": 42,
@@ -13,10 +17,13 @@
     "is_anonymous": true,
     "type": "regular",
     "allows_multiple_answers": false,
+    "allows_revoting": false,
     "question_entities": null,
-    "correct_option_id": null,
+    "correct_option_ids": null,
     "explanation": null,
     "explanation_entities": null,
     "open_period": null,
-    "close_date": null
+    "close_date": null,
+    "description": null,
+    "description_entities": null
 }

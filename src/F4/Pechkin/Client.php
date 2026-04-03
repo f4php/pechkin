@@ -38,6 +38,7 @@ use F4\Pechkin\DataType\{
     InputProfilePhoto,
     InputSticker,
     InputStoryContent,
+    KeyboardButton,
     LabeledPrice,
     LinkPreviewOptions,
     MaskPosition,
@@ -49,6 +50,7 @@ use F4\Pechkin\DataType\{
     PassportElementError,
     Poll,
     PreparedInlineMessage,
+    PreparedKeyboardButton,
     ReactionType,
     ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
@@ -71,14 +73,14 @@ use F4\Pechkin\DataType\{
 };
 
 use function
-array_map,
-get_defined_vars,
-is_bool
+    array_map,
+    get_defined_vars,
+    is_bool
 ;
 
 class Client implements ClientInterface
 {
-    protected const string API_VERSION = '9.5';
+    protected const string API_VERSION = '9.6';
     protected const int REQUEST_TIMEOUT = 60;
 
     protected ApiClient $apiClient;
@@ -553,6 +555,16 @@ class Client implements ClientInterface
     ): BusinessConnection {
         return BusinessConnection::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
+    public function getManagedBotToken(
+        string $user_id,
+    ): BusinessConnection {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function replaceManagedBotToken(
+        string $user_id,
+    ): BusinessConnection {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
     public function getChat(
         int|string $chat_id,
     ): ChatFullInfo {
@@ -730,7 +742,7 @@ class Client implements ClientInterface
         int $star_count,
         ?string $text = null,
         ?string $text_parse_mode = null,
-        ?array $text_entities = null,
+        ?array $text_entities = null, // It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom_emoji”, and “date_time” are ignored.
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -874,6 +886,12 @@ class Client implements ClientInterface
         ?bool $allow_channel_chats = null,
     ): PreparedInlineMessage {
         return PreparedInlineMessage::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+    }
+    public function savePreparedKeyboardButton(
+        int|string $user_id,
+        KeyboardButton $button,
+    ): PreparedKeyboardButton {
+        return PreparedKeyboardButton::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendAnimation(
         int|string $chat_id,
@@ -1020,7 +1038,7 @@ class Client implements ClientInterface
         ?bool $pay_for_upgrade = null,
         ?string $text = null,
         ?string $text_parse_mode = null,
-        ?array $text_entities = null,
+        ?array $text_entities = null, // It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, “custom_emoji”, and “date_time” are ignored.
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -1179,13 +1197,21 @@ class Client implements ClientInterface
         ?bool $is_anonymous = null,
         ?string $type = null,
         ?bool $allows_multiple_answers = null,
-        ?int $correct_option_id = null,
+        ?bool $allows_revoting = null,
+        ?bool $shuffle_options = null,
+        ?bool $allow_adding_options = null,
+        ?bool $hide_results_until_closes = null,
+        // ?int $correct_option_id = null, // support dropped in ver 9.6
+        ?array $correct_option_ids = null,
         ?string $explanation = null,
         ?string $explanation_parse_mode = null,
         ?array $explanation_entities = null,
         ?int $open_period = null,
         ?int $close_date = null,
         ?bool $is_closed = null,
+        ?string $description = null,
+        ?string $description_parse_mode = null,
+        ?array $description_parse_entities = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
         ?bool $allow_paid_broadcast = null,

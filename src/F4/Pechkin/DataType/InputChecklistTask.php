@@ -18,6 +18,6 @@ readonly class InputChecklistTask extends AbstractDataType
         public readonly ?string $parse_mode = null,
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
-        public readonly ?array $text_entities = null,
+        public readonly ?array $text_entities = null, // List of special entities that appear in the text, which can be specified instead of parse_mode. Currently, only bold, italic, underline, strikethrough, spoiler, custom_emoji, and date_time entities are allowed.
     ) {}
 }

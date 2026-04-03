@@ -67,5 +67,6 @@
         "url": "https://example.com"
     },
     "icon_custom_emoji_id": "emoji_456",
-    "style": "primary"
+    "style": "primary",
+    "request_managed_bot": null
 }

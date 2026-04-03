@@ -13,5 +13,6 @@
     "can_connect_to_business": null,
     "has_main_web_app": null,
     "has_topics_enabled": null,
-    "allows_users_to_create_topics": null
+    "allows_users_to_create_topics": null,
+    "can_manage_bots": null
 }

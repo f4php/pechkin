@@ -32,7 +32,8 @@
                 "can_connect_to_business": true,
                 "has_main_web_app": true,
                 "has_topics_enabled": true,
-                "allows_users_to_create_topics": true
+                "allows_users_to_create_topics": true,
+                "can_manage_bots": true
             },
             "language": "test_string",
             "custom_emoji_id": "emoji_456"

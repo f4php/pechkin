@@ -18,6 +18,8 @@ readonly class PollAnswer extends AbstractDataType
         /** @var int[] */
         #[ArrayOf('int')]
         public readonly array $option_ids,
+        #[ArrayOf('string')]
+        public readonly array $option_persistent_ids,
         public readonly ?Chat $voter_chat = null,
         public readonly ?User $user = null,
     ) {}
