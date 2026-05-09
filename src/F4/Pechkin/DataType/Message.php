@@ -39,6 +39,7 @@ use F4\Pechkin\DataType\{
     InlineKeyboardMarkup,
     Invoice,
     LinkPreviewOptions,
+    LivePhoto,
     Location,
     ManagedBotCreated,
     MaybeInaccessibleMessage,
@@ -92,6 +93,7 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?Chat $sender_chat = null,
         public readonly ?int $sender_boost_count = null,
         public readonly ?User $sender_business_bot = null,
+        public readonly ?string $guest_query_id = null,
         public readonly ?string $sender_tag = null,
         public readonly ?string $business_connection_id = null,
         public readonly ?MessageOrigin $forward_origin = null,
@@ -104,6 +106,8 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?int $reply_to_checklist_task_id = null,
         public readonly ?string $reply_to_poll_option_id = null,
         public readonly ?User $via_bot = null,
+        public readonly ?User $guest_bot_caller_user = null,
+        public readonly ?Chat $guest_bot_caller_chat = null,
         public readonly ?int $edit_date = null,
         public readonly ?bool $has_protected_content = null,
         public readonly ?bool $is_from_offline = null,
@@ -121,6 +125,7 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?Animation $animation = null,
         public readonly ?Audio $audio = null,
         public readonly ?Document $document = null,
+        public readonly ?LivePhoto $live_photo = null,
         public readonly ?PaidMediaInfo $paid_media = null,
         /** @var PhotoSize[]|null */
         #[ArrayOf(PhotoSize::class)]

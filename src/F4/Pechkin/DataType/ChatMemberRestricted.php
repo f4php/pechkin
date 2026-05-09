@@ -26,6 +26,7 @@ readonly class ChatMemberRestricted extends ChatMember
         public readonly bool $can_send_polls,
         public readonly bool $can_send_other_messages,
         public readonly bool $can_add_web_page_previews,
+        public readonly bool $can_react_to_messages,
         public readonly bool $can_edit_tag,
         public readonly bool $can_change_info,
         public readonly bool $can_invite_users,

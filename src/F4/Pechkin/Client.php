@@ -12,6 +12,7 @@ use F4\Pechkin\{
 };
 use F4\Pechkin\DataType\{
     AcceptedGiftTypes,
+    BotAccessSettings,
     BotCommand,
     BotCommandScope,
     BotDescription,
@@ -35,6 +36,7 @@ use F4\Pechkin\DataType\{
     InputFile,
     InputMedia,
     InputPaidMedia,
+    InputPollMedia,
     InputProfilePhoto,
     InputSticker,
     InputStoryContent,
@@ -55,6 +57,7 @@ use F4\Pechkin\DataType\{
     ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
     ReplyParameters,
+    SentGuestMessage,
     SentWebAppMessage,
     ShippingOption,
     StarAmount,
@@ -80,7 +83,7 @@ use function
 
 class Client implements ClientInterface
 {
-    protected const string API_VERSION = '9.6';
+    protected const string API_VERSION = '10';
     protected const int REQUEST_TIMEOUT = 60;
 
     protected ApiClient $apiClient;
@@ -330,6 +333,21 @@ class Client implements ClientInterface
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
+    public function deleteMessageReaction(
+        int|string $chat_id,
+        int $message_id,
+        int|string|null $user_id = null,
+        int|string|null $actor_chat_id = null,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function deleteAllMessageReactions(
+        int|string $chat_id,
+        int|string|null $user_id = null,
+        int|string|null $actor_chat_id = null,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
     public function deleteMyCommands(
         ?BotCommandScope $scope = null,
         ?string $language_code = null,
@@ -572,6 +590,7 @@ class Client implements ClientInterface
     }
     public function getChatAdministrators(
         int|string $chat_id,
+        ?bool $return_bots = null,
     ): array {
         return array_map(
             array: $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()),
@@ -699,6 +718,12 @@ class Client implements ClientInterface
             array: $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()),
             callback: Update::fromArray(...),
         );
+    }
+    public function answerGuestQuery(
+        int|string $guest_query_id,
+        InlineQueryResult $result,
+    ): SentGuestMessage {
+        return SentGuestMessage::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function getUserChatBoosts(
         int|string $chat_id,
@@ -1186,6 +1211,28 @@ class Client implements ClientInterface
     ): Message {
         return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
+    public function sendLivePhoto(
+        int|string $chat_id,
+        InputFile|string $photo,
+        InputFile|string $live_photo,
+        ?string $business_connection_id = null,
+        ?int $message_thread_id = null,
+        ?int $direct_messages_topic_id = null,
+        ?string $caption = null,
+        ?string $parse_mode = null,
+        ?array $caption_entities = null,
+        ?bool $show_caption_above_media = null,
+        ?bool $has_spoiler = null,
+        ?bool $disable_notification = null,
+        ?bool $protect_content = null,
+        ?bool $allow_paid_broadcast = null,
+        ?string $message_effect_id = null,
+        ?SuggestedPostParameters $suggested_post_parameters = null,
+        ?ReplyParameters $reply_parameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
+    ): Message {
+        return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
+    }
     public function sendPoll(
         int|string $chat_id,
         string $question,
@@ -1201,17 +1248,21 @@ class Client implements ClientInterface
         ?bool $shuffle_options = null,
         ?bool $allow_adding_options = null,
         ?bool $hide_results_until_closes = null,
+        ?bool $members_only = null,
+        ?array $country_codes = null,
         // ?int $correct_option_id = null, // support dropped in ver 9.6
         ?array $correct_option_ids = null,
         ?string $explanation = null,
         ?string $explanation_parse_mode = null,
         ?array $explanation_entities = null,
+        ?InputPollMedia $explanation_media = null,
         ?int $open_period = null,
         ?int $close_date = null,
         ?bool $is_closed = null,
         ?string $description = null,
         ?string $description_parse_mode = null,
-        ?array $description_parse_entities = null,
+        ?array $description_entities = null,
+        ?InputPollMedia $media = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
         ?bool $allow_paid_broadcast = null,
@@ -1400,6 +1451,15 @@ class Client implements ClientInterface
     ): bool {
         return $this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars());
     }
+    public function getUserPersonalChatMessages(
+        int|string $user_id,
+        int $limit,
+    ): array {
+        return array_map(
+            array: $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()),
+            callback: Message::fromArray(...),
+        );
+    }
     public function setChatStickerSet(
         int|string $chat_id,
         string $sticker_set_name,
@@ -1433,11 +1493,22 @@ class Client implements ClientInterface
         };
     }
     public function setMessageReaction(
-
         int|string $chat_id,
         int $message_id,
         ?array $reaction = null,
         ?bool $is_big = null,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function getManagedBotAccessSettings(
+        int|string $user_id,
+    ): BotAccessSettings {
+        return BotAccessSettings::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+    }
+    public function setManagedBotAccessSettings(
+        int|string $user_id,
+        bool $is_access_restricted,
+        ?array $added_user_ids = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }

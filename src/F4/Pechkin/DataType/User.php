@@ -19,6 +19,7 @@ readonly class User extends AbstractDataType
         public readonly ?bool $added_to_attachment_menu = null,
         public readonly ?bool $can_join_groups = null,
         public readonly ?bool $can_read_all_group_messages = null,
+        public readonly ?bool $supports_guest_queries = null,
         public readonly ?bool $supports_inline_queries = null,
         public readonly ?bool $can_connect_to_business = null,
         public readonly ?bool $has_main_web_app = null,

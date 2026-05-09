@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     Chat,
+    PollMedia,
     MessageEntity,
     User,
     Attribute\ArrayOf,
@@ -21,6 +22,7 @@ readonly class PollOption extends AbstractDataType
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $text_entities = null,
+        public readonly ?PollMedia $media = null,
         public readonly ?User $added_by_user = null,
         public readonly ?Chat $added_by_chat = null,
         public readonly ?int $addition_date = null,

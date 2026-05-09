@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     MessageEntity,
+    PollMedia,
     PollOption,
     Attribute\ArrayOf,
 };
@@ -28,6 +29,8 @@ readonly class Poll extends AbstractDataType
         public readonly string $type,
         public readonly bool $allows_multiple_answers,
         public readonly bool $allows_revoting,
+        public readonly bool $members_only,
+        public readonly ?array $country_codes = null,
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $question_entities = null,
@@ -37,12 +40,14 @@ readonly class Poll extends AbstractDataType
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $explanation_entities = null,
+        public readonly ?PollMedia $explanation_media = null,
         public readonly ?int $open_period = null,
         public readonly ?int $close_date = null,
         public readonly ?string $description = null,
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $description_entities = null,
+        public readonly ?PollMedia $media = null,
     ) {
         if(!in_array(needle: $this->type, haystack: ['regular', 'quiz'], strict: true)) {
             throw new InvalidArgumentException('Unsupported '.__CLASS__.' type');

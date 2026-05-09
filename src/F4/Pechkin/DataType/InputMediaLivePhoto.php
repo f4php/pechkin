@@ -1,0 +1,29 @@
+<?php
+
+declare(strict_types=1);
+
+namespace F4\Pechkin\DataType;
+
+use F4\Pechkin\DataType\{
+    InputMedia,
+    MessageEntity,
+    Attribute\ArrayOf,
+};
+
+readonly class InputMediaLivePhoto extends InputMedia
+{
+    public readonly string $type;
+    public function __construct(
+        public readonly string $media,
+        public readonly string $photo,
+        public readonly ?string $caption = null,
+        public readonly ?string $parse_mode = null,
+        /** @var MessageEntity[]|null */
+        #[ArrayOf(MessageEntity::class)]
+        public readonly ?array $caption_entities = null,
+        public readonly ?bool $show_caption_above_media = null,
+        public readonly ?bool $has_spoiler = null,
+    ) {
+        $this->type = 'live_photo';
+    }
+}

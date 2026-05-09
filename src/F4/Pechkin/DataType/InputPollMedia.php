@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace F4\Pechkin\DataType;
 
 use F4\Pechkin\DataType\{
-    AbstractDataType,
+    InputMedia,
     InputMediaAnimation,
     InputMediaAudio,
     InputMediaDocument,
-    InputMediaLivePhoto,
     InputMediaLocation,
     InputMediaPhoto,
-    InputMediaSticker,
+    // InputMediaSticker,
     InputMediaVenue,
     InputMediaVideo,
     Attribute\Polymorphic,
@@ -25,11 +24,11 @@ use F4\Pechkin\DataType\{
     'live_photo' => InputMediaLivePhoto::class,
     'location' => InputMediaLocation::class,
     'photo' => InputMediaPhoto::class,
-    'sticker' => InputMediaSticker::class,
+    // 'sticker' => InputMediaSticker::class,
     'venue' => InputMediaVenue::class,
     'video' => InputMediaVideo::class,
 ])]
-abstract readonly class InputMedia extends AbstractDataType
+abstract readonly class InputPollMedia extends InputMedia
 {
     public readonly string $type;
 }

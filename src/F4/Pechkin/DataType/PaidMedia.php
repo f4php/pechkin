@@ -6,6 +6,7 @@ namespace F4\Pechkin\DataType;
 
 use F4\Pechkin\DataType\{
     AbstractDataType,
+    PaidMediaLivePhoto,
     PaidMediaPhoto,
     PaidMediaPreview,
     PaidMediaVideo,
@@ -13,6 +14,7 @@ use F4\Pechkin\DataType\{
 };
 
 #[Polymorphic([
+    'live_photo' => PaidMediaLivePhoto::class,
     'photo' => PaidMediaPhoto::class,
     'preview' => PaidMediaPreview::class,
     'video' => PaidMediaVideo::class,

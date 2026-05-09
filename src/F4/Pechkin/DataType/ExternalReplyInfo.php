@@ -18,6 +18,7 @@ use F4\Pechkin\DataType\{
     GiveawayWinners,
     Invoice,
     LinkPreviewOptions,
+    LivePhoto,
     Location,
     MessageOrigin,
     PaidMediaInfo,
@@ -42,6 +43,7 @@ readonly class ExternalReplyInfo extends AbstractDataType
         public readonly ?Animation $animation = null,
         public readonly ?Audio $audio = null,
         public readonly ?Document $document = null,
+        public readonly ?LivePhoto $live_photo = null,
         public readonly ?PaidMediaInfo $paid_media = null,
         /** @var PhotoSize[]|null */
         #[ArrayOf(PhotoSize::class)]
