@@ -1,0 +1,19 @@
+{
+    "animation": null,
+    "audio": null,
+    "document": null,
+    "live_photo": null,
+    "location": null,
+    "photo": [
+        {
+            "file_id": "BAACAgIAAxkBAAI",
+            "file_unique_id": "AgADBAADZqc",
+            "width": 640,
+            "height": 480,
+            "file_size": null
+        }
+    ],
+    "sticker": null,
+    "venue": null,
+    "video": null
+}

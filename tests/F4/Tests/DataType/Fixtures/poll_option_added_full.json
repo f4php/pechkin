@@ -1,0 +1,29 @@
+{
+    "option_persistent_id": "abc123",
+    "option_text": "New option text",
+    "poll_message": {
+        "chat": {
+            "id": "123456789",
+            "type": "private",
+            "title": "Test Title",
+            "username": "johndoe",
+            "first_name": "John",
+            "last_name": "Doe",
+            "is_forum": false,
+            "is_direct_messages": false
+        },
+        "message_id": "42",
+        "date": 0
+    },
+    "option_text_entities": [
+        {
+            "type": "bold",
+            "offset": 0,
+            "length": 15,
+            "url": null,
+            "user": null,
+            "language": null,
+            "custom_emoji_id": null
+        }
+    ]
+}

@@ -39,4 +39,11 @@ final class InputPollOptionTest extends TestCase
         $inputPollOption = InputPollOption::fromArray($data);
         $this->assertEquals($data, $inputPollOption->toArray());
     }
+
+    public function testMediaIsNullWhenNotProvided(): void
+    {
+        $data = $this->loadFixture('input_poll_option_minimal.json');
+        $option = InputPollOption::fromArray($data);
+        $this->assertNull($option->media);
+    }
 }

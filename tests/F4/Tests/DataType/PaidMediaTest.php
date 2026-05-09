@@ -7,6 +7,7 @@ namespace F4\Tests\DataType;
 use F4\Tests\DataType\FixtureAwareTrait;
 use PHPUnit\Framework\TestCase;
 use F4\Pechkin\DataType\PaidMedia;
+use F4\Pechkin\DataType\PaidMediaLivePhoto;
 use F4\Pechkin\DataType\PaidMediaPhoto;
 use F4\Pechkin\DataType\PaidMediaVideo;
 use F4\Pechkin\DataType\PaidMediaPreview;
@@ -43,5 +44,15 @@ final class PaidMediaTest extends TestCase
         ];
         $result = PaidMedia::fromArray($data);
         $this->assertInstanceOf(PaidMediaPreview::class, $result);
+    }
+
+    public function testFromArrayWithLivePhotoType(): void
+    {
+        $data = [
+            ...$this->loadFixture('paid_media_live_photo_full.json'),
+            'type' => 'live_photo',
+        ];
+        $result = PaidMedia::fromArray($data);
+        $this->assertInstanceOf(PaidMediaLivePhoto::class, $result);
     }
 }
