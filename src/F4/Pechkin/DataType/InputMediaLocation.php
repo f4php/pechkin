@@ -14,9 +14,9 @@ readonly class InputMediaLocation extends InputMedia
 {
     public readonly string $type;
     public function __construct(
-        float $latitude,
-        float $longitude,
-        ?float $horizontal_accuracy = null,
+        public readonly float $latitude,
+        public readonly float $longitude,
+        public readonly ?float $horizontal_accuracy = null,
     ) {
         $this->type = 'location';
     }

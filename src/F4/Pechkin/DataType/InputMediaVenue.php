@@ -12,14 +12,14 @@ readonly class InputMediaVenue extends InputMedia
 {
     public readonly string $type;
     public function __construct(
-        float $latitude,
-        float $longitude,
-        string $title,
-        string $address,
-        ?string $foursquare_id = null,
-        ?string $foursquare_type = null,
-        ?string $google_place_id = null,
-        ?string $google_place_type = null,
+        public readonly float $latitude,
+        public readonly float $longitude,
+        public readonly string $title,
+        public readonly string $address,
+        public readonly ?string $foursquare_id = null,
+        public readonly ?string $foursquare_type = null,
+        public readonly ?string $google_place_id = null,
+        public readonly ?string $google_place_type = null,
     ) {
         $this->type = 'venue';
     }

@@ -13,6 +13,7 @@
             "added_to_attachment_menu": true,
             "can_join_groups": true,
             "can_read_all_group_messages": true,
+            "supports_guest_queries": null,
             "supports_inline_queries": true,
             "can_connect_to_business": true,
             "has_main_web_app": true,
@@ -225,6 +226,7 @@
                             "added_to_attachment_menu": true,
                             "can_join_groups": true,
                             "can_read_all_group_messages": true,
+                            "supports_guest_queries": null,
                             "supports_inline_queries": true,
                             "can_connect_to_business": true,
                             "has_main_web_app": true,
@@ -247,6 +249,7 @@
                     "added_to_attachment_menu": true,
                     "can_join_groups": true,
                     "can_read_all_group_messages": true,
+                    "supports_guest_queries": null,
                     "supports_inline_queries": true,
                     "can_connect_to_business": true,
                     "has_main_web_app": true,
@@ -284,6 +287,7 @@
                     "added_to_attachment_menu": true,
                     "can_join_groups": true,
                     "can_read_all_group_messages": true,
+                    "supports_guest_queries": null,
                     "supports_inline_queries": true,
                     "can_connect_to_business": true,
                     "has_main_web_app": true,
@@ -339,6 +343,7 @@
                     "added_to_attachment_menu": true,
                     "can_join_groups": true,
                     "can_read_all_group_messages": true,
+                    "supports_guest_queries": null,
                     "supports_inline_queries": true,
                     "can_connect_to_business": true,
                     "has_main_web_app": true,
@@ -418,6 +423,7 @@
                 "added_to_attachment_menu": true,
                 "can_join_groups": true,
                 "can_read_all_group_messages": true,
+                "supports_guest_queries": null,
                 "supports_inline_queries": true,
                 "can_connect_to_business": true,
                 "has_main_web_app": true,
@@ -474,6 +480,7 @@
                             "added_to_attachment_menu": true,
                             "can_join_groups": true,
                             "can_read_all_group_messages": true,
+                            "supports_guest_queries": null,
                             "supports_inline_queries": true,
                             "can_connect_to_business": true,
                             "has_main_web_app": true,
@@ -485,6 +492,7 @@
                         "custom_emoji_id": "emoji_456"
                     }
                 ],
+                "media": null,
                 "added_by_user": null,
                 "added_by_chat": null,
                 "addition_date": null
@@ -496,6 +504,8 @@
         "type": "regular",
         "allows_multiple_answers": false,
         "allows_revoting": true,
+        "members_only": true,
+        "country_codes": null,
         "question_entities": [
             {
                 "type": "bold",
@@ -513,6 +523,7 @@
                     "added_to_attachment_menu": true,
                     "can_join_groups": true,
                     "can_read_all_group_messages": true,
+                    "supports_guest_queries": null,
                     "supports_inline_queries": true,
                     "can_connect_to_business": true,
                     "has_main_web_app": true,
@@ -545,6 +556,7 @@
                     "added_to_attachment_menu": true,
                     "can_join_groups": true,
                     "can_read_all_group_messages": true,
+                    "supports_guest_queries": null,
                     "supports_inline_queries": true,
                     "can_connect_to_business": true,
                     "has_main_web_app": true,
@@ -556,11 +568,14 @@
                 "custom_emoji_id": "emoji_456"
             }
         ],
+        "explanation_media": null,
         "open_period": 60,
         "close_date": 1700086400,
         "description": null,
-        "description_entities": null
+        "description_entities": null,
+        "media": null
     },
+    "live_photo": null,
     "venue": {
         "location": {
             "latitude": 55.7558,

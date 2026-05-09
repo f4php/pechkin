@@ -122,5 +122,9 @@
     "user_shared": null,
     "sender_tag": null,
     "chat_owner_left": null,
-    "chat_owner_changed": null
+    "chat_owner_changed": null,
+    "guest_query_id": null,
+    "guest_bot_caller_user": null,
+    "guest_bot_caller_chat": null,
+    "live_photo": null
 }

@@ -6,6 +6,7 @@ namespace F4\Pechkin;
 
 use F4\Pechkin\DataType\{
     AcceptedGiftTypes,
+    BotAccessSettings,
     BotCommand,
     BotCommandScope,
     BotDescription,
@@ -29,6 +30,7 @@ use F4\Pechkin\DataType\{
     InputFile,
     InputMedia,
     InputPaidMedia,
+    InputPollMedia,
     InputProfilePhoto,
     KeyboardButton,
     InputSticker,
@@ -49,6 +51,7 @@ use F4\Pechkin\DataType\{
     ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
     ReplyParameters,
+    SentGuestMessage,
     SentWebAppMessage,
     ShippingOption,
     StarAmount,
@@ -483,6 +486,34 @@ interface ClientInterface
     ): bool;
 
     /**
+     * Removes a reaction of a user or a chat that is managed by the bot on a message.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
+     * @param int $message_id Identifier of the message
+     * @param int|string|null $user_id Unique identifier of the target user that reacted to the message; for non-anonymous reactions
+     * @param int|string|null $actor_chat_id Unique identifier of the chat that reacted to the message; for anonymous reactions
+     * @return bool Returns True on success
+     */
+    public function deleteMessageReaction(
+        int|string $chat_id,
+        int $message_id,
+        int|string|null $user_id = null,
+        int|string|null $actor_chat_id = null,
+    ): bool;
+
+    /**
+     * Removes all reactions on a message that are made by users managed by the bot or by anonymous reactions of chats managed by the bot.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
+     * @param int|string|null $user_id Unique identifier of the target user
+     * @param int|string|null $actor_chat_id Unique identifier of the target chat
+     * @return bool Returns True on success
+     */
+    public function deleteAllMessageReactions(
+        int|string $chat_id,
+        int|string|null $user_id = null,
+        int|string|null $actor_chat_id = null,
+    ): bool;
+
+    /**
      * Use this method to delete the list of the bot's commands for the given scope and user language.
      * @param BotCommandScope|null $scope A JSON-serialized object, describing scope of users for which the commands are relevant
      * @param string|null $language_code A two-letter ISO 639-1 language code
@@ -875,6 +906,28 @@ interface ClientInterface
     ): BusinessConnection;
 
     /**
+     * Returns the bot access settings of a business account that can be managed by the bot.
+     * @param int|string $user_id Unique identifier of the business account owner
+     * @return BotAccessSettings Returns a BotAccessSettings object on success
+     */
+    public function getManagedBotAccessSettings(
+        int|string $user_id,
+    ): BotAccessSettings;
+
+    /**
+     * Changes the bot access settings of a business account that can be managed by the bot.
+     * @param int|string $user_id Unique identifier of the business account owner
+     * @param bool $is_access_restricted Pass True to restrict access to the account; pass False to unrestrict
+     * @param int[]|null $added_user_ids List of users that are exceptions to the access restriction
+     * @return bool Returns True on success
+     */
+    public function setManagedBotAccessSettings(
+        int|string $user_id,
+        bool $is_access_restricted,
+        ?array $added_user_ids = null,
+    ): bool;
+
+    /**
      * Use this method to get up-to-date information about the chat.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup or channel
      * @return ChatFullInfo Returns a ChatFullInfo object on success
@@ -1117,6 +1170,17 @@ interface ClientInterface
         ?string $offset = null,
         ?int $limit = null,
     ): OwnedGifts;
+
+    /**
+     * Returns the personal messages of a user to the bot's chat.
+     * @param int|string $user_id Unique identifier of the target user
+     * @param int $limit The maximum number of messages to be returned; 1-100
+     * @return Message[] Returns an array of Message objects on success
+     */
+    public function getUserPersonalChatMessages(
+        int|string $user_id,
+        int $limit,
+    ): array;
 
     /**
      * Returns the list of audios added to the profile of a user.
@@ -1971,6 +2035,49 @@ interface ClientInterface
     ): Message;
 
     /**
+     * Use this method to send a photo with a live area.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
+     * @param InputFile|string $photo Photo to send as a static preview
+     * @param InputFile|string $live_photo The animation to be used as the live photo
+     * @param string|null $business_connection_id Unique identifier of the business connection on behalf of which the message will be sent
+     * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
+     * @param int|null $direct_messages_topic_id Unique identifier of the private chat direct messages topic to send the message to
+     * @param string|null $caption Photo caption
+     * @param string|null $parse_mode Mode for parsing entities in the photo caption
+     * @param MessageEntity[]|null $caption_entities List of special entities that appear in the caption
+     * @param bool|null $show_caption_above_media Pass True if the caption must be shown above the message media
+     * @param bool|null $has_spoiler Pass True if the photo needs to be covered with a spoiler animation
+     * @param bool|null $disable_notification Sends the message silently
+     * @param bool|null $protect_content Protects the contents of the sent message from forwarding and saving
+     * @param bool|null $allow_paid_broadcast Pass True to allow up to 1000 messages per second
+     * @param string|null $message_effect_id Unique identifier of the message effect to be added to the message
+     * @param SuggestedPostParameters|null $suggested_post_parameters Parameters for suggesting a post in a channel; for channel posts only
+     * @param ReplyParameters|null $reply_parameters Description of the message to reply to
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup Additional interface options
+     * @return Message Returns the sent Message on success
+     */
+    public function sendLivePhoto(
+        int|string $chat_id,
+        InputFile|string $photo,
+        InputFile|string $live_photo,
+        ?string $business_connection_id = null,
+        ?int $message_thread_id = null,
+        ?int $direct_messages_topic_id = null,
+        ?string $caption = null,
+        ?string $parse_mode = null,
+        ?array $caption_entities = null,
+        ?bool $show_caption_above_media = null,
+        ?bool $has_spoiler = null,
+        ?bool $disable_notification = null,
+        ?bool $protect_content = null,
+        ?bool $allow_paid_broadcast = null,
+        ?string $message_effect_id = null,
+        ?SuggestedPostParameters $suggested_post_parameters = null,
+        ?ReplyParameters $reply_parameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
+    ): Message;
+
+    /**
      * Use this method to send a native poll.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param string $question Poll question
@@ -1986,16 +2093,20 @@ interface ClientInterface
      * @param bool|null $shuffle_options True, if the poll options should be shuffled randomly
      * @param bool|null $allow_adding_options True, if the poll allows users to add new options
      * @param bool|null $hide_results_until_closes True, if the quiz results should be hidden while the poll is running
+     * @param bool|null $members_only Pass True if the poll needs to be accessible only to chat members
+     * @param string[]|null $country_codes A list of two-letter ISO 3166-1 alpha-2 country codes representing the countries from which eligible voters are allowed to vote
      * @param int[]|null $correct_option_ids 0-based identifiers of the correct answer options
      * @param string|null $explanation Text that is shown when a user chooses an incorrect answer
      * @param string|null $explanation_parse_mode Mode for parsing entities in the explanation
      * @param MessageEntity[]|null $explanation_entities List of special entities that appear in the poll explanation
+     * @param InputPollMedia|null $explanation_media An object for the media to be shown in the poll explanation
      * @param int|null $open_period Amount of time in seconds the poll will be active after creation
      * @param int|null $close_date Point in time (Unix timestamp) when the poll will be automatically closed
      * @param bool|null $is_closed Pass True if the poll needs to be immediately closed
      * @param string|null $description Description for the poll shown in the preview
      * @param string|null $description_parse_mode Mode for parsing entities in the description
-     * @param MessageEntity[]|null $description_parse_entities List of special entities that appear in the description
+     * @param MessageEntity[]|null $description_entities List of special entities that appear in the description
+     * @param InputPollMedia|null $media An object for the media to be shown in the poll
      * @param bool|null $disable_notification Sends the message silently
      * @param bool|null $protect_content Protects the contents of the sent message from forwarding and saving
      * @param bool|null $allow_paid_broadcast Pass True to allow up to 1000 messages per second
@@ -2019,16 +2130,20 @@ interface ClientInterface
         ?bool $shuffle_options = null,
         ?bool $allow_adding_options = null,
         ?bool $hide_results_until_closes = null,
+        ?bool $members_only = null,
+        ?array $country_codes = null,
         ?array $correct_option_ids = null,
         ?string $explanation = null,
         ?string $explanation_parse_mode = null,
         ?array $explanation_entities = null,
+        ?InputPollMedia $explanation_media = null,
         ?int $open_period = null,
         ?int $close_date = null,
         ?bool $is_closed = null,
         ?string $description = null,
         ?string $description_parse_mode = null,
-        ?array $description_parse_entities = null,
+        ?array $description_entities = null,
+        ?InputPollMedia $media = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
         ?bool $allow_paid_broadcast = null,
@@ -2863,6 +2978,17 @@ interface ClientInterface
         string $web_app_query_id,
         InlineQueryResult $result,
     ): SentWebAppMessage;
+
+    /**
+     * Stores and sends a result of an interaction with a guest user in a direct messages chat.
+     * @param int|string $guest_query_id Unique identifier for the query to be answered
+     * @param InlineQueryResult $result A JSON-serialized object describing the message to be sent
+     * @return SentGuestMessage Returns a SentGuestMessage object on success
+     */
+    public function answerGuestQuery(
+        int|string $guest_query_id,
+        InlineQueryResult $result,
+    ): SentGuestMessage;
 
     /**
      * Stores a message that can be sent by a user of a Mini App.

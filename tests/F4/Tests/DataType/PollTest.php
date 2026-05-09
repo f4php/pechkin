@@ -28,6 +28,8 @@ final class PollTest extends TestCase
         $this->assertSame(true, $poll->is_anonymous);
         $this->assertSame('regular', $poll->type);
         $this->assertSame(false, $poll->allows_multiple_answers);
+        $this->assertSame(true, $poll->members_only);
+        $this->assertSame(['US', 'CA'], $poll->country_codes);
         $this->assertSame([0], $poll->correct_option_ids);
         $this->assertSame('Because it is correct', $poll->explanation);
         $this->assertSame(60, $poll->open_period);

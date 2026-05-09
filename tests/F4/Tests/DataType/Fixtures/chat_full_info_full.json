@@ -215,7 +215,11 @@
     "user_shared": null,
     "sender_tag": null,
     "chat_owner_left": null,
-    "chat_owner_changed": null
+    "chat_owner_changed": null,
+    "guest_query_id": null,
+    "guest_bot_caller_user": null,
+    "guest_bot_caller_chat": null,
+    "live_photo": null
   },
   "permissions": {
     "can_send_messages": null,
@@ -233,7 +237,8 @@
     "can_pin_messages": null,
     "can_manage_topics": null,
     "can_send_media_messages": null,
-    "can_edit_tag": null
+    "can_edit_tag": null,
+    "can_react_to_messages": null
   },
   "can_send_paid_media": true,
   "slow_mode_delay": 30,

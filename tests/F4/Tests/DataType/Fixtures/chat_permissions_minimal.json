@@ -14,5 +14,6 @@
     "can_pin_messages": null,
     "can_manage_topics": null,
     "can_send_media_messages": null,
-    "can_edit_tag": null
+    "can_edit_tag": null,
+    "can_react_to_messages": null
 }
