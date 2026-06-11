@@ -1,11 +1,12 @@
 {
-    "animation": null,
-    "audio": null,
-    "document": null,
-    "live_photo": null,
-    "location": null,
-    "photo": null,
-    "sticker": null,
-    "venue": null,
-    "video": null
+  "animation": null,
+  "audio": null,
+  "document": null,
+  "live_photo": null,
+  "location": null,
+  "photo": null,
+  "sticker": null,
+  "venue": null,
+  "video": null,
+  "link": null
 }

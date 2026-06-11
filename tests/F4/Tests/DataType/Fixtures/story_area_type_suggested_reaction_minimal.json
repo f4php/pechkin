@@ -1,8 +1,8 @@
 {
-    "reaction_type": {
-        "type": "emoji",
-        "emoji": "🎲"
-    },
-    "is_dark": null,
-    "is_flipped": null
+  "reaction_type": {
+    "type": "emoji",
+    "emoji": "🎲"
+  },
+  "is_dark": null,
+  "is_flipped": null
 }

@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace F4\Pechkin\DataType;
 
 use F4\Pechkin\DataType\{
+    Attribute\Polymorphic,
     AbstractDataType,
     InputContactMessageContent,
     InputInvoiceMessageContent,
     InputLocationMessageContent,
+    InputRichMessageContent,
     InputTextMessageContent,
     InputVenueMessageContent,
-    Attribute\Polymorphic,
 };
 
 #[Polymorphic(
@@ -21,6 +22,7 @@ use F4\Pechkin\DataType\{
             isset($data['currency']) => InputInvoiceMessageContent::fromArray($data),
             isset($data['longitude']) && !isset($data['address']) => InputLocationMessageContent::fromArray($data),
             isset($data['message_text']) => InputTextMessageContent::fromArray($data),
+            isset($data['rich_message']) => InputRichMessageContent::fromArray($data),
             isset($data['address']) => InputVenueMessageContent::fromArray($data),
             default => null
         };

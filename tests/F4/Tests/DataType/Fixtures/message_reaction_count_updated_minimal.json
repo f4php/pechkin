@@ -1,25 +1,26 @@
 {
-    "chat": {
-        "id": "123456789",
-        "type": "private",
-        "title": null,
-        "username": null,
-        "first_name": null,
-        "last_name": null,
-        "is_forum": null,
-        "is_direct_messages": null,
-        "all_members_are_administrators": null,
-        "accepted_gift_types": null
-    },
-    "message_id": 42,
-    "date": 1700000000,
-    "reactions": [
-        {
-            "type": {
-                "type": "emoji",
-                "emoji": "🎲"
-            },
-            "total_count": 10
-        }
-    ]
+  "chat": {
+    "id": "123456789",
+    "type": "private",
+    "title": null,
+    "username": null,
+    "first_name": null,
+    "last_name": null,
+    "is_forum": null,
+    "is_direct_messages": null,
+    "guard_bot": null,
+    "all_members_are_administrators": null,
+    "accepted_gift_types": null
+  },
+  "message_id": 42,
+  "date": 1700000000,
+  "reactions": [
+    {
+      "type": {
+        "type": "emoji",
+        "emoji": "🎲"
+      },
+      "total_count": 10
+    }
+  ]
 }

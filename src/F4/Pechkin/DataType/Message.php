@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     Animation,
+    RichMessage,
     Audio,
     Chat,
     ChatBackground,
@@ -122,6 +123,7 @@ readonly class Message extends MaybeInaccessibleMessage
         public readonly ?LinkPreviewOptions $link_preview_options = null,
         public readonly ?SuggestedPostInfo $suggested_post_info = null,
         public readonly ?string $effect_id = null,
+        public readonly ?RichMessage $rich_message = null,
         public readonly ?Animation $animation = null,
         public readonly ?Audio $audio = null,
         public readonly ?Document $document = null,

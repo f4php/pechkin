@@ -1,5 +1,5 @@
 {
-    "type": "driver_license",
-    "file_hash": "file_hash_def",
-    "message": "Error message"
+  "type": "driver_license",
+  "file_hash": "file_hash_def",
+  "message": "Error message"
 }

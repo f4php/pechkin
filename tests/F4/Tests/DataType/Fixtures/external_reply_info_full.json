@@ -1,28 +1,404 @@
 {
-    "origin": {
-        "type": "user",
-        "date": 1700000000,
-        "sender_user": {
-            "id": "123456789",
-            "is_bot": false,
-            "first_name": "John",
-            "last_name": "Doe",
-            "username": "johndoe",
-            "language_code": "en",
-            "is_premium": true,
-            "added_to_attachment_menu": true,
-            "can_join_groups": true,
-            "can_read_all_group_messages": true,
-            "supports_guest_queries": null,
-            "supports_inline_queries": true,
-            "can_connect_to_business": true,
-            "has_main_web_app": true,
-            "has_topics_enabled": true,
-            "allows_users_to_create_topics": true,
-            "can_manage_bots": true
-        }
+  "origin": {
+    "type": "user",
+    "date": 1700000000,
+    "sender_user": {
+      "id": "123456789",
+      "is_bot": false,
+      "first_name": "John",
+      "last_name": "Doe",
+      "username": "johndoe",
+      "language_code": "en",
+      "is_premium": true,
+      "added_to_attachment_menu": true,
+      "can_join_groups": true,
+      "can_read_all_group_messages": true,
+      "supports_guest_queries": null,
+      "supports_inline_queries": true,
+      "can_connect_to_business": true,
+      "has_main_web_app": true,
+      "has_topics_enabled": true,
+      "allows_users_to_create_topics": true,
+      "can_manage_bots": true,
+      "supports_join_request_queries": null
+    }
+  },
+  "chat": {
+    "id": "123456789",
+    "type": "private",
+    "title": "Test Title",
+    "username": "johndoe",
+    "first_name": "John",
+    "last_name": "Doe",
+    "is_forum": false,
+    "is_direct_messages": false,
+    "guard_bot": null,
+    "all_members_are_administrators": null,
+    "accepted_gift_types": null
+  },
+  "message_id": 42,
+  "link_preview_options": {
+    "is_disabled": false,
+    "url": "https://example.com",
+    "prefer_small_media": false,
+    "prefer_large_media": false,
+    "show_above_text": false
+  },
+  "animation": {
+    "file_id": "BAACAgIAAxkBAAI",
+    "file_unique_id": "AgADBAADZqc",
+    "width": 640,
+    "height": 480,
+    "duration": 120,
+    "thumbnail": {
+      "file_id": "BAACAgIAAxkBAAI",
+      "file_unique_id": "AgADBAADZqc",
+      "width": 640,
+      "height": 480,
+      "file_size": 1024000
     },
+    "file_name": "test_file.pdf",
+    "mime_type": "application/pdf",
+    "file_size": "1024000"
+  },
+  "audio": {
+    "file_id": "BAACAgIAAxkBAAI",
+    "file_unique_id": "AgADBAADZqc",
+    "duration": 120,
+    "performer": "Test Artist",
+    "title": "Test Title",
+    "file_name": "test_file.pdf",
+    "mime_type": "application/pdf",
+    "file_size": "1024000",
+    "thumbnail": {
+      "file_id": "BAACAgIAAxkBAAI",
+      "file_unique_id": "AgADBAADZqc",
+      "width": 640,
+      "height": 480,
+      "file_size": 1024000
+    }
+  },
+  "document": {
+    "file_id": "BAACAgIAAxkBAAI",
+    "file_unique_id": "AgADBAADZqc",
+    "thumbnail": {
+      "file_id": "BAACAgIAAxkBAAI",
+      "file_unique_id": "AgADBAADZqc",
+      "width": 640,
+      "height": 480,
+      "file_size": 1024000
+    },
+    "file_name": "test_file.pdf",
+    "mime_type": "application/pdf",
+    "file_size": "1024000"
+  },
+  "live_photo": null,
+  "paid_media": {
+    "star_count": 100,
+    "paid_media": [
+      {
+        "type": "preview",
+        "width": 640,
+        "height": 480,
+        "duration": 120
+      }
+    ]
+  },
+  "photo": [
+    {
+      "file_id": "BAACAgIAAxkBAAI",
+      "file_unique_id": "AgADBAADZqc",
+      "width": 640,
+      "height": 480,
+      "file_size": 1024000
+    }
+  ],
+  "sticker": {
+    "file_id": "BAACAgIAAxkBAAI",
+    "file_unique_id": "AgADBAADZqc",
+    "type": "regular",
+    "width": 640,
+    "height": 480,
+    "is_animated": false,
+    "is_video": false,
+    "thumbnail": {
+      "file_id": "BAACAgIAAxkBAAI",
+      "file_unique_id": "AgADBAADZqc",
+      "width": 640,
+      "height": 480,
+      "file_size": 1024000
+    },
+    "emoji": "🎲",
+    "set_name": "test_sticker_set",
+    "premium_animation": {
+      "file_id": "BAACAgIAAxkBAAI",
+      "file_unique_id": "AgADBAADZqc",
+      "file_size": "1024000",
+      "file_path": "/path/to/file"
+    },
+    "mask_position": {
+      "point": "forehead",
+      "x_shift": 0.5,
+      "y_shift": 0.5,
+      "scale": 100
+    },
+    "custom_emoji_id": "emoji_456",
+    "needs_repainting": false,
+    "file_size": 1024000,
+    "thumb": null
+  },
+  "story": {
     "chat": {
+      "id": "123456789",
+      "type": "private",
+      "title": "Test Title",
+      "username": "johndoe",
+      "first_name": "John",
+      "last_name": "Doe",
+      "is_forum": false,
+      "is_direct_messages": false,
+      "guard_bot": null,
+      "all_members_are_administrators": null,
+      "accepted_gift_types": null
+    },
+    "id": 123456789
+  },
+  "video": {
+    "file_id": "BAACAgIAAxkBAAI",
+    "file_unique_id": "AgADBAADZqc",
+    "width": 640,
+    "height": 480,
+    "duration": 120,
+    "thumbnail": {
+      "file_id": "BAACAgIAAxkBAAI",
+      "file_unique_id": "AgADBAADZqc",
+      "width": 640,
+      "height": 480,
+      "file_size": 1024000
+    },
+    "cover": [
+      {
+        "file_id": "BAACAgIAAxkBAAI",
+        "file_unique_id": "AgADBAADZqc",
+        "width": 640,
+        "height": 480,
+        "file_size": 1024000
+      }
+    ],
+    "start_timestamp": 42,
+    "qualities": null,
+    "file_name": "test_file.pdf",
+    "mime_type": "application/pdf",
+    "file_size": "1024000"
+  },
+  "video_note": {
+    "file_id": "BAACAgIAAxkBAAI",
+    "file_unique_id": "AgADBAADZqc",
+    "length": 240,
+    "duration": 120,
+    "thumbnail": {
+      "file_id": "BAACAgIAAxkBAAI",
+      "file_unique_id": "AgADBAADZqc",
+      "width": 640,
+      "height": 480,
+      "file_size": 1024000
+    },
+    "file_size": "1024000"
+  },
+  "voice": {
+    "file_id": "BAACAgIAAxkBAAI",
+    "file_unique_id": "AgADBAADZqc",
+    "duration": 120,
+    "mime_type": "application/pdf",
+    "file_size": "1024000"
+  },
+  "has_media_spoiler": true,
+  "checklist": {
+    "title": "Test Title",
+    "tasks": [
+      {
+        "id": 123456789,
+        "text": "Hello, World!",
+        "text_entities": [
+          {
+            "type": "bold",
+            "offset": 0,
+            "length": 240,
+            "url": "https://example.com",
+            "user": {
+              "id": "123456789",
+              "is_bot": false,
+              "first_name": "John",
+              "last_name": "Doe",
+              "username": "johndoe",
+              "language_code": "en",
+              "is_premium": true,
+              "added_to_attachment_menu": true,
+              "can_join_groups": true,
+              "can_read_all_group_messages": true,
+              "supports_guest_queries": null,
+              "supports_inline_queries": true,
+              "can_connect_to_business": true,
+              "has_main_web_app": true,
+              "has_topics_enabled": true,
+              "allows_users_to_create_topics": true,
+              "can_manage_bots": true,
+              "supports_join_request_queries": null
+            },
+            "language": "test_string",
+            "custom_emoji_id": "emoji_456",
+            "unix_time": null,
+            "date_time_format": null
+          }
+        ],
+        "completed_by_user": {
+          "id": "123456789",
+          "is_bot": false,
+          "first_name": "John",
+          "last_name": "Doe",
+          "username": "johndoe",
+          "language_code": "en",
+          "is_premium": true,
+          "added_to_attachment_menu": true,
+          "can_join_groups": true,
+          "can_read_all_group_messages": true,
+          "supports_guest_queries": null,
+          "supports_inline_queries": true,
+          "can_connect_to_business": true,
+          "has_main_web_app": true,
+          "has_topics_enabled": true,
+          "allows_users_to_create_topics": true,
+          "can_manage_bots": true,
+          "supports_join_request_queries": null
+        },
+        "completed_by_chat": {
+          "id": "123456789",
+          "type": "private",
+          "title": "Test Title",
+          "username": "johndoe",
+          "first_name": "John",
+          "last_name": "Doe",
+          "is_forum": false,
+          "is_direct_messages": false,
+          "guard_bot": null,
+          "all_members_are_administrators": null,
+          "accepted_gift_types": null
+        },
+        "completion_date": 42
+      }
+    ],
+    "title_entities": [
+      {
+        "type": "bold",
+        "offset": 0,
+        "length": 240,
+        "url": "https://example.com",
+        "user": {
+          "id": "123456789",
+          "is_bot": false,
+          "first_name": "John",
+          "last_name": "Doe",
+          "username": "johndoe",
+          "language_code": "en",
+          "is_premium": true,
+          "added_to_attachment_menu": true,
+          "can_join_groups": true,
+          "can_read_all_group_messages": true,
+          "supports_guest_queries": null,
+          "supports_inline_queries": true,
+          "can_connect_to_business": true,
+          "has_main_web_app": true,
+          "has_topics_enabled": true,
+          "allows_users_to_create_topics": true,
+          "can_manage_bots": true,
+          "supports_join_request_queries": null
+        },
+        "language": "test_string",
+        "custom_emoji_id": "emoji_456",
+        "unix_time": null,
+        "date_time_format": null
+      }
+    ],
+    "others_can_add_tasks": true,
+    "others_can_mark_tasks_as_done": true
+  },
+  "contact": {
+    "phone_number": "+1234567890",
+    "first_name": "John",
+    "last_name": "Doe",
+    "user_id": "987654321",
+    "vcard": "BEGIN:VCARD\\nVERSION:3.0\\nFN:John Doe\\nEND:VCARD"
+  },
+  "dice": {
+    "emoji": "🎲",
+    "value": 6
+  },
+  "game": {
+    "title": "Test Title",
+    "description": "Test description",
+    "photo": [
+      {
+        "file_id": "BAACAgIAAxkBAAI",
+        "file_unique_id": "AgADBAADZqc",
+        "width": 640,
+        "height": 480,
+        "file_size": 1024000
+      }
+    ],
+    "text": "Hello, World!",
+    "text_entities": [
+      {
+        "type": "bold",
+        "offset": 0,
+        "length": 240,
+        "url": "https://example.com",
+        "user": {
+          "id": "123456789",
+          "is_bot": false,
+          "first_name": "John",
+          "last_name": "Doe",
+          "username": "johndoe",
+          "language_code": "en",
+          "is_premium": true,
+          "added_to_attachment_menu": true,
+          "can_join_groups": true,
+          "can_read_all_group_messages": true,
+          "supports_guest_queries": null,
+          "supports_inline_queries": true,
+          "can_connect_to_business": true,
+          "has_main_web_app": true,
+          "has_topics_enabled": true,
+          "allows_users_to_create_topics": true,
+          "can_manage_bots": true,
+          "supports_join_request_queries": null
+        },
+        "language": "test_string",
+        "custom_emoji_id": "emoji_456",
+        "unix_time": null,
+        "date_time_format": null
+      }
+    ],
+    "animation": {
+      "file_id": "BAACAgIAAxkBAAI",
+      "file_unique_id": "AgADBAADZqc",
+      "width": 640,
+      "height": 480,
+      "duration": 120,
+      "thumbnail": {
+        "file_id": "BAACAgIAAxkBAAI",
+        "file_unique_id": "AgADBAADZqc",
+        "width": 640,
+        "height": 480,
+        "file_size": 1024000
+      },
+      "file_name": "test_file.pdf",
+      "mime_type": "application/pdf",
+      "file_size": "1024000"
+    }
+  },
+  "giveaway": {
+    "chats": [
+      {
         "id": "123456789",
         "type": "private",
         "title": "Test Title",
@@ -30,566 +406,228 @@
         "first_name": "John",
         "last_name": "Doe",
         "is_forum": false,
-        "is_direct_messages": false
-    },
-    "message_id": 42,
-    "link_preview_options": {
-        "is_disabled": false,
-        "url": "https://example.com",
-        "prefer_small_media": false,
-        "prefer_large_media": false,
-        "show_above_text": false
-    },
-    "animation": {
-        "file_id": "BAACAgIAAxkBAAI",
-        "file_unique_id": "AgADBAADZqc",
-        "width": 640,
-        "height": 480,
-        "duration": 120,
-        "thumbnail": {
-            "file_id": "BAACAgIAAxkBAAI",
-            "file_unique_id": "AgADBAADZqc",
-            "width": 640,
-            "height": 480,
-            "file_size": 1024000
-        },
-        "file_name": "test_file.pdf",
-        "mime_type": "application/pdf",
-        "file_size": "1024000"
-    },
-    "audio": {
-        "file_id": "BAACAgIAAxkBAAI",
-        "file_unique_id": "AgADBAADZqc",
-        "duration": 120,
-        "performer": "Test Artist",
-        "title": "Test Title",
-        "file_name": "test_file.pdf",
-        "mime_type": "application/pdf",
-        "file_size": "1024000",
-        "thumbnail": {
-            "file_id": "BAACAgIAAxkBAAI",
-            "file_unique_id": "AgADBAADZqc",
-            "width": 640,
-            "height": 480,
-            "file_size": 1024000
-        }
-    },
-    "document": {
-        "file_id": "BAACAgIAAxkBAAI",
-        "file_unique_id": "AgADBAADZqc",
-        "thumbnail": {
-            "file_id": "BAACAgIAAxkBAAI",
-            "file_unique_id": "AgADBAADZqc",
-            "width": 640,
-            "height": 480,
-            "file_size": 1024000
-        },
-        "file_name": "test_file.pdf",
-        "mime_type": "application/pdf",
-        "file_size": "1024000"
-    },
-    "paid_media": {
-        "star_count": 100,
-        "paid_media": [
-            {
-                "type": "preview",
-                "width": 640,
-                "height": 480,
-                "duration": 120
-            }
-        ]
-    },
-    "photo": [
-        {
-            "file_id": "BAACAgIAAxkBAAI",
-            "file_unique_id": "AgADBAADZqc",
-            "width": 640,
-            "height": 480,
-            "file_size": 1024000
-        }
+        "is_direct_messages": false,
+        "guard_bot": null,
+        "all_members_are_administrators": null,
+        "accepted_gift_types": null
+      }
     ],
-    "sticker": {
-        "file_id": "BAACAgIAAxkBAAI",
-        "file_unique_id": "AgADBAADZqc",
-        "type": "regular",
-        "width": 640,
-        "height": 480,
-        "is_animated": false,
-        "is_video": false,
-        "thumbnail": {
-            "file_id": "BAACAgIAAxkBAAI",
-            "file_unique_id": "AgADBAADZqc",
-            "width": 640,
-            "height": 480,
-            "file_size": 1024000
-        },
-        "emoji": "🎲",
-        "set_name": "test_sticker_set",
-        "premium_animation": {
-            "file_id": "BAACAgIAAxkBAAI",
-            "file_unique_id": "AgADBAADZqc",
-            "file_size": "1024000",
-            "file_path": "/path/to/file"
-        },
-        "mask_position": {
-            "point": "forehead",
-            "x_shift": 0.5,
-            "y_shift": 0.5,
-            "scale": 100
-        },
-        "custom_emoji_id": "emoji_456",
-        "needs_repainting": false,
-        "file_size": 1024000
+    "winners_selection_date": 42,
+    "winner_count": 5,
+    "only_new_members": false,
+    "has_public_winners": true,
+    "prize_description": "Win a prize!",
+    "country_codes": [
+      "item_1"
+    ],
+    "prize_star_count": 100,
+    "premium_subscription_month_count": 42
+  },
+  "giveaway_winners": {
+    "chat": {
+      "id": "123456789",
+      "type": "private",
+      "title": "Test Title",
+      "username": "johndoe",
+      "first_name": "John",
+      "last_name": "Doe",
+      "is_forum": false,
+      "is_direct_messages": false,
+      "guard_bot": null,
+      "all_members_are_administrators": null,
+      "accepted_gift_types": null
     },
-    "story": {
-        "chat": {
-            "id": "123456789",
-            "type": "private",
-            "title": "Test Title",
-            "username": "johndoe",
-            "first_name": "John",
-            "last_name": "Doe",
-            "is_forum": false,
-            "is_direct_messages": false
-        },
-        "id": 123456789
-    },
-    "video": {
-        "file_id": "BAACAgIAAxkBAAI",
-        "file_unique_id": "AgADBAADZqc",
-        "width": 640,
-        "height": 480,
-        "duration": 120,
-        "thumbnail": {
-            "file_id": "BAACAgIAAxkBAAI",
-            "file_unique_id": "AgADBAADZqc",
-            "width": 640,
-            "height": 480,
-            "file_size": 1024000
-        },
-        "cover": [
-            {
-                "file_id": "BAACAgIAAxkBAAI",
-                "file_unique_id": "AgADBAADZqc",
-                "width": 640,
-                "height": 480,
-                "file_size": 1024000
-            }
-        ],
-        "start_timestamp": 42,
-        "file_name": "test_file.pdf",
-        "mime_type": "application/pdf",
-        "file_size": "1024000"
-    },
-    "video_note": {
-        "file_id": "BAACAgIAAxkBAAI",
-        "file_unique_id": "AgADBAADZqc",
-        "length": 240,
-        "duration": 120,
-        "thumbnail": {
-            "file_id": "BAACAgIAAxkBAAI",
-            "file_unique_id": "AgADBAADZqc",
-            "width": 640,
-            "height": 480,
-            "file_size": 1024000
-        },
-        "file_size": "1024000"
-    },
-    "voice": {
-        "file_id": "BAACAgIAAxkBAAI",
-        "file_unique_id": "AgADBAADZqc",
-        "duration": 120,
-        "mime_type": "application/pdf",
-        "file_size": "1024000"
-    },
-    "has_media_spoiler": true,
-    "checklist": {
-        "title": "Test Title",
-        "tasks": [
-            {
-                "id": 123456789,
-                "text": "Hello, World!",
-                "text_entities": [
-                    {
-                        "type": "bold",
-                        "offset": 0,
-                        "length": 240,
-                        "url": "https://example.com",
-                        "user": {
-                            "id": "123456789",
-                            "is_bot": false,
-                            "first_name": "John",
-                            "last_name": "Doe",
-                            "username": "johndoe",
-                            "language_code": "en",
-                            "is_premium": true,
-                            "added_to_attachment_menu": true,
-                            "can_join_groups": true,
-                            "can_read_all_group_messages": true,
-                            "supports_guest_queries": null,
-                            "supports_inline_queries": true,
-                            "can_connect_to_business": true,
-                            "has_main_web_app": true,
-                            "has_topics_enabled": true,
-                            "allows_users_to_create_topics": true,
-                            "can_manage_bots": true
-                        },
-                        "language": "test_string",
-                        "custom_emoji_id": "emoji_456"
-                    }
-                ],
-                "completed_by_user": {
-                    "id": "123456789",
-                    "is_bot": false,
-                    "first_name": "John",
-                    "last_name": "Doe",
-                    "username": "johndoe",
-                    "language_code": "en",
-                    "is_premium": true,
-                    "added_to_attachment_menu": true,
-                    "can_join_groups": true,
-                    "can_read_all_group_messages": true,
-                    "supports_guest_queries": null,
-                    "supports_inline_queries": true,
-                    "can_connect_to_business": true,
-                    "has_main_web_app": true,
-                    "has_topics_enabled": true,
-                    "allows_users_to_create_topics": true,
-                    "can_manage_bots": true
-                },
-                "completed_by_chat": {
-                    "id": "123456789",
-                    "type": "private",
-                    "title": "Test Title",
-                    "username": "johndoe",
-                    "first_name": "John",
-                    "last_name": "Doe",
-                    "is_forum": false,
-                    "is_direct_messages": false
-                },
-                "completion_date": 42
-            }
-        ],
-        "title_entities": [
-            {
-                "type": "bold",
-                "offset": 0,
-                "length": 240,
-                "url": "https://example.com",
-                "user": {
-                    "id": "123456789",
-                    "is_bot": false,
-                    "first_name": "John",
-                    "last_name": "Doe",
-                    "username": "johndoe",
-                    "language_code": "en",
-                    "is_premium": true,
-                    "added_to_attachment_menu": true,
-                    "can_join_groups": true,
-                    "can_read_all_group_messages": true,
-                    "supports_guest_queries": null,
-                    "supports_inline_queries": true,
-                    "can_connect_to_business": true,
-                    "has_main_web_app": true,
-                    "has_topics_enabled": true,
-                    "allows_users_to_create_topics": true,
-                    "can_manage_bots": true
-                },
-                "language": "test_string",
-                "custom_emoji_id": "emoji_456"
-            }
-        ],
-        "others_can_add_tasks": true,
-        "others_can_mark_tasks_as_done": true
-    },
-    "contact": {
-        "phone_number": "+1234567890",
+    "giveaway_message_id": 42,
+    "winners_selection_date": 42,
+    "winner_count": 5,
+    "winners": [
+      {
+        "id": "123456789",
+        "is_bot": false,
         "first_name": "John",
         "last_name": "Doe",
-        "user_id": "987654321",
-        "vcard": "BEGIN:VCARD\\nVERSION:3.0\\nFN:John Doe\\nEND:VCARD"
-    },
-    "dice": {
-        "emoji": "🎲",
-        "value": 6
-    },
-    "game": {
-        "title": "Test Title",
-        "description": "Test description",
-        "photo": [
-            {
-                "file_id": "BAACAgIAAxkBAAI",
-                "file_unique_id": "AgADBAADZqc",
-                "width": 640,
-                "height": 480,
-                "file_size": 1024000
-            }
-        ],
+        "username": "johndoe",
+        "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_guest_queries": null,
+        "supports_inline_queries": true,
+        "can_connect_to_business": true,
+        "has_main_web_app": true,
+        "has_topics_enabled": true,
+        "allows_users_to_create_topics": true,
+        "can_manage_bots": true,
+        "supports_join_request_queries": null
+      }
+    ],
+    "additional_chat_count": 3,
+    "prize_star_count": 100,
+    "premium_subscription_month_count": 42,
+    "unclaimed_prize_count": 2,
+    "only_new_members": false,
+    "was_refunded": false,
+    "prize_description": "Win a prize!"
+  },
+  "invoice": {
+    "title": "Test Title",
+    "description": "Test description",
+    "start_parameter": "test_start",
+    "currency": "USD",
+    "total_amount": 10000
+  },
+  "location": {
+    "latitude": 55.7558,
+    "longitude": 37.6173,
+    "horizontal_accuracy": 10.5,
+    "live_period": 3600,
+    "heading": 180,
+    "proximity_alert_radius": 100
+  },
+  "poll": {
+    "id": "123456789",
+    "question": "What is the answer?",
+    "options": [
+      {
+        "persistent_id": "option_persistent_id_test",
         "text": "Hello, World!",
+        "voter_count": 15,
         "text_entities": [
-            {
-                "type": "bold",
-                "offset": 0,
-                "length": 240,
-                "url": "https://example.com",
-                "user": {
-                    "id": "123456789",
-                    "is_bot": false,
-                    "first_name": "John",
-                    "last_name": "Doe",
-                    "username": "johndoe",
-                    "language_code": "en",
-                    "is_premium": true,
-                    "added_to_attachment_menu": true,
-                    "can_join_groups": true,
-                    "can_read_all_group_messages": true,
-                    "supports_guest_queries": null,
-                    "supports_inline_queries": true,
-                    "can_connect_to_business": true,
-                    "has_main_web_app": true,
-                    "has_topics_enabled": true,
-                    "allows_users_to_create_topics": true,
-                    "can_manage_bots": true
-                },
-                "language": "test_string",
-                "custom_emoji_id": "emoji_456"
-            }
-        ],
-        "animation": {
-            "file_id": "BAACAgIAAxkBAAI",
-            "file_unique_id": "AgADBAADZqc",
-            "width": 640,
-            "height": 480,
-            "duration": 120,
-            "thumbnail": {
-                "file_id": "BAACAgIAAxkBAAI",
-                "file_unique_id": "AgADBAADZqc",
-                "width": 640,
-                "height": 480,
-                "file_size": 1024000
+          {
+            "type": "bold",
+            "offset": 0,
+            "length": 240,
+            "url": "https://example.com",
+            "user": {
+              "id": "123456789",
+              "is_bot": false,
+              "first_name": "John",
+              "last_name": "Doe",
+              "username": "johndoe",
+              "language_code": "en",
+              "is_premium": true,
+              "added_to_attachment_menu": true,
+              "can_join_groups": true,
+              "can_read_all_group_messages": true,
+              "supports_guest_queries": null,
+              "supports_inline_queries": true,
+              "can_connect_to_business": true,
+              "has_main_web_app": true,
+              "has_topics_enabled": true,
+              "allows_users_to_create_topics": true,
+              "can_manage_bots": true,
+              "supports_join_request_queries": null
             },
-            "file_name": "test_file.pdf",
-            "mime_type": "application/pdf",
-            "file_size": "1024000"
-        }
-    },
-    "giveaway": {
-        "chats": [
-            {
-                "id": "123456789",
-                "type": "private",
-                "title": "Test Title",
-                "username": "johndoe",
-                "first_name": "John",
-                "last_name": "Doe",
-                "is_forum": false,
-                "is_direct_messages": false
-            }
+            "language": "test_string",
+            "custom_emoji_id": "emoji_456",
+            "unix_time": null,
+            "date_time_format": null
+          }
         ],
-        "winners_selection_date": 42,
-        "winner_count": 5,
-        "only_new_members": false,
-        "has_public_winners": true,
-        "prize_description": "Win a prize!",
-        "country_codes": [
-            "item_1"
-        ],
-        "prize_star_count": 100,
-        "premium_subscription_month_count": 42
-    },
-    "giveaway_winners": {
-        "chat": {
-            "id": "123456789",
-            "type": "private",
-            "title": "Test Title",
-            "username": "johndoe",
-            "first_name": "John",
-            "last_name": "Doe",
-            "is_forum": false,
-            "is_direct_messages": false
+        "media": null,
+        "added_by_user": null,
+        "added_by_chat": null,
+        "addition_date": null
+      }
+    ],
+    "total_voter_count": 42,
+    "is_closed": false,
+    "is_anonymous": true,
+    "type": "regular",
+    "allows_multiple_answers": false,
+    "allows_revoting": true,
+    "members_only": true,
+    "country_codes": null,
+    "question_entities": [
+      {
+        "type": "bold",
+        "offset": 0,
+        "length": 240,
+        "url": "https://example.com",
+        "user": {
+          "id": "123456789",
+          "is_bot": false,
+          "first_name": "John",
+          "last_name": "Doe",
+          "username": "johndoe",
+          "language_code": "en",
+          "is_premium": true,
+          "added_to_attachment_menu": true,
+          "can_join_groups": true,
+          "can_read_all_group_messages": true,
+          "supports_guest_queries": null,
+          "supports_inline_queries": true,
+          "can_connect_to_business": true,
+          "has_main_web_app": true,
+          "has_topics_enabled": true,
+          "allows_users_to_create_topics": true,
+          "can_manage_bots": true,
+          "supports_join_request_queries": null
         },
-        "giveaway_message_id": 42,
-        "winners_selection_date": 42,
-        "winner_count": 5,
-        "winners": [
-            {
-                "id": "123456789",
-                "is_bot": false,
-                "first_name": "John",
-                "last_name": "Doe",
-                "username": "johndoe",
-                "language_code": "en",
-                "is_premium": true,
-                "added_to_attachment_menu": true,
-                "can_join_groups": true,
-                "can_read_all_group_messages": true,
-                "supports_guest_queries": null,
-                "supports_inline_queries": true,
-                "can_connect_to_business": true,
-                "has_main_web_app": true,
-                "has_topics_enabled": true,
-                "allows_users_to_create_topics": true,
-                "can_manage_bots": true
-            }
-        ],
-        "additional_chat_count": 3,
-        "prize_star_count": 100,
-        "premium_subscription_month_count": 42,
-        "unclaimed_prize_count": 2,
-        "only_new_members": false,
-        "was_refunded": false,
-        "prize_description": "Win a prize!"
-    },
-    "invoice": {
-        "title": "Test Title",
-        "description": "Test description",
-        "start_parameter": "test_start",
-        "currency": "USD",
-        "total_amount": 10000
-    },
+        "language": "test_string",
+        "custom_emoji_id": "emoji_456",
+        "unix_time": null,
+        "date_time_format": null
+      }
+    ],
+    "correct_option_ids": [
+      0
+    ],
+    "explanation": "Because it is correct",
+    "explanation_entities": [
+      {
+        "type": "bold",
+        "offset": 0,
+        "length": 240,
+        "url": "https://example.com",
+        "user": {
+          "id": "123456789",
+          "is_bot": false,
+          "first_name": "John",
+          "last_name": "Doe",
+          "username": "johndoe",
+          "language_code": "en",
+          "is_premium": true,
+          "added_to_attachment_menu": true,
+          "can_join_groups": true,
+          "can_read_all_group_messages": true,
+          "supports_guest_queries": null,
+          "supports_inline_queries": true,
+          "can_connect_to_business": true,
+          "has_main_web_app": true,
+          "has_topics_enabled": true,
+          "allows_users_to_create_topics": true,
+          "can_manage_bots": true,
+          "supports_join_request_queries": null
+        },
+        "language": "test_string",
+        "custom_emoji_id": "emoji_456",
+        "unix_time": null,
+        "date_time_format": null
+      }
+    ],
+    "explanation_media": null,
+    "open_period": 60,
+    "close_date": 1700086400,
+    "description": null,
+    "description_entities": null,
+    "media": null
+  },
+  "venue": {
     "location": {
-        "latitude": 55.7558,
-        "longitude": 37.6173,
-        "horizontal_accuracy": 10.5,
-        "live_period": 3600,
-        "heading": 180,
-        "proximity_alert_radius": 100
+      "latitude": 55.7558,
+      "longitude": 37.6173,
+      "horizontal_accuracy": 10.5,
+      "live_period": 3600,
+      "heading": 180,
+      "proximity_alert_radius": 100
     },
-    "poll": {
-        "id": "123456789",
-        "question": "What is the answer?",
-        "options": [
-            {
-                "persistent_id": "option_persistent_id_test",
-                "text": "Hello, World!",
-                "voter_count": 15,
-                "text_entities": [
-                    {
-                        "type": "bold",
-                        "offset": 0,
-                        "length": 240,
-                        "url": "https://example.com",
-                        "user": {
-                            "id": "123456789",
-                            "is_bot": false,
-                            "first_name": "John",
-                            "last_name": "Doe",
-                            "username": "johndoe",
-                            "language_code": "en",
-                            "is_premium": true,
-                            "added_to_attachment_menu": true,
-                            "can_join_groups": true,
-                            "can_read_all_group_messages": true,
-                            "supports_guest_queries": null,
-                            "supports_inline_queries": true,
-                            "can_connect_to_business": true,
-                            "has_main_web_app": true,
-                            "has_topics_enabled": true,
-                            "allows_users_to_create_topics": true,
-                            "can_manage_bots": true
-                        },
-                        "language": "test_string",
-                        "custom_emoji_id": "emoji_456"
-                    }
-                ],
-                "media": null,
-                "added_by_user": null,
-                "added_by_chat": null,
-                "addition_date": null
-            }
-        ],
-        "total_voter_count": 42,
-        "is_closed": false,
-        "is_anonymous": true,
-        "type": "regular",
-        "allows_multiple_answers": false,
-        "allows_revoting": true,
-        "members_only": true,
-        "country_codes": null,
-        "question_entities": [
-            {
-                "type": "bold",
-                "offset": 0,
-                "length": 240,
-                "url": "https://example.com",
-                "user": {
-                    "id": "123456789",
-                    "is_bot": false,
-                    "first_name": "John",
-                    "last_name": "Doe",
-                    "username": "johndoe",
-                    "language_code": "en",
-                    "is_premium": true,
-                    "added_to_attachment_menu": true,
-                    "can_join_groups": true,
-                    "can_read_all_group_messages": true,
-                    "supports_guest_queries": null,
-                    "supports_inline_queries": true,
-                    "can_connect_to_business": true,
-                    "has_main_web_app": true,
-                    "has_topics_enabled": true,
-                    "allows_users_to_create_topics": true,
-                    "can_manage_bots": true
-                },
-                "language": "test_string",
-                "custom_emoji_id": "emoji_456"
-            }
-        ],
-        "correct_option_ids": [
-            0
-        ],
-        "explanation": "Because it is correct",
-        "explanation_entities": [
-            {
-                "type": "bold",
-                "offset": 0,
-                "length": 240,
-                "url": "https://example.com",
-                "user": {
-                    "id": "123456789",
-                    "is_bot": false,
-                    "first_name": "John",
-                    "last_name": "Doe",
-                    "username": "johndoe",
-                    "language_code": "en",
-                    "is_premium": true,
-                    "added_to_attachment_menu": true,
-                    "can_join_groups": true,
-                    "can_read_all_group_messages": true,
-                    "supports_guest_queries": null,
-                    "supports_inline_queries": true,
-                    "can_connect_to_business": true,
-                    "has_main_web_app": true,
-                    "has_topics_enabled": true,
-                    "allows_users_to_create_topics": true,
-                    "can_manage_bots": true
-                },
-                "language": "test_string",
-                "custom_emoji_id": "emoji_456"
-            }
-        ],
-        "explanation_media": null,
-        "open_period": 60,
-        "close_date": 1700086400,
-        "description": null,
-        "description_entities": null,
-        "media": null
-    },
-    "live_photo": null,
-    "venue": {
-        "location": {
-            "latitude": 55.7558,
-            "longitude": 37.6173,
-            "horizontal_accuracy": 10.5,
-            "live_period": 3600,
-            "heading": 180,
-            "proximity_alert_radius": 100
-        },
-        "title": "Test Title",
-        "address": "123 Main St",
-        "foursquare_id": "abc123foursquare",
-        "foursquare_type": "food/restaurant",
-        "google_place_id": "ChIJN1t_tDeuEmsRUsoyG83frY4",
-        "google_place_type": "restaurant"
-    }
+    "title": "Test Title",
+    "address": "123 Main St",
+    "foursquare_id": "abc123foursquare",
+    "foursquare_type": "food/restaurant",
+    "google_place_id": "ChIJN1t_tDeuEmsRUsoyG83frY4",
+    "google_place_type": "restaurant"
+  }
 }

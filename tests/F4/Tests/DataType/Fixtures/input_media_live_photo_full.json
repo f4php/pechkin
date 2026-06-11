@@ -1,9 +1,9 @@
 {
-    "media": "attach://live_photo",
-    "photo": "attach://preview_photo",
-    "caption": "Live photo caption",
-    "parse_mode": "HTML",
-    "caption_entities": null,
-    "show_caption_above_media": true,
-    "has_spoiler": false
+  "media": "attach://live_photo",
+  "photo": "attach://preview_photo",
+  "caption": "Live photo caption",
+  "parse_mode": "HTML",
+  "caption_entities": null,
+  "show_caption_above_media": true,
+  "has_spoiler": false
 }

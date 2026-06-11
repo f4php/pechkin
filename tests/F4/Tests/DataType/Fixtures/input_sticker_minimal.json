@@ -1,7 +1,9 @@
 {
-    "sticker": "sticker_file_id",
-    "format": "static",
-    "emoji_list": ["👍"],
-    "mask_position": null,
-    "keywords": null
+  "sticker": "sticker_file_id",
+  "format": "static",
+  "emoji_list": [
+    "👍"
+  ],
+  "mask_position": null,
+  "keywords": null
 }

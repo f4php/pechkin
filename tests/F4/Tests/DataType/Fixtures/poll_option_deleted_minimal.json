@@ -1,6 +1,6 @@
 {
-    "option_persistent_id": "abc123",
-    "option_text": "Deleted option text",
-    "poll_message": null,
-    "option_text_entities": null
+  "option_persistent_id": "abc123",
+  "option_text": "Deleted option text",
+  "poll_message": null,
+  "option_text_entities": null
 }

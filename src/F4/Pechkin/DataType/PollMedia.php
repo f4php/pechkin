@@ -10,6 +10,7 @@ use F4\Pechkin\DataType\{
     Animation,
     Audio,
     Document,
+    Link,
     LivePhoto,
     Location,
     PhotoSize,
@@ -29,6 +30,7 @@ readonly class PollMedia extends AbstractDataType
         public readonly ?Animation $animation = null,
         public readonly ?Audio $audio = null,
         public readonly ?Document $document = null,
+        public readonly ?Link $link = null,
         public readonly ?LivePhoto $live_photo = null,
         public readonly ?Location $location = null,
         /** @var PhotoSize[]|null */
@@ -48,6 +50,7 @@ readonly class PollMedia extends AbstractDataType
             $this->sticker,
             $this->venue,
             $this->video,
+            $this->link,
         ]))) {
             throw new InvalidArgumentException('At most one media field may be set.');
         }

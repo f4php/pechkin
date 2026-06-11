@@ -20,5 +20,6 @@ readonly class ChatJoinRequest extends AbstractDataType
         public readonly int $date,
         public readonly ?string $bio = null,
         public readonly ?ChatInviteLink $invite_link = null,
+        public readonly ?string $query_id = null,
     ) {}
 }

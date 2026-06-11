@@ -1,9 +1,9 @@
 {
-    "poll_id": "test_string",
-    "option_ids": [
-        1
-    ],
-    "option_persistent_ids": [],
-    "voter_chat": null,
-    "user": null
+  "poll_id": "test_string",
+  "option_ids": [
+    1
+  ],
+  "option_persistent_ids": [],
+  "voter_chat": null,
+  "user": null
 }

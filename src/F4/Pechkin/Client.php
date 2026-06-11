@@ -38,6 +38,7 @@ use F4\Pechkin\DataType\{
     InputPaidMedia,
     InputPollMedia,
     InputProfilePhoto,
+    InputRichMessage,
     InputSticker,
     InputStoryContent,
     KeyboardButton,
@@ -72,6 +73,7 @@ use F4\Pechkin\DataType\{
     UserChatBoosts,
     UserProfileAudios,
     UserProfilePhotos,
+    WebAppInfo,
     WebhookInfo,
 };
 
@@ -83,7 +85,7 @@ use function
 
 class Client implements ClientInterface
 {
-    protected const string API_VERSION = '10';
+    protected const string API_VERSION = '10.1';
     protected const int REQUEST_TIMEOUT = 60;
 
     protected ApiClient $apiClient;
@@ -106,6 +108,12 @@ class Client implements ClientInterface
         ?bool $show_alert = null,
         ?string $url = null,
         ?int $cache_time = null,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function answerChatJoinRequestQuery(
+        string $query_id,
+        bool $answer,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -487,6 +495,7 @@ class Client implements ClientInterface
         ?array $entities = null,
         ?LinkPreviewOptions $link_preview_options = null,
         ?InlineKeyboardMarkup $reply_markup = null,
+        ?InputRichMessage $rich_message = null,
     ): Message|bool {
         return match(is_bool($result = $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()))) {
             true => $result,
@@ -974,6 +983,13 @@ class Client implements ClientInterface
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
+    public function sendChatJoinRequestWebApp(
+        string $query_id,
+        string $button_text,
+        WebAppInfo $web_app,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
     public function sendChecklist(
         int|string $chat_id,
         InputChecklist $checklist,
@@ -1269,6 +1285,29 @@ class Client implements ClientInterface
         ?string $message_effect_id = null,
         ?ReplyParameters $reply_parameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
+    ): Message {
+        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+    }
+    public function sendRichMessage(
+        int|string $chat_id,
+        InputRichMessage $rich_message,
+        ?string $business_connection_id = null,
+        ?int $message_thread_id = null,
+        ?ReplyParameters $reply_parameters = null,
+        ?LinkPreviewOptions $link_preview_options = null,
+        ?bool $disable_notification = null,
+        ?bool $protect_content = null,
+        ?bool $allow_user_chats = null,
+        ?string $effect_id = null,
+    ): Message {
+        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+    }
+    public function sendRichMessageDraft(
+        int|string $chat_id,
+        InputRichMessage $rich_message,
+        ?string $business_connection_id = null,
+        ?int $message_thread_id = null,
+        ?string $effect_id = null,
     ): Message {
         return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }

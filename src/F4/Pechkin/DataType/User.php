@@ -26,6 +26,7 @@ readonly class User extends AbstractDataType
         public readonly ?bool $has_topics_enabled = null,
         public readonly ?bool $allows_users_to_create_topics = null,
         public readonly ?bool $can_manage_bots = null,
+        public readonly ?bool $supports_join_request_queries = null,
     )
     {}
 }

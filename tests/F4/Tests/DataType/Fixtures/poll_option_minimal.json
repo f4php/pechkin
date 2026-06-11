@@ -1,10 +1,10 @@
 {
-    "persistent_id": "option_persistent_id_test",
-    "text": "Hello, World!",
-    "voter_count": 15,
-    "text_entities": null,
-    "media": null,
-    "added_by_user": null,
-    "added_by_chat": null,
-    "addition_date": null
+  "persistent_id": "option_persistent_id_test",
+  "text": "Hello, World!",
+  "voter_count": 15,
+  "text_entities": null,
+  "media": null,
+  "added_by_user": null,
+  "added_by_chat": null,
+  "addition_date": null
 }

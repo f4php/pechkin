@@ -1,18 +1,18 @@
 {
-    "file_id": "BAACAgIAAxkBAAI",
-    "file_unique_id": "AgADBAADZqc",
-    "width": 1280,
-    "height": 720,
-    "duration": 3,
-    "photo": [
-        {
-            "file_id": "BAACAgIAAxkBAAI",
-            "file_unique_id": "AgADBAADZqc",
-            "width": 640,
-            "height": 480,
-            "file_size": null
-        }
-    ],
-    "mime_type": "video/mp4",
-    "file_size": "102400"
+  "file_id": "BAACAgIAAxkBAAI",
+  "file_unique_id": "AgADBAADZqc",
+  "width": 1280,
+  "height": 720,
+  "duration": 3,
+  "photo": [
+    {
+      "file_id": "BAACAgIAAxkBAAI",
+      "file_unique_id": "AgADBAADZqc",
+      "width": 640,
+      "height": 480,
+      "file_size": null
+    }
+  ],
+  "mime_type": "video/mp4",
+  "file_size": "102400"
 }

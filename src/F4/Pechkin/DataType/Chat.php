@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
+    User,
 };
 
 use function in_array;
@@ -22,6 +23,7 @@ readonly class Chat extends AbstractDataType
         public readonly ?string $last_name = null,
         public readonly ?bool $is_forum = null,
         public readonly ?bool $is_direct_messages = null,
+        public readonly ?User $guard_bot = null,
 
         // Undocumented property discoverd through API interaction
         public readonly ?bool $all_members_are_administrators = null,
