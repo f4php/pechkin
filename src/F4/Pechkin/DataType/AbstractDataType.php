@@ -18,6 +18,7 @@ use F4\Pechkin\{
 };
 
 use function
+    array_is_list,
     array_map,
     array_reduce,
     get_object_vars,
@@ -64,7 +65,9 @@ abstract readonly class AbstractDataType
                     class: AbstractDataType::class,
                     allow_string: true,
                 ) =>
-                    fn(mixed $item): mixed => ($type)::fromArray((array)$item),
+                    // scalar items pass through unchanged: e.g. an Array of RichText
+                    // may mix RichText objects with plain strings
+                    fn(mixed $item): mixed => is_array($item) ? ($type)::fromArray($item) : $item,
                 default =>
                     fn(mixed $item): mixed => $item,
             },
@@ -115,10 +118,12 @@ abstract readonly class AbstractDataType
             if (!isset($data[$name])) {
                 continue;
             }
-            if (self::checkIfTypeHas($type, 'array') && is_array($data[$name]) && $arrayOf) {
+            // a list is an "Array of X"; an associative array is a single object —
+            // both can be valid for union-typed fields such as RichText|array|string
+            if (self::checkIfTypeHas($type, 'array') && is_array($data[$name]) && array_is_list($data[$name]) && $arrayOf) {
                 $data[$name] = self::createArrayOfType(data: $data[$name], type: $arrayOf->type);
-            } 
-            elseif (self::checkIfTypeHas($type, AbstractDataType::class) && ($className = self::extractClassName($type, AbstractDataType::class))) {
+            }
+            elseif (self::checkIfTypeHas($type, AbstractDataType::class) && is_array($data[$name]) && ($className = self::extractClassName($type, AbstractDataType::class))) {
                 $data[$name] = $className::fromArray($data[$name]);
             }
             // attempt to cast types automatically

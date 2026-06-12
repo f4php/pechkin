@@ -17,7 +17,9 @@ readonly class RichBlockBlockQuotation extends RichBlock
         /** @var RichBlock[] */
         #[ArrayOf(RichBlock::class)]
         public readonly array $blocks,
-        public readonly ?RichText $credit = null,
+        /** @var RichText|RichText[]|string|null */
+        #[ArrayOf(RichText::class)]
+        public readonly RichText|array|string|null $credit = null,
     ) {
         $this->type = 'blockquote';
     }

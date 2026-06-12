@@ -14,7 +14,9 @@ readonly class RichBlockDetails extends RichBlock
 {
     public readonly string $type;
     public function __construct(
-        public readonly RichText $summary,
+        /** @var RichText|RichText[]|string */
+        #[ArrayOf(RichText::class)]
+        public readonly RichText|array|string $summary,
         /** @var RichBlock[] */
         #[ArrayOf(RichBlock::class)]
         public readonly array $blocks,
