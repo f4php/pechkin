@@ -1,0 +1,10 @@
+# RichTextUnderline
+
+Source: https://core.telegram.org/bots/api#richtextunderline
+
+An underlined text.
+
+| Field | Type | Description |
+| --- | --- | --- |
+| type | String | Type of the rich text, always “underline” |
+| text | [RichText](https://core.telegram.org/bots/api#richtext) | The text |
