@@ -15,6 +15,7 @@ readonly class Document extends AbstractDataType
         public readonly string $file_id,
         public readonly string $file_unique_id,
         public readonly ?PhotoSize $thumbnail = null,
+        public readonly ?PhotoSize $thumb = null, // this property is not documented, but returned by the API alongside $thumbnail
         public readonly ?string $file_name = null,
         public readonly ?string $mime_type = null,
         public readonly ?string $file_size = null, // may not fit in a 32-bit integer

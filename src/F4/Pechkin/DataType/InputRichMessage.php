@@ -6,9 +6,6 @@ namespace F4\Pechkin\DataType;
 
 use F4\Pechkin\DataType\{
     AbstractDataType,
-    InlineKeyboardMarkup,
-    RichBlock,
-    Attribute\ArrayOf,
 };
 
 readonly class InputRichMessage extends AbstractDataType

@@ -20,6 +20,7 @@ readonly class Video extends AbstractDataType
         public readonly int $height,
         public readonly int $duration,
         public readonly ?PhotoSize $thumbnail = null,
+        public readonly ?PhotoSize $thumb = null, // this property is not documented, but returned by the API alongside $thumbnail
         /** @var PhotoSize[]|null */
         #[ArrayOf(PhotoSize::class)]
         public readonly ?array $cover = null,
