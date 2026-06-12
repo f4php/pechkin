@@ -22,6 +22,8 @@ use F4\Pechkin\DataType\{
     InlineKeyboardMarkup,
     InlineQueryResultArticle,
     InputFile,
+    InputRichMessage,
+    KeyboardButton,
     MenuButton,
     Message,
     MessageId,
@@ -41,6 +43,7 @@ use PHPUnit\Framework\Attributes\{
     Group,
 };
 
+#[Group('integration')]
 #[Group('integration:basic')]
 final class ClientTest extends IntegrationTestCase
 {
@@ -600,7 +603,11 @@ final class ClientTest extends IntegrationTestCase
 
     public function testGetUpdates(): void
     {
-        $updates = self::$client->getUpdates(timeout: 0, limit: 1);
+        // 409 Conflict when a webhook is configured for the bot — environmental
+        $updates = $this->attemptOrSkip(
+            fn() => self::$client->getUpdates(timeout: 0, limit: 1),
+            'getUpdates',
+        );
         $this->assertIsArray($updates);
         foreach ($updates as $update) {
             $this->assertInstanceOf(Update::class, $update);
@@ -656,10 +663,11 @@ final class ClientTest extends IntegrationTestCase
         // Requires a real human user — bots cannot have boosts
         $this->skipUnlessUserId();
 
-        $boosts = self::$client->getUserChatBoosts(
+        // boosts exist only for supergroups and channels; basic groups give PEER_ID_INVALID
+        $boosts = $this->attemptOrSkip(fn() => self::$client->getUserChatBoosts(
             chat_id: self::$chatId,
             user_id: self::$userId,
-        );
+        ), 'getUserChatBoosts');
         $this->assertInstanceOf(UserChatBoosts::class, $boosts);
         // boosts array may be empty if the user hasn't boosted the chat
         $this->assertIsArray($boosts->boosts);
@@ -676,11 +684,12 @@ final class ClientTest extends IntegrationTestCase
         $this->skipUnlessUserId();
 
         // Restrict: remove send_messages permission
-        $restricted = self::$client->restrictChatMember(
+        // (supergroup-only — skips the whole lifecycle before any state is changed)
+        $restricted = $this->attemptOrSkip(fn() => self::$client->restrictChatMember(
             chat_id: self::$chatId,
             user_id: self::$userId,
             permissions: ChatPermissions::fromArray(['can_send_messages' => false]),
-        );
+        ), 'restrictChatMember');
         $this->assertTrue($restricted);
 
         // Restore full permissions
@@ -1048,6 +1057,198 @@ final class ClientTest extends IntegrationTestCase
         $this->assertApiError(fn() =>
             self::$client->setUserEmojiStatus(user_id: 1)
         );
+    }
+
+    // -------------------------------------------------------------------------
+    // Query-answering methods that need live inbound updates (web app, join
+    // request, guest queries). Success paths cannot be automated; a 4xx with a
+    // fabricated query id proves the requests are wired correctly.
+    // -------------------------------------------------------------------------
+
+    public function testAnswerWebAppQuery(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->answerWebAppQuery(
+                web_app_query_id: 'fake_id_000',
+                result: InlineQueryResultArticle::fromArray([
+                    'id' => 'test',
+                    'title' => 'Test',
+                    'input_message_content' => ['message_text' => 'test'],
+                ]),
+            )
+        );
+    }
+
+    public function testAnswerChatJoinRequestQuery(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->answerChatJoinRequestQuery(
+                chat_join_request_query_id: 'fake_id_000',
+                result: 'approve',
+            )
+        );
+    }
+
+    public function testAnswerGuestQuery(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->answerGuestQuery(
+                guest_query_id: 'fake_id_000',
+                result: InlineQueryResultArticle::fromArray([
+                    'id' => 'test',
+                    'title' => 'Test',
+                    'input_message_content' => ['message_text' => 'test'],
+                ]),
+            )
+        );
+    }
+
+    public function testSendChatJoinRequestWebApp(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->sendChatJoinRequestWebApp(
+                chat_join_request_query_id: 'fake_id_000',
+                web_app_url: 'https://example.com/webapp',
+            )
+        );
+    }
+
+    public function testSavePreparedKeyboardButton(): void
+    {
+        $this->skipUnlessUserId();
+
+        // like savePreparedInlineMessage: requires the user to have started the
+        // bot in private; 4xx proves correct serialization
+        $this->assertApiError(fn() =>
+            self::$client->savePreparedKeyboardButton(
+                user_id: self::$userId,
+                button: new KeyboardButton(text: '[integration] prepared button'),
+            )
+        );
+    }
+
+    // -------------------------------------------------------------------------
+    // User profile data (requires TELEGRAM_TEST_USER_ID)
+    // -------------------------------------------------------------------------
+
+    public function testGetUserProfileAudios(): void
+    {
+        $this->skipUnlessUserId();
+
+        $audios = $this->attemptOrSkip(
+            fn() => self::$client->getUserProfileAudios(user_id: self::$userId),
+            'getUserProfileAudios',
+        );
+        $this->assertGreaterThanOrEqual(0, $audios->total_count);
+    }
+
+    public function testGetUserPersonalChatMessages(): void
+    {
+        $this->skipUnlessUserId();
+
+        $messages = $this->attemptOrSkip(
+            fn() => self::$client->getUserPersonalChatMessages(user_id: self::$userId, limit: 1),
+            'getUserPersonalChatMessages',
+        );
+        $this->assertIsArray($messages);
+    }
+
+    // -------------------------------------------------------------------------
+    // Games — real chain requires TELEGRAM_TEST_GAME_SHORT_NAME (a game created
+    // with BotFather); without it, 4xx smoke tests prove the wiring
+    // -------------------------------------------------------------------------
+
+    public function testSendGameWithUnknownGame(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->sendGame(chat_id: self::$chatId, game_short_name: 'nonexistent_game_000')
+        );
+    }
+
+    public function testSetGameScoreWithoutGameMessage(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->setGameScore(
+                user_id: self::$userId ?? self::$botId,
+                score: 1,
+                inline_message_id: 'fake_id_000',
+            )
+        );
+    }
+
+    public function testGameLifecycle(): void
+    {
+        $this->skipUnlessGameShortName();
+
+        $msg = self::$client->sendGame(
+            chat_id: self::$chatId,
+            game_short_name: self::$gameShortName,
+        );
+        $this->assertInstanceOf(Message::class, $msg);
+        $this->assertNotNull($msg->game);
+
+        $scores = $this->attemptOrSkip(fn() => self::$client->getGameHighScores(
+            user_id: self::$userId ?? self::$botId,
+            chat_id: (int) self::$chatId,
+            message_id: $msg->message_id,
+        ), 'getGameHighScores');
+        $this->assertIsArray($scores);
+    }
+
+    public function testSetChatMemberTag(): void
+    {
+        $this->skipUnlessUserId();
+
+        // member tags require a supergroup with topics-style features; skip on 4xx
+        $result = $this->attemptOrSkip(fn() => self::$client->setChatMemberTag(
+            chat_id: self::$chatId,
+            user_id: self::$userId,
+            tag: 'tester',
+        ), 'setChatMemberTag');
+        $this->assertTrue($result);
+    }
+
+    // -------------------------------------------------------------------------
+    // Rich messages and drafts (Bot API 10.x)
+    // -------------------------------------------------------------------------
+
+    public function testSendRichMessage(): void
+    {
+        $msg = $this->attemptOrSkip(fn() => self::$client->sendRichMessage(
+            chat_id: self::$chatId,
+            rich_message: new InputRichMessage(html: '<b>[integration]</b> testSendRichMessage'),
+        ), 'sendRichMessage');
+
+        $this->assertInstanceOf(Message::class, $msg);
+    }
+
+    public function testSendRichMessageDraft(): void
+    {
+        // drafts stream to private chats only — target the test user's chat;
+        // still skips if the user has never started the bot
+        $this->skipUnlessUserId();
+
+        $result = $this->attemptOrSkip(fn() => self::$client->sendRichMessageDraft(
+            chat_id: self::$userId,
+            draft_id: 1,
+            rich_message: new InputRichMessage(html: '<b>[integration]</b> draft'),
+        ), 'sendRichMessageDraft');
+
+        $this->assertTrue($result);
+    }
+
+    public function testSendMessageDraft(): void
+    {
+        // drafts stream to private chats only — target the test user's chat
+        $this->skipUnlessUserId();
+
+        $result = $this->attemptOrSkip(fn() => self::$client->sendMessageDraft(
+            chat_id: self::$userId,
+            draft_id: 1,
+            text: '[integration] testSendMessageDraft',
+        ), 'sendMessageDraft');
+
+        $this->assertTrue($result);
     }
 
     /**

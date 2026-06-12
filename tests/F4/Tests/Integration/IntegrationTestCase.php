@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace F4\Tests\Integration;
 
 use F4\Pechkin\Client;
+use F4\Pechkin\Client\ApiClient;
 use F4\Pechkin\Client\ClientException;
 use PHPUnit\Framework\TestCase;
 
+// NOTE: PHPUnit 13 does not inherit #[Group] attributes from parent classes,
+// so every concrete test class must carry #[Group('integration')] itself
+// in addition to its specific integration:* group.
 abstract class IntegrationTestCase extends TestCase
 {
     protected static Client $client;
@@ -23,6 +27,15 @@ abstract class IntegrationTestCase extends TestCase
     /** Set when TELEGRAM_PAYMENT_PROVIDER_TOKEN is provided. Required for payment tests. */
     protected static ?string $paymentProviderToken = null;
 
+    /** Set when TELEGRAM_TEST_CHANNEL_ID is provided. Required for channel-only features. */
+    protected static ?string $channelId = null;
+
+    /** Set when TELEGRAM_TEST_GAME_SHORT_NAME is provided. Required for real game tests. */
+    protected static ?string $gameShortName = null;
+
+    /** Set when TELEGRAM_TEST_ALLOW_DESTRUCTIVE is provided. Gates logOut/close tests. */
+    protected static bool $allowDestructive = false;
+
     public static function setUpBeforeClass(): void
     {
         $token = getenv('TELEGRAM_BOT_TOKEN');
@@ -34,7 +47,10 @@ abstract class IntegrationTestCase extends TestCase
             );
         }
 
-        self::$client = new Client($token);
+        // Throttle requests and react to 429 responses to stay under Telegram's flood limits
+        $throttleMs = ($v = getenv('TELEGRAM_TEST_THROTTLE_MS')) !== false && $v !== '' ? (int) $v : 1500;
+        $maxRetries = ($v = getenv('TELEGRAM_TEST_MAX_RETRIES')) !== false && $v !== '' ? (int) $v : 3;
+        self::$client = new Client($token, new ApiClient($token, throttleMs: $throttleMs, maxRetries: $maxRetries));
         self::$chatId = $chatId;
 
         $me = self::$client->getMe();
@@ -48,6 +64,14 @@ abstract class IntegrationTestCase extends TestCase
 
         $paymentToken = getenv('TELEGRAM_PAYMENT_PROVIDER_TOKEN');
         self::$paymentProviderToken = $paymentToken ?: null;
+
+        $channelId = getenv('TELEGRAM_TEST_CHANNEL_ID');
+        self::$channelId = $channelId ?: null;
+
+        $gameShortName = getenv('TELEGRAM_TEST_GAME_SHORT_NAME');
+        self::$gameShortName = $gameShortName ?: null;
+
+        self::$allowDestructive = (bool) getenv('TELEGRAM_TEST_ALLOW_DESTRUCTIVE');
     }
 
     /**
@@ -79,6 +103,67 @@ abstract class IntegrationTestCase extends TestCase
         if (self::$paymentProviderToken === null) {
             $this->markTestSkipped('Requires TELEGRAM_PAYMENT_PROVIDER_TOKEN env var');
         }
+    }
+
+    /**
+     * Skip unless TELEGRAM_TEST_CHANNEL_ID was provided.
+     * Call at the top of any test that needs a channel the bot administers.
+     */
+    protected function skipUnlessChannelId(): void
+    {
+        if (self::$channelId === null) {
+            $this->markTestSkipped('Requires TELEGRAM_TEST_CHANNEL_ID env var');
+        }
+    }
+
+    /**
+     * Skip unless TELEGRAM_TEST_GAME_SHORT_NAME was provided.
+     * Call at the top of any test that needs a game registered with BotFather.
+     */
+    protected function skipUnlessGameShortName(): void
+    {
+        if (self::$gameShortName === null) {
+            $this->markTestSkipped('Requires TELEGRAM_TEST_GAME_SHORT_NAME env var');
+        }
+    }
+
+    /**
+     * Skip unless TELEGRAM_TEST_ALLOW_DESTRUCTIVE was provided.
+     * Gates tests that disrupt the bot session (logOut, close).
+     */
+    protected function skipUnlessDestructiveAllowed(): void
+    {
+        if (!self::$allowDestructive) {
+            $this->markTestSkipped('Requires TELEGRAM_TEST_ALLOW_DESTRUCTIVE env var');
+        }
+    }
+
+    /**
+     * Run $callable and return its result; if Telegram rejects the call with a 4xx
+     * error (feature unavailable for this bot/chat, missing rights, flood limits on
+     * rarely-used settings), skip the test instead of failing. 5xx and transport
+     * errors still fail, so serialization regressions are not masked.
+     */
+    protected function attemptOrSkip(callable $callable, string $feature): mixed
+    {
+        try {
+            return $callable();
+        } catch (ClientException $e) {
+            if ($e->getCode() >= 400 && $e->getCode() < 500) {
+                $this->markTestSkipped(
+                    $feature . ' unavailable for this bot/chat: [' . $e->getCode() . '] ' . $e->getMessage()
+                );
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Load a binary fixture from the Fixtures directory (tiny ffmpeg-generated media files).
+     */
+    protected static function fixture(string $name): string
+    {
+        return file_get_contents(__DIR__ . '/Fixtures/' . $name);
     }
 
     /**

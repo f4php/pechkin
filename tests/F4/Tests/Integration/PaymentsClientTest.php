@@ -30,6 +30,7 @@ use PHPUnit\Framework\Attributes\{
  * available in the main ClientTest as read-only tests that need no token.
  * The tests here focus on write operations that require a provider token.
  */
+#[Group('integration')]
 #[Group('integration:payments')]
 final class PaymentsClientTest extends IntegrationTestCase
 {

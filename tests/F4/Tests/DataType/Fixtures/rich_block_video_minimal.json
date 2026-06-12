@@ -6,12 +6,13 @@
         "height": 480,
         "duration": 120,
         "thumbnail": null,
+        "thumb": null,
         "cover": null,
         "start_timestamp": null,
+        "qualities": null,
         "file_name": null,
         "mime_type": null,
-        "file_size": null,
-        "qualities": null
+        "file_size": null
     },
     "has_spoiler": null,
     "caption": null

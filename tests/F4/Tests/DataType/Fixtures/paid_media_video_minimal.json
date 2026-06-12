@@ -1,16 +1,17 @@
 {
-  "video": {
-    "file_id": "BAACAgIAAxkBAAI",
-    "file_unique_id": "AgADBAADZqc",
-    "width": 640,
-    "height": 480,
-    "duration": 120,
-    "thumbnail": null,
-    "cover": null,
-    "start_timestamp": null,
-    "file_name": null,
-    "mime_type": null,
-    "file_size": null,
-    "qualities": null
-  }
+    "video": {
+        "file_id": "BAACAgIAAxkBAAI",
+        "file_unique_id": "AgADBAADZqc",
+        "width": 640,
+        "height": 480,
+        "duration": 120,
+        "thumbnail": null,
+        "thumb": null,
+        "cover": null,
+        "start_timestamp": null,
+        "qualities": null,
+        "file_name": null,
+        "mime_type": null,
+        "file_size": null
+    }
 }

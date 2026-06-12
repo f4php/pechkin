@@ -1,0 +1,15 @@
+{
+    "blocks": [
+        {
+            "type": "paragraph",
+            "text": [
+                {
+                    "type": "bold",
+                    "text": "[integration] payload capture"
+                },
+                " plain tail"
+            ]
+        }
+    ],
+    "is_rtl": null
+}

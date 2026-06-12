@@ -26,6 +26,7 @@ use PHPUnit\Framework\Attributes\{
  *
  * The sticker set is deleted at the end of the suite so no permanent state is left.
  */
+#[Group('integration')]
 #[Group('integration:basic')]
 final class StickerLifecycleTest extends IntegrationTestCase
 {
@@ -55,11 +56,12 @@ final class StickerLifecycleTest extends IntegrationTestCase
     {
         $this->skipUnlessUserId();
 
-        $file = self::$client->uploadStickerFile(
+        // PEER_ID_INVALID here means the test user has never started the bot in private
+        $file = $this->attemptOrSkip(fn() => self::$client->uploadStickerFile(
             user_id: self::$userId,
             sticker: new InputFile('sticker.png', self::stickerPng()),
             sticker_format: 'static',
-        );
+        ), 'uploadStickerFile');
 
         $this->assertInstanceOf(File::class, $file);
         $this->assertNotEmpty($file->file_id);
@@ -81,7 +83,8 @@ final class StickerLifecycleTest extends IntegrationTestCase
             // Set didn't exist — that's fine
         }
 
-        $result = self::$client->createNewStickerSet(
+        // PEER_ID_INVALID here means the test user has never started the bot in private
+        $result = $this->attemptOrSkip(fn() => self::$client->createNewStickerSet(
             user_id: self::$userId,
             name: $name,
             title: 'Pechkin Integration Test',
@@ -92,7 +95,7 @@ final class StickerLifecycleTest extends IntegrationTestCase
                     'emoji_list' => ['👍'],
                 ]),
             ],
-        );
+        ), 'createNewStickerSet');
 
         $this->assertTrue($result);
 
@@ -227,6 +230,37 @@ final class StickerLifecycleTest extends IntegrationTestCase
     }
 
     #[Depends('testSetStickerPositionInSet')]
+    public function testReplaceStickerInSet(StickerSet $set): StickerSet
+    {
+        $this->skipUnlessUserId();
+
+        // Upload a replacement sticker file
+        $file3 = self::$client->uploadStickerFile(
+            user_id: self::$userId,
+            sticker: new InputFile('sticker3.png', self::stickerPng()),
+            sticker_format: 'static',
+        );
+
+        $result = self::$client->replaceStickerInSet(
+            user_id: self::$userId,
+            name: $set->name,
+            old_sticker: $set->stickers[1]->file_id,
+            sticker: InputSticker::fromArray([
+                'sticker' => $file3->file_id,
+                'format' => 'static',
+                'emoji_list' => ['🎉'],
+            ]),
+        );
+        $this->assertTrue($result);
+
+        // Fetch the updated set so dependents reference current file_ids
+        $updated = self::$client->getStickerSet($set->name);
+        $this->assertCount(2, $updated->stickers);
+
+        return $updated;
+    }
+
+    #[Depends('testReplaceStickerInSet')]
     public function testDeleteStickerFromSet(StickerSet $set): StickerSet
     {
         $this->skipUnlessUserId();

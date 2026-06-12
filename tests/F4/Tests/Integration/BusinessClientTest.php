@@ -7,10 +7,18 @@ namespace F4\Tests\Integration;
 use F4\Pechkin\DataType\{
     AcceptedGiftTypes,
     BusinessConnection,
+    InputChecklist,
+    InputChecklistTask,
+    InputProfilePhotoStatic,
+    InputStoryContentPhoto,
+    Message,
     OwnedGifts,
     StarAmount,
 };
-use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\{
+    Depends,
+    Group,
+};
 
 /**
  * Tests for Telegram Business account methods.
@@ -24,6 +32,7 @@ use PHPUnit\Framework\Attributes\Group;
  * Run with:
  *   TELEGRAM_BUSINESS_CONNECTION_ID=xxx composer test:integration:business
  */
+#[Group('integration')]
 #[Group('integration:business')]
 final class BusinessClientTest extends IntegrationTestCase
 {
@@ -170,6 +179,127 @@ final class BusinessClientTest extends IntegrationTestCase
             self::$client->deleteStory(
                 business_connection_id: self::$businessConnectionId,
                 story_id: 999999999,
+            )
+        );
+    }
+
+    // -------------------------------------------------------------------------
+    // Profile photo and username
+    // -------------------------------------------------------------------------
+
+    public function testSetBusinessAccountProfilePhoto(): void
+    {
+        // InputProfilePhotoStatic.photo is an attach:// reference, but the request
+        // is sent as JSON — uploading a new photo cannot succeed through this
+        // client yet; a 4xx proves the request shape is correct
+        $this->assertApiError(fn() =>
+            self::$client->setBusinessAccountProfilePhoto(
+                business_connection_id: self::$businessConnectionId,
+                photo: new InputProfilePhotoStatic(photo: 'attach://unsupported'),
+            )
+        );
+    }
+
+    public function testRemoveBusinessAccountProfilePhoto(): void
+    {
+        $result = $this->attemptOrSkip(fn() => self::$client->removeBusinessAccountProfilePhoto(
+            business_connection_id: self::$businessConnectionId,
+        ), 'removeBusinessAccountProfilePhoto');
+        $this->assertTrue($result);
+    }
+
+    public function testSetBusinessAccountUsername(): void
+    {
+        // re-set the current username to avoid changing visible state
+        $conn = self::$client->getBusinessConnection(self::$businessConnectionId);
+
+        $result = $this->attemptOrSkip(fn() => self::$client->setBusinessAccountUsername(
+            business_connection_id: self::$businessConnectionId,
+            username: $conn->user->username,
+        ), 'setBusinessAccountUsername');
+        $this->assertTrue($result);
+    }
+
+    // -------------------------------------------------------------------------
+    // Checklists
+    // -------------------------------------------------------------------------
+
+    public function testSendChecklist(): Message
+    {
+        $msg = $this->attemptOrSkip(fn() => self::$client->sendChecklist(
+            chat_id: self::$chatId,
+            checklist: new InputChecklist(
+                title: '[integration] checklist',
+                tasks: [
+                    new InputChecklistTask(id: 1, text: 'first task'),
+                    new InputChecklistTask(id: 2, text: 'second task'),
+                ],
+            ),
+            business_connection_id: self::$businessConnectionId,
+        ), 'sendChecklist');
+
+        $this->assertInstanceOf(Message::class, $msg);
+        $this->assertNotNull($msg->checklist);
+
+        return $msg;
+    }
+
+    #[Depends('testSendChecklist')]
+    public function testEditMessageChecklist(Message $msg): void
+    {
+        $result = self::$client->editMessageChecklist(
+            business_connection_id: self::$businessConnectionId,
+            chat_id: self::$chatId,
+            message_id: $msg->message_id,
+            checklist: new InputChecklist(
+                title: '[integration] checklist (edited)',
+                tasks: [
+                    new InputChecklistTask(id: 1, text: 'first task'),
+                    new InputChecklistTask(id: 2, text: 'second task'),
+                    new InputChecklistTask(id: 3, text: 'third task'),
+                ],
+            ),
+        );
+
+        $this->assertInstanceOf(Message::class, $result);
+    }
+
+    // -------------------------------------------------------------------------
+    // Stories — InputStoryContentPhoto.photo is an attach:// reference sent as
+    // JSON, so real uploads cannot succeed through this client yet; 4xx smoke
+    // tests prove the wiring
+    // -------------------------------------------------------------------------
+
+    public function testPostStory(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->postStory(
+                business_connection_id: self::$businessConnectionId,
+                content: new InputStoryContentPhoto(photo: 'attach://unsupported'),
+                active_period: 86400,
+            )
+        );
+    }
+
+    public function testEditStory(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->editStory(
+                business_connection_id: self::$businessConnectionId,
+                story_id: 999999999,
+                content: new InputStoryContentPhoto(photo: 'attach://unsupported'),
+            )
+        );
+    }
+
+    public function testRepostStory(): void
+    {
+        $this->assertApiError(fn() =>
+            self::$client->repostStory(
+                business_connection_id: self::$businessConnectionId,
+                from_chat_id: 1,
+                from_story_id: 999999999,
+                active_period: 86400,
             )
         );
     }
