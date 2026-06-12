@@ -19,6 +19,9 @@ use F4\Pechkin\DataType\{
     Attribute\Polymorphic,
 };
 
+// The map deliberately covers more subtypes than documented for InputMedia itself:
+// it also dispatches the InputPollMedia and InputPollOptionMedia union members
+// (link, location, sticker, venue), since those unions are typed as InputMedia.
 #[Polymorphic([
     'animation' => InputMediaAnimation::class,
     'audio' => InputMediaAudio::class,

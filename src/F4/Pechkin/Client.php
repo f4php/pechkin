@@ -36,7 +36,6 @@ use F4\Pechkin\DataType\{
     InputFile,
     InputMedia,
     InputPaidMedia,
-    InputPollMedia,
     InputProfilePhoto,
     InputRichMessage,
     InputSticker,
@@ -73,7 +72,6 @@ use F4\Pechkin\DataType\{
     UserChatBoosts,
     UserProfileAudios,
     UserProfilePhotos,
-    WebAppInfo,
     WebhookInfo,
 };
 
@@ -112,8 +110,8 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function answerChatJoinRequestQuery(
-        string $query_id,
-        bool $answer,
+        string $chat_join_request_query_id,
+        string $result,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -436,11 +434,8 @@ class Client implements ClientInterface
         int $message_id,
         InputChecklist $checklist,
         ?InlineKeyboardMarkup $reply_markup = null,
-    ): Message|bool {
-        return match(is_bool($result = $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()))) {
-            true => $result,
-            default => Message::fromArray($result),
-        };
+    ): Message {
+        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function editMessageLiveLocation(
         float $latitude,
@@ -486,7 +481,7 @@ class Client implements ClientInterface
         };
     }
     public function editMessageText(
-        string $text,
+        ?string $text = null,
         ?string $business_connection_id = null,
         int|string|null $chat_id = null,
         ?int $message_id = null,
@@ -583,13 +578,13 @@ class Client implements ClientInterface
         return BusinessConnection::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function getManagedBotToken(
-        string $user_id,
-    ): BusinessConnection {
+        int|string $user_id,
+    ): string {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function replaceManagedBotToken(
-        string $user_id,
-    ): BusinessConnection {
+        int|string $user_id,
+    ): string {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function getChat(
@@ -692,7 +687,7 @@ class Client implements ClientInterface
         return BotDescription::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function getMyName(
-        string $language_code = '',
+        string $language_code = '', // the API does not accept null as a parameter and requires empty string instead
     ): BotName {
         return BotName::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
@@ -719,9 +714,9 @@ class Client implements ClientInterface
     public function getUpdates(
 
         ?int $offset = null,
-        int $limit = 100,
-        int $timeout = 0,
-        array $allowed_updates = [],
+        ?int $limit = null,
+        ?int $timeout = null,
+        ?array $allowed_updates = null,
     ): array {
         return array_map(
             array: $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()),
@@ -729,7 +724,7 @@ class Client implements ClientInterface
         );
     }
     public function answerGuestQuery(
-        int|string $guest_query_id,
+        string $guest_query_id,
         InlineQueryResult $result,
     ): SentGuestMessage {
         return SentGuestMessage::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
@@ -746,6 +741,7 @@ class Client implements ClientInterface
         ?bool $exclude_limited_upgradable = null,
         ?bool $exclude_limited_non_upgradable = null,
         ?bool $exclude_from_blockchain = null,
+        ?bool $exclude_unique = null,
         ?bool $sort_by_price = null,
         ?string $offset = null,
         ?int $limit = null,
@@ -984,9 +980,8 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function sendChatJoinRequestWebApp(
-        string $query_id,
-        string $button_text,
-        WebAppInfo $web_app,
+        string $chat_join_request_query_id,
+        string $web_app_url,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -1059,7 +1054,7 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendGame(
-        int $chat_id,
+        int|string $chat_id,
         string $game_short_name,
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
@@ -1178,7 +1173,7 @@ class Client implements ClientInterface
     public function sendMessageDraft(
         int|string $chat_id,
         int $draft_id,
-        string $text,
+        ?string $text = null,
         ?int $message_thread_id = null,
         ?string $parse_mode = null,
         ?array $entities = null,
@@ -1271,14 +1266,17 @@ class Client implements ClientInterface
         ?string $explanation = null,
         ?string $explanation_parse_mode = null,
         ?array $explanation_entities = null,
-        ?InputPollMedia $explanation_media = null,
+        // documented as InputPollMedia; typed as the wider InputMedia base because
+        // its union members are InputMedia* subtypes that cannot also extend InputPollMedia
+        ?InputMedia $explanation_media = null,
         ?int $open_period = null,
         ?int $close_date = null,
         ?bool $is_closed = null,
         ?string $description = null,
         ?string $description_parse_mode = null,
         ?array $description_entities = null,
-        ?InputPollMedia $media = null,
+        // documented as InputPollMedia; typed as the wider InputMedia base (see explanation_media)
+        ?InputMedia $media = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
         ?bool $allow_paid_broadcast = null,
@@ -1293,23 +1291,24 @@ class Client implements ClientInterface
         InputRichMessage $rich_message,
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
-        ?ReplyParameters $reply_parameters = null,
-        ?LinkPreviewOptions $link_preview_options = null,
+        ?int $direct_messages_topic_id = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
-        ?bool $allow_user_chats = null,
-        ?string $effect_id = null,
+        ?bool $allow_paid_broadcast = null,
+        ?string $message_effect_id = null,
+        ?SuggestedPostParameters $suggested_post_parameters = null,
+        ?ReplyParameters $reply_parameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message {
         return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendRichMessageDraft(
         int|string $chat_id,
+        int $draft_id,
         InputRichMessage $rich_message,
-        ?string $business_connection_id = null,
         ?int $message_thread_id = null,
-        ?string $effect_id = null,
-    ): Message {
-        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function sendSticker(
         int|string $chat_id,

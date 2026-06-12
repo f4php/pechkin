@@ -7,7 +7,7 @@ namespace F4\Pechkin\DataType;
 use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
-    InputPollOptionMedia,
+    InputMedia,
     MessageEntity,
     Attribute\ArrayOf,
 };
@@ -22,7 +22,9 @@ readonly class InputPollOption extends AbstractDataType
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $text_entities = null,
-        public readonly ?InputPollOptionMedia $media = null,
+        // documented as InputPollOptionMedia; typed as the wider InputMedia base because
+        // its union members are InputMedia* subtypes that cannot also extend InputPollOptionMedia
+        public readonly ?InputMedia $media = null,
     ) {
         if (mb_strlen($this->text) > 100) {
             throw new InvalidArgumentException('Text length cannot exceed 100 characters');

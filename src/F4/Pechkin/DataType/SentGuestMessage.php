@@ -9,6 +9,6 @@ use F4\Pechkin\DataType\AbstractDataType;
 readonly class SentGuestMessage extends AbstractDataType
 {
     public function __construct(
-        public readonly ?string $inline_message_id = null,
+        public readonly string $inline_message_id,
     ) {}
 }

@@ -17,6 +17,7 @@ readonly class UsersShared extends AbstractDataType
         /** @var SharedUser[] */
         #[ArrayOf(SharedUser::class)]
         public readonly array $users,
+        // Removed from the docs (replaced by users in Bot API 7.0); kept for backward compatibility
         public readonly ?array $user_ids = null,
     ) {}
 }

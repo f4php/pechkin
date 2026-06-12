@@ -20,7 +20,7 @@ final class UniqueGiftColorsTest extends TestCase
         $this->assertInstanceOf(UniqueGiftColors::class, $uniqueGiftColors);
         $this->assertNotEmpty($uniqueGiftColors->light_theme_other_colors);
         $this->assertNotEmpty($uniqueGiftColors->dark_theme_other_colors);
-        $this->assertSame(42, $uniqueGiftColors->model_custom_emoji_id);
+        $this->assertSame('42', $uniqueGiftColors->model_custom_emoji_id);
         $this->assertSame('test_string', $uniqueGiftColors->symbol_custom_emoji_id);
         $this->assertSame(42, $uniqueGiftColors->light_theme_main_color);
         $this->assertSame(42, $uniqueGiftColors->dark_theme_main_color);

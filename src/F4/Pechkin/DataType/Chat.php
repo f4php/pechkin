@@ -23,9 +23,10 @@ readonly class Chat extends AbstractDataType
         public readonly ?string $last_name = null,
         public readonly ?bool $is_forum = null,
         public readonly ?bool $is_direct_messages = null,
-        public readonly ?User $guard_bot = null,
 
-        // Undocumented property discoverd through API interaction
+        // Undocumented properties discovered through API interaction
+        // (guard_bot and accepted_gift_types are documented for ChatFullInfo only)
+        public readonly ?User $guard_bot = null,
         public readonly ?bool $all_members_are_administrators = null,
         public readonly ?AcceptedGiftTypes $accepted_gift_types = null,
     )

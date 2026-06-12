@@ -23,6 +23,15 @@ final class DirectMessagesTopicTest extends TestCase
         $this->assertSame('test_string', $directMessagesTopic->topic_id);
     }
 
+    public function testFromArrayWithMinimalData(): void
+    {
+        $data = $this->loadFixture('direct_messages_topic_minimal.json');
+        $directMessagesTopic = DirectMessagesTopic::fromArray($data);
+
+        $this->assertInstanceOf(DirectMessagesTopic::class, $directMessagesTopic);
+        $this->assertNull($directMessagesTopic->user);
+    }
+
     public function testFromArrayToArrayRoundtrip(): void
     {
         $data = $this->loadFixture('direct_messages_topic_minimal.json');

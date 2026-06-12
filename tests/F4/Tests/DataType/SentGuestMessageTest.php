@@ -21,15 +21,6 @@ final class SentGuestMessageTest extends TestCase
         $this->assertSame('inline_msg_456', $msg->inline_message_id);
     }
 
-    public function testFromArrayWithMinimalData(): void
-    {
-        $data = $this->loadFixture('sent_guest_message_minimal.json');
-        $msg = SentGuestMessage::fromArray($data);
-
-        $this->assertInstanceOf(SentGuestMessage::class, $msg);
-        $this->assertNull($msg->inline_message_id);
-    }
-
     public function testFromArrayToArrayRoundtrip(): void
     {
         $data = $this->loadFixture('sent_guest_message_minimal.json');

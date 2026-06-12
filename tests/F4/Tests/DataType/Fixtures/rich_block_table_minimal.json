@@ -1,0 +1,20 @@
+{
+    "cells": [
+        [
+            {
+                "align": "left",
+                "valign": "top",
+                "text": {
+                    "type": "mathematical_expression",
+                    "expression": "x^2"
+                },
+                "is_header": null,
+                "colspan": null,
+                "rowspan": null
+            }
+        ]
+    ],
+    "is_bordered": null,
+    "is_striped": null,
+    "caption": null
+}

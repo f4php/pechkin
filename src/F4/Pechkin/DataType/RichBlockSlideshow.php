@@ -17,7 +17,7 @@ readonly class RichBlockSlideshow extends RichBlock
         /** @var RichBlock[] */
         #[ArrayOf(RichBlock::class)]
         public readonly array $blocks,
-        public readonly RichBlockCaption $caption,
+        public readonly ?RichBlockCaption $caption = null,
     ) {
         $this->type = 'slideshow';
     }

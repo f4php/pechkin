@@ -30,11 +30,15 @@ readonly class Poll extends AbstractDataType
         public readonly bool $allows_multiple_answers,
         public readonly bool $allows_revoting,
         public readonly bool $members_only,
+        /** @var string[]|null */
+        #[ArrayOf('string')]
         public readonly ?array $country_codes = null,
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $question_entities = null,
         // public readonly ?int $correct_option_id = null, // support dropped in ver 9.6
+        /** @var int[]|null */
+        #[ArrayOf('int')]
         public readonly ?array $correct_option_ids = null,
         public readonly ?string $explanation = null,
         /** @var MessageEntity[]|null */

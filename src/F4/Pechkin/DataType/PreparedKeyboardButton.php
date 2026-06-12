@@ -11,6 +11,6 @@ use F4\Pechkin\DataType\{
 readonly class PreparedKeyboardButton extends AbstractDataType
 {
     public function __construct(
-        public readonly int $id,
+        public readonly string $id,
     ) {}
 }

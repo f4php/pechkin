@@ -13,6 +13,6 @@ readonly class DirectMessagesTopic extends AbstractDataType
 {
     public function __construct(
         public readonly string $topic_id, // may not fit in a 32-bit integer
-        public readonly User $user,
+        public readonly ?User $user = null,
     ) {}
 }

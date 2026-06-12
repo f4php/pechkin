@@ -1,0 +1,11 @@
+{
+  "align": "center",
+  "valign": "middle",
+  "text": {
+    "type": "mathematical_expression",
+    "expression": "x^2"
+  },
+  "is_header": true,
+  "colspan": 2,
+  "rowspan": 1
+}

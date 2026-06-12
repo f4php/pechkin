@@ -15,7 +15,7 @@ use function in_array;
 readonly class UniqueGiftInfo extends AbstractDataType
 {
     public function __construct(
-        public readonly UniqueGift $unique_gift,
+        public readonly UniqueGift $gift,
         public readonly string $origin,
         public readonly ?string $last_resale_currency = null,
         public readonly ?int $last_resale_amount = null,

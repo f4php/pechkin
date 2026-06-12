@@ -1,0 +1,15 @@
+{
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": {
+        "type": "mathematical_expression",
+        "expression": "x^2"
+      }
+    },
+    {
+      "type": "divider"
+    }
+  ],
+  "is_rtl": true
+}

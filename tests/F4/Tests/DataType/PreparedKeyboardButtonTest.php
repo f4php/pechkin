@@ -18,7 +18,7 @@ final class PreparedKeyboardButtonTest extends TestCase
         $pkb = PreparedKeyboardButton::fromArray($data);
 
         $this->assertInstanceOf(PreparedKeyboardButton::class, $pkb);
-        $this->assertSame(42, $pkb->id);
+        $this->assertSame('42', $pkb->id);
     }
 
     public function testFromArrayToArrayRoundtrip(): void

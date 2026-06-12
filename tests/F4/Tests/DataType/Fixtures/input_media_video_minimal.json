@@ -1,14 +1,15 @@
 {
-  "media": "attach://file",
-  "thumbnail": null,
-  "cover": null,
-  "start_timestamp": null,
-  "caption": null,
-  "parse_mode": null,
-  "caption_entities": null,
-  "width": null,
-  "height": null,
-  "duration": null,
-  "supports_streaming": null,
-  "has_spoiler": null
+    "media": "attach://file",
+    "thumbnail": null,
+    "cover": null,
+    "start_timestamp": null,
+    "caption": null,
+    "parse_mode": null,
+    "caption_entities": null,
+    "width": null,
+    "height": null,
+    "duration": null,
+    "supports_streaming": null,
+    "has_spoiler": null,
+    "show_caption_above_media": null
 }

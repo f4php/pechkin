@@ -24,6 +24,15 @@ final class UniqueGiftModelTest extends TestCase
         $this->assertSame(42, $uniqueGiftModel->rarity_per_mille);
     }
 
+    public function testFromArrayWithMinimalData(): void
+    {
+        $data = $this->loadFixture('unique_gift_model_minimal.json');
+        $uniqueGiftModel = UniqueGiftModel::fromArray($data);
+
+        $this->assertInstanceOf(UniqueGiftModel::class, $uniqueGiftModel);
+        $this->assertNull($uniqueGiftModel->rarity);
+    }
+
     public function testFromArrayToArrayRoundtrip(): void
     {
         $data = $this->loadFixture('unique_gift_model_minimal.json');

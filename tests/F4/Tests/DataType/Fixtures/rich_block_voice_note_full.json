@@ -1,0 +1,16 @@
+{
+    "voice_note": {
+        "file_id": "BAACAgIAAxkBAAI",
+        "file_unique_id": "AgADBAADZqc",
+        "duration": 120,
+        "mime_type": null,
+        "file_size": null
+    },
+    "caption": {
+        "text": {
+            "type": "mathematical_expression",
+            "expression": "x^2"
+        },
+        "credit": null
+    }
+}

@@ -88,10 +88,14 @@ abstract readonly class AbstractDataType
     /**
      * Create an instance from an array of data.
      *
+     * Declared as self (not static) because polymorphic union bases such as
+     * InputPollMedia and InputPollOptionMedia dispatch to sibling InputMedia*
+     * subtypes that do not extend the base they are dispatched from.
+     *
      * @param array<string, mixed> $data
      * @return static
      */
-    public static function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
         $reflection = new ReflectionClass(static::class);
         if ($polymorphic = ($reflection->getAttributes(Polymorphic::class)[0] ?? null)?->newInstance()) {

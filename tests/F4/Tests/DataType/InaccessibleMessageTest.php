@@ -20,7 +20,7 @@ final class InaccessibleMessageTest extends TestCase
 
         $this->assertInstanceOf(InaccessibleMessage::class, $inaccessibleMessage);
         $this->assertInstanceOf(Chat::class, $inaccessibleMessage->chat);
-        $this->assertSame('42', $inaccessibleMessage->message_id);
+        $this->assertSame(42, $inaccessibleMessage->message_id);
         $this->assertSame(0, $inaccessibleMessage->date);
     }
 

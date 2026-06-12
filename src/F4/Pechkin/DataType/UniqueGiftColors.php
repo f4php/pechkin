@@ -12,7 +12,7 @@ use F4\Pechkin\DataType\{
 readonly class UniqueGiftColors extends AbstractDataType
 {
     public function __construct(
-        public readonly int $model_custom_emoji_id,
+        public readonly string $model_custom_emoji_id,
         public readonly string $symbol_custom_emoji_id,
         public readonly int $light_theme_main_color,
         #[ArrayOf('integer')]

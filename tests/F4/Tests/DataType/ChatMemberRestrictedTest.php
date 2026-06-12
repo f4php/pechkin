@@ -39,6 +39,15 @@ final class ChatMemberRestrictedTest extends TestCase
         $this->assertSame('VIP', $chatMemberRestricted->tag);
     }
 
+    public function testFromArrayWithMinimalData(): void
+    {
+        $data = $this->loadFixture('chat_member_restricted_minimal.json');
+        $chatMemberRestricted = ChatMemberRestricted::fromArray($data);
+
+        $this->assertInstanceOf(ChatMemberRestricted::class, $chatMemberRestricted);
+        $this->assertNull($chatMemberRestricted->tag);
+    }
+
     public function testFromArrayToArrayRoundtrip(): void
     {
         $data = $this->loadFixture('chat_member_restricted_minimal.json');

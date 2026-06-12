@@ -1,0 +1,14 @@
+{
+    "location": {
+        "latitude": 55.7558,
+        "longitude": 37.6173,
+        "horizontal_accuracy": null,
+        "live_period": null,
+        "heading": null,
+        "proximity_alert_radius": null
+    },
+    "zoom": 15,
+    "width": 600,
+    "height": 400,
+    "caption": null
+}

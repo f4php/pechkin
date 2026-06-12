@@ -19,7 +19,7 @@ final class UniqueGiftInfoTest extends TestCase
         $uniqueGiftInfo = UniqueGiftInfo::fromArray($data);
 
         $this->assertInstanceOf(UniqueGiftInfo::class, $uniqueGiftInfo);
-        $this->assertInstanceOf(UniqueGift::class, $uniqueGiftInfo->unique_gift);
+        $this->assertInstanceOf(UniqueGift::class, $uniqueGiftInfo->gift);
         $this->assertSame('upgrade', $uniqueGiftInfo->origin);
         $this->assertSame('test_string', $uniqueGiftInfo->last_resale_currency);
         $this->assertSame(42, $uniqueGiftInfo->last_resale_amount);

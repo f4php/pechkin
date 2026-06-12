@@ -1,0 +1,16 @@
+{
+    "summary": {
+        "type": "mathematical_expression",
+        "expression": "x^2"
+    },
+    "blocks": [
+        {
+            "type": "paragraph",
+            "text": {
+                "type": "mathematical_expression",
+                "expression": "x^2"
+            }
+        }
+    ],
+    "is_open": true
+}

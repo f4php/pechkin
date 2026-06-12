@@ -6,6 +6,7 @@ namespace F4\Pechkin\DataType;
 
 use F4\Pechkin\DataType\{
     RichBlock,
+    RichText,
     Attribute\ArrayOf,
 };
 
@@ -13,7 +14,7 @@ readonly class RichBlockDetails extends RichBlock
 {
     public readonly string $type;
     public function __construct(
-        public readonly RichBlock $summary,
+        public readonly RichText $summary,
         /** @var RichBlock[] */
         #[ArrayOf(RichBlock::class)]
         public readonly array $blocks,

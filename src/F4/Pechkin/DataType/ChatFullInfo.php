@@ -20,6 +20,7 @@ use F4\Pechkin\DataType\{
     Message,
     ReactionType,
     UniqueGiftColors,
+    User,
     UserRating,
     Attribute\ArrayOf,
 };
@@ -84,6 +85,7 @@ readonly class ChatFullInfo extends AbstractDataType
         public readonly ?Audio $first_profile_audio = null,
         public readonly ?UniqueGiftColors $unique_gift_colors = null,
         public readonly ?int $paid_message_star_count = null,
+        public readonly ?User $guard_bot = null,
 
         // Undocumented property discoverd through API interaction
         public readonly ?bool $all_members_are_administrators = null,

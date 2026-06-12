@@ -30,7 +30,6 @@ use F4\Pechkin\DataType\{
     InputFile,
     InputMedia,
     InputPaidMedia,
-    InputPollMedia,
     InputProfilePhoto,
     KeyboardButton,
     InputSticker,
@@ -632,7 +631,7 @@ interface ClientInterface
      * @param int $message_id Identifier of the message to edit
      * @param InputChecklist $checklist An object describing the checklist to replace the current one
      * @param InlineKeyboardMarkup|null $reply_markup A JSON-serialized object for an inline keyboard
-     * @return Message|bool Returns the edited Message if the message is not an inline message, otherwise returns True
+     * @return Message Returns the edited Message on success
      */
     public function editMessageChecklist(
         string $business_connection_id,
@@ -640,7 +639,7 @@ interface ClientInterface
         int $message_id,
         InputChecklist $checklist,
         ?InlineKeyboardMarkup $reply_markup = null,
-    ): Message|bool;
+    ): Message;
 
     /**
      * Use this method to edit live location messages.
@@ -721,7 +720,7 @@ interface ClientInterface
      * @return Message|bool Returns the edited Message if the message is not an inline message, otherwise returns True
      */
     public function editMessageText(
-        string $text,
+        ?string $text = null,
         ?string $business_connection_id = null,
         int|string|null $chat_id = null,
         ?int $message_id = null,
@@ -889,21 +888,21 @@ interface ClientInterface
 
     /**
      * Returns the bot token of a managed business bot.
-     * @param string $user_id Unique identifier of the business account owner
-     * @return BusinessConnection
+     * @param int|string $user_id Unique identifier of the business account owner
+     * @return string Returns the token as String on success
      */
     public function getManagedBotToken(
-        string $user_id,
-    ): BusinessConnection;
+        int|string $user_id,
+    ): string;
 
     /**
      * Replaces the current token of a managed business bot.
-     * @param string $user_id Unique identifier of the business account owner
-     * @return BusinessConnection
+     * @param int|string $user_id Unique identifier of the business account owner
+     * @return string Returns the new token as String on success
      */
     public function replaceManagedBotToken(
-        string $user_id,
-    ): BusinessConnection;
+        int|string $user_id,
+    ): string;
 
     /**
      * Returns the bot access settings of a business account that can be managed by the bot.
@@ -1132,9 +1131,9 @@ interface ClientInterface
      */
     public function getUpdates(
         ?int $offset = null,
-        int $limit = 100,
-        int $timeout = 0,
-        array $allowed_updates = [],
+        ?int $limit = null,
+        ?int $timeout = null,
+        ?array $allowed_updates = null,
     ): array;
 
     /**
@@ -1155,6 +1154,7 @@ interface ClientInterface
      * @param bool|null $exclude_limited_upgradable Pass True to exclude limited gifts that can be upgraded
      * @param bool|null $exclude_limited_non_upgradable Pass True to exclude limited gifts that cannot be upgraded
      * @param bool|null $exclude_from_blockchain Pass True to exclude gifts on the TON blockchain
+     * @param bool|null $exclude_unique Pass True to exclude unique gifts
      * @param bool|null $sort_by_price Pass True to sort results by gift price instead of send date
      * @param string|null $offset Offset of the first entry to return as received from the previous request
      * @param int|null $limit The maximum number of gifts to be returned; 1-100
@@ -1166,6 +1166,7 @@ interface ClientInterface
         ?bool $exclude_limited_upgradable = null,
         ?bool $exclude_limited_non_upgradable = null,
         ?bool $exclude_from_blockchain = null,
+        ?bool $exclude_unique = null,
         ?bool $sort_by_price = null,
         ?string $offset = null,
         ?int $limit = null,
@@ -1726,7 +1727,7 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendGame(
-        int $chat_id,
+        int|string $chat_id,
         string $game_short_name,
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
@@ -1946,7 +1947,7 @@ interface ClientInterface
     public function sendMessageDraft(
         int|string $chat_id,
         int $draft_id,
-        string $text,
+        ?string $text = null,
         ?int $message_thread_id = null,
         ?string $parse_mode = null,
         ?array $entities = null,
@@ -2136,14 +2137,17 @@ interface ClientInterface
         ?string $explanation = null,
         ?string $explanation_parse_mode = null,
         ?array $explanation_entities = null,
-        ?InputPollMedia $explanation_media = null,
+        // documented as InputPollMedia; typed as the wider InputMedia base because
+        // its union members are InputMedia* subtypes that cannot also extend InputPollMedia
+        ?InputMedia $explanation_media = null,
         ?int $open_period = null,
         ?int $close_date = null,
         ?bool $is_closed = null,
         ?string $description = null,
         ?string $description_parse_mode = null,
         ?array $description_entities = null,
-        ?InputPollMedia $media = null,
+        // documented as InputPollMedia; typed as the wider InputMedia base (see explanation_media)
+        ?InputMedia $media = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
         ?bool $allow_paid_broadcast = null,
@@ -2986,7 +2990,7 @@ interface ClientInterface
      * @return SentGuestMessage Returns a SentGuestMessage object on success
      */
     public function answerGuestQuery(
-        int|string $guest_query_id,
+        string $guest_query_id,
         InlineQueryResult $result,
     ): SentGuestMessage;
 

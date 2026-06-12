@@ -1,0 +1,8 @@
+{
+    "text": {
+        "type": "mathematical_expression",
+        "expression": "x^2"
+    },
+    "unix_time": 1700000000,
+    "date_time_format": "Y-m-d"
+}

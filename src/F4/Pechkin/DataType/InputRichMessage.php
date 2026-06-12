@@ -14,9 +14,9 @@ use F4\Pechkin\DataType\{
 readonly class InputRichMessage extends AbstractDataType
 {
     public function __construct(
-        public readonly ?string $html,
-        public readonly ?string $markdown,
-        public readonly ?bool $is_rtl,
-        public readonly ?bool $skip_entity_detection,
+        public readonly ?string $html = null,
+        public readonly ?string $markdown = null,
+        public readonly ?bool $is_rtl = null,
+        public readonly ?bool $skip_entity_detection = null,
     ) {}
 }

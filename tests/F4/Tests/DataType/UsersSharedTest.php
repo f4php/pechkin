@@ -22,6 +22,15 @@ final class UsersSharedTest extends TestCase
         $this->assertSame(12345, $usersShared->request_id);
     }
 
+    public function testFromArrayWithMinimalData(): void
+    {
+        $data = $this->loadFixture('users_shared_minimal.json');
+        $usersShared = UsersShared::fromArray($data);
+
+        $this->assertInstanceOf(UsersShared::class, $usersShared);
+        $this->assertNull($usersShared->user_ids);
+    }
+
     public function testFromArrayToArrayRoundtrip(): void
     {
         $data = $this->loadFixture('users_shared_minimal.json');

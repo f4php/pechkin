@@ -23,6 +23,7 @@ readonly class InputMediaVideo extends InputMedia
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $caption_entities = null,
+        public readonly ?bool $show_caption_above_media = null,
         public readonly ?int $width = null,
         public readonly ?int $height = null,
         public readonly ?int $duration = null,

@@ -24,7 +24,7 @@ final class VideoNoteTest extends TestCase
         $this->assertSame('AgADBAADZqc', $videoNote->file_unique_id);
         $this->assertSame(240, $videoNote->length);
         $this->assertSame(120, $videoNote->duration);
-        $this->assertSame('1024000', $videoNote->file_size);
+        $this->assertSame(1024000, $videoNote->file_size);
     }
 
     public function testFromArrayWithMinimalData(): void

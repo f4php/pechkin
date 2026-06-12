@@ -84,5 +84,5 @@ final class BotCommandScopeTest extends TestCase
         $result = BotCommandScope::fromArray($data);
         $this->assertInstanceOf(BotCommandScopeChatMember::class, $result);
     }
-    
+
 }
