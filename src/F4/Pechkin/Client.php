@@ -88,9 +88,9 @@ class Client implements ClientInterface
 
     protected ApiClient $apiClient;
 
-    public function __construct(string $token)
+    public function __construct(string $token, ?ApiClient $apiClient = null)
     {
-        $this->apiClient = new ApiClient($token);
+        $this->apiClient = $apiClient ?? new ApiClient($token);
     }
 
     public function addStickerToSet(
