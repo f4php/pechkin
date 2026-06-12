@@ -15,6 +15,8 @@ Conventions for comparing pechkin code against the documentation snapshots in
 | SomeType | `SomeType` (a DataType class) |
 | Array of X | `array` property with `#[ArrayOf(X::class)]` (or `#[ArrayOf('int')]` / `#[ArrayOf('string')]` for scalars); nested arrays use nested ArrayOf semantics — follow existing examples |
 | "X or Y" unions | PHP union type `X\|Y` |
+| RichText | `RichText\|array\|string` with `#[ArrayOf(RichText::class)]` — the RichText doc defines it as "a String for plain text, an Array of RichText, or any RichText* type", and the API returns all three forms |
+| InputPollMedia / InputPollOptionMedia | the wider `InputMedia` base (their union members are InputMedia* subtypes that cannot also extend them), with an explanatory comment |
 | Base type with subtypes selected by a field (e.g. MessageOrigin, ChatBoostSource) | class-level `#[Polymorphic(discriminator: '...', map)]` on the base DataType |
 
 ## Datatype checks (`docs/datatypes/{Name}.md` vs `src/F4/Pechkin/DataType/{Name}.php`)
