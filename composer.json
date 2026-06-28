@@ -26,11 +26,13 @@
         }
     },
     "scripts": {
-        "test": "phpunit --bootstrap tests/F4/Config.php --display-warnings --display-skipped --display-phpunit-deprecations --fail-on-deprecation tests --exclude-group integration:basic --exclude-group integration:business --exclude-group integration:payments",
+        "test": "phpunit --bootstrap tests/F4/Config.php --display-warnings --display-skipped --display-phpunit-deprecations --fail-on-deprecation tests --exclude-group integration",
         "test:integration:basic": "phpunit --display-warnings --display-skipped --group integration:basic tests/F4/Tests/Integration",
         "test:integration:business": "phpunit --display-warnings --display-skipped --group integration:business tests/F4/Tests/Integration/BusinessClientTest.php",
         "test:integration:payments": "phpunit --display-warnings --display-skipped --group integration:payments tests/F4/Tests/Integration/PaymentsClientTest.php",
-        "test:integration:all": "phpunit --display-warnings --display-skipped tests/F4/Tests/Integration",
+        "test:integration:channel": "phpunit --display-warnings --display-skipped --group integration:channel tests/F4/Tests/Integration/ChannelClientTest.php",
+        "test:integration:destructive": "phpunit --display-warnings --display-skipped --group integration:destructive tests/F4/Tests/Integration/DestructiveTest.php",
+        "test:integration:all": "phpunit --display-warnings --display-skipped --exclude-group integration:destructive tests/F4/Tests/Integration",
         "stan": "phpstan --level=1 analyse src tests"
     },
     "require": {

@@ -7,6 +7,10 @@ use Attribute,
     InvalidArgumentException
 ;
 
+use F4\Pechkin\DataType\AbstractDataType;
+
+use function sprintf;
+
 #[Attribute(Attribute::TARGET_CLASS | Attribute::TARGET_PROPERTY)]
 final readonly class Polymorphic
 {
@@ -25,10 +29,16 @@ final readonly class Polymorphic
             return $result;
         }
         if(!$type = $data[$this->discriminator] ?? null) {
-            throw new InvalidArgumentException("Cannot determine value of discriminator");
+            // Missing discriminator on (likely new) data: degrade to null rather
+            // than aborting deserialization of the surrounding object.
+            AbstractDataType::warn(sprintf('Pechkin: missing polymorphic discriminator "%s"; resolving to null', $this->discriminator));
+            return null;
         }
         if(!$target = $this->map[$type] ?? null) {
-            throw new InvalidArgumentException("Cannot determine polymorphic target");
+            // Unknown subtype introduced by an upstream API change: degrade to
+            // null and warn instead of throwing.
+            AbstractDataType::warn(sprintf('Pechkin: unknown polymorphic discriminator "%s"; resolving to null', $type));
+            return null;
         }
         unset($data[$this->discriminator]);
         return match ($target instanceof Polymorphic) {

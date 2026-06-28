@@ -18,6 +18,8 @@ use F4\Pechkin\{
 };
 
 use function
+    array_diff_key,
+    array_intersect_key,
     array_is_list,
     array_map,
     array_reduce,
@@ -33,6 +35,24 @@ abstract readonly class AbstractDataType
 {
     use CanExpandDataTypesTrait;
     public function __construct(...$args) {}
+    /**
+     * Register a handler that receives deserialization warnings (unknown
+     * properties, unresolvable polymorphic discriminators). Pass null to reset
+     * to the default behaviour, which is trigger_error(..., E_USER_WARNING).
+     */
+    public static function setWarningHandler(?callable $handler): void
+    {
+        DeserializationWarnings::setHandler($handler);
+    }
+    /**
+     * Emit a deserialization warning. Routed through the registered handler when
+     * one is set, otherwise raised as an E_USER_WARNING so it surfaces in logs
+     * and test runners without aborting deserialization.
+     */
+    public static function warn(string $message): void
+    {
+        DeserializationWarnings::emit($message);
+    }
     private static function checkIfTypeHas(ReflectionType $haystack, string $needle): bool
     {
         return match (true) {
@@ -95,10 +115,14 @@ abstract readonly class AbstractDataType
      * InputPollMedia and InputPollOptionMedia dispatch to sibling InputMedia*
      * subtypes that do not extend the base they are dispatched from.
      *
+     * Returns null when dispatching a polymorphic base whose discriminator value
+     * is unknown (e.g. a subtype introduced by a newer API version): the caller
+     * then leaves the corresponding field null rather than crashing.
+     *
      * @param array<string, mixed> $data
-     * @return static
+     * @return static|null
      */
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): ?self
     {
         $reflection = new ReflectionClass(static::class);
         if ($polymorphic = ($reflection->getAttributes(Polymorphic::class)[0] ?? null)?->newInstance()) {
@@ -106,13 +130,15 @@ abstract readonly class AbstractDataType
         }
         $constructor = $reflection->getConstructor();
         if ($constructor === null || $constructor->getNumberOfParameters() === 0) {
-            if (!empty($data)) {
-                throw new InvalidArgumentException('Cannot use supplied data with empty constructor for '.static::class);
-            }
+            // Tolerate upstream API additions to a previously field-less object:
+            // warn about the unknown keys instead of throwing.
+            self::warnAboutUnknownProperties($data, []);
             return new static();
         }
+        $knownNames = [];
         foreach ($constructor->getParameters() as $parameter) {
             $name = $parameter->getName();
+            $knownNames[$name] = true;
             $type = $parameter->getType();
             $arrayOf = ($parameter->getAttributes(ArrayOf::class)[0] ?? null)?->newInstance();
             if (!isset($data[$name])) {
@@ -136,7 +162,24 @@ abstract readonly class AbstractDataType
                 }
             }
         }
+        // Drop properties the constructor does not declare so that new fields
+        // introduced by an upstream API change cannot crash deserialization.
+        self::warnAboutUnknownProperties($data, $knownNames);
+        $data = array_intersect_key($data, $knownNames);
         return new static(...$data);
+    }
+    /**
+     * Emit a warning for every key in $data that is not a known constructor
+     * parameter name.
+     *
+     * @param array<string, mixed> $data
+     * @param array<string, true> $knownNames
+     */
+    private static function warnAboutUnknownProperties(array $data, array $knownNames): void
+    {
+        foreach (array_diff_key($data, $knownNames) as $key => $_) {
+            self::warn(sprintf('Pechkin: ignoring unknown property "%s" for %s', $key, static::class));
+        }
     }
     private static function normalizeTypeName(string $type): ?string
     {
