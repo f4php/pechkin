@@ -1,0 +1,7 @@
+{
+  "id": "photo-1",
+  "media": {
+    "type": "photo",
+    "media": "attach://photo.jpg"
+  }
+}

@@ -14,6 +14,7 @@ use F4\Pechkin\DataType\ChatFullInfo;
 use F4\Pechkin\DataType\ChatLocation;
 use F4\Pechkin\DataType\ChatPermissions;
 use F4\Pechkin\DataType\ChatPhoto;
+use F4\Pechkin\DataType\Community;
 use F4\Pechkin\DataType\Message;
 use F4\Pechkin\DataType\UniqueGiftColors;
 use F4\Pechkin\DataType\UserRating;
@@ -80,6 +81,8 @@ final class ChatFullInfoTest extends TestCase
         $this->assertSame('custom_set', $chatFullInfo->custom_emoji_sticker_set_name);
         $this->assertSame('-1001234567890', $chatFullInfo->linked_chat_id);
         $this->assertSame(10, $chatFullInfo->paid_message_star_count);
+        $this->assertInstanceOf(Community::class, $chatFullInfo->community);
+        $this->assertSame('9876543210', $chatFullInfo->community->id);
     }
 
     public function testFromArrayWithMinimalData(): void

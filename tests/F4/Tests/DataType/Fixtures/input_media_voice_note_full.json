@@ -1,0 +1,13 @@
+{
+  "media": "attach://voice.ogg",
+  "caption": "A voice note",
+  "parse_mode": "MarkdownV2",
+  "caption_entities": [
+    {
+      "type": "bold",
+      "offset": 0,
+      "length": 1
+    }
+  ],
+  "duration": 12
+}

@@ -1,0 +1,19 @@
+{
+    "items": [
+        {
+            "blocks": [
+                {
+                    "type": "paragraph",
+                    "text": {
+                        "type": "mathematical_expression",
+                        "expression": "x^2"
+                    }
+                }
+            ],
+            "has_checkbox": null,
+            "is_checked": null,
+            "value": null,
+            "type": null
+        }
+    ]
+}

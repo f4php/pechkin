@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use InvalidArgumentException;
 use F4\Pechkin\DataType\{
     AbstractDataType,
+    BotSubscriptionUpdated,
     BusinessConnection,
     BusinessMessagesDeleted,
     CallbackQuery,
@@ -61,6 +62,7 @@ readonly class Update extends AbstractDataType
         public readonly ?ChatBoostUpdated $chat_boost = null,
         public readonly ?ChatBoostRemoved $removed_chat_boost = null,
         public readonly ?ManagedBotUpdated $managed_bot = null,
+        public readonly ?BotSubscriptionUpdated $subscription = null,
     ) {
         if (1 < count(array_filter([
             $this->message,
@@ -87,6 +89,7 @@ readonly class Update extends AbstractDataType
             $this->chat_join_request,
             $this->chat_boost,
             $this->removed_chat_boost,
+            $this->subscription,
         ]))) {
             throw new InvalidArgumentException('At most one update payload field may be set.');
         }

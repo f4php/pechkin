@@ -14,6 +14,6 @@ Represents a link to a video file stored on the Telegram servers. By default, th
 | caption | String | *Optional*. Caption of the video to be sent, 0-1024 characters after entities parsing |
 | parse_mode | String | *Optional*. Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. |
 | caption_entities | Array of [MessageEntity](https://core.telegram.org/bots/api#messageentity) | *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse_mode* |
-| show_caption_above_media | Boolean | *Optional*. Pass *True*, if the caption must be shown above the message media |
+| show_caption_above_media | Boolean | *Optional*. Pass *True* if the caption must be shown above the message media |
 | reply_markup | [InlineKeyboardMarkup](https://core.telegram.org/bots/api#inlinekeyboardmarkup) | *Optional*. [Inline keyboard](https://core.telegram.org/bots/features#inline-keyboards) attached to the message |
 | input_message_content | [InputMessageContent](https://core.telegram.org/bots/api#inputmessagecontent) | *Optional*. Content of the message to be sent instead of the video |

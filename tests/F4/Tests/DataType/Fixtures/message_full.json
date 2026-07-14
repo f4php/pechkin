@@ -971,6 +971,13 @@
         ],
         "checklist_message": null
     },
+    "community_chat_added": {
+        "community": {
+            "id": "9876543210",
+            "name": "My Community"
+        }
+    },
+    "community_chat_removed": {},
     "direct_message_price_changed": {
         "are_direct_messages_enabled": true,
         "direct_message_star_count": null
@@ -1191,6 +1198,12 @@
     "forward_date": null,
     "user_shared": null,
     "sender_tag": "VIP",
+    "receiver_user": {
+        "id": "555555555",
+        "is_bot": false,
+        "first_name": "Jane"
+    },
+    "ephemeral_message_id": 99,
     "chat_owner_left": null,
     "chat_owner_changed": null,
     "guest_query_id": "guest_query_123",

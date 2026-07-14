@@ -16,6 +16,7 @@ readonly class BotCommand extends AbstractDataType
     public function __construct(
         public readonly string $command,
         public readonly string $description,
+        public readonly ?bool $is_ephemeral = null,
     ) {
         if (mb_strlen($this->command) > 32) {
             throw new InvalidArgumentException('Command length cannot exceed 32 characters');

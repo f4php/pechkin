@@ -16,6 +16,7 @@ use F4\Pechkin\DataType\{
     InputMediaSticker,
     InputMediaVenue,
     InputMediaVideo,
+    InputMediaVoiceNote,
     Attribute\Polymorphic,
 };
 
@@ -33,6 +34,7 @@ use F4\Pechkin\DataType\{
     'sticker' => InputMediaSticker::class,
     'venue' => InputMediaVenue::class,
     'video' => InputMediaVideo::class,
+    'voice_note' => InputMediaVoiceNote::class,
 ])]
 abstract readonly class InputMedia extends AbstractDataType
 {

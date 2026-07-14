@@ -10,6 +10,8 @@ Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without s
 | chat_id | Integer or String | Yes | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username` |
 | message_thread_id | Integer | Optional | Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | direct_messages_topic_id | Integer | Optional | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| receiver_user_id | Integer | Optional | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details. |
+| callback_query_id | String | Optional | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
 | animation | [InputFile](https://core.telegram.org/bots/api#inputfile) or String | Yes | Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files) |
 | duration | Integer | Optional | Duration of sent animation in seconds |
 | width | Integer | Optional | Animation width |
@@ -18,7 +20,7 @@ Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without s
 | caption | String | Optional | Animation caption (may also be used when resending animation by *file_id*), 0-1024 characters after entities parsing |
 | parse_mode | String | Optional | Mode for parsing entities in the animation caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. |
 | caption_entities | Array of [MessageEntity](https://core.telegram.org/bots/api#messageentity) | Optional | A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode* |
-| show_caption_above_media | Boolean | Optional | Pass *True*, if the caption must be shown above the message media |
+| show_caption_above_media | Boolean | Optional | Pass *True* if the caption must be shown above the message media |
 | has_spoiler | Boolean | Optional | Pass *True* if the animation needs to be covered with a spoiler animation |
 | disable_notification | Boolean | Optional | Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound. |
 | protect_content | Boolean | Optional | Protects the contents of the sent message from forwarding and saving |

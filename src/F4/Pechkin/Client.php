@@ -83,7 +83,7 @@ use function
 
 class Client implements ClientInterface
 {
-    protected const string API_VERSION = '10.1';
+    protected const string API_VERSION = '10.2';
     protected const int REQUEST_TIMEOUT = 60;
 
     protected ApiClient $apiClient;
@@ -333,6 +333,13 @@ class Client implements ClientInterface
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
+    public function deleteEphemeralMessage(
+        int|string $chat_id,
+        int|string $receiver_user_id,
+        int $ephemeral_message_id,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
     public function deleteMessages(
         int|string $chat_id,
         array $message_ids,
@@ -409,6 +416,46 @@ class Client implements ClientInterface
     public function editGeneralForumTopic(
         int|string $chat_id,
         string $name,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function editEphemeralMessageText(
+        int|string $chat_id,
+        int|string $receiver_user_id,
+        int $ephemeral_message_id,
+        string $text,
+        ?string $parse_mode = null,
+        ?array $entities = null,
+        ?LinkPreviewOptions $link_preview_options = null,
+        ?InlineKeyboardMarkup $reply_markup = null,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function editEphemeralMessageCaption(
+        int|string $chat_id,
+        int|string $receiver_user_id,
+        int $ephemeral_message_id,
+        ?string $caption = null,
+        ?string $parse_mode = null,
+        ?array $caption_entities = null,
+        ?InlineKeyboardMarkup $reply_markup = null,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function editEphemeralMessageMedia(
+        int|string $chat_id,
+        int|string $receiver_user_id,
+        int $ephemeral_message_id,
+        InputMedia $media,
+        ?InlineKeyboardMarkup $reply_markup = null,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function editEphemeralMessageReplyMarkup(
+        int|string $chat_id,
+        int|string $receiver_user_id,
+        int $ephemeral_message_id,
+        ?InlineKeyboardMarkup $reply_markup = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -929,6 +976,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?int $duration = null,
         ?int $width = null,
         ?int $height = null,
@@ -954,6 +1003,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -1004,6 +1055,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $last_name = null,
         ?string $vcard = null,
         ?bool $disable_notification = null,
@@ -1038,6 +1091,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         InputFile|string|null $thumbnail = null,
         ?string $caption = null,
         ?string $parse_mode = null,
@@ -1120,6 +1175,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?float $horizontal_accuracy = null,
         ?int $live_period = null,
         ?int $heading = null,
@@ -1157,6 +1214,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $parse_mode = null,
         ?array $entities = null,
         ?LinkPreviewOptions $link_preview_options = null,
@@ -1207,6 +1266,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -1229,6 +1290,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -1316,6 +1379,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $emoji = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
@@ -1336,6 +1401,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $foursquare_id = null,
         ?string $foursquare_type = null,
         ?string $google_place_id = null,
@@ -1356,6 +1423,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?int $duration = null,
         ?int $width = null,
         ?int $height = null,
@@ -1384,6 +1453,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?int $duration = null,
         ?int $length = null,
         InputFile|string|null $thumbnail = null,
@@ -1403,6 +1474,8 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,

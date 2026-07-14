@@ -12,4 +12,4 @@ Represents a join request sent to a chat.
 | date | Integer | Date the request was sent in Unix time |
 | bio | String | *Optional*. Bio of the user |
 | invite_link | [ChatInviteLink](https://core.telegram.org/bots/api#chatinvitelink) | *Optional*. Chat invite link that was used by the user to send the join request |
-| query_id | String | *Optional*. Identifier of the join request query. If present, then the bot must call [sendChatJoinRequestWebApp](https://core.telegram.org/bots/api#sendchatjoinrequestwebapp) or directly call [answerChatJoinRequestQuery](https://core.telegram.org/bots/api#answerchatjoinrequestquery) within 10 seconds. |
+| query_id | String | *Optional*. Identifier of the join request query; for bots assigned to process join requests only. If present, then the bot must call [sendChatJoinRequestWebApp](https://core.telegram.org/bots/api#sendchatjoinrequestwebapp) or directly call [answerChatJoinRequestQuery](https://core.telegram.org/bots/api#answerchatjoinrequestquery) within 10 seconds. |

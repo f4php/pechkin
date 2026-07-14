@@ -116,6 +116,8 @@
         "sender_business_bot": null,
         "guest_query_id": null,
         "sender_tag": null,
+        "receiver_user": null,
+        "ephemeral_message_id": null,
         "business_connection_id": null,
         "forward_origin": null,
         "is_topic_message": null,
@@ -193,6 +195,8 @@
         "chat_background_set": null,
         "checklist_tasks_done": null,
         "checklist_tasks_added": null,
+        "community_chat_added": null,
+        "community_chat_removed": null,
         "direct_message_price_changed": null,
         "forum_topic_created": null,
         "forum_topic_edited": null,
@@ -307,5 +311,9 @@
         "allows_users_to_create_topics": true,
         "can_manage_bots": true,
         "supports_join_request_queries": null
+    },
+    "community": {
+        "id": "9876543210",
+        "name": "My Community"
     }
 }

@@ -1,0 +1,11 @@
+{
+    "photo": {
+        "media": "attach://photo.jpg",
+        "caption": null,
+        "parse_mode": null,
+        "caption_entities": null,
+        "show_caption_above_media": null,
+        "has_spoiler": null
+    },
+    "caption": null
+}

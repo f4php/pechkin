@@ -1,0 +1,13 @@
+{
+    "summary": {
+        "type": "mathematical_expression",
+        "expression": "x^2"
+    },
+    "blocks": [
+        {
+            "type": "anchor",
+            "name": "block-1"
+        }
+    ],
+    "is_open": true
+}

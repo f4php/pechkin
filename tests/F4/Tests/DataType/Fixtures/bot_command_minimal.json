@@ -1,4 +1,5 @@
 {
   "command": "/start",
-  "description": "Test description"
+  "description": "Test description",
+  "is_ephemeral": null
 }

@@ -474,6 +474,19 @@ interface ClientInterface
     ): bool;
 
     /**
+     * Use this method to delete an ephemeral message.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup
+     * @param int|string $receiver_user_id Identifier of the user who received the message
+     * @param int $ephemeral_message_id Identifier of the ephemeral message to delete
+     * @return bool Returns True on success
+     */
+    public function deleteEphemeralMessage(
+        int|string $chat_id,
+        int|string $receiver_user_id,
+        int $ephemeral_message_id,
+    ): bool;
+
+    /**
      * Use this method to delete multiple messages simultaneously.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param int[] $message_ids A list of 1-100 identifiers of messages to delete
@@ -612,6 +625,82 @@ interface ClientInterface
      * @param InlineKeyboardMarkup|null $reply_markup A JSON-serialized object for an inline keyboard
      * @return Message|bool Returns the edited Message if the message is not an inline message, otherwise returns True
      */
+    /**
+     * Use this method to edit an ephemeral text message.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup
+     * @param int|string $receiver_user_id Identifier of the user who received the message
+     * @param int $ephemeral_message_id Identifier of the ephemeral message to edit
+     * @param string $text New text of the message
+     * @param string|null $parse_mode Mode for parsing entities in the message text
+     * @param MessageEntity[]|null $entities List of special entities that appear in message text
+     * @param LinkPreviewOptions|null $link_preview_options Link preview generation options for the message
+     * @param InlineKeyboardMarkup|null $reply_markup A JSON-serialized object for an inline keyboard
+     * @return bool Returns True on success
+     */
+    public function editEphemeralMessageText(
+        int|string $chat_id,
+        int|string $receiver_user_id,
+        int $ephemeral_message_id,
+        string $text,
+        ?string $parse_mode = null,
+        ?array $entities = null,
+        ?LinkPreviewOptions $link_preview_options = null,
+        ?InlineKeyboardMarkup $reply_markup = null,
+    ): bool;
+
+    /**
+     * Use this method to edit the caption of an ephemeral message.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup
+     * @param int|string $receiver_user_id Identifier of the user who received the message
+     * @param int $ephemeral_message_id Identifier of the ephemeral message to edit
+     * @param string|null $caption New caption of the message
+     * @param string|null $parse_mode Mode for parsing entities in the message caption
+     * @param MessageEntity[]|null $caption_entities List of special entities that appear in the caption
+     * @param InlineKeyboardMarkup|null $reply_markup A JSON-serialized object for an inline keyboard
+     * @return bool Returns True on success
+     */
+    public function editEphemeralMessageCaption(
+        int|string $chat_id,
+        int|string $receiver_user_id,
+        int $ephemeral_message_id,
+        ?string $caption = null,
+        ?string $parse_mode = null,
+        ?array $caption_entities = null,
+        ?InlineKeyboardMarkup $reply_markup = null,
+    ): bool;
+
+    /**
+     * Use this method to edit the media of an ephemeral message.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup
+     * @param int|string $receiver_user_id Identifier of the user who received the message
+     * @param int $ephemeral_message_id Identifier of the ephemeral message to edit
+     * @param InputMedia $media A JSON-serialized object for the new media content of the message
+     * @param InlineKeyboardMarkup|null $reply_markup A JSON-serialized object for an inline keyboard
+     * @return bool Returns True on success
+     */
+    public function editEphemeralMessageMedia(
+        int|string $chat_id,
+        int|string $receiver_user_id,
+        int $ephemeral_message_id,
+        InputMedia $media,
+        ?InlineKeyboardMarkup $reply_markup = null,
+    ): bool;
+
+    /**
+     * Use this method to edit only the reply markup of an ephemeral message.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup
+     * @param int|string $receiver_user_id Identifier of the user who received the message
+     * @param int $ephemeral_message_id Identifier of the ephemeral message to edit
+     * @param InlineKeyboardMarkup|null $reply_markup A JSON-serialized object for an inline keyboard
+     * @return bool Returns True on success
+     */
+    public function editEphemeralMessageReplyMarkup(
+        int|string $chat_id,
+        int|string $receiver_user_id,
+        int $ephemeral_message_id,
+        ?InlineKeyboardMarkup $reply_markup = null,
+    ): bool;
+
     public function editMessageCaption(
         ?string $business_connection_id = null,
         int|string|null $chat_id = null,
@@ -1502,6 +1591,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?int $duration = null,
         ?int $width = null,
         ?int $height = null,
@@ -1549,6 +1640,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -1629,6 +1722,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $last_name = null,
         ?string $vcard = null,
         ?bool $disable_notification = null,
@@ -1698,6 +1793,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         InputFile|string|null $thumbnail = null,
         ?string $caption = null,
         ?string $parse_mode = null,
@@ -1857,6 +1954,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?float $horizontal_accuracy = null,
         ?int $live_period = null,
         ?int $heading = null,
@@ -1922,6 +2021,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $parse_mode = null,
         ?array $entities = null,
         ?LinkPreviewOptions $link_preview_options = null,
@@ -2021,6 +2122,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -2064,6 +2167,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -2179,6 +2284,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $emoji = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
@@ -2221,6 +2328,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $foursquare_id = null,
         ?string $foursquare_type = null,
         ?string $google_place_id = null,
@@ -2268,6 +2377,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?int $duration = null,
         ?int $width = null,
         ?int $height = null,
@@ -2314,6 +2425,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?int $duration = null,
         ?int $length = null,
         InputFile|string|null $thumbnail = null,
@@ -2352,6 +2465,8 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        int|string|null $receiver_user_id = null,
+        ?string $callback_query_id = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,

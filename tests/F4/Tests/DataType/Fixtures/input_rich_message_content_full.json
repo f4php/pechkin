@@ -1,7 +1,9 @@
 {
   "rich_message": {
+    "blocks": null,
     "html": "<b>Hello</b>",
     "markdown": "*Hello*",
+    "media": null,
     "is_rtl": false,
     "skip_entity_detection": true
   }

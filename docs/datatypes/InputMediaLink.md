@@ -6,5 +6,5 @@ Represents an HTTP link to be sent.
 
 | Field | Type | Description |
 | --- | --- | --- |
-| type | String | Type of the result, must be *link* |
+| type | String | Type of the media, must be *link* |
 | url | String | HTTP URL of the link |

@@ -10,6 +10,8 @@ As of [v.4.0](https://telegram.org/blog/video-messages-and-telescope), Telegram 
 | chat_id | Integer or String | Yes | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username` |
 | message_thread_id | Integer | Optional | Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | direct_messages_topic_id | Integer | Optional | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
+| receiver_user_id | Integer | Optional | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details. |
+| callback_query_id | String | Optional | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
 | video_note | [InputFile](https://core.telegram.org/bots/api#inputfile) or String | Yes | Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files). Sending video notes by a URL is currently unsupported. |
 | duration | Integer | Optional | Duration of sent video in seconds |
 | length | Integer | Optional | Video width and height, i.e. diameter of the video message |

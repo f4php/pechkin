@@ -1,0 +1,13 @@
+{
+    "audio": {
+        "media": "attach://audio.mp3",
+        "thumbnail": null,
+        "caption": null,
+        "parse_mode": null,
+        "caption_entities": null,
+        "duration": 120,
+        "performer": null,
+        "title": null
+    },
+    "caption": null
+}

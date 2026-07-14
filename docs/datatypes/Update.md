@@ -32,3 +32,4 @@ This [object](https://core.telegram.org/bots/api#available-types) represents an 
 | chat_boost | [ChatBoostUpdated](https://core.telegram.org/bots/api#chatboostupdated) | *Optional*. A chat boost was added or changed. The bot must be an administrator in the chat to receive these updates. |
 | removed_chat_boost | [ChatBoostRemoved](https://core.telegram.org/bots/api#chatboostremoved) | *Optional*. A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates. |
 | managed_bot | [ManagedBotUpdated](https://core.telegram.org/bots/api#managedbotupdated) | *Optional*. A new bot was created to be managed by the bot, or token or owner of a managed bot was changed |
+| subscription | [BotSubscriptionUpdated](https://core.telegram.org/bots/api#botsubscriptionupdated) | *Optional*. User payment subscription has changed |

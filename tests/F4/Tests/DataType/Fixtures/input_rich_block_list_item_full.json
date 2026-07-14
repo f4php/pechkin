@@ -1,0 +1,15 @@
+{
+    "blocks": [
+        {
+            "type": "paragraph",
+            "text": {
+                "type": "mathematical_expression",
+                "expression": "x^2"
+            }
+        }
+    ],
+    "has_checkbox": true,
+    "is_checked": false,
+    "value": 1,
+    "type": "1"
+}

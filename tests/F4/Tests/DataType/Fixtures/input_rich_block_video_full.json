@@ -1,0 +1,24 @@
+{
+    "video": {
+        "media": "attach://video.mp4",
+        "thumbnail": null,
+        "cover": null,
+        "start_timestamp": null,
+        "caption": null,
+        "parse_mode": null,
+        "caption_entities": null,
+        "show_caption_above_media": null,
+        "width": 640,
+        "height": 480,
+        "duration": 120,
+        "supports_streaming": null,
+        "has_spoiler": null
+    },
+    "caption": {
+        "text": {
+            "type": "mathematical_expression",
+            "expression": "x^2"
+        },
+        "credit": null
+    }
+}

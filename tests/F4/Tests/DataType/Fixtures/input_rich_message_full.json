@@ -1,6 +1,21 @@
 {
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Hello"
+    }
+  ],
   "html": "<b>Hello</b>",
   "markdown": "*Hello*",
+  "media": [
+    {
+      "id": "photo-1",
+      "media": {
+        "type": "photo",
+        "media": "attach://photo.jpg"
+      }
+    }
+  ],
   "is_rtl": false,
   "skip_entity_detection": true
 }

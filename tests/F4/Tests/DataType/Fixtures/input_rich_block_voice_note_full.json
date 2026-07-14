@@ -1,0 +1,16 @@
+{
+    "voice_note": {
+        "media": "attach://voice.ogg",
+        "caption": null,
+        "parse_mode": null,
+        "caption_entities": null,
+        "duration": 120
+    },
+    "caption": {
+        "text": {
+            "type": "mathematical_expression",
+            "expression": "x^2"
+        },
+        "credit": null
+    }
+}

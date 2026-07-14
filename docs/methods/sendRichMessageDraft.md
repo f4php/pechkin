@@ -9,4 +9,4 @@ Use this method to stream a partial rich message to a user while the message is 
 | chat_id | Integer | Yes | Unique identifier for the target private chat |
 | message_thread_id | Integer | Optional | Unique identifier for the target message thread |
 | draft_id | Integer | Yes | Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated. |
-| rich_message | [InputRichMessage](https://core.telegram.org/bots/api#inputrichmessage) | Yes | The partial message to be streamed |
+| rich_message | [InputRichMessage](https://core.telegram.org/bots/api#inputrichmessage) | Yes | The partial message to be streamed. Direct upload of new files isn't supported. |

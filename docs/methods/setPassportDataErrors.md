@@ -9,4 +9,4 @@ Use this if the data submitted by the user doesn't satisfy the standards your se
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | user_id | Integer | Yes | User identifier |
-| errors | Array of [PassportElementError](https://core.telegram.org/bots/api#passportelementerror) | Yes | A JSON-serialized array describing the errors |
+| errors | Array of [PassportElementError](https://core.telegram.org/bots/api#passportelementerror) | Yes | A JSON-serialized Array describing the errors |

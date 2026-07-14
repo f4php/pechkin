@@ -1,0 +1,15 @@
+{
+    "blocks": [
+        {
+            "type": "anchor",
+            "name": "block-1"
+        }
+    ],
+    "caption": {
+        "text": {
+            "type": "mathematical_expression",
+            "expression": "x^2"
+        },
+        "credit": null
+    }
+}

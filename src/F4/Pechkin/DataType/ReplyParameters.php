@@ -13,7 +13,8 @@ use F4\Pechkin\DataType\{
 readonly class ReplyParameters extends AbstractDataType
 {
     public function __construct(
-        public readonly int $message_id,
+        public readonly ?int $message_id = null,
+        public readonly ?int $ephemeral_message_id = null,
         public readonly null|int|string $chat_id = null,
         public readonly ?bool $allow_sending_without_reply = null,
         public readonly ?string $quote = null, // Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including bold, italic, underline, strikethrough, spoiler, custom_emoji, and date_time entities. The message will fail to send if the quote isn't found in the original message.

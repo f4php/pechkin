@@ -1,0 +1,10 @@
+{
+    "voice_note": {
+        "media": "attach://voice.ogg",
+        "caption": null,
+        "parse_mode": null,
+        "caption_entities": null,
+        "duration": 120
+    },
+    "caption": null
+}

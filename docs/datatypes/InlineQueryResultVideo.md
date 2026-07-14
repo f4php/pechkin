@@ -17,7 +17,7 @@ Represents a link to a page containing an embedded video player or a video file.
 | caption | String | *Optional*. Caption of the video to be sent, 0-1024 characters after entities parsing |
 | parse_mode | String | *Optional*. Mode for parsing entities in the video caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. |
 | caption_entities | Array of [MessageEntity](https://core.telegram.org/bots/api#messageentity) | *Optional*. List of special entities that appear in the caption, which can be specified instead of *parse_mode* |
-| show_caption_above_media | Boolean | *Optional*. Pass *True*, if the caption must be shown above the message media |
+| show_caption_above_media | Boolean | *Optional*. Pass *True* if the caption must be shown above the message media |
 | video_width | Integer | *Optional*. Video width |
 | video_height | Integer | *Optional*. Video height |
 | video_duration | Integer | *Optional*. Video duration in seconds |

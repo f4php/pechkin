@@ -1,0 +1,21 @@
+{
+    "animation": {
+        "media": "attach://animation.mp4",
+        "thumbnail": null,
+        "caption": null,
+        "parse_mode": null,
+        "caption_entities": null,
+        "show_caption_above_media": null,
+        "width": 640,
+        "height": 480,
+        "duration": 120,
+        "has_spoiler": null
+    },
+    "caption": {
+        "text": {
+            "type": "mathematical_expression",
+            "expression": "x^2"
+        },
+        "credit": null
+    }
+}

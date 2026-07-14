@@ -21,4 +21,4 @@ Describes actions that a non-administrator user is allowed to take in a chat.
 | can_change_info | Boolean | *Optional*. *True*, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups. |
 | can_invite_users | Boolean | *Optional*. *True*, if the user is allowed to invite new users to the chat |
 | can_pin_messages | Boolean | *Optional*. *True*, if the user is allowed to pin messages. Ignored in public supergroups. |
-| can_manage_topics | Boolean | *Optional*. *True*, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages. |
+| can_manage_topics | Boolean | *Optional*. *True*, if the user is allowed to create forum topics. If omitted, defaults to the value of can_pin_messages. |

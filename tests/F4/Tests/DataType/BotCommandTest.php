@@ -20,6 +20,7 @@ final class BotCommandTest extends TestCase
         $this->assertInstanceOf(BotCommand::class, $botCommand);
         $this->assertSame('/start', $botCommand->command);
         $this->assertSame('Test description', $botCommand->description);
+        $this->assertSame(true, $botCommand->is_ephemeral);
     }
 
     public function testFromArrayToArrayRoundtrip(): void

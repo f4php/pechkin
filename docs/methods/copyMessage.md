@@ -15,7 +15,7 @@ Use this method to copy messages of any kind. Service messages, paid media messa
 | caption | String | Optional | New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept. |
 | parse_mode | String | Optional | Mode for parsing entities in the new caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. |
 | caption_entities | Array of [MessageEntity](https://core.telegram.org/bots/api#messageentity) | Optional | A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of *parse_mode* |
-| show_caption_above_media | Boolean | Optional | Pass *True*, if the caption must be shown above the message media. Ignored if a new caption isn't specified. |
+| show_caption_above_media | Boolean | Optional | Pass *True* if the caption must be shown above the message media. Ignored if a new caption isn't specified. |
 | disable_notification | Boolean | Optional | Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound. |
 | protect_content | Boolean | Optional | Protects the contents of the sent message from forwarding and saving |
 | allow_paid_broadcast | Boolean | Optional | Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. |

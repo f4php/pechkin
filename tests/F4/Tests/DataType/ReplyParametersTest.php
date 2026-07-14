@@ -20,6 +20,7 @@ final class ReplyParametersTest extends TestCase
         $this->assertInstanceOf(ReplyParameters::class, $replyParameters);
         $this->assertNotEmpty($replyParameters->quote_entities);
         $this->assertSame(42, $replyParameters->message_id);
+        $this->assertSame(7, $replyParameters->ephemeral_message_id);
         $this->assertSame(true, $replyParameters->allow_sending_without_reply);
         $this->assertSame('test_string', $replyParameters->quote);
         $this->assertSame('test_string', $replyParameters->quote_parse_mode);

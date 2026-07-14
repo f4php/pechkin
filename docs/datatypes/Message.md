@@ -6,7 +6,7 @@ This object represents a message.
 
 | Field | Type | Description |
 | --- | --- | --- |
-| message_id | Integer | Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent. |
+| message_id | Integer | Unique message identifier inside this chat; 0 for ephemeral messages. In specific instances (e.g., a message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent. |
 | message_thread_id | Integer | *Optional*. Unique identifier of a message thread or forum topic to which the message belongs; for supergroups and private chats only |
 | direct_messages_topic | [DirectMessagesTopic](https://core.telegram.org/bots/api#directmessagestopic) | *Optional*. Information about the direct messages chat topic that contains the message |
 | from | [User](https://core.telegram.org/bots/api#user) | *Optional*. Sender of the message; may be empty for messages sent to channels. For backward compatibility, if the message was sent on behalf of a chat, the field contains a fake sender user in non-channel chats. |
@@ -14,6 +14,8 @@ This object represents a message.
 | sender_boost_count | Integer | *Optional*. If the sender of the message boosted the chat, the number of boosts added by the user |
 | sender_business_bot | [User](https://core.telegram.org/bots/api#user) | *Optional*. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account. |
 | sender_tag | String | *Optional*. Tag or custom title of the sender of the message; for supergroups only |
+| receiver_user | [User](https://core.telegram.org/bots/api#user) | *Optional*. For ephemeral messages, the user who received the message |
+| ephemeral_message_id | Integer | For ephemeral messages, identifier of the ephemeral message inside this chat. The identifier may be reused for another ephemeral message after the message is deleted or expires. |
 | date | Integer | Date the message was sent in Unix time. It is always a positive number, representing a valid date. |
 | guest_query_id | String | *Optional*. The unique identifier for the guest query. Use this identifier with the method [answerGuestQuery](https://core.telegram.org/bots/api#answerguestquery) to send a response message. If non-empty, the message belongs to the chat where the guest bot was summoned, which may not coincide with other existing bot chats sharing the same identifier. |
 | business_connection_id | String | *Optional*. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier. |
@@ -21,7 +23,7 @@ This object represents a message.
 | forward_origin | [MessageOrigin](https://core.telegram.org/bots/api#messageorigin) | *Optional*. Information about the original message for forwarded messages |
 | is_topic_message | True | *Optional*. *True*, if the message is sent to a topic in a forum supergroup or a private chat with the bot |
 | is_automatic_forward | True | *Optional*. *True*, if the message is a channel post that was automatically forwarded to the connected discussion group |
-| reply_to_message | [Message](https://core.telegram.org/bots/api#message) | *Optional*. For replies in the same chat and message thread, the original message. Note that the [Message](https://core.telegram.org/bots/api#message) object in this field will not contain further *reply_to_message* fields even if it itself is a reply. |
+| reply_to_message | [Message](https://core.telegram.org/bots/api#message) | *Optional*. For replies in the same chat and message thread, the original message. Note that the [Message](https://core.telegram.org/bots/api#message) object in this field will not contain further *reply_to_message* fields even if it itself is a reply. If the message is a reply to an ephemeral message, then this field may be omitted. |
 | external_reply | [ExternalReplyInfo](https://core.telegram.org/bots/api#externalreplyinfo) | *Optional*. Information about the message that is being replied to, which may come from another chat or forum topic |
 | quote | [TextQuote](https://core.telegram.org/bots/api#textquote) | *Optional*. For replies that quote part of the original message, the quoted part of the message |
 | reply_to_story | [Story](https://core.telegram.org/bots/api#story) | *Optional*. For replies to a story, the original story |
@@ -95,6 +97,8 @@ This object represents a message.
 | chat_background_set | [ChatBackground](https://core.telegram.org/bots/api#chatbackground) | *Optional*. Service message: chat background set |
 | checklist_tasks_done | [ChecklistTasksDone](https://core.telegram.org/bots/api#checklisttasksdone) | *Optional*. Service message: some tasks in a checklist were marked as done or not done |
 | checklist_tasks_added | [ChecklistTasksAdded](https://core.telegram.org/bots/api#checklisttasksadded) | *Optional*. Service message: tasks were added to a checklist |
+| community_chat_added | [CommunityChatAdded](https://core.telegram.org/bots/api#communitychatadded) | *Optional*. Service message: chat added to a [Community](https://core.telegram.org/bots/api#community) |
+| community_chat_removed | [CommunityChatRemoved](https://core.telegram.org/bots/api#communitychatremoved) | *Optional*. Service message: chat removed from a [Community](https://core.telegram.org/bots/api#community) |
 | direct_message_price_changed | [DirectMessagePriceChanged](https://core.telegram.org/bots/api#directmessagepricechanged) | *Optional*. Service message: the price for paid messages in the corresponding direct messages chat of a channel has changed |
 | forum_topic_created | [ForumTopicCreated](https://core.telegram.org/bots/api#forumtopiccreated) | *Optional*. Service message: forum topic created |
 | forum_topic_edited | [ForumTopicEdited](https://core.telegram.org/bots/api#forumtopicedited) | *Optional*. Service message: forum topic edited |

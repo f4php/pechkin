@@ -1,0 +1,19 @@
+{
+    "blocks": [
+        {
+            "type": "heading",
+            "text": {
+                "type": "mathematical_expression",
+                "expression": "x^2"
+            },
+            "size": 2
+        }
+    ],
+    "caption": {
+        "text": {
+            "type": "mathematical_expression",
+            "expression": "x^2"
+        },
+        "credit": null
+    }
+}

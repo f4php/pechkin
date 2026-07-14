@@ -22,6 +22,8 @@ final class InputRichMessageTest extends TestCase
         $this->assertSame('*Hello*', $message->markdown);
         $this->assertSame(false, $message->is_rtl);
         $this->assertSame(true, $message->skip_entity_detection);
+        $this->assertNotEmpty($message->blocks);
+        $this->assertNotEmpty($message->media);
     }
 
     public function testFromArrayWithMinimalData(): void

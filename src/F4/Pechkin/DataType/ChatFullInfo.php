@@ -16,6 +16,7 @@ use F4\Pechkin\DataType\{
     Chat,
     ChatLocation,
     ChatPermissions,
+    Community,
     ChatPhoto,
     Message,
     ReactionType,
@@ -86,6 +87,7 @@ readonly class ChatFullInfo extends AbstractDataType
         public readonly ?UniqueGiftColors $unique_gift_colors = null,
         public readonly ?int $paid_message_star_count = null,
         public readonly ?User $guard_bot = null,
+        public readonly ?Community $community = null,
 
         // Undocumented property discoverd through API interaction
         public readonly ?bool $all_members_are_administrators = null,

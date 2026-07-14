@@ -2,7 +2,7 @@
 
 Source: https://core.telegram.org/bots/api#richblockphoto
 
-A block with a photo, corresponding to the HTML tag `<photo>`.
+A block with a photo, corresponding to the HTML tag `<img>`.
 
 | Field | Type | Description |
 | --- | --- | --- |
