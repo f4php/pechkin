@@ -16,6 +16,7 @@
     ],
     "is_bordered": true,
     "is_striped": false,
+    "is_compact": true,
     "caption": {
         "type": "mathematical_expression",
         "expression": "x^2"

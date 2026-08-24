@@ -10,6 +10,7 @@
   "copy_text": null,
   "callback_game": null,
   "pay": null,
+  "disabled": null,
   "icon_custom_emoji_id": null,
   "style": null
 }

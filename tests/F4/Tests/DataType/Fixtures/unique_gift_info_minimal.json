@@ -66,6 +66,9 @@
         "is_burned": null
     },
     "origin": "upgrade",
+    "text": null,
+    "entities": null,
+    "is_private": null,
     "last_resale_currency": null,
     "last_resale_amount": null,
     "owned_gift_id": null,

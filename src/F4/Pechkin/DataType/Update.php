@@ -18,6 +18,7 @@ use F4\Pechkin\DataType\{
     ChosenInlineResult,
     InlineQuery,
     ManagedBotUpdated,
+    MessageGenerationStopped,
     Message,
     MessageReactionCountUpdated,
     MessageReactionUpdated,
@@ -63,6 +64,7 @@ readonly class Update extends AbstractDataType
         public readonly ?ChatBoostRemoved $removed_chat_boost = null,
         public readonly ?ManagedBotUpdated $managed_bot = null,
         public readonly ?BotSubscriptionUpdated $subscription = null,
+        public readonly ?MessageGenerationStopped $stopped_message_generation = null,
     ) {
         if (1 < count(array_filter([
             $this->message,
@@ -90,6 +92,7 @@ readonly class Update extends AbstractDataType
             $this->chat_boost,
             $this->removed_chat_boost,
             $this->subscription,
+            $this->stopped_message_generation,
         ]))) {
             throw new InvalidArgumentException('At most one update payload field may be set.');
         }

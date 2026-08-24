@@ -21,5 +21,6 @@ readonly class ReplyKeyboardMarkup extends AbstractDataType
         public readonly ?bool $one_time_keyboard = null,
         public readonly ?string $input_field_placeholder = null,
         public readonly ?bool $selective = null,
+        public readonly ?bool $force_reply = null,
     ) {}
 }

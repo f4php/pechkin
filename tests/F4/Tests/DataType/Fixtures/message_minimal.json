@@ -102,6 +102,7 @@
     "checklist_tasks_done": null,
     "checklist_tasks_added": null,
     "community_chat_added": null,
+    "community_chat_joined": null,
     "community_chat_removed": null,
     "direct_message_price_changed": null,
     "forum_topic_created": null,

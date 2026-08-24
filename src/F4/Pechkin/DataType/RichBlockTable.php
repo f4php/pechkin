@@ -20,6 +20,7 @@ readonly class RichBlockTable extends RichBlock
         public readonly array $cells,
         public readonly ?bool $is_bordered = null,
         public readonly ?bool $is_striped = null,
+        public readonly ?bool $is_compact = null,
         /** @var RichText|RichText[]|string|null */
         #[ArrayOf(RichText::class)]
         public readonly RichText|array|string|null $caption = null,

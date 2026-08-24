@@ -2,7 +2,7 @@
 
 Source: https://core.telegram.org/bots/api#videonote
 
-This object represents a [video message](https://telegram.org/blog/video-messages-and-telescope) (available in Telegram apps as of [v.4.0](https://telegram.org/blog/video-messages-and-telescope)).
+This object represents a [video message](https://telegram.org/blog/video-messages-and-telescope).
 
 | Field | Type | Description |
 | --- | --- | --- |

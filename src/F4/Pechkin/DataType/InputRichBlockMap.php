@@ -15,9 +15,9 @@ readonly class InputRichBlockMap extends InputRichBlock
     public readonly string $type;
     public function __construct(
         public readonly Location $location,
-        public readonly int $zoom, // 0 - 24
-        public readonly int $width,
-        public readonly int $height,
+        public readonly ?int $zoom = null, // 0 - 24
+        public readonly ?int $width = null, // 0 - 10000
+        public readonly ?int $height = null, // 0 - 10000
         public readonly ?RichBlockCaption $caption = null,
     ) {
         $this->type = 'map';

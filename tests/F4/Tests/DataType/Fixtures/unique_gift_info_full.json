@@ -117,6 +117,15 @@
         "is_burned": true
     },
     "origin": "upgrade",
+    "text": "Happy birthday!",
+    "entities": [
+        {
+            "type": "bold",
+            "offset": 0,
+            "length": 5
+        }
+    ],
+    "is_private": true,
     "last_resale_currency": "test_string",
     "last_resale_amount": 42,
     "owned_gift_id": "test_string",

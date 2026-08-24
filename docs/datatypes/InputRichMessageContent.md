@@ -6,4 +6,4 @@ Represents the [content](https://core.telegram.org/bots/api#inputmessagecontent)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| rich_message | [InputRichMessage](https://core.telegram.org/bots/api#inputrichmessage) | The message to be sent |
+| rich_message | [InputRichMessage](https://core.telegram.org/bots/api#inputrichmessage) | The message to be sent. Only previously uploaded files may be used in the message. |

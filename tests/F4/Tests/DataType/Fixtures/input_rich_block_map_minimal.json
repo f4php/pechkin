@@ -7,8 +7,8 @@
         "heading": null,
         "proximity_alert_radius": null
     },
-    "zoom": 15,
-    "width": 600,
-    "height": 400,
+    "zoom": null,
+    "width": null,
+    "height": null,
     "caption": null
 }

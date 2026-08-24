@@ -19,5 +19,6 @@
   "resize_keyboard": null,
   "one_time_keyboard": null,
   "input_field_placeholder": null,
-  "selective": null
+  "selective": null,
+  "force_reply": null
 }

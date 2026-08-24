@@ -16,5 +16,6 @@ readonly class InlineKeyboardMarkup extends AbstractDataType
         /** @var InlineKeyboardButton[][] */
         #[ArrayOf(new ArrayOf(InlineKeyboardButton::class))]
         public readonly array $inline_keyboard,
+        public readonly ?bool $force_reply = null,
     ) {}
 }

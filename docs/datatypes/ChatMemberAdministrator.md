@@ -25,5 +25,6 @@ Represents a [chat member](https://core.telegram.org/bots/api#chatmember) that h
 | can_pin_messages | Boolean | *Optional*. *True*, if the user is allowed to pin messages; for groups and supergroups only |
 | can_manage_topics | Boolean | *Optional*. *True*, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only |
 | can_manage_direct_messages | Boolean | *Optional*. *True*, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only |
-| can_manage_tags | Boolean | *Optional*. *True*, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted, defaults to the value of can_pin_messages. |
+| can_manage_tags | Boolean | *Optional*. *True*, if the administrator can edit the tags of regular members; for groups and supergroups only |
+| can_send_welcome_messages | Boolean | *True*, if the administrator can manage chat welcome messages or directly send them in the case of bots |
 | custom_title | String | *Optional*. Custom title for this user |

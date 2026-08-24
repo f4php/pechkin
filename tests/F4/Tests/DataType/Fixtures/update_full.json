@@ -138,5 +138,6 @@
     "chat_boost": null,
     "removed_chat_boost": null,
     "guest_message": null,
-    "managed_bot": null
+    "managed_bot": null,
+    "stopped_message_generation": null
 }

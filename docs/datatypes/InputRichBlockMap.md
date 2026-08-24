@@ -8,7 +8,7 @@ A block with a map, corresponding to the custom HTML tag `<tg-map>`. The map's w
 | --- | --- | --- |
 | type | String | Type of the block, always “map” |
 | location | [Location](https://core.telegram.org/bots/api#location) | Location of the center of the map |
-| zoom | Integer | Map zoom level; 0-24 |
-| width | Integer | Map width; 0-10000 |
-| height | Integer | Map height; 0-10000 |
+| zoom | Integer | *Optional*. Map zoom level; 0-24 |
+| width | Integer | *Optional*. Map width; 0-10000 |
+| height | Integer | *Optional*. Map height; 0-10000 |
 | caption | [RichBlockCaption](https://core.telegram.org/bots/api#richblockcaption) | *Optional*. Caption of the block |

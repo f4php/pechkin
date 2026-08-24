@@ -8,6 +8,7 @@ use F4\Pechkin\DataType\{
     AbstractDataType,
     CallbackGame,
     CopyTextButton,
+    DisabledButton,
     LoginUrl,
     SwitchInlineQueryChosenChat,
     WebAppInfo,
@@ -29,5 +30,6 @@ readonly class InlineKeyboardButton extends AbstractDataType
         public readonly ?CopyTextButton $copy_text = null,
         public readonly ?CallbackGame $callback_game = null,
         public readonly ?bool $pay = null,
+        public readonly ?DisabledButton $disabled = null,
     ) {}
 }

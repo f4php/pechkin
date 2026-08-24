@@ -2,7 +2,7 @@
 
 Source: https://core.telegram.org/bots/api#inlinequeryresultgame
 
-Represents a [Game](https://core.telegram.org/bots/api#games).
+Represents a [Game](https://core.telegram.org/bots/api#game).
 
 | Field | Type | Description |
 | --- | --- | --- |

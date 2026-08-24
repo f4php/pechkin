@@ -977,6 +977,12 @@
             "name": "My Community"
         }
     },
+    "community_chat_joined": {
+        "community": {
+            "id": "9876543210",
+            "name": "My Community"
+        }
+    },
     "community_chat_removed": {},
     "direct_message_price_changed": {
         "are_direct_messages_enabled": true,

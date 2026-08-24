@@ -73,6 +73,7 @@
     "can_manage_topics": true,
     "can_manage_direct_messages": true,
     "can_manage_tags": null,
+    "can_send_welcome_messages": null,
     "custom_title": "Admin",
     "can_manage_voice_chats": true
   },
@@ -116,6 +117,7 @@
     "can_manage_topics": true,
     "can_manage_direct_messages": true,
     "can_manage_tags": null,
+    "can_send_welcome_messages": null,
     "custom_title": "Admin",
     "can_manage_voice_chats": true
   },

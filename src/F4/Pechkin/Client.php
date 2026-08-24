@@ -24,6 +24,7 @@ use F4\Pechkin\DataType\{
     ChatInviteLink,
     ChatMember,
     ChatPermissions,
+    EphemeralMessageParameters,
     File,
     ForceReply,
     ForumTopic,
@@ -83,7 +84,7 @@ use function
 
 class Client implements ClientInterface
 {
-    protected const string API_VERSION = '10.2';
+    protected const string API_VERSION = '10.3';
     protected const int REQUEST_TIMEOUT = 60;
 
     protected ApiClient $apiClient;
@@ -423,9 +424,10 @@ class Client implements ClientInterface
         int|string $chat_id,
         int|string $receiver_user_id,
         int $ephemeral_message_id,
-        string $text,
+        ?string $text = null,
         ?string $parse_mode = null,
         ?array $entities = null,
+        ?InputRichMessage $rich_message = null,
         ?LinkPreviewOptions $link_preview_options = null,
         ?InlineKeyboardMarkup $reply_markup = null,
     ): bool {
@@ -438,6 +440,7 @@ class Client implements ClientInterface
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
+        ?bool $show_caption_above_media = null,
         ?InlineKeyboardMarkup $reply_markup = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
@@ -878,6 +881,7 @@ class Client implements ClientInterface
         ?bool $can_manage_topics = null,
         ?bool $can_manage_direct_messages = null,
         ?bool $can_manage_tags = null,
+        ?bool $can_send_welcome_messages = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -976,8 +980,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?int $duration = null,
         ?int $width = null,
         ?int $height = null,
@@ -1003,8 +1006,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -1055,8 +1057,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $last_name = null,
         ?string $vcard = null,
         ?bool $disable_notification = null,
@@ -1091,8 +1092,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         InputFile|string|null $thumbnail = null,
         ?string $caption = null,
         ?string $parse_mode = null,
@@ -1175,8 +1175,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?float $horizontal_accuracy = null,
         ?int $live_period = null,
         ?int $heading = null,
@@ -1214,8 +1213,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $parse_mode = null,
         ?array $entities = null,
         ?LinkPreviewOptions $link_preview_options = null,
@@ -1236,6 +1234,8 @@ class Client implements ClientInterface
         ?int $message_thread_id = null,
         ?string $parse_mode = null,
         ?array $entities = null,
+        ?bool $can_stop = null,
+        ?bool $keep_on_stop = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -1266,8 +1266,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -1290,8 +1289,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -1355,6 +1353,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
         ?bool $allow_paid_broadcast = null,
@@ -1370,6 +1369,8 @@ class Client implements ClientInterface
         int $draft_id,
         InputRichMessage $rich_message,
         ?int $message_thread_id = null,
+        ?bool $can_stop = null,
+        ?bool $keep_on_stop = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -1379,8 +1380,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $emoji = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
@@ -1401,8 +1401,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $foursquare_id = null,
         ?string $foursquare_type = null,
         ?string $google_place_id = null,
@@ -1423,8 +1422,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?int $duration = null,
         ?int $width = null,
         ?int $height = null,
@@ -1453,8 +1451,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?int $duration = null,
         ?int $length = null,
         InputFile|string|null $thumbnail = null,
@@ -1474,8 +1471,7 @@ class Client implements ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,

@@ -15,7 +15,7 @@ This object represents a message.
 | sender_business_bot | [User](https://core.telegram.org/bots/api#user) | *Optional*. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account. |
 | sender_tag | String | *Optional*. Tag or custom title of the sender of the message; for supergroups only |
 | receiver_user | [User](https://core.telegram.org/bots/api#user) | *Optional*. For ephemeral messages, the user who received the message |
-| ephemeral_message_id | Integer | For ephemeral messages, identifier of the ephemeral message inside this chat. The identifier may be reused for another ephemeral message after the message is deleted or expires. |
+| ephemeral_message_id | Integer | *Optional*. For ephemeral messages, identifier of the ephemeral message inside this chat. The identifier may be reused for another ephemeral message after the message is deleted or expires. |
 | date | Integer | Date the message was sent in Unix time. It is always a positive number, representing a valid date. |
 | guest_query_id | String | *Optional*. The unique identifier for the guest query. Use this identifier with the method [answerGuestQuery](https://core.telegram.org/bots/api#answerguestquery) to send a response message. If non-empty, the message belongs to the chat where the guest bot was summoned, which may not coincide with other existing bot chats sharing the same identifier. |
 | business_connection_id | String | *Optional*. Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier. |
@@ -92,13 +92,14 @@ This object represents a message.
 | connected_website | String | *Optional*. The domain name of the website on which the user has logged in. [More about Telegram Login »](https://core.telegram.org/widgets/login) |
 | write_access_allowed | [WriteAccessAllowed](https://core.telegram.org/bots/api#writeaccessallowed) | *Optional*. Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method [requestWriteAccess](https://core.telegram.org/bots/webapps#initializing-mini-apps) |
 | passport_data | [PassportData](https://core.telegram.org/bots/api#passportdata) | *Optional*. Telegram Passport data |
-| proximity_alert_triggered | [ProximityAlertTriggered](https://core.telegram.org/bots/api#proximityalerttriggered) | *Optional*. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location. |
+| proximity_alert_triggered | [ProximityAlertTriggered](https://core.telegram.org/bots/api#proximityalerttriggered) | *Optional*. Service message: a user in the chat triggered another user's proximity alert while sharing Live Location |
 | boost_added | [ChatBoostAdded](https://core.telegram.org/bots/api#chatboostadded) | *Optional*. Service message: user boosted the chat |
 | chat_background_set | [ChatBackground](https://core.telegram.org/bots/api#chatbackground) | *Optional*. Service message: chat background set |
 | checklist_tasks_done | [ChecklistTasksDone](https://core.telegram.org/bots/api#checklisttasksdone) | *Optional*. Service message: some tasks in a checklist were marked as done or not done |
 | checklist_tasks_added | [ChecklistTasksAdded](https://core.telegram.org/bots/api#checklisttasksadded) | *Optional*. Service message: tasks were added to a checklist |
-| community_chat_added | [CommunityChatAdded](https://core.telegram.org/bots/api#communitychatadded) | *Optional*. Service message: chat added to a [Community](https://core.telegram.org/bots/api#community) |
-| community_chat_removed | [CommunityChatRemoved](https://core.telegram.org/bots/api#communitychatremoved) | *Optional*. Service message: chat removed from a [Community](https://core.telegram.org/bots/api#community) |
+| community_chat_added | [CommunityChatAdded](https://core.telegram.org/bots/api#communitychatadded) | *Optional*. Service message: chat or bot added to a [Community](https://core.telegram.org/bots/api#community) |
+| community_chat_joined | [CommunityChatJoined](https://core.telegram.org/bots/api#communitychatjoined) | *Optional*. Service message: chat was joined by a user from a [Community](https://core.telegram.org/bots/api#community) |
+| community_chat_removed | [CommunityChatRemoved](https://core.telegram.org/bots/api#communitychatremoved) | *Optional*. Service message: chat or bot removed from a [Community](https://core.telegram.org/bots/api#community) |
 | direct_message_price_changed | [DirectMessagePriceChanged](https://core.telegram.org/bots/api#directmessagepricechanged) | *Optional*. Service message: the price for paid messages in the corresponding direct messages chat of a channel has changed |
 | forum_topic_created | [ForumTopicCreated](https://core.telegram.org/bots/api#forumtopiccreated) | *Optional*. Service message: forum topic created |
 | forum_topic_edited | [ForumTopicEdited](https://core.telegram.org/bots/api#forumtopicedited) | *Optional*. Service message: forum topic edited |

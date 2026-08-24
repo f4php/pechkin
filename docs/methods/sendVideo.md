@@ -10,8 +10,7 @@ Use this method to send video files, Telegram clients support MPEG4 videos (othe
 | chat_id | Integer or String | Yes | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username` |
 | message_thread_id | Integer | Optional | Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | direct_messages_topic_id | Integer | Optional | Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat |
-| receiver_user_id | Integer | Optional | For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See [ephemeral message sending](https://core.telegram.org/bots/api#ephemeral-messages-and-commands) for more details. |
-| callback_query_id | String | Optional | For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any |
+| ephemeral_message_parameters | [EphemeralMessageParameters](https://core.telegram.org/bots/api#ephemeralmessageparameters) | Optional | A JSON-serialized object containing the parameters of the ephemeral message to send |
 | video | [InputFile](https://core.telegram.org/bots/api#inputfile) or String | Yes | Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. [More information on Sending Files »](https://core.telegram.org/bots/api#sending-files) |
 | duration | Integer | Optional | Duration of sent video in seconds |
 | width | Integer | Optional | Video width |

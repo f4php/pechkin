@@ -28,9 +28,11 @@
         },
         "callback_game": {},
         "pay": true,
+        "disabled": {},
         "icon_custom_emoji_id": null,
         "style": null
       }
     ]
-  ]
+  ],
+  "force_reply": true
 }

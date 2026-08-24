@@ -25,6 +25,7 @@ This object represents a rich formatted text. Currently, it can be either a Stri
 - [RichTextHashtag](https://core.telegram.org/bots/api#richtexthashtag)
 - [RichTextCashtag](https://core.telegram.org/bots/api#richtextcashtag)
 - [RichTextBotCommand](https://core.telegram.org/bots/api#richtextbotcommand)
+- [RichTextButton](https://core.telegram.org/bots/api#richtextbutton)
 - [RichTextAnchor](https://core.telegram.org/bots/api#richtextanchor)
 - [RichTextAnchorLink](https://core.telegram.org/bots/api#richtextanchorlink)
 - [RichTextReference](https://core.telegram.org/bots/api#richtextreference)

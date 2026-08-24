@@ -16,5 +16,6 @@
     ],
     "is_bordered": null,
     "is_striped": null,
+    "is_compact": null,
     "caption": null
 }

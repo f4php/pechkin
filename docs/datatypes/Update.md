@@ -33,3 +33,4 @@ This [object](https://core.telegram.org/bots/api#available-types) represents an 
 | removed_chat_boost | [ChatBoostRemoved](https://core.telegram.org/bots/api#chatboostremoved) | *Optional*. A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates. |
 | managed_bot | [ManagedBotUpdated](https://core.telegram.org/bots/api#managedbotupdated) | *Optional*. A new bot was created to be managed by the bot, or token or owner of a managed bot was changed |
 | subscription | [BotSubscriptionUpdated](https://core.telegram.org/bots/api#botsubscriptionupdated) | *Optional*. User payment subscription has changed |
+| stopped_message_generation | [MessageGenerationStopped](https://core.telegram.org/bots/api#messagegenerationstopped) | *Optional*. A user asked the bot to stop the generation of a message |

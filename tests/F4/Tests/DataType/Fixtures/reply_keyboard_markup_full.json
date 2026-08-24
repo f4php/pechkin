@@ -76,5 +76,6 @@
   "resize_keyboard": true,
   "one_time_keyboard": false,
   "input_field_placeholder": "Type here...",
-  "selective": false
+  "selective": false,
+  "force_reply": true
 }
