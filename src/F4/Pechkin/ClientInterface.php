@@ -18,6 +18,7 @@ use F4\Pechkin\DataType\{
     ChatInviteLink,
     ChatMember,
     ChatPermissions,
+    EphemeralMessageParameters,
     File,
     ForceReply,
     ForumTopic,
@@ -31,6 +32,7 @@ use F4\Pechkin\DataType\{
     InputMedia,
     InputPaidMedia,
     InputProfilePhoto,
+    InputRichMessage,
     KeyboardButton,
     InputSticker,
     InputStoryContent,
@@ -100,6 +102,17 @@ interface ClientInterface
         ?bool $show_alert = null,
         ?string $url = null,
         ?int $cache_time = null,
+    ): bool;
+
+    /**
+     * Use this method to process a received chat join request query.
+     * @param string $chat_join_request_query_id Unique identifier of the join request query
+     * @param string $result Result of the query: "approve", "decline" or "queue"
+     * @return bool Returns True on success
+     */
+    public function answerChatJoinRequestQuery(
+        string $chat_join_request_query_id,
+        string $result,
     ): bool;
 
     /**
@@ -613,26 +626,14 @@ interface ClientInterface
     ): bool;
 
     /**
-     * Use this method to edit captions of messages.
-     * @param string|null $business_connection_id Unique identifier of the business connection
-     * @param int|string|null $chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel
-     * @param int|null $message_id Required if inline_message_id is not specified. Identifier of the message to edit
-     * @param string|null $inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
-     * @param string|null $caption New caption of the message
-     * @param string|null $parse_mode Mode for parsing entities in the message caption
-     * @param MessageEntity[]|null $caption_entities List of special entities that appear in the caption
-     * @param bool|null $show_caption_above_media Pass True if the caption must be shown above the message media
-     * @param InlineKeyboardMarkup|null $reply_markup A JSON-serialized object for an inline keyboard
-     * @return Message|bool Returns the edited Message if the message is not an inline message, otherwise returns True
-     */
-    /**
      * Use this method to edit an ephemeral text message.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup
      * @param int|string $receiver_user_id Identifier of the user who received the message
      * @param int $ephemeral_message_id Identifier of the ephemeral message to edit
-     * @param string $text New text of the message
+     * @param string|null $text New text of the message; required if rich_message isn't specified
      * @param string|null $parse_mode Mode for parsing entities in the message text
      * @param MessageEntity[]|null $entities List of special entities that appear in message text
+     * @param InputRichMessage|null $rich_message New rich content of the message; required if text isn't specified
      * @param LinkPreviewOptions|null $link_preview_options Link preview generation options for the message
      * @param InlineKeyboardMarkup|null $reply_markup A JSON-serialized object for an inline keyboard
      * @return bool Returns True on success
@@ -641,9 +642,10 @@ interface ClientInterface
         int|string $chat_id,
         int|string $receiver_user_id,
         int $ephemeral_message_id,
-        string $text,
+        ?string $text = null,
         ?string $parse_mode = null,
         ?array $entities = null,
+        ?InputRichMessage $rich_message = null,
         ?LinkPreviewOptions $link_preview_options = null,
         ?InlineKeyboardMarkup $reply_markup = null,
     ): bool;
@@ -656,6 +658,7 @@ interface ClientInterface
      * @param string|null $caption New caption of the message
      * @param string|null $parse_mode Mode for parsing entities in the message caption
      * @param MessageEntity[]|null $caption_entities List of special entities that appear in the caption
+     * @param bool|null $show_caption_above_media Pass True if the caption must be shown above the message media
      * @param InlineKeyboardMarkup|null $reply_markup A JSON-serialized object for an inline keyboard
      * @return bool Returns True on success
      */
@@ -666,6 +669,7 @@ interface ClientInterface
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
+        ?bool $show_caption_above_media = null,
         ?InlineKeyboardMarkup $reply_markup = null,
     ): bool;
 
@@ -701,6 +705,19 @@ interface ClientInterface
         ?InlineKeyboardMarkup $reply_markup = null,
     ): bool;
 
+    /**
+     * Use this method to edit captions of messages.
+     * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel
+     * @param int|null $message_id Required if inline_message_id is not specified. Identifier of the message to edit
+     * @param string|null $inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
+     * @param string|null $caption New caption of the message
+     * @param string|null $parse_mode Mode for parsing entities in the message caption
+     * @param MessageEntity[]|null $caption_entities List of special entities that appear in the caption
+     * @param bool|null $show_caption_above_media Pass True if the caption must be shown above the message media
+     * @param InlineKeyboardMarkup|null $reply_markup A JSON-serialized object for an inline keyboard
+     * @return Message|bool Returns the edited Message if the message is not an inline message, otherwise returns True
+     */
     public function editMessageCaption(
         ?string $business_connection_id = null,
         int|string|null $chat_id = null,
@@ -797,7 +814,7 @@ interface ClientInterface
 
     /**
      * Use this method to edit text and game messages.
-     * @param string $text New text of the message
+     * @param string|null $text New text of the message; required if rich_message isn't specified
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|string|null $chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel
      * @param int|null $message_id Required if inline_message_id is not specified. Identifier of the message to edit
@@ -806,6 +823,7 @@ interface ClientInterface
      * @param MessageEntity[]|null $entities List of special entities that appear in message text
      * @param LinkPreviewOptions|null $link_preview_options Link preview generation options for the message
      * @param InlineKeyboardMarkup|null $reply_markup A JSON-serialized object for an inline keyboard
+     * @param InputRichMessage|null $rich_message New rich content of the message; required if text isn't specified
      * @return Message|bool Returns the edited Message if the message is not an inline message, otherwise returns True
      */
     public function editMessageText(
@@ -818,6 +836,7 @@ interface ClientInterface
         ?array $entities = null,
         ?LinkPreviewOptions $link_preview_options = null,
         ?InlineKeyboardMarkup $reply_markup = null,
+        ?InputRichMessage $rich_message = null,
     ): Message|bool;
 
     /**
@@ -1027,10 +1046,12 @@ interface ClientInterface
     /**
      * Use this method to get a list of administrators in a chat.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup or channel
+     * @param bool|null $return_bots Pass True to additionally receive all bots that are administrators of the chat
      * @return ChatMember[] Returns an Array of ChatMember objects
      */
     public function getChatAdministrators(
         int|string $chat_id,
+        ?bool $return_bots = null,
     ): array;
 
     /**
@@ -1401,6 +1422,8 @@ interface ClientInterface
      * @param bool|null $can_delete_stories Pass True if the administrator can delete stories posted by other users
      * @param bool|null $can_manage_topics Pass True if the user is allowed to create, rename, close, and reopen forum topics (supergroups only)
      * @param bool|null $can_manage_direct_messages Pass True if the administrator can manage direct messages of the channel
+     * @param bool|null $can_manage_tags Pass True if the administrator can edit the tags of regular members; for groups and supergroups only
+     * @param bool|null $can_send_welcome_messages Pass True if the administrator can manage chat welcome messages or directly send them in the case of bots
      * @return bool Returns True on success
      */
     public function promoteChatMember(
@@ -1423,6 +1446,7 @@ interface ClientInterface
         ?bool $can_manage_topics = null,
         ?bool $can_manage_direct_messages = null,
         ?bool $can_manage_tags = null,
+        ?bool $can_send_welcome_messages = null,
     ): bool;
 
     /**
@@ -1567,6 +1591,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param int|null $duration Duration of sent animation in seconds
      * @param int|null $width Animation width
      * @param int|null $height Animation height
@@ -1591,8 +1616,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?int $duration = null,
         ?int $width = null,
         ?int $height = null,
@@ -1618,6 +1642,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param string|null $caption Audio caption
      * @param string|null $parse_mode Mode for parsing entities in the audio caption
      * @param MessageEntity[]|null $caption_entities List of special entities that appear in the caption
@@ -1640,8 +1665,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -1657,6 +1681,17 @@ interface ClientInterface
         ?ReplyParameters $reply_parameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message;
+
+    /**
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome.
+     * @param string $chat_join_request_query_id Unique identifier of the join request query
+     * @param string $web_app_url An HTTPS URL of a Web App to be opened
+     * @return bool Returns True on success
+     */
+    public function sendChatJoinRequestWebApp(
+        string $chat_join_request_query_id,
+        string $web_app_url,
+    ): bool;
 
     /**
      * Use this method when you need to tell the user that something is happening on the bot's side.
@@ -1704,6 +1739,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param string|null $last_name Contact's last name
      * @param string|null $vcard Additional data about the contact in the form of a vCard
      * @param bool|null $disable_notification Sends the message silently
@@ -1722,8 +1758,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $last_name = null,
         ?string $vcard = null,
         ?bool $disable_notification = null,
@@ -1773,6 +1808,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param InputFile|string|null $thumbnail Thumbnail of the file sent
      * @param string|null $caption Document caption
      * @param string|null $parse_mode Mode for parsing entities in the document caption
@@ -1793,8 +1829,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         InputFile|string|null $thumbnail = null,
         ?string $caption = null,
         ?string $parse_mode = null,
@@ -1934,6 +1969,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param float|null $horizontal_accuracy The radius of uncertainty for the location
      * @param int|null $live_period Period in seconds during which the location will be updated
      * @param int|null $heading For live locations, a direction in which the user is moving
@@ -1954,8 +1990,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?float $horizontal_accuracy = null,
         ?int $live_period = null,
         ?int $heading = null,
@@ -2003,6 +2038,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param string|null $parse_mode Mode for parsing entities in the message text
      * @param MessageEntity[]|null $entities List of special entities that appear in message text
      * @param LinkPreviewOptions|null $link_preview_options Link preview generation options for the message
@@ -2021,8 +2057,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $parse_mode = null,
         ?array $entities = null,
         ?LinkPreviewOptions $link_preview_options = null,
@@ -2039,10 +2074,12 @@ interface ClientInterface
      * Use this method to send a message draft on behalf of a business account.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param int $draft_id Identifier of the message draft to be sent
-     * @param string $text Text of the message draft to be sent
+     * @param string|null $text Text of the message draft to be sent; pass an empty text to show a "Thinking…" placeholder
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param string|null $parse_mode Mode for parsing entities in the message text
      * @param MessageEntity[]|null $entities List of special entities that appear in message text
+     * @param bool|null $can_stop Pass True to show the user a button to stop further drafts
+     * @param bool|null $keep_on_stop Pass True to keep the draft in the chat when the stop button is pressed
      * @return bool Returns True on success
      */
     public function sendMessageDraft(
@@ -2052,7 +2089,61 @@ interface ClientInterface
         ?int $message_thread_id = null,
         ?string $parse_mode = null,
         ?array $entities = null,
+        ?bool $can_stop = null,
+        ?bool $keep_on_stop = null,
     ): bool;
+
+    /**
+     * Use this method to stream a partial rich message to a user while the message is being generated.
+     * @param int|string $chat_id Unique identifier for the target private chat
+     * @param int $draft_id Unique identifier of the message draft
+     * @param InputRichMessage $rich_message The partial message to be streamed
+     * @param int|null $message_thread_id Unique identifier for the target message thread
+     * @param bool|null $can_stop Pass True to show the user a button to stop further drafts
+     * @param bool|null $keep_on_stop Pass True to keep the draft in the chat when the stop button is pressed
+     * @return bool Returns True on success
+     */
+    public function sendRichMessageDraft(
+        int|string $chat_id,
+        int $draft_id,
+        InputRichMessage $rich_message,
+        ?int $message_thread_id = null,
+        ?bool $can_stop = null,
+        ?bool $keep_on_stop = null,
+    ): bool;
+
+    /**
+     * Use this method to send rich messages.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
+     * @param InputRichMessage $rich_message The message to be sent
+     * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
+     * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
+     * @param bool|null $disable_notification Sends the message silently
+     * @param bool|null $protect_content Protects the contents of the sent message from forwarding and saving
+     * @param bool|null $allow_paid_broadcast Pass True to allow up to 1000 messages per second
+     * @param string|null $message_effect_id Unique identifier of the message effect to be added to the message
+     * @param SuggestedPostParameters|null $suggested_post_parameters Parameters for scheduling or suggesting the message as a channel post
+     * @param ReplyParameters|null $reply_parameters Description of the message to reply to
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup Additional interface options
+     * @return Message Returns the sent Message on success
+     */
+    public function sendRichMessage(
+        int|string $chat_id,
+        InputRichMessage $rich_message,
+        ?string $business_connection_id = null,
+        ?int $message_thread_id = null,
+        ?int $direct_messages_topic_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
+        ?bool $disable_notification = null,
+        ?bool $protect_content = null,
+        ?bool $allow_paid_broadcast = null,
+        ?string $message_effect_id = null,
+        ?SuggestedPostParameters $suggested_post_parameters = null,
+        ?ReplyParameters $reply_parameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
+    ): Message;
 
     /**
      * Use this method to send paid media.
@@ -2102,6 +2193,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param string|null $caption Photo caption
      * @param string|null $parse_mode Mode for parsing entities in the photo caption
      * @param MessageEntity[]|null $caption_entities List of special entities that appear in the caption
@@ -2122,8 +2214,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -2146,6 +2237,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection on behalf of which the message will be sent
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier of the private chat direct messages topic to send the message to
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param string|null $caption Photo caption
      * @param string|null $parse_mode Mode for parsing entities in the photo caption
      * @param MessageEntity[]|null $caption_entities List of special entities that appear in the caption
@@ -2167,8 +2259,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -2268,6 +2359,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param string|null $emoji Emoji associated with the sticker
      * @param bool|null $disable_notification Sends the message silently
      * @param bool|null $protect_content Protects the contents of the sent message from forwarding and saving
@@ -2284,8 +2376,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $emoji = null,
         ?bool $disable_notification = null,
         ?bool $protect_content = null,
@@ -2306,6 +2397,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param string|null $foursquare_id Foursquare identifier of the venue
      * @param string|null $foursquare_type Foursquare type of the venue
      * @param string|null $google_place_id Google Places identifier of the venue
@@ -2328,8 +2420,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $foursquare_id = null,
         ?string $foursquare_type = null,
         ?string $google_place_id = null,
@@ -2350,6 +2441,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param int|null $duration Duration of sent video in seconds
      * @param int|null $width Video width
      * @param int|null $height Video height
@@ -2377,8 +2469,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?int $duration = null,
         ?int $width = null,
         ?int $height = null,
@@ -2407,6 +2498,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param int|null $duration Duration of sent video in seconds
      * @param int|null $length Video width and height
      * @param InputFile|string|null $thumbnail Thumbnail of the file sent
@@ -2425,8 +2517,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?int $duration = null,
         ?int $length = null,
         InputFile|string|null $thumbnail = null,
@@ -2446,6 +2537,7 @@ interface ClientInterface
      * @param string|null $business_connection_id Unique identifier of the business connection
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
+     * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @param string|null $caption Voice message caption
      * @param string|null $parse_mode Mode for parsing entities in the voice message caption
      * @param MessageEntity[]|null $caption_entities List of special entities that appear in the caption
@@ -2465,8 +2557,7 @@ interface ClientInterface
         ?string $business_connection_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
-        int|string|null $receiver_user_id = null,
-        ?string $callback_query_id = null,
+        ?EphemeralMessageParameters $ephemeral_message_parameters = null,
         ?string $caption = null,
         ?string $parse_mode = null,
         ?array $caption_entities = null,
@@ -3047,13 +3138,11 @@ interface ClientInterface
     /**
      * Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized Update. In case of an unsuccessful request (a request with response HTTP status code different from 2XY), we will repeat the request and give up after a reasonable amount of attempts. Returns True on success.
      * If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter secret_token. If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as content.
-     * @param bool|null $drop_pending_updates Pass True to drop all pending updates
-     * 
      * @param string $url HTTPS URL to send updates to. Use an empty string to remove webhook integration
      * @param InputFile|null $certificate Upload your public key certificate so that the root certificate in use can be checked. See our self-signed guide for details.
      * @param string|null $ip_address The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS
-     * @param int|null $maxx_connections The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput.
-     * @param array|null$allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify ["message", "edited_channel_post", "callback_query"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default). If not specified, the previous setting will be used. Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
+     * @param int|null $max_connections The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput.
+     * @param string[]|null $allowed_updates A JSON-serialized list of the update types you want your bot to receive. For example, specify ["message", "edited_channel_post", "callback_query"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default). If not specified, the previous setting will be used. Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
      * @param bool|null $drop_pending_updates Pass True to drop all pending updates
      * @param string|null $secret_token A secret token to be sent in a header “X-Telegram-Bot-Api-Secret-Token” in every webhook request, 1-256 characters. Only characters A-Z, a-z, 0-9, _ and - are allowed. The header is useful to ensure that the request comes from a webhook set by you.
      * @return bool Returns True on success.

@@ -13,8 +13,11 @@ Sync pechkin with the latest Telegram Bot API documentation. All paths are relat
 4. **Check the API version.** `curl -s https://core.telegram.org/bots/api | grep -oE 'Bot API [0-9]+\.[0-9]+' | head -1` and compare with `API_VERSION` in `src/F4/Pechkin/Client.php`; update the constant if the API moved.
 5. **Audit each changed piece** against [the api-audit checklist](../api-audit/checklist.md):
    - **Modified**: read `git diff` for that doc file first — usually only a field or two changed; fix code/tests/fixtures accordingly.
-   - **New**: create the DataType class (or Client method), test, and fixtures following the checklist conventions; use an existing similar class as the template.
+   - **New**: create the DataType class (or Client method **plus its ClientInterface declaration**), test, and fixtures following the checklist conventions; use an existing similar class as the template.
+   - **Methods always touch two files**: every method change is applied to both `Client.php` and `ClientInterface.php` (signature and docblock). Tell subagents this explicitly and give them both paths.
    - **Deleted**: do **not** delete the code. Flag it and decide with the user whether to keep it with an "undocumented" comment (precedent: `UserShared`) or remove it.
    - **Context discipline**: each piece needs only its doc file + its code/test/fixture files. If more than ~5 pieces changed, fan out general-purpose subagents in batches of up to 8 pieces each; give every agent the exact file paths, the absolute path to `.claude/skills/api-audit/checklist.md`, and require the per-piece verdict format from the api-audit skill. Never load the whole docs/ tree or Client.php into one context.
-6. **Verify.** Run `composer test` (unit tests only; integration groups are excluded by default). Fix regressions before reporting.
+6. **Verify.**
+   - First run `vendor/bin/phpunit --bootstrap tests/F4/Config.php tests/F4/Tests/InterfaceConformanceTest.php`. It fails on any Client/ClientInterface mismatch, including PHP-legal drift (extra optional params, renamed params, differing defaults) and stale interface docblocks. If PHP dies with "Declaration of Client::x() must be compatible with ClientInterface::x()", the interface was not updated — fix it and rerun.
+   - Then run `composer test` (unit tests only; integration groups are excluded by default) and `composer stan`. Fix regressions before reporting.
 7. **Report.** Summary table: piece, change kind (modified/new/deleted), verdict (OK / FIXED / NEEDS DECISION), one-line detail. Remind the user to commit `docs/` together with the code changes so the next sync diffs against this baseline.

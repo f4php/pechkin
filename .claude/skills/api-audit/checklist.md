@@ -27,12 +27,15 @@ Conventions for comparing pechkin code against the documentation snapshots in
 4. Types follow the mapping table above.
 5. Extra properties not in the docs are allowed **only** with an explanatory comment (existing precedents: `UserShared` — whole class kept although removed from docs; `Chat::$all_members_are_administrators` — "Undocumented property discovered through API interaction"). Flag uncommented extras.
 
-## Method checks (`docs/methods/{name}.md` vs `Client.php`)
+## Method checks (`docs/methods/{name}.md` vs `Client.php` and `ClientInterface.php`)
 
-1. `public function {name}(...)` exists with the exact documented name.
+1. `public function {name}(...)` exists with the exact documented name in **both** `Client.php` and `ClientInterface.php`.
 2. Parameters match documented names; Required = Yes → no default value, listed first; Optional → nullable with `= null`.
 3. Types follow the mapping table; `chat_id` style "Integer or String" → `int|string`.
 4. Return type matches the "Returns ..." / "... is returned" sentence in the description (e.g. "a File object is returned" → `: File`; "Returns *True*" → `: bool`).
+5. The `ClientInterface` declaration is identical to `Client` — same parameter names, order, types, defaults and return type. PHP accepts an implementation with extra optional parameters or renamed parameters, so drift is not caught by the language; it is caught only by `tests/F4/Tests/InterfaceConformanceTest.php`.
+6. The `ClientInterface` docblock has one `@param` per parameter, in signature order (a one-line description is enough), plus `@return`. Any new DataType used in the signature is added to the `use F4\Pechkin\DataType\{...}` imports of both files.
+7. Removed parameters (e.g. ones superseded by a new object such as `ephemeral_message_parameters`) are removed from both files.
 
 ## Test and fixture checks (datatypes only)
 
