@@ -20,10 +20,7 @@
         }
     ],
     "config": {
-        "optimize-autoloader": true,
-        "allow-plugins": {
-            "cweagans/composer-patches": true
-        }
+        "optimize-autoloader": true
     },
     "scripts": {
         "test": "phpunit --bootstrap tests/F4/Config.php --display-warnings --display-skipped --display-phpunit-deprecations --fail-on-deprecation tests --exclude-group integration",
@@ -36,7 +33,7 @@
         "stan": "phpstan --level=1 analyse src tests"
     },
     "require": {
-        "f4php/framework": "^0.2",
+        "f4php/framework": "^0.2.14",
         "guzzlehttp/guzzle": "^7.10"
     },
     "require-dev": {
