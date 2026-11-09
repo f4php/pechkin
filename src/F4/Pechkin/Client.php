@@ -24,6 +24,7 @@ use F4\Pechkin\DataType\{
     ChatInviteLink,
     ChatMember,
     ChatPermissions,
+    ChatShareThemeBackdrops,
     EphemeralMessageParameters,
     File,
     ForceReply,
@@ -68,6 +69,7 @@ use F4\Pechkin\DataType\{
     Story,
     StoryArea,
     SuggestedPostParameters,
+    UniqueGift,
     Update,
     User,
     UserChatBoosts,
@@ -84,7 +86,7 @@ use function
 
 class Client implements ClientInterface
 {
-    protected const string API_VERSION = '10.3';
+    protected const string API_VERSION = '10.4';
     protected const int REQUEST_TIMEOUT = 60;
 
     protected ApiClient $apiClient;
@@ -147,6 +149,12 @@ class Client implements ClientInterface
         InlineQueryResult $result,
     ): SentWebAppMessage {
         return SentWebAppMessage::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+    }
+    public function answerWidgetQuery(
+        string $widget_query_id,
+        ?string $data = null,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function approveChatJoinRequest(
         int|string $chat_id,
@@ -303,6 +311,12 @@ class Client implements ClientInterface
         int|string $chat_id,
         int $message_id,
         ?string $comment = null,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function deleteBusinessAccountGift(
+        string $business_connection_id,
+        string $owned_gift_id,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
@@ -547,6 +561,22 @@ class Client implements ClientInterface
             default => Message::fromArray($result),
         };
     }
+    public function editMessageWidgetData(
+        int|string|null $chat_id = null,
+        ?int $message_id = null,
+        ?string $inline_message_id = null,
+        ?string $public_data = null,
+        ?string $chat_data = null,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function editSharedWidgetData(
+        string $widget_id,
+        string $public_data,
+        ?int $cache_time = null,
+    ): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
     public function editStory(
         string $business_connection_id,
         int $story_id,
@@ -682,6 +712,10 @@ class Client implements ClientInterface
     ): MenuButton {
         return MenuButton::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
+    public function getChatShareThemeBackdrops(): ChatShareThemeBackdrops
+    {
+        return ChatShareThemeBackdrops::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
+    }
     public function getCustomEmojiStickers(
         array $custom_emoji_ids,
     ): array {
@@ -760,6 +794,11 @@ class Client implements ClientInterface
         string $name,
     ): StickerSet {
         return StickerSet::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+    }
+    public function getUniqueGift(
+        string $name,
+    ): UniqueGift {
+        return UniqueGift::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function getUpdates(
 
@@ -975,9 +1014,9 @@ class Client implements ClientInterface
         return PreparedKeyboardButton::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendAnimation(
-        int|string $chat_id,
         InputFile|string $animation,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1001,9 +1040,9 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendAudio(
-        int|string $chat_id,
         InputFile|string $audio,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1051,10 +1090,10 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendContact(
-        int|string $chat_id,
         string $phone_number,
         string $first_name,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1087,9 +1126,9 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendDocument(
-        int|string $chat_id,
         InputFile|string $document,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1169,10 +1208,10 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendLocation(
-        int|string $chat_id,
         float $latitude,
         float $longitude,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1208,9 +1247,9 @@ class Client implements ClientInterface
         );
     }
     public function sendMessage(
-        int|string $chat_id,
         string $text,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1261,9 +1300,9 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendPhoto(
-        int|string $chat_id,
         InputFile|string $photo,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1283,10 +1322,10 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendLivePhoto(
-        int|string $chat_id,
         InputFile|string $photo,
         InputFile|string $live_photo,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1348,9 +1387,9 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendRichMessage(
-        int|string $chat_id,
         InputRichMessage $rich_message,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1374,10 +1413,28 @@ class Client implements ClientInterface
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
-    public function sendSticker(
+    public function sendSharedWidget(
         int|string $chat_id,
+        string $widget_id,
+        ?int $message_thread_id = null,
+        ?string $chat_data = null,
+        ?string $caption = null,
+        ?string $parse_mode = null,
+        ?array $caption_entities = null,
+        ?bool $show_caption_above_media = null,
+        ?bool $disable_notification = null,
+        ?bool $protect_content = null,
+        ?bool $allow_paid_broadcast = null,
+        ?string $message_effect_id = null,
+        ?ReplyParameters $reply_parameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
+    ): Message {
+        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
+    }
+    public function sendSticker(
         InputFile|string $sticker,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1393,12 +1450,12 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendVenue(
-        int|string $chat_id,
         float $latitude,
         float $longitude,
         string $title,
         string $address,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1417,9 +1474,9 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendVideo(
-        int|string $chat_id,
         InputFile|string $video,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1446,9 +1503,9 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendVideoNote(
-        int|string $chat_id,
         InputFile|string $video_note,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1466,9 +1523,9 @@ class Client implements ClientInterface
         return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
     }
     public function sendVoice(
-        int|string $chat_id,
         InputFile|string $voice,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1485,6 +1542,29 @@ class Client implements ClientInterface
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message {
         return Message::fromArray($this->apiClient->sendMultipartRequest(__FUNCTION__, get_defined_vars()));
+    }
+    public function sendWidget(
+        int|string $chat_id,
+        string $html,
+        ?int $message_thread_id = null,
+        ?int $width = null,
+        ?int $height = null,
+        ?string $public_data = null,
+        ?string $chat_data = null,
+        ?string $caption = null,
+        ?string $parse_mode = null,
+        ?array $caption_entities = null,
+        ?bool $show_caption_above_media = null,
+        ?bool $allow_queries = null,
+        ?bool $is_shared = null,
+        ?bool $disable_notification = null,
+        ?bool $protect_content = null,
+        ?bool $allow_paid_broadcast = null,
+        ?string $message_effect_id = null,
+        ?ReplyParameters $reply_parameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
+    ): Message {
+        return Message::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars()));
     }
     public function setBusinessAccountBio(
         string $business_connection_id,
@@ -1816,12 +1896,16 @@ class Client implements ClientInterface
     public function verifyChat(
         int|string $chat_id,
         ?string $custom_description = null,
+        ?string $custom_description_parse_mode = null,
+        ?array $custom_description_entities = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function verifyUser(
         int|string $user_id,
         ?string $custom_description = null,
+        ?string $custom_description_parse_mode = null,
+        ?array $custom_description_entities = null,
     ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }

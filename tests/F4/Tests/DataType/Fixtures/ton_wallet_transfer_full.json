@@ -1,0 +1,6 @@
+{
+  "transaction_id": "tx_abc123",
+  "peer_address": "EQCpeer00000000000000000000000000000000000000001",
+  "amount": "-1500000000",
+  "comment": "Thanks!"
+}

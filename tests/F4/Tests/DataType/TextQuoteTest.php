@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
+use F4\Pechkin\DataType\RichTextBold;
 use F4\Pechkin\DataType\TextQuote;
 use F4\Tests\DataType\FixtureAwareTrait;
 use PHPUnit\Framework\TestCase;
@@ -22,6 +23,9 @@ final class TextQuoteTest extends TestCase
         $this->assertSame('Hello, World!', $textQuote->text);
         $this->assertSame(1, $textQuote->position);
         $this->assertSame(false, $textQuote->is_manual);
+        $this->assertCount(2, $textQuote->rich_texts);
+        $this->assertSame('Hello, ', $textQuote->rich_texts[0]);
+        $this->assertInstanceOf(RichTextBold::class, $textQuote->rich_texts[1]);
     }
 
     public function testFromArrayWithMinimalData(): void
@@ -31,6 +35,7 @@ final class TextQuoteTest extends TestCase
 
         $this->assertInstanceOf(TextQuote::class, $textQuote);
         $this->assertNull($textQuote->entities);
+        $this->assertNull($textQuote->rich_texts);
         $this->assertNull($textQuote->is_manual);
     }
 

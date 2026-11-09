@@ -35,6 +35,13 @@
             "custom_emoji_id": "emoji_456"
         }
     ],
+    "quote_rich_texts": [
+        "Hello, ",
+        {
+            "type": "bold",
+            "text": "World"
+        }
+    ],
     "quote_position": 42,
     "checklist_task_id": 42,
     "poll_option_id": "option_123"

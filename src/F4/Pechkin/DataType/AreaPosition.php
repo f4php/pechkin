@@ -6,7 +6,7 @@ namespace F4\Pechkin\DataType;
 
 use F4\Pechkin\DataType\AbstractDataType;
 
-readonly class StoryAreaPosition extends AbstractDataType
+readonly class AreaPosition extends AbstractDataType
 {
     public function __construct(
         public readonly float $x_percentage,

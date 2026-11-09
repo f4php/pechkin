@@ -27,6 +27,7 @@ use F4\Pechkin\DataType\Venue;
 use F4\Pechkin\DataType\Video;
 use F4\Pechkin\DataType\VideoNote;
 use F4\Pechkin\DataType\Voice;
+use F4\Pechkin\DataType\Widget;
 use F4\Tests\DataType\FixtureAwareTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -55,6 +56,8 @@ final class ExternalReplyInfoTest extends TestCase
         $this->assertInstanceOf(Video::class, $externalReplyInfo->video);
         $this->assertInstanceOf(VideoNote::class, $externalReplyInfo->video_note);
         $this->assertInstanceOf(Voice::class, $externalReplyInfo->voice);
+        $this->assertInstanceOf(Widget::class, $externalReplyInfo->widget);
+        $this->assertSame('<div>Hello</div>', $externalReplyInfo->widget->html);
         $this->assertSame(true, $externalReplyInfo->has_media_spoiler);
         $this->assertInstanceOf(Checklist::class, $externalReplyInfo->checklist);
         $this->assertInstanceOf(Contact::class, $externalReplyInfo->contact);

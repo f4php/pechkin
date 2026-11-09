@@ -1,0 +1,9 @@
+{
+  "wallet": {
+    "address": "UQBvW8Z5huBkMJYdnfAEM5JqTNkuWX3diqYENkWsIL0XggGG",
+    "amount": "1500000000",
+    "public_key": "a1b2c3d4e5f6",
+    "state_init": "te6ccgEBAgEAKAAA"
+  },
+  "sign_data": "{\"signature\":\"abc\"}"
+}

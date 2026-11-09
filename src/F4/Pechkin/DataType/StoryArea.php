@@ -6,14 +6,14 @@ namespace F4\Pechkin\DataType;
 
 use F4\Pechkin\DataType\{
     AbstractDataType,
-    StoryAreaPosition,
+    AreaPosition,
     StoryAreaType,
 };
 
 readonly class StoryArea extends AbstractDataType
 {
     public function __construct(
-        public readonly StoryAreaPosition $position,
+        public readonly AreaPosition $position,
         public readonly StoryAreaType $type,
     ) {}
 }

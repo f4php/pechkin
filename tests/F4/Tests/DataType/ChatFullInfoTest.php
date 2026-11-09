@@ -14,8 +14,10 @@ use F4\Pechkin\DataType\ChatFullInfo;
 use F4\Pechkin\DataType\ChatLocation;
 use F4\Pechkin\DataType\ChatPermissions;
 use F4\Pechkin\DataType\ChatPhoto;
+use F4\Pechkin\DataType\ChatShareThemeEmoji;
 use F4\Pechkin\DataType\Community;
 use F4\Pechkin\DataType\Message;
+use F4\Pechkin\DataType\TonWalletCard;
 use F4\Pechkin\DataType\UniqueGiftColors;
 use F4\Pechkin\DataType\UserRating;
 use F4\Tests\DataType\FixtureAwareTrait;
@@ -83,6 +85,10 @@ final class ChatFullInfoTest extends TestCase
         $this->assertSame(10, $chatFullInfo->paid_message_star_count);
         $this->assertInstanceOf(Community::class, $chatFullInfo->community);
         $this->assertSame('9876543210', $chatFullInfo->community->id);
+        $this->assertInstanceOf(TonWalletCard::class, $chatFullInfo->ton_wallet_card);
+        $this->assertSame('EQCwallet0000000000000000000000000000000000000001', $chatFullInfo->ton_wallet_card->address);
+        $this->assertInstanceOf(ChatShareThemeEmoji::class, $chatFullInfo->share_theme);
+        $this->assertCount(1, $chatFullInfo->share_theme->emojis);
     }
 
     public function testFromArrayWithMinimalData(): void

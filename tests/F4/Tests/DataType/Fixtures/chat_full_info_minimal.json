@@ -58,5 +58,7 @@
     "paid_message_star_count": null,
     "all_members_are_administrators": null,
     "can_send_gift": null,
-    "guard_bot": null
+    "guard_bot": null,
+    "ton_wallet_card": null,
+    "share_theme": null
 }

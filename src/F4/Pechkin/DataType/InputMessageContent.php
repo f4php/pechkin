@@ -11,13 +11,17 @@ use F4\Pechkin\DataType\{
     InputInvoiceMessageContent,
     InputLocationMessageContent,
     InputRichMessageContent,
+    InputSharedWidgetMessageContent,
     InputTextMessageContent,
     InputVenueMessageContent,
+    InputWidgetMessageContent,
 };
 
 #[Polymorphic(
     createFromArray: static function (array $data): mixed {
         return match(true) {
+            isset($data['html']) => InputWidgetMessageContent::fromArray($data),
+            isset($data['widget_id']) => InputSharedWidgetMessageContent::fromArray($data),
             isset($data['phone_number']) => InputContactMessageContent::fromArray($data),
             isset($data['currency']) => InputInvoiceMessageContent::fromArray($data),
             isset($data['longitude']) && !isset($data['address']) => InputLocationMessageContent::fromArray($data),

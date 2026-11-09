@@ -7,7 +7,7 @@ Use this method to edit live location messages. A location can be edited until i
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | business_connection_id | String | Optional | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| chat_id | Integer or String | Optional | Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`. |
+| chat_id | Integer or String | Optional | Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target bot, supergroup, or channel in the format `@username`. |
 | message_id | Integer | Optional | Required if *inline_message_id* is not specified. Identifier of the message to edit. |
 | inline_message_id | String | Optional | Required if *chat_id* and *message_id* are not specified. Identifier of the inline message. |
 | latitude | Float | Yes | Latitude of new location |

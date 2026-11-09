@@ -31,5 +31,12 @@
       "custom_emoji_id": "emoji_456"
     }
   ],
+  "rich_texts": [
+    "Hello, ",
+    {
+      "type": "bold",
+      "text": "World"
+    }
+  ],
   "is_manual": false
 }

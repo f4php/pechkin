@@ -7,7 +7,7 @@ Use this method to send a native poll. On success, the sent [Message](https://co
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | business_connection_id | String | Optional | Unique identifier of the business connection on behalf of which the message will be sent |
-| chat_id | Integer or String | Yes | Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`. Polls can't be sent to channel direct messages chats. |
+| chat_id | Integer or String | Yes | Unique identifier for the target chat or username of the target bot, supergroup, or channel in the format `@username`. Polls can't be sent to channel direct messages chats. |
 | message_thread_id | Integer | Optional | Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only |
 | question | String | Yes | Poll question, 1-300 characters |
 | question_parse_mode | String | Optional | Mode for parsing entities in the question. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details. Currently, only custom emoji entities are allowed. |

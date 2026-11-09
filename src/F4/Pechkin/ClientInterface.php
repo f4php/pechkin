@@ -18,6 +18,7 @@ use F4\Pechkin\DataType\{
     ChatInviteLink,
     ChatMember,
     ChatPermissions,
+    ChatShareThemeBackdrops,
     EphemeralMessageParameters,
     File,
     ForceReply,
@@ -62,6 +63,7 @@ use F4\Pechkin\DataType\{
     Story,
     StoryArea,
     SuggestedPostParameters,
+    UniqueGift,
     Update,
     User,
     UserChatBoosts,
@@ -433,6 +435,17 @@ interface ClientInterface
         int|string $chat_id,
         int $message_id,
         ?string $comment = null,
+    ): bool;
+
+    /**
+     * Deletes a regular gift owned by a managed business account without receiving Telegram Stars for it.
+     * @param string $business_connection_id Unique identifier of the business connection
+     * @param string $owned_gift_id Unique identifier of the regular gift that should be deleted
+     * @return bool Returns True on success
+     */
+    public function deleteBusinessAccountGift(
+        string $business_connection_id,
+        string $owned_gift_id,
     ): bool;
 
     /**
@@ -851,6 +864,36 @@ interface ClientInterface
     ): bool;
 
     /**
+     * Use this method to edit data of a widget in a message sent by the bot or via the bot (for inline bots).
+     * @param int|string|null $chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target supergroup
+     * @param int|null $message_id Required if inline_message_id is not specified. Identifier of the message with the widget
+     * @param string|null $inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
+     * @param string|null $public_data New public data of the widget, 0-1024 bytes; pass an empty string to remove it
+     * @param string|null $chat_data New message-specific data of the widget, 0-1024 bytes; pass an empty string to remove it
+     * @return bool Returns True on success
+     */
+    public function editMessageWidgetData(
+        int|string|null $chat_id = null,
+        ?int $message_id = null,
+        ?string $inline_message_id = null,
+        ?string $public_data = null,
+        ?string $chat_data = null,
+    ): bool;
+
+    /**
+     * Use this method to edit public data of a shared widget created by the bot.
+     * @param string $widget_id Unique identifier of the shared widget
+     * @param string $public_data New public data of the widget, 0-1024 bytes; pass an empty string to remove the public data
+     * @param int|null $cache_time The maximum amount of time in seconds that the public data may be cached client-side; 5-3600
+     * @return bool Returns True on success
+     */
+    public function editSharedWidgetData(
+        string $widget_id,
+        string $public_data,
+        ?int $cache_time = null,
+    ): bool;
+
+    /**
      * Edits a story previously posted by the bot on behalf of a managed business account.
      * @param string $business_connection_id Unique identifier of the business connection
      * @param int $story_id Unique identifier of the story to edit
@@ -1113,6 +1156,12 @@ interface ClientInterface
     ): MenuButton;
 
     /**
+     * Use this method to get the list of backdrops, which can be used as the background of a theme of the screen for sharing a link to a user or a chat.
+     * @return ChatShareThemeBackdrops Returns a ChatShareThemeBackdrops object
+     */
+    public function getChatShareThemeBackdrops(): ChatShareThemeBackdrops;
+
+    /**
      * Use this method to get information about custom emoji stickers by their identifiers.
      * @param string[] $custom_emoji_ids A list of custom emoji identifiers
      * @return Sticker[] Returns an Array of Sticker objects
@@ -1229,6 +1278,15 @@ interface ClientInterface
     public function getStickerSet(
         string $name,
     ): StickerSet;
+
+    /**
+     * Use this method to get information about a unique gift by its name.
+     * @param string $name Unique name of the gift
+     * @return UniqueGift Returns a UniqueGift object on success
+     */
+    public function getUniqueGift(
+        string $name,
+    ): UniqueGift;
 
     /**
      * Use this method to receive incoming updates using long polling. Returns an Array of Update objects
@@ -1586,9 +1644,9 @@ interface ClientInterface
 
     /**
      * Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound).
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param InputFile|string $animation Animation to send
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -1611,9 +1669,9 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendAnimation(
-        int|string $chat_id,
         InputFile|string $animation,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1637,9 +1695,9 @@ interface ClientInterface
 
     /**
      * Use this method to send audio files.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param InputFile|string $audio Audio file to send
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -1660,9 +1718,9 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendAudio(
-        int|string $chat_id,
         InputFile|string $audio,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1733,10 +1791,10 @@ interface ClientInterface
 
     /**
      * Use this method to send phone contacts.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param string $phone_number Contact's phone number
      * @param string $first_name Contact's first name
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -1752,10 +1810,10 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendContact(
-        int|string $chat_id,
         string $phone_number,
         string $first_name,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1803,9 +1861,9 @@ interface ClientInterface
 
     /**
      * Use this method to send general files.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param InputFile|string $document File to send
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -1824,9 +1882,9 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendDocument(
-        int|string $chat_id,
         InputFile|string $document,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -1963,10 +2021,10 @@ interface ClientInterface
 
     /**
      * Use this method to send point on the map.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param float $latitude Latitude of the location
      * @param float $longitude Longitude of the location
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -1984,10 +2042,10 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendLocation(
-        int|string $chat_id,
         float $latitude,
         float $longitude,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -2033,9 +2091,9 @@ interface ClientInterface
 
     /**
      * Use this method to send text messages.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param string $text Text of the message to be sent
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -2052,9 +2110,9 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendMessage(
-        int|string $chat_id,
         string $text,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -2114,9 +2172,9 @@ interface ClientInterface
 
     /**
      * Use this method to send rich messages.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param InputRichMessage $rich_message The message to be sent
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -2130,9 +2188,9 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendRichMessage(
-        int|string $chat_id,
         InputRichMessage $rich_message,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -2188,9 +2246,9 @@ interface ClientInterface
 
     /**
      * Use this method to send photos.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param InputFile|string $photo Photo to send
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -2209,9 +2267,9 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendPhoto(
-        int|string $chat_id,
         InputFile|string $photo,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -2231,10 +2289,10 @@ interface ClientInterface
 
     /**
      * Use this method to send a photo with a live area.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param InputFile|string $photo Photo to send as a static preview
      * @param InputFile|string $live_photo The animation to be used as the live photo
      * @param string|null $business_connection_id Unique identifier of the business connection on behalf of which the message will be sent
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier of the private chat direct messages topic to send the message to
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -2253,10 +2311,10 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendLivePhoto(
-        int|string $chat_id,
         InputFile|string $photo,
         InputFile|string $live_photo,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -2353,10 +2411,45 @@ interface ClientInterface
     ): Message;
 
     /**
+     * Use this method to send again a shared widget created by the bot.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup
+     * @param string $widget_id Unique identifier of the shared widget
+     * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of a forum
+     * @param string|null $chat_data Data of the widget, which is specific to the message, 0-1024 bytes
+     * @param string|null $caption Widget caption, 0-1024 characters after entities parsing
+     * @param string|null $parse_mode Mode for parsing entities in the widget caption
+     * @param MessageEntity[]|null $caption_entities List of special entities that appear in the caption
+     * @param bool|null $show_caption_above_media Pass True if the caption must be shown above the widget
+     * @param bool|null $disable_notification Sends the message silently
+     * @param bool|null $protect_content Protects the contents of the sent message from forwarding and saving
+     * @param bool|null $allow_paid_broadcast Pass True to allow up to 1000 messages per second
+     * @param string|null $message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
+     * @param ReplyParameters|null $reply_parameters Description of the message to reply to
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup Additional interface options
+     * @return Message Returns the sent Message on success
+     */
+    public function sendSharedWidget(
+        int|string $chat_id,
+        string $widget_id,
+        ?int $message_thread_id = null,
+        ?string $chat_data = null,
+        ?string $caption = null,
+        ?string $parse_mode = null,
+        ?array $caption_entities = null,
+        ?bool $show_caption_above_media = null,
+        ?bool $disable_notification = null,
+        ?bool $protect_content = null,
+        ?bool $allow_paid_broadcast = null,
+        ?string $message_effect_id = null,
+        ?ReplyParameters $reply_parameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
+    ): Message;
+
+    /**
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param InputFile|string $sticker Sticker to send
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -2371,9 +2464,9 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendSticker(
-        int|string $chat_id,
         InputFile|string $sticker,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -2389,12 +2482,12 @@ interface ClientInterface
 
     /**
      * Use this method to send information about a venue.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param float $latitude Latitude of the venue
      * @param float $longitude Longitude of the venue
      * @param string $title Name of the venue
      * @param string $address Address of the venue
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -2412,12 +2505,12 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendVenue(
-        int|string $chat_id,
         float $latitude,
         float $longitude,
         string $title,
         string $address,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -2436,9 +2529,9 @@ interface ClientInterface
 
     /**
      * Use this method to send video files.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param InputFile|string $video Video to send
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -2464,9 +2557,9 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendVideo(
-        int|string $chat_id,
         InputFile|string $video,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -2493,9 +2586,9 @@ interface ClientInterface
 
     /**
      * Use this method to send video messages.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param InputFile|string $video_note Video note to send
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -2512,9 +2605,9 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendVideoNote(
-        int|string $chat_id,
         InputFile|string $video_note,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -2532,9 +2625,9 @@ interface ClientInterface
 
     /**
      * Use this method to send audio files.
-     * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param InputFile|string $voice Audio file to send
      * @param string|null $business_connection_id Unique identifier of the business connection
+     * @param int|string|null $chat_id Unique identifier for the target chat or username of the target bot, supergroup, or channel; required unless the message is sent as an ephemeral reply to a callback query
      * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of the forum
      * @param int|null $direct_messages_topic_id Unique identifier for the target direct messages topic of the forum
      * @param EphemeralMessageParameters|null $ephemeral_message_parameters A JSON-serialized object containing the parameters of the ephemeral message to send
@@ -2552,9 +2645,9 @@ interface ClientInterface
      * @return Message Returns the sent Message on success
      */
     public function sendVoice(
-        int|string $chat_id,
         InputFile|string $voice,
         ?string $business_connection_id = null,
+        int|string|null $chat_id = null,
         ?int $message_thread_id = null,
         ?int $direct_messages_topic_id = null,
         ?EphemeralMessageParameters $ephemeral_message_parameters = null,
@@ -2567,6 +2660,51 @@ interface ClientInterface
         ?bool $allow_paid_broadcast = null,
         ?string $message_effect_id = null,
         ?SuggestedPostParameters $suggested_post_parameters = null,
+        ?ReplyParameters $reply_parameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
+    ): Message;
+
+    /**
+     * Use this method to send a message with an HTML widget.
+     * @param int|string $chat_id Unique identifier for the target chat or username of the target supergroup
+     * @param string $html HTML code of the widget, 1-32768 bytes
+     * @param int|null $message_thread_id Unique identifier for the target message thread (topic) of a forum
+     * @param int|null $width Width of the widget in logical pixels
+     * @param int|null $height Height of the widget in logical pixels
+     * @param string|null $public_data Public data of the widget, 0-1024 bytes
+     * @param string|null $chat_data Data of the widget, which is specific to the message, 0-1024 bytes
+     * @param string|null $caption Widget caption, 0-1024 characters after entities parsing
+     * @param string|null $parse_mode Mode for parsing entities in the widget caption
+     * @param MessageEntity[]|null $caption_entities List of special entities that appear in the caption
+     * @param bool|null $show_caption_above_media Pass True if the caption must be shown above the widget
+     * @param bool|null $allow_queries Pass True to allow the widget to send queries to the bot
+     * @param bool|null $is_shared Pass True to create a shared widget, which can be sent again using sendSharedWidget
+     * @param bool|null $disable_notification Sends the message silently
+     * @param bool|null $protect_content Protects the contents of the sent message from forwarding and saving
+     * @param bool|null $allow_paid_broadcast Pass True to allow up to 1000 messages per second
+     * @param string|null $message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
+     * @param ReplyParameters|null $reply_parameters Description of the message to reply to
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup Additional interface options
+     * @return Message Returns the sent Message on success
+     */
+    public function sendWidget(
+        int|string $chat_id,
+        string $html,
+        ?int $message_thread_id = null,
+        ?int $width = null,
+        ?int $height = null,
+        ?string $public_data = null,
+        ?string $chat_data = null,
+        ?string $caption = null,
+        ?string $parse_mode = null,
+        ?array $caption_entities = null,
+        ?bool $show_caption_above_media = null,
+        ?bool $allow_queries = null,
+        ?bool $is_shared = null,
+        ?bool $disable_notification = null,
+        ?bool $protect_content = null,
+        ?bool $allow_paid_broadcast = null,
+        ?string $message_effect_id = null,
         ?ReplyParameters $reply_parameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null,
     ): Message;
@@ -3104,22 +3242,30 @@ interface ClientInterface
      * Verifies a chat on behalf of the organization represented by the bot.
      * @param int|string $chat_id Unique identifier for the target chat or username of the target channel
      * @param string|null $custom_description Custom description for the verification
+     * @param string|null $custom_description_parse_mode Mode for parsing entities in the custom description; only text_link entities are supported
+     * @param MessageEntity[]|null $custom_description_entities List of special entities that appear in the custom description, which can be specified instead of custom_description_parse_mode; only text_link entities are supported
      * @return bool Returns True on success
      */
     public function verifyChat(
         int|string $chat_id,
         ?string $custom_description = null,
+        ?string $custom_description_parse_mode = null,
+        ?array $custom_description_entities = null,
     ): bool;
 
     /**
      * Verifies a user on behalf of the organization represented by the bot.
      * @param int|string $user_id Unique identifier of the target user
      * @param string|null $custom_description Custom description for the verification
+     * @param string|null $custom_description_parse_mode Mode for parsing entities in the custom description; only text_link entities are supported
+     * @param MessageEntity[]|null $custom_description_entities List of special entities that appear in the custom description, which can be specified instead of custom_description_parse_mode; only text_link entities are supported
      * @return bool Returns True on success
      */
     public function verifyUser(
         int|string $user_id,
         ?string $custom_description = null,
+        ?string $custom_description_parse_mode = null,
+        ?array $custom_description_entities = null,
     ): bool;
 
     /**
@@ -3186,6 +3332,17 @@ interface ClientInterface
         string $web_app_query_id,
         InlineQueryResult $result,
     ): SentWebAppMessage;
+
+    /**
+     * Use this method to send an answer to a query from a widget.
+     * @param string $widget_query_id Unique identifier for the query to be answered
+     * @param string|null $data Data to be returned to the widget, 0-1024 bytes
+     * @return bool Returns True on success
+     */
+    public function answerWidgetQuery(
+        string $widget_query_id,
+        ?string $data = null,
+    ): bool;
 
     /**
      * Stores and sends a result of an interaction with a guest user in a direct messages chat.

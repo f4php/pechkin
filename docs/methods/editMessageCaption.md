@@ -7,7 +7,7 @@ Use this method to edit captions of messages. On success, if the edited message 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | business_connection_id | String | Optional | Unique identifier of the business connection on behalf of which the message to be edited was sent |
-| chat_id | Integer or String | Optional | Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target bot, supergroup or channel in the format `@username`. |
+| chat_id | Integer or String | Optional | Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target bot, supergroup, or channel in the format `@username`. |
 | message_id | Integer | Optional | Required if *inline_message_id* is not specified. Identifier of the message to edit. |
 | inline_message_id | String | Optional | Required if *chat_id* and *message_id* are not specified. Identifier of the inline message. |
 | caption | String | Optional | New caption of the message, 0-1024 characters after entities parsing |

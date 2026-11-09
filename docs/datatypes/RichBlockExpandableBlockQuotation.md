@@ -2,7 +2,7 @@
 
 Source: https://core.telegram.org/bots/api#richblockexpandableblockquotation
 
-A block quotation, corresponding to the HTML tag `<blockquote>` with custom attribute `"collapsed"`.
+A block quotation, corresponding to the HTML tag `<blockquote>` with custom attribute `"expandable"`.
 
 | Field | Type | Description |
 | --- | --- | --- |

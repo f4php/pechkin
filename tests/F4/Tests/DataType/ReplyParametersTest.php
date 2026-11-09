@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace F4\Tests\DataType;
 
 use F4\Pechkin\DataType\ReplyParameters;
+use F4\Pechkin\DataType\RichTextBold;
 use F4\Tests\DataType\FixtureAwareTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -26,6 +27,9 @@ final class ReplyParametersTest extends TestCase
         $this->assertSame('test_string', $replyParameters->quote_parse_mode);
         $this->assertSame(42, $replyParameters->quote_position);
         $this->assertSame(42, $replyParameters->checklist_task_id);
+        $this->assertCount(2, $replyParameters->quote_rich_texts);
+        $this->assertSame('Hello, ', $replyParameters->quote_rich_texts[0]);
+        $this->assertInstanceOf(RichTextBold::class, $replyParameters->quote_rich_texts[1]);
     }
 
     public function testFromArrayWithMinimalData(): void
@@ -37,6 +41,7 @@ final class ReplyParametersTest extends TestCase
         $this->assertNull($replyParameters->chat_id);
         $this->assertNull($replyParameters->allow_sending_without_reply);
         $this->assertNull($replyParameters->quote);
+        $this->assertNull($replyParameters->quote_rich_texts);
     }
 
     public function testFromArrayToArrayRoundtrip(): void

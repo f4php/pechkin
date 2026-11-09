@@ -30,6 +30,7 @@ use F4\Pechkin\DataType\{
     Video,
     VideoNote,
     Voice,
+    Widget,
     Attribute\ArrayOf,
 };
 
@@ -53,6 +54,7 @@ readonly class ExternalReplyInfo extends AbstractDataType
         public readonly ?Video $video = null,
         public readonly ?VideoNote $video_note = null,
         public readonly ?Voice $voice = null,
+        public readonly ?Widget $widget = null,
         public readonly ?bool $has_media_spoiler = null,
         public readonly ?Checklist $checklist = null,
         public readonly ?Contact $contact = null,

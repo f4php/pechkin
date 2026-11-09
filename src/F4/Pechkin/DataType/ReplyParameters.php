@@ -7,6 +7,7 @@ namespace F4\Pechkin\DataType;
 use F4\Pechkin\DataType\{
     AbstractDataType,
     MessageEntity,
+    RichText,
     Attribute\ArrayOf,
 };
 
@@ -22,6 +23,9 @@ readonly class ReplyParameters extends AbstractDataType
         /** @var MessageEntity[]|null */
         #[ArrayOf(MessageEntity::class)]
         public readonly ?array $quote_entities = null,
+        /** @var array<RichText|RichText[]|string>|null */
+        #[ArrayOf(RichText::class)]
+        public readonly ?array $quote_rich_texts = null,
         public readonly ?int $quote_position = null,
         public readonly ?int $checklist_task_id = null,
         public readonly ?string $poll_option_id = null,

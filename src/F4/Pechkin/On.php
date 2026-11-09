@@ -296,6 +296,25 @@ final class On extends AbstractRoutable
             handler: $handler,
         );
     }
+    // ── Widgets ──────────────────────────────────────────────────────────
+    public static function widgetQuery(When $when, Closure $handler): static
+    {
+        return new static(
+            matcher: fn(Context $context): bool =>
+                $context->update?->widget_query !== null
+                && $when->test($context->update?->widget_query?->data),
+            handler: $handler,
+        );
+    }
+    public static function sharedWidgetQuery(When $when, Closure $handler): static
+    {
+        return new static(
+            matcher: fn(Context $context): bool =>
+                $context->update?->shared_widget_query !== null
+                && $when->test($context->update?->shared_widget_query?->data),
+            handler: $handler,
+        );
+    }
     // ── Payments ─────────────────────────────────────────────────────────
     public static function preCheckoutQuery(When $when, Closure $handler): static
     {

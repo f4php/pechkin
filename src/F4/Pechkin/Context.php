@@ -59,6 +59,8 @@ class Context
             ?? $this->update->callback_query?->from
             ?? $this->update->inline_query?->from
             ?? $this->update->chosen_inline_result?->from
+            ?? $this->update->widget_query?->from
+            ?? $this->update->shared_widget_query?->from
             ?? $this->update->shipping_query?->from
             ?? $this->update->pre_checkout_query?->from
             ?? $this->update->my_chat_member?->from

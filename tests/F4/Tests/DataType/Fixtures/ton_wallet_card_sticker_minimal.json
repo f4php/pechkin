@@ -1,0 +1,19 @@
+{
+  "position": {
+    "x_percentage": 50.5,
+    "y_percentage": 40.5,
+    "width_percentage": 20.5,
+    "height_percentage": 15.5,
+    "rotation_angle": 45.5,
+    "corner_radius_percentage": 5.5
+  },
+  "nft": {
+    "address": "EQBnft0000000000000000000000000000000000000000001",
+    "index": "18446744073709551617",
+    "name": "Test NFT",
+    "description": "Test NFT description",
+    "collection_address": null,
+    "attributes": null,
+    "gift": null
+  }
+}

@@ -127,6 +127,8 @@
     "inline_query": null,
     "chosen_inline_result": null,
     "callback_query": null,
+    "widget_query": null,
+    "shared_widget_query": null,
     "shipping_query": null,
     "pre_checkout_query": null,
     "purchased_paid_media": null,

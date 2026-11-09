@@ -29,7 +29,7 @@ final class EphemeralMessageParametersTest extends TestCase
         $obj = EphemeralMessageParameters::fromArray($data);
 
         $this->assertInstanceOf(EphemeralMessageParameters::class, $obj);
-        $this->assertSame('123456789', $obj->receiver_user_id);
+        $this->assertNull($obj->receiver_user_id);
         $this->assertNull($obj->callback_query_id);
         $this->assertNull($obj->replace_callback_query_message);
     }

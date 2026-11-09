@@ -20,8 +20,10 @@ use F4\Pechkin\DataType\PaidMediaPurchased;
 use F4\Pechkin\DataType\Poll;
 use F4\Pechkin\DataType\PollAnswer;
 use F4\Pechkin\DataType\PreCheckoutQuery;
+use F4\Pechkin\DataType\SharedWidgetQuery;
 use F4\Pechkin\DataType\ShippingQuery;
 use F4\Pechkin\DataType\Update;
+use F4\Pechkin\DataType\WidgetQuery;
 use F4\Tests\DataType\FixtureAwareTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -50,6 +52,8 @@ final class UpdateTest extends TestCase
         $this->assertNull($update->inline_query);
         $this->assertNull($update->chosen_inline_result);
         $this->assertNull($update->callback_query);
+        $this->assertNull($update->widget_query);
+        $this->assertNull($update->shared_widget_query);
         $this->assertNull($update->shipping_query);
         $this->assertNull($update->pre_checkout_query);
         $this->assertNull($update->purchased_paid_media);
@@ -60,6 +64,42 @@ final class UpdateTest extends TestCase
         $this->assertNull($update->chat_join_request);
         $this->assertNull($update->chat_boost);
         $this->assertNull($update->removed_chat_boost);
+    }
+
+    public function testFromArrayWithWidgetQuery(): void
+    {
+        $update = Update::fromArray([
+            'update_id' => 100000002,
+            'widget_query' => $this->loadFixture('widget_query_full.json'),
+        ]);
+
+        $this->assertInstanceOf(WidgetQuery::class, $update->widget_query);
+        $this->assertSame('query_123', $update->widget_query->id);
+        $this->assertNull($update->shared_widget_query);
+        $this->assertNull($update->message);
+    }
+
+    public function testFromArrayWithSharedWidgetQuery(): void
+    {
+        $update = Update::fromArray([
+            'update_id' => 100000003,
+            'shared_widget_query' => $this->loadFixture('shared_widget_query_full.json'),
+        ]);
+
+        $this->assertInstanceOf(SharedWidgetQuery::class, $update->shared_widget_query);
+        $this->assertSame('widget_123', $update->shared_widget_query->widget_id);
+        $this->assertNull($update->widget_query);
+        $this->assertNull($update->message);
+    }
+
+    public function testFromArrayRejectsMultiplePayloads(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        Update::fromArray([
+            'update_id' => 100000004,
+            'widget_query' => $this->loadFixture('widget_query_full.json'),
+            'shared_widget_query' => $this->loadFixture('shared_widget_query_full.json'),
+        ]);
     }
 
     public function testFromArrayWithMinimalData(): void

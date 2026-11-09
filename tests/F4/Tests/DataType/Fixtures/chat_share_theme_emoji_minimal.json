@@ -1,0 +1,13 @@
+{
+  "emojis": [
+    {
+      "type": "emoji",
+      "emoji": "🎲"
+    },
+    {
+      "type": "custom_emoji",
+      "custom_emoji_id": "5368324170671202286"
+    }
+  ],
+  "background_backdrop_id": null
+}

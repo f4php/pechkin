@@ -1,0 +1,35 @@
+{
+  "id": "query_123",
+  "from": {
+    "id": "123456789",
+    "is_bot": false,
+    "first_name": "John",
+    "last_name": "Doe",
+    "username": "johndoe",
+    "language_code": "en",
+    "is_premium": true,
+    "added_to_attachment_menu": true,
+    "can_join_groups": true,
+    "can_read_all_group_messages": true,
+    "supports_guest_queries": null,
+    "supports_inline_queries": true,
+    "can_connect_to_business": true,
+    "has_main_web_app": true,
+    "has_topics_enabled": true,
+    "allows_users_to_create_topics": true,
+    "can_manage_bots": true,
+    "supports_join_request_queries": null
+  },
+  "type": {
+    "type": "sign_data",
+    "wallet": {
+      "address": "UQBvW8Z5huBkMJYdnfAEM5JqTNkuWX3diqYENkWsIL0XggGG",
+      "amount": "1500000000",
+      "public_key": "a1b2c3d4e5f6",
+      "state_init": "te6ccgEBAgEAKAAA"
+    },
+    "sign_data": "{\"signature\":\"abc\"}"
+  },
+  "data": "payload",
+  "widget_id": "widget_123"
+}

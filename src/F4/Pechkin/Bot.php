@@ -138,6 +138,7 @@ class Bot implements BotInterface
             ?? $update->business_message?->chat
             ?? $update->edited_business_message?->chat
             ?? $update->callback_query?->message?->chat
+            ?? $update->widget_query?->chat
             ?? $update->my_chat_member?->chat
             ?? $update->chat_member?->chat
             ?? $update->chat_join_request?->chat
@@ -162,6 +163,8 @@ class Bot implements BotInterface
             ?? $update->callback_query?->from?->id
             ?? $update->inline_query?->from?->id
             ?? $update->chosen_inline_result?->from?->id
+            ?? $update->widget_query?->from?->id
+            ?? $update->shared_widget_query?->from?->id
             ?? $update->shipping_query?->from?->id
             ?? $update->pre_checkout_query?->from?->id
             ?? $update->my_chat_member?->from?->id

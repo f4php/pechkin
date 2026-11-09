@@ -10,3 +10,5 @@ This object represents the content of a message to be sent as a result of an inl
 - [InputVenueMessageContent](https://core.telegram.org/bots/api#inputvenuemessagecontent)
 - [InputContactMessageContent](https://core.telegram.org/bots/api#inputcontactmessagecontent)
 - [InputInvoiceMessageContent](https://core.telegram.org/bots/api#inputinvoicemessagecontent)
+- [InputWidgetMessageContent](https://core.telegram.org/bots/api#inputwidgetmessagecontent)
+- [InputSharedWidgetMessageContent](https://core.telegram.org/bots/api#inputsharedwidgetmessagecontent)

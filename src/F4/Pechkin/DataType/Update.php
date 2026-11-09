@@ -26,7 +26,9 @@ use F4\Pechkin\DataType\{
     Poll,
     PollAnswer,
     PreCheckoutQuery,
+    SharedWidgetQuery,
     ShippingQuery,
+    WidgetQuery,
 };
 
 use function 
@@ -52,6 +54,8 @@ readonly class Update extends AbstractDataType
         public readonly ?InlineQuery $inline_query = null,
         public readonly ?ChosenInlineResult $chosen_inline_result = null,
         public readonly ?CallbackQuery $callback_query = null,
+        public readonly ?WidgetQuery $widget_query = null,
+        public readonly ?SharedWidgetQuery $shared_widget_query = null,
         public readonly ?ShippingQuery $shipping_query = null,
         public readonly ?PreCheckoutQuery $pre_checkout_query = null,
         public readonly ?PaidMediaPurchased $purchased_paid_media = null,
@@ -81,6 +85,8 @@ readonly class Update extends AbstractDataType
             $this->inline_query,
             $this->chosen_inline_result,
             $this->callback_query,
+            $this->widget_query,
+            $this->shared_widget_query,
             $this->shipping_query,
             $this->pre_checkout_query,
             $this->purchased_paid_media,
@@ -91,6 +97,7 @@ readonly class Update extends AbstractDataType
             $this->chat_join_request,
             $this->chat_boost,
             $this->removed_chat_boost,
+            $this->managed_bot,
             $this->subscription,
             $this->stopped_message_generation,
         ]))) {

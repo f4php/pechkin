@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+namespace F4\Pechkin\DataType;
+
+use F4\Pechkin\DataType\{
+    InputMessageContent,
+    MessageEntity,
+    Attribute\ArrayOf,
+};
+
+readonly class InputWidgetMessageContent extends InputMessageContent
+{
+    public function __construct(
+        public readonly string $html,
+        public readonly ?int $width = null,
+        public readonly ?int $height = null,
+        public readonly ?string $public_data = null,
+        public readonly ?string $chat_data = null,
+        public readonly ?string $caption = null,
+        public readonly ?string $parse_mode = null,
+        /** @var MessageEntity[]|null */
+        #[ArrayOf(MessageEntity::class)]
+        public readonly ?array $caption_entities = null,
+        public readonly ?bool $show_caption_above_media = null,
+        public readonly ?bool $allow_queries = null,
+        public readonly ?bool $is_shared = null,
+    ) {}
+}

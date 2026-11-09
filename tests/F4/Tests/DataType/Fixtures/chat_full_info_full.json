@@ -154,6 +154,7 @@
         "video": null,
         "video_note": null,
         "voice": null,
+        "widget": null,
         "caption": null,
         "caption_entities": null,
         "show_caption_above_media": null,
@@ -211,6 +212,7 @@
         "giveaway_completed": null,
         "managed_bot_created": null,
         "paid_message_price_changed": null,
+        "paid_messages_waived": null,
         "poll_option_added": null,
         "poll_option_deleted": null,
         "suggested_post_approved": null,
@@ -218,6 +220,7 @@
         "suggested_post_declined": null,
         "suggested_post_paid": null,
         "suggested_post_refunded": null,
+        "ton_wallet_transfer": null,
         "video_chat_scheduled": null,
         "video_chat_started": null,
         "video_chat_ended": null,
@@ -316,5 +319,111 @@
     "community": {
         "id": "9876543210",
         "name": "My Community"
+    },
+    "ton_wallet_card": {
+        "address": "EQCwallet0000000000000000000000000000000000000001",
+        "amount": "123456789012345678901",
+        "stickers": [
+            {
+                "position": {
+                    "x_percentage": 50.5,
+                    "y_percentage": 40.5,
+                    "width_percentage": 20.5,
+                    "height_percentage": 15.5,
+                    "rotation_angle": 45.5,
+                    "corner_radius_percentage": 5.5
+                },
+                "nft": {
+                    "address": "EQBnft0000000000000000000000000000000000000000001",
+                    "index": "18446744073709551617",
+                    "name": "Test NFT",
+                    "description": "Test NFT description",
+                    "collection_address": "EQCcollection00000000000000000000000000000000001",
+                    "attributes": [
+                        {
+                            "trait_type": "Background",
+                            "value": "Blue"
+                        }
+                    ],
+                    "gift": {
+                        "gift_id": "test_string",
+                        "base_name": "gift_base",
+                        "name": "Test Name",
+                        "number": 42,
+                        "model": {
+                            "name": "Test Name",
+                            "sticker": {
+                                "file_id": "BAACAgIAAxkBAAI",
+                                "file_unique_id": "AgADBAADZqc",
+                                "type": "regular",
+                                "width": 640,
+                                "height": 480,
+                                "is_animated": false,
+                                "is_video": false,
+                                "thumbnail": null,
+                                "emoji": null,
+                                "set_name": null,
+                                "premium_animation": null,
+                                "mask_position": null,
+                                "custom_emoji_id": null,
+                                "needs_repainting": null,
+                                "file_size": null,
+                                "thumb": null
+                            },
+                            "rarity_per_mille": 42,
+                            "rarity": null
+                        },
+                        "symbol": {
+                            "name": "Test Name",
+                            "sticker": {
+                                "file_id": "BAACAgIAAxkBAAI",
+                                "file_unique_id": "AgADBAADZqc",
+                                "type": "regular",
+                                "width": 640,
+                                "height": 480,
+                                "is_animated": false,
+                                "is_video": false,
+                                "thumbnail": null,
+                                "emoji": null,
+                                "set_name": null,
+                                "premium_animation": null,
+                                "mask_position": null,
+                                "custom_emoji_id": null,
+                                "needs_repainting": null,
+                                "file_size": null,
+                                "thumb": null
+                            },
+                            "rarity_per_mille": 42
+                        },
+                        "backdrop": {
+                            "name": "Test Name",
+                            "colors": {
+                                "center_color": 16711680,
+                                "edge_color": 255,
+                                "symbol_color": 65280,
+                                "text_color": 16777215
+                            },
+                            "rarity_per_mille": 42
+                        },
+                        "is_premium": null,
+                        "is_from_blockchain": null,
+                        "colors": null,
+                        "publisher_chat": null,
+                        "is_burned": null
+                    }
+                }
+            }
+        ],
+        "background_nft_address": "EQBnft0000000000000000000000000000000000000000001"
+    },
+    "share_theme": {
+        "type": "emoji",
+        "emojis": [
+            {
+                "type": "emoji",
+                "emoji": "\ud83d\udd25"
+            }
+        ],
+        "background_backdrop_id": null
     }
 }

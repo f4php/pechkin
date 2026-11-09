@@ -483,6 +483,14 @@
         "mime_type": null,
         "file_size": null
     },
+    "widget": {
+        "html": "<div>Hello</div>",
+        "id": "widget_123",
+        "width": 320,
+        "height": 200,
+        "public_data": "public",
+        "chat_data": "chat"
+    },
     "caption": "Test caption",
     "caption_entities": [
         {
@@ -1108,6 +1116,7 @@
     "paid_message_price_changed": {
         "paid_message_star_count": 10
     },
+    "paid_messages_waived": {},
     "poll_option_added": {
         "option_persistent_id": "option_persistent_id_test",
         "option_text": "New option",
@@ -1145,6 +1154,12 @@
     "suggested_post_refunded": {
         "reason": "post_deleted",
         "suggested_post_message": null
+    },
+    "ton_wallet_transfer": {
+        "transaction_id": "tx_abc123",
+        "peer_address": "EQCpeer00000000000000000000000000000000000000001",
+        "amount": "-1500000000",
+        "comment": "Thanks!"
     },
     "video_chat_scheduled": {
         "start_date": 42

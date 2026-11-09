@@ -21,6 +21,7 @@ This object represents a rich formatted text. Currently, it can be either a Stri
 - [RichTextEmailAddress](https://core.telegram.org/bots/api#richtextemailaddress)
 - [RichTextPhoneNumber](https://core.telegram.org/bots/api#richtextphonenumber)
 - [RichTextBankCardNumber](https://core.telegram.org/bots/api#richtextbankcardnumber)
+- [RichTextTonAddress](https://core.telegram.org/bots/api#richtexttonaddress)
 - [RichTextMention](https://core.telegram.org/bots/api#richtextmention)
 - [RichTextHashtag](https://core.telegram.org/bots/api#richtexthashtag)
 - [RichTextCashtag](https://core.telegram.org/bots/api#richtextcashtag)

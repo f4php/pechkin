@@ -18,8 +18,10 @@ use F4\Pechkin\DataType\{
     ChatPermissions,
     Community,
     ChatPhoto,
+    ChatShareTheme,
     Message,
     ReactionType,
+    TonWalletCard,
     UniqueGiftColors,
     User,
     UserRating,
@@ -88,6 +90,8 @@ readonly class ChatFullInfo extends AbstractDataType
         public readonly ?int $paid_message_star_count = null,
         public readonly ?User $guard_bot = null,
         public readonly ?Community $community = null,
+        public readonly ?TonWalletCard $ton_wallet_card = null,
+        public readonly ?ChatShareTheme $share_theme = null,
 
         // Undocumented property discoverd through API interaction
         public readonly ?bool $all_members_are_administrators = null,

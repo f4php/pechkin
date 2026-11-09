@@ -22,7 +22,7 @@ readonly class RichMessageButton extends AbstractDataType
         /** @var RichText|RichText[]|string */
         #[ArrayOf(RichText::class)]
         public readonly RichText|array|string $text,
-        public readonly ?string $style = null, // Must be one of “danger” (red), “success” (green), “primary” (blue) or “link”. If omitted, then an app-specific style is used.
+        public readonly ?string $style = null, // Must be one of “danger”, “success”, “primary”, or “link”. If omitted, then an app-specific style is used.
         public readonly ?string $url = null,
         public readonly ?string $callback_data = null,
         public readonly ?WebAppInfo $web_app = null,

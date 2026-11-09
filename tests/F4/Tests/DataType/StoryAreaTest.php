@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace F4\Tests\DataType;
 
 use F4\Pechkin\DataType\StoryArea;
-use F4\Pechkin\DataType\StoryAreaPosition;
+use F4\Pechkin\DataType\AreaPosition;
 use F4\Pechkin\DataType\StoryAreaTypeLink;
 use F4\Tests\DataType\FixtureAwareTrait;
 use PHPUnit\Framework\TestCase;
@@ -20,7 +20,7 @@ final class StoryAreaTest extends TestCase
         $storyArea = StoryArea::fromArray($data);
 
         $this->assertInstanceOf(StoryArea::class, $storyArea);
-        $this->assertInstanceOf(StoryAreaPosition::class, $storyArea->position);
+        $this->assertInstanceOf(AreaPosition::class, $storyArea->position);
         $this->assertInstanceOf(StoryAreaTypeLink::class, $storyArea->type);
     }
 

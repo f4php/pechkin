@@ -212,6 +212,14 @@
     "mime_type": "application/pdf",
     "file_size": "1024000"
   },
+  "widget": {
+    "html": "<div>Hello</div>",
+    "id": "widget_123",
+    "width": 320,
+    "height": 200,
+    "public_data": "public",
+    "chat_data": "chat"
+  },
   "has_media_spoiler": true,
   "checklist": {
     "title": "Test Title",

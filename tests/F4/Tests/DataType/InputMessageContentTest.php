@@ -12,6 +12,8 @@ use F4\Pechkin\DataType\InputLocationMessageContent;
 use F4\Pechkin\DataType\InputVenueMessageContent;
 use F4\Pechkin\DataType\InputContactMessageContent;
 use F4\Pechkin\DataType\InputInvoiceMessageContent;
+use F4\Pechkin\DataType\InputWidgetMessageContent;
+use F4\Pechkin\DataType\InputSharedWidgetMessageContent;
 
 final class InputMessageContentTest extends TestCase
 {
@@ -50,5 +52,19 @@ final class InputMessageContentTest extends TestCase
         $data = $this->loadFixture('input_invoice_message_content_full.json');
         $result = InputMessageContent::fromArray($data);
         $this->assertInstanceOf(InputInvoiceMessageContent::class, $result);
+    }
+
+    public function testFromArrayWithWidgetContent(): void
+    {
+        $data = $this->loadFixture('input_widget_message_content_full.json');
+        $result = InputMessageContent::fromArray($data);
+        $this->assertInstanceOf(InputWidgetMessageContent::class, $result);
+    }
+
+    public function testFromArrayWithSharedWidgetContent(): void
+    {
+        $data = $this->loadFixture('input_shared_widget_message_content_full.json');
+        $result = InputMessageContent::fromArray($data);
+        $this->assertInstanceOf(InputSharedWidgetMessageContent::class, $result);
     }
 }
