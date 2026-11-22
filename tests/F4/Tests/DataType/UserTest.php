@@ -26,12 +26,6 @@ final class UserTest extends TestCase
         $this->assertSame('en', $user->language_code);
         $this->assertSame(true, $user->is_premium);
         $this->assertSame(true, $user->added_to_attachment_menu);
-        $this->assertSame(true, $user->can_join_groups);
-        $this->assertSame(true, $user->can_read_all_group_messages);
-        $this->assertSame(true, $user->supports_inline_queries);
-        $this->assertSame(true, $user->can_connect_to_business);
-        $this->assertSame(true, $user->has_main_web_app);
-        $this->assertSame(true, $user->has_topics_enabled);
     }
 
     public function testFromArrayWithMinimalData(): void

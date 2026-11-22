@@ -1,5 +1,6 @@
 {
   "from_request": null,
   "web_app_name": null,
-  "from_attachment_menu": null
+  "from_attachment_menu": null,
+  "inviter": null
 }

@@ -10,6 +10,7 @@ use F4\Pechkin\DataType\{
     BotCommand,
     BotCommandScope,
     BotDescription,
+    BotFullInfo,
     BotName,
     BotShortDescription,
     BusinessConnection,
@@ -1202,9 +1203,9 @@ interface ClientInterface
 
     /**
      * A simple method for testing your bot's authentication token.
-     * @return User Returns basic information about the bot in form of a User object
+     * @return BotFullInfo Returns information about the bot in form of a BotFullInfo object
      */
-    public function getMe(): User;
+    public function getMe(): BotFullInfo;
 
     /**
      * Use this method to get the current list of the bot's commands for the given scope and user language.
@@ -2970,6 +2971,43 @@ interface ClientInterface
     public function setMyName(
         ?string $name = null,
         ?string $language_code = null,
+    ): bool;
+
+    /**
+     * Use this method to change settings of the bot. Settings that aren't specified remain unchanged.
+     * @param bool|null $supports_inline_queries Pass True to enable inline mode for the bot or False to disable it
+     * @param string|null $inline_query_placeholder New placeholder for inline queries; pass an empty string to use the default placeholder
+     * @param bool|null $needs_inline_query_location Pass True to request the location of the user with every inline query or False to stop requesting it
+     * @param int|null $inline_feedback_share_denominator Denominator of the share of chosen inline results received by the bot; one of 1, 10, 100, 1000, or 0 to stop
+     * @param bool|null $can_join_groups Pass True to allow adding the bot to groups or False to disallow it
+     * @param bool|null $can_read_all_group_messages Pass True to disable privacy mode for the bot or False to enable it
+     * @param bool|null $can_connect_to_business Pass True to allow connecting the bot to user accounts or False to disallow it
+     * @param bool|null $can_manage_bots Pass True to allow creating other bots controlled by the bot or False to disallow it
+     * @param bool|null $supports_guest_queries Pass True to allow guest queries from chats the bot isn't a member of or False to disallow them
+     * @param bool|null $supports_join_request_queries Pass True to allow assigning the bot to process join request queries or False to disallow it
+     * @param bool|null $has_topics_enabled Pass True to enable forum topic mode in private chats with the bot or False to disable it
+     * @param bool|null $allows_users_to_create_topics Pass True to allow users to create and delete topics in private chats or False to disallow it
+     * @param bool|null $has_topic_sidebar Pass True to show topics in private chats in a sidebar or False to stop showing them
+     * @param bool|null $can_communicate_with_bots Pass True to allow the bot to communicate with other bots or False to disallow it
+     * @param string|null $callback_query_mode Mode in which the bot receives callback queries: "default", "auto" or "inline"
+     * @return bool Returns True on success
+     */
+    public function setMySettings(
+        ?bool $supports_inline_queries = null,
+        ?string $inline_query_placeholder = null,
+        ?bool $needs_inline_query_location = null,
+        ?int $inline_feedback_share_denominator = null,
+        ?bool $can_join_groups = null,
+        ?bool $can_read_all_group_messages = null,
+        ?bool $can_connect_to_business = null,
+        ?bool $can_manage_bots = null,
+        ?bool $supports_guest_queries = null,
+        ?bool $supports_join_request_queries = null,
+        ?bool $has_topics_enabled = null,
+        ?bool $allows_users_to_create_topics = null,
+        ?bool $has_topic_sidebar = null,
+        ?bool $can_communicate_with_bots = null,
+        ?string $callback_query_mode = null,
     ): bool;
 
     /**

@@ -14,9 +14,9 @@ readonly class RichBlockExpandableBlockQuotation extends RichBlock
 {
     public readonly string $type;
     public function __construct(
-        /** @var RichText|RichText[]|string */
-        #[ArrayOf(RichText::class)]
-        public readonly RichText|array|string $text,
+        /** @var RichBlock[] */
+        #[ArrayOf(RichBlock::class)]
+        public readonly array $blocks,
         /** @var RichText|RichText[]|string|null */
         #[ArrayOf(RichText::class)]
         public readonly RichText|array|string|null $credit = null,

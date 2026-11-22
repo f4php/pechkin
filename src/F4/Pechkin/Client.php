@@ -16,6 +16,7 @@ use F4\Pechkin\DataType\{
     BotCommand,
     BotCommandScope,
     BotDescription,
+    BotFullInfo,
     BotName,
     BotShortDescription,
     BusinessConnection,
@@ -86,7 +87,7 @@ use function
 
 class Client implements ClientInterface
 {
-    protected const string API_VERSION = '10.4';
+    protected const string API_VERSION = '10.5';
     protected const int REQUEST_TIMEOUT = 60;
 
     protected ApiClient $apiClient;
@@ -747,9 +748,9 @@ class Client implements ClientInterface
             callback: GameHighScore::fromArray(...),
         );
     }
-    public function getMe(): User
+    public function getMe(): BotFullInfo
     {
-        return User::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
+        return BotFullInfo::fromArray($this->apiClient->sendJsonRequest(__FUNCTION__));
     }
     public function getMyCommands(
         ?BotCommandScope $scope = null,
@@ -1730,6 +1731,25 @@ class Client implements ClientInterface
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function removeMyProfilePhoto(): bool {
+        return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
+    }
+    public function setMySettings(
+        ?bool $supports_inline_queries = null,
+        ?string $inline_query_placeholder = null,
+        ?bool $needs_inline_query_location = null,
+        ?int $inline_feedback_share_denominator = null,
+        ?bool $can_join_groups = null,
+        ?bool $can_read_all_group_messages = null,
+        ?bool $can_connect_to_business = null,
+        ?bool $can_manage_bots = null,
+        ?bool $supports_guest_queries = null,
+        ?bool $supports_join_request_queries = null,
+        ?bool $has_topics_enabled = null,
+        ?bool $allows_users_to_create_topics = null,
+        ?bool $has_topic_sidebar = null,
+        ?bool $can_communicate_with_bots = null,
+        ?string $callback_query_mode = null,
+    ): bool {
         return $this->apiClient->sendJsonRequest(__FUNCTION__, get_defined_vars());
     }
     public function setMyShortDescription(

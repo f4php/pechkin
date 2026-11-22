@@ -1,5 +1,10 @@
 {
   "from_request": true,
   "web_app_name": "TestWebApp",
-  "from_attachment_menu": true
+  "from_attachment_menu": true,
+  "inviter": {
+    "id": "987654321",
+    "is_bot": false,
+    "first_name": "Owner"
+  }
 }

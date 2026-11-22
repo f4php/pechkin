@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace F4\Tests\DataType;
 
+use F4\Pechkin\DataType\User;
 use F4\Pechkin\DataType\WriteAccessAllowed;
 use F4\Tests\DataType\FixtureAwareTrait;
 use PHPUnit\Framework\TestCase;
@@ -21,6 +22,8 @@ final class WriteAccessAllowedTest extends TestCase
         $this->assertSame(true, $writeAccessAllowed->from_request);
         $this->assertSame('TestWebApp', $writeAccessAllowed->web_app_name);
         $this->assertSame(true, $writeAccessAllowed->from_attachment_menu);
+        $this->assertInstanceOf(User::class, $writeAccessAllowed->inviter);
+        $this->assertSame('987654321', $writeAccessAllowed->inviter->id);
     }
 
     public function testFromArrayWithMinimalData(): void
@@ -32,6 +35,7 @@ final class WriteAccessAllowedTest extends TestCase
         $this->assertNull($writeAccessAllowed->from_request);
         $this->assertNull($writeAccessAllowed->web_app_name);
         $this->assertNull($writeAccessAllowed->from_attachment_menu);
+        $this->assertNull($writeAccessAllowed->inviter);
     }
 
     public function testFromArrayToArrayRoundtrip(): void

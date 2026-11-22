@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace F4\Tests\DataType;
 
 use F4\Pechkin\DataType\InputRichBlockExpandableBlockQuotation;
+use F4\Pechkin\DataType\InputRichBlockParagraph;
 use F4\Pechkin\DataType\RichText;
 use F4\Tests\DataType\FixtureAwareTrait;
 use PHPUnit\Framework\TestCase;
@@ -20,7 +21,8 @@ final class InputRichBlockExpandableBlockQuotationTest extends TestCase
 
         $this->assertInstanceOf(InputRichBlockExpandableBlockQuotation::class, $obj);
         $this->assertSame('expandable_blockquote', $obj->type);
-        $this->assertInstanceOf(RichText::class, $obj->text);
+        $this->assertCount(1, $obj->blocks);
+        $this->assertInstanceOf(InputRichBlockParagraph::class, $obj->blocks[0]);
         $this->assertInstanceOf(RichText::class, $obj->credit);
     }
 

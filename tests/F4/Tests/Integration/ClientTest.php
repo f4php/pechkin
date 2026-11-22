@@ -7,6 +7,7 @@ namespace F4\Tests\Integration;
 use F4\Pechkin\Client\ClientException;
 use F4\Pechkin\DataType\{
     BotCommand,
+    BotFullInfo,
     BotDescription,
     BotName,
     BotShortDescription,
@@ -51,11 +52,11 @@ final class ClientTest extends IntegrationTestCase
     // Bot info
     // -------------------------------------------------------------------------
 
-    public function testGetMe(): User
+    public function testGetMe(): BotFullInfo
     {
         $me = self::$client->getMe();
 
-        $this->assertInstanceOf(User::class, $me);
+        $this->assertInstanceOf(BotFullInfo::class, $me);
         $this->assertTrue($me->is_bot);
         $this->assertNotEmpty($me->first_name);
 

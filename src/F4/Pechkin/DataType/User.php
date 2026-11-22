@@ -17,16 +17,6 @@ readonly class User extends AbstractDataType
         public readonly ?string $language_code = null,
         public readonly ?bool $is_premium = null,
         public readonly ?bool $added_to_attachment_menu = null,
-        public readonly ?bool $can_join_groups = null,
-        public readonly ?bool $can_read_all_group_messages = null,
-        public readonly ?bool $supports_guest_queries = null,
-        public readonly ?bool $supports_inline_queries = null,
-        public readonly ?bool $can_connect_to_business = null,
-        public readonly ?bool $has_main_web_app = null,
-        public readonly ?bool $has_topics_enabled = null,
-        public readonly ?bool $allows_users_to_create_topics = null,
-        public readonly ?bool $can_manage_bots = null,
-        public readonly ?bool $supports_join_request_queries = null,
     )
     {}
 }
